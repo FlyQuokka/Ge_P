@@ -1,0 +1,588 @@
+<!doctype html>
+<!-- 网页本体。放置位置：仓库根目录 index.html -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perth 房价监控</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;   /* 珀斯 / 独立屋 */
+    --series-2: #eb6834;   /* 对比城市 / 公寓 */
+    --highlight: rgba(42,120,214,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+      --series-1: #3987e5; --series-2: #d95926; --highlight: rgba(57,135,229,0.14);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5; --series-2: #d95926; --highlight: rgba(57,135,229,0.14);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: var(--ink-2); margin: 0 0 24px; }
+  .section-title {
+    font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: 0.04em;
+    margin: 36px 0 12px; padding-top: 20px; border-top: 1px solid var(--grid);
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .card-head { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .hint { color: var(--muted); font-size: 13px; margin: 0; }
+
+  /* 顶部数字 */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .tiles .card { margin-bottom: 0; }
+  .tile .label { color: var(--ink-2); font-size: 14px; }
+  .tile .value { font-size: 34px; font-weight: 650; margin: 4px 0 6px; letter-spacing: -0.02em; }
+  .deltas { display: flex; gap: 4px 16px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); }
+  .deltas b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tile .peak { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--grid); font-size: 13px; color: var(--ink-2); }
+  .tile .peak b { color: var(--ink); }
+
+  /* 按钮和下拉框 */
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 14px; color: var(--ink-2); }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .seg button {
+    font: inherit; font-size: 13px; padding: 5px 12px; border: 0; background: transparent;
+    color: var(--ink-2); cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+  select {
+    font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-bottom: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 2px; display: inline-block; border-radius: 1px; }
+  .chart-box { position: relative; height: 300px; }
+
+  /* 表格 */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); font-weight: 500; font-size: 13px; }
+  td { font-variant-numeric: tabular-nums; }
+  tr.perth td { background: var(--highlight); font-weight: 600; }
+  tr.total td { color: var(--ink-2); }
+  tr.total:first-of-type td, tr.first-total td { border-top: 1px solid var(--axis); }
+  .city-cn { color: var(--muted); font-weight: 400; margin-left: 6px; }
+
+  footer { color: var(--muted); font-size: 13px; line-height: 1.7; }
+  footer p { margin: 0 0 10px; }
+  footer a { color: var(--ink-2); }
+  .error { color: #d03b3b; }
+
+  @media (max-width: 520px) {
+    h1 { font-size: 24px; }
+    .tile .value { font-size: 30px; }
+    .chart-box { height: 250px; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Perth 房价监控</h1>
+  <p class="sub"><span id="latest">加载中…</span></p>
+
+  <!-- ========== 月度数据（realestate.com.au / PropTrack） ========== -->
+  <div class="tiles" id="tiles"></div>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2><span id="monthlyCityName">Perth</span> 月度中位价</h2>
+        <p class="hint">全部住宅（独立屋 + 公寓），每月报告公布的数值</p>
+      </div>
+      <label class="controls">城市：<select id="monthlyCity"></select></label>
+    </div>
+    <div class="chart-box"><canvas id="monthlyChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>年度涨幅走势</h2>
+        <p class="hint">每个月与一年前相比的涨跌幅，全部住宅。线往下走 = 涨势减弱；低于 0% = 比一年前便宜</p>
+      </div>
+      <div class="controls">
+        <label>对比：<select id="growthCity"></select></label>
+        <div class="seg" id="growthRange">
+          <button data-n="36">3 年</button>
+          <button data-n="60" aria-pressed="true">5 年</button>
+          <button data-n="0">全部</button>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--series-1)"></i>Perth</span>
+      <span><i style="background:var(--series-2)"></i><span id="growthName"></span></span>
+    </div>
+    <div class="chart-box"><canvas id="growthChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>各城市本月数据</h2>
+        <p class="hint" id="tableHint">全部住宅中位价，按价格从高到低排列</p>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>城市</th>
+            <th>中位价</th>
+            <th>月度变化</th>
+            <th>年度变化</th>
+            <th>较近期高点</th>
+            <th>高点月份</th>
+          </tr>
+        </thead>
+        <tbody id="cityTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 季度数据（ABS 官方统计） ========== -->
+  <div class="section-title">长期走势 · ABS 官方季度数据（<span id="quarter">—</span>）</div>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>Perth 长期走势</h2>
+        <p class="hint">每季度实际成交中位价。官方统计更新较慢，但历史更长</p>
+      </div>
+      <div class="seg" id="range">
+        <button data-years="5">5 年</button>
+        <button data-years="10" aria-pressed="true">10 年</button>
+        <button data-years="0">全部</button>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--series-1)"></i>独立屋 House</span>
+      <span><i style="background:var(--series-2)"></i>公寓/联排 Unit</span>
+    </div>
+    <div class="chart-box"><canvas id="perthChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>Perth 与其他城市长期对比</h2>
+        <p class="hint">独立屋成交中位价 · 时间范围跟随上方图表</p>
+      </div>
+      <label class="controls">对比城市：<select id="compareCity"></select></label>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--series-1)"></i>Perth</span>
+      <span><i style="background:var(--series-2)"></i><span id="compareName">Sydney</span></span>
+    </div>
+    <div class="chart-box"><canvas id="compareChart"></canvas></div>
+  </section>
+
+  <footer>
+    <p><b>月度数据</b>来自 realestate.com.au 旗下 PropTrack 每月初发布的
+    <a href="https://www.proptrack.com.au/home-price-index/" target="_blank" rel="noopener">Home Price Index</a>。
+    中位价、月度变化、年度变化都是当月报告公布的数值。PropTrack 每个月会重新修订历史数据，
+    所以相邻两个月中位价的差距，可能和公布的"月度变化"对不上；"较近期高点"是用各月公布的中位价直接计算的，仅供参考。</p>
+    <p><b>季度数据</b>来自澳大利亚统计局 (ABS)
+    <a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/total-value-dwellings" target="_blank" rel="noopener">Total Value of Dwellings</a>，
+    是各首府大都市区实际成交的中位价，最近一个季度为初步数据。两个来源的统计方法不同，数字不能直接比较。</p>
+    <p>数据由 GitHub Actions 每天自动检查更新 · 上次检查：<span id="lastChecked">—</span></p>
+  </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// ============================================================
+//  名称对照
+// ============================================================
+// 月度数据里的城市（data/monthly.csv 的 region 列）
+const M_CITIES = {
+  "Perth": "珀斯", "Sydney": "悉尼", "Melbourne": "墨尔本", "Brisbane": "布里斯班",
+  "Adelaide": "阿德莱德", "Hobart": "霍巴特", "Darwin": "达尔文", "Canberra": "堪培拉"
+};
+const M_TOTALS = { "Capital cities": "八大首府合计", "National": "全国" };
+
+// 季度数据里的城市（ABS 代码）
+const CITIES = {
+  "5GPER": { en: "Perth",     cn: "珀斯" },
+  "1GSYD": { en: "Sydney",    cn: "悉尼" },
+  "2GMEL": { en: "Melbourne", cn: "墨尔本" },
+  "3GBRI": { en: "Brisbane",  cn: "布里斯班" },
+  "4GADE": { en: "Adelaide",  cn: "阿德莱德" },
+  "6GHOB": { en: "Hobart",    cn: "霍巴特" },
+  "7GDAR": { en: "Darwin",    cn: "达尔文" },
+  "8ACTE": { en: "Canberra",  cn: "堪培拉" }
+};
+const HOUSE = "3", UNIT = "4";   // ABS 指标代码：3 = 独立屋，4 = 公寓/联排
+
+// ============================================================
+//  数据
+// ============================================================
+let monthly = {};   // monthly[城市][类型] = [{ m: "2026-10", v: 949000, mo: -0.3, an: 2.4 }, ...]
+let growth = { months: [], cities: {} };   // growth.cities[城市] = [年度涨幅, ...]
+let data = {};      // 季度：data[城市代码][指标] = [{ q: "2026-Q2", v: 1010000, prelim: true }, ...]
+let charts = {};
+let rangeYears = 10;
+let growthMonths = 60;
+
+async function readCsv(path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error("无法读取 " + path);
+  const lines = (await res.text()).trim().split(/\r?\n/);
+  return { head: lines[0].split(","), rows: lines.slice(1).map(l => l.split(",")) };
+}
+
+async function loadMonthly() {
+  const { rows } = await readCsv("data/monthly.csv");
+  for (const [m, region, type, median, mo, an] of rows) {
+    monthly[region] ??= {};
+    monthly[region][type] ??= [];
+    monthly[region][type].push({ m, v: Number(median), mo: Number(mo), an: Number(an) });
+  }
+  for (const r in monthly) for (const t in monthly[r]) monthly[r][t].sort((a, b) => a.m.localeCompare(b.m));
+}
+
+async function loadGrowth() {
+  const { head, rows } = await readCsv("data/annual_growth.csv");
+  growth.months = rows.map(r => r[0]);
+  head.slice(1).forEach((city, i) => growth.cities[city] = rows.map(r => Number(r[i + 1])));
+}
+
+async function loadQuarterly() {
+  const { head, rows } = await readCsv("data/prices.csv");
+  const col = name => head.indexOf(name);
+  const iM = col("MEASURE"), iR = col("REGION"), iT = col("TIME_PERIOD"),
+        iV = col("OBS_VALUE"), iS = col("OBS_STATUS");
+  for (const c of rows) {
+    const city = c[iR], measure = c[iM], value = parseFloat(c[iV]);
+    if (!CITIES[city] || isNaN(value)) continue;
+    data[city] ??= {};
+    data[city][measure] ??= [];
+    data[city][measure].push({ q: c[iT], v: value * 1000, prelim: c[iS] === "p" });
+  }
+  for (const city in data) for (const m in data[city]) data[city][m].sort((a, b) => a.q.localeCompare(b.q));
+}
+
+async function loadLastChecked() {
+  try {
+    const t = await fetch("data/last_checked.txt", { cache: "no-store" });
+    if (!t.ok) return;
+    const d = new Date((await t.text()).trim());
+    if (!isNaN(d)) document.getElementById("lastChecked").textContent =
+      d.toLocaleString("zh-CN", { timeZone: "Australia/Perth" }) + "（珀斯时间）";
+  } catch (e) {}
+}
+
+// ============================================================
+//  小工具
+// ============================================================
+const mSeries = (region, type) => (monthly[region] && monthly[region][type]) || [];
+const series = (city, m) => (data[city] && data[city][m]) || [];
+const last = arr => arr[arr.length - 1];
+const quarterLabel = q => q.replace("-Q", " 年第 ") + " 季度";
+const monthLabel = m => m.slice(0, 4) + " 年 " + Number(m.slice(5)) + " 月";
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+function money(v) {
+  if (v == null) return "—";
+  return "$" + Math.round(v).toLocaleString("en-AU");
+}
+function moneyShort(v) {
+  if (v === 0) return "$0";
+  if (v >= 1e6) return "$" + (v / 1e6).toFixed(2).replace(/0$/, "").replace(/\.0$/, "") + "m";
+  return "$" + Math.round(v / 1000) + "k";
+}
+function pct(p) {
+  if (p == null || isNaN(p)) return "—";
+  const arrow = p > 0 ? "▲" : p < 0 ? "▼" : "";
+  return (arrow + " " + (p > 0 ? "+" : "") + p.toFixed(1) + "%").trim();
+}
+// 横轴只在每年第一个月/季度的位置写年份；时间跨度长时隔几年写一次
+function yearTick(label, years) {
+  if (!/-(01|Q1)$/.test(label)) return "";
+  const year = Number(label.slice(0, 4));
+  const step = years > 16 ? 4 : years > 8 ? 2 : 1;
+  return year % step === 0 ? year : "";
+}
+// 在已有的月度记录里找最高的中位价
+function peakOf(arr) {
+  let peak = arr[0];
+  for (const p of arr) if (p.v >= peak.v) peak = p;   // 相同时取较晚的月份
+  const now = last(arr);
+  return { month: peak.m, value: peak.v, drop: (now.v - peak.v) / peak.v * 100, atPeak: peak.v === now.v };
+}
+
+// ============================================================
+//  顶部数字（月度）
+// ============================================================
+function renderTiles() {
+  const dw = mSeries("Perth", "dwelling");
+  const now = last(dw);
+  document.getElementById("latest").textContent =
+    "最新数据：" + monthLabel(now.m) + " · 来源 realestate.com.au (PropTrack)";
+
+  const peak = peakOf(dw);
+  const peakLine = peak.atPeak
+    ? `<p class="peak">目前处于 ${monthLabel(dw[0].m)}以来的最高点</p>`
+    : `<p class="peak">比 ${monthLabel(peak.month)}的高点 ${money(peak.value)} 低 <b>${Math.abs(peak.drop).toFixed(1)}%</b>（少 ${money(peak.value - now.v)}）</p>`;
+
+  const tile = (title, arr, extra) => {
+    if (!arr.length) return "";
+    const p = last(arr);
+    return `<div class="card tile">
+      <div class="label">${title}</div>
+      <div class="value">${money(p.v)}</div>
+      <div class="deltas">
+        <span>月度 <b>${pct(p.mo)}</b></span>
+        <span>年度 <b>${pct(p.an)}</b></span>
+      </div>${extra || ""}
+    </div>`;
+  };
+  document.getElementById("tiles").innerHTML =
+    tile("Perth 全部住宅中位价", dw, peakLine) +
+    tile("Perth 独立屋 House", mSeries("Perth", "house").filter(p => p.m === now.m)) +
+    tile("Perth 公寓 Unit", mSeries("Perth", "unit").filter(p => p.m === now.m));
+}
+
+// ============================================================
+//  通用折线图
+// ============================================================
+function lineChart(canvasId, labels, datasets, opt) {
+  if (charts[canvasId]) charts[canvasId].destroy();
+  charts[canvasId] = new Chart(document.getElementById(canvasId), {
+    type: "line",
+    data: {
+      labels,
+      datasets: datasets.map(d => ({
+        label: d.label,
+        data: d.values,
+        borderColor: css(d.color),
+        backgroundColor: css(d.color),
+        borderWidth: 2,
+        pointRadius: opt.points ? 4 : 0,
+        pointBorderWidth: opt.points ? 2 : 0,
+        pointBorderColor: css("--surface"),
+        pointHoverRadius: 6,
+        pointHoverBorderWidth: 2,
+        pointHoverBorderColor: css("--surface"),
+        tension: 0.25,
+        spanGaps: true
+      }))
+    },
+    options: {
+      maintainAspectRatio: false,
+      animation: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: css("--surface"),
+          titleColor: css("--ink"),
+          bodyColor: css("--ink-2"),
+          borderColor: css("--axis"),
+          borderWidth: 1,
+          padding: 10,
+          boxPadding: 4,
+          usePointStyle: true,
+          callbacks: {
+            title: items => opt.title(items[0].label),
+            label: item => " " + item.dataset.label + "：" + (item.raw == null ? "—" : opt.value(item.raw))
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { color: css("--axis") },
+          ticks: {
+            color: css("--muted"), maxRotation: 0,
+            autoSkip: !!opt.autoSkip, maxTicksLimit: opt.autoSkip ? 7 : undefined,
+            callback: function (v) { return opt.tick(this.getLabelForValue(v), labels.length); }
+          }
+        },
+        y: {
+          grid: { color: ctx => (opt.zeroLine && ctx.tick.value === 0) ? css("--axis") : css("--grid"),
+                  lineWidth: ctx => (opt.zeroLine && ctx.tick.value === 0) ? 1.5 : 1 },
+          border: { display: false },
+          ticks: { color: css("--muted"), maxTicksLimit: 6, callback: v => opt.axis(v) }
+        }
+      }
+    }
+  });
+}
+
+// ============================================================
+//  月度图表
+// ============================================================
+function renderMonthlyChart() {
+  const city = document.getElementById("monthlyCity").value;
+  const arr = mSeries(city, "dwelling");
+  document.getElementById("monthlyCityName").textContent = city === "Perth" ? "Perth" : (M_CITIES[city] ? city : M_TOTALS[city]);
+  lineChart("monthlyChart", arr.map(p => p.m),
+    [{ label: "中位价", color: "--series-1", values: arr.map(p => p.v) }],
+    { points: true, autoSkip: true,
+      title: monthLabel, value: money, axis: moneyShort,
+      tick: m => m.slice(2, 4) + "年" + Number(m.slice(5)) + "月" });
+}
+
+function renderGrowthChart() {
+  const other = document.getElementById("growthCity").value;
+  document.getElementById("growthName").textContent = other;
+  const n = growthMonths || growth.months.length;
+  const cut = arr => arr.slice(-n);
+  lineChart("growthChart", cut(growth.months), [
+    { label: "Perth", color: "--series-1", values: cut(growth.cities["Perth"]) },
+    { label: other, color: "--series-2", values: cut(growth.cities[other]) }
+  ], { zeroLine: true,
+       title: monthLabel, value: v => (v > 0 ? "+" : "") + v.toFixed(1) + "%", axis: v => v + "%",
+       tick: (m, n) => yearTick(m, n / 12) });
+}
+
+function renderTable() {
+  const month = last(mSeries("Perth", "dwelling")).m;
+  const first = mSeries("Perth", "dwelling")[0].m;
+  document.getElementById("tableHint").textContent =
+    monthLabel(month) + " · 全部住宅中位价 ·「近期高点」指 " + monthLabel(first) + "以来";
+
+  const row = (region, cn, cls) => {
+    const arr = mSeries(region, "dwelling");
+    if (!arr.length) return "";
+    const p = last(arr), peak = peakOf(arr);
+    return `<tr class="${cls}">
+      <td>${M_TOTALS[region] ? cn : region + `<span class="city-cn">${cn}</span>`}</td>
+      <td>${money(p.v)}</td>
+      <td>${pct(p.mo)}</td>
+      <td>${pct(p.an)}</td>
+      <td>${peak.atPeak ? "处于高点" : pct(peak.drop)}</td>
+      <td>${peak.atPeak ? "—" : monthLabel(peak.month)}</td>
+    </tr>`;
+  };
+  const cities = Object.keys(M_CITIES).filter(c => mSeries(c, "dwelling").length)
+    .sort((a, b) => last(mSeries(b, "dwelling")).v - last(mSeries(a, "dwelling")).v);
+
+  document.getElementById("cityTable").innerHTML =
+    cities.map(c => row(c, M_CITIES[c], c === "Perth" ? "perth" : "")).join("") +
+    Object.keys(M_TOTALS).map((t, i) => row(t, M_TOTALS[t], "total" + (i === 0 ? " first-total" : ""))).join("");
+}
+
+// ============================================================
+//  季度图表（ABS）
+// ============================================================
+function quarterlyChart(canvasId, sets) {
+  let labels = sets[0].points.map(p => p.q);
+  if (rangeYears) labels = labels.slice(-rangeYears * 4);
+  lineChart(canvasId, labels, sets.map(s => {
+    const map = Object.fromEntries(s.points.map(p => [p.q, p.v]));
+    return { label: s.label, color: s.color, values: labels.map(q => map[q] ?? null) };
+  }), { title: quarterLabel, value: money, axis: moneyShort, tick: (q, n) => yearTick(q, n / 4) });
+}
+
+function renderQuarterly() {
+  const house = series("5GPER", HOUSE);
+  if (!house.length) return;
+  const p = last(house);
+  document.getElementById("quarter").textContent = "最新：" + quarterLabel(p.q) + (p.prelim ? "，初步" : "");
+
+  quarterlyChart("perthChart", [
+    { label: "独立屋", color: "--series-1", points: house },
+    { label: "公寓/联排", color: "--series-2", points: series("5GPER", UNIT) }
+  ]);
+  const other = document.getElementById("compareCity").value;
+  document.getElementById("compareName").textContent = CITIES[other].en;
+  quarterlyChart("compareChart", [
+    { label: "Perth", color: "--series-1", points: house },
+    { label: CITIES[other].en, color: "--series-2", points: series(other, HOUSE) }
+  ]);
+}
+
+function renderAllCharts() {
+  renderMonthlyChart();
+  renderGrowthChart();
+  renderQuarterly();
+}
+
+// ============================================================
+//  启动
+// ============================================================
+function segButtons(id, onPick) {
+  document.querySelectorAll("#" + id + " button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#" + id + " button").forEach(b => b.setAttribute("aria-pressed", b === btn));
+      onPick(btn);
+    });
+  });
+}
+
+(async function () {
+  try {
+    await Promise.all([loadMonthly(), loadGrowth(), loadQuarterly()]);
+  } catch (e) {
+    document.getElementById("latest").innerHTML = `<span class="error">数据加载失败：${e.message}</span>`;
+    return;
+  }
+  loadLastChecked();
+
+  // 下拉框
+  const monthlyCity = document.getElementById("monthlyCity");
+  monthlyCity.innerHTML =
+    Object.keys(M_CITIES).map(c => `<option value="${c}">${c} ${M_CITIES[c]}</option>`).join("") +
+    Object.keys(M_TOTALS).map(c => `<option value="${c}">${M_TOTALS[c]}</option>`).join("");
+  monthlyCity.addEventListener("change", renderMonthlyChart);
+
+  const growthCity = document.getElementById("growthCity");
+  growthCity.innerHTML = Object.keys(growth.cities).filter(c => c !== "Perth")
+    .map(c => `<option value="${c}">${c} ${M_CITIES[c] || ""}</option>`).join("");
+  growthCity.addEventListener("change", renderGrowthChart);
+
+  const compareCity = document.getElementById("compareCity");
+  compareCity.innerHTML = Object.keys(CITIES).filter(c => c !== "5GPER")
+    .map(c => `<option value="${c}">${CITIES[c].en} ${CITIES[c].cn}</option>`).join("");
+  compareCity.addEventListener("change", renderQuarterly);
+
+  // 时间范围按钮
+  segButtons("growthRange", btn => { growthMonths = Number(btn.dataset.n); renderGrowthChart(); });
+  segButtons("range", btn => { rangeYears = Number(btn.dataset.years); renderQuarterly(); });
+
+  renderTiles();
+  renderTable();
+  renderAllCharts();
+
+  // 系统切换深色/浅色模式时重新画图
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderAllCharts);
+})();
+</script>
+</body>
+</html>
