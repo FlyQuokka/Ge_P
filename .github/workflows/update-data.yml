@@ -1,0 +1,64 @@
+# 每天自动检查并下载最新房价数据，保存到 data/ 文件夹
+# 放置位置：仓库里的 .github/workflows/update-data.yml
+
+name: Update house price data
+
+on:
+  schedule:
+    # 每天 UTC 22:00（= 珀斯早上 6 点）
+    - cron: "0 22 * * *"
+  # 允许在 GitHub 网页上手动点 "Run workflow" 立即运行
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # ① 月度数据：realestate.com.au (PropTrack) Home Price Index，每月初发布
+      - name: Update monthly data (realestate.com.au PropTrack)
+        id: monthly
+        continue-on-error: true
+        run: ruby scripts/update_monthly.rb
+
+      # ② 季度数据：澳大利亚统计局 (ABS)，用于长期走势图
+      - name: Update quarterly data (ABS)
+        id: quarterly
+        continue-on-error: true
+        run: |
+          # 3 = 独立屋 (house) 中位价, 4 = 公寓/联排 (unit) 中位价
+          # 8 个首府城市：悉尼 墨尔本 布里斯班 阿德莱德 珀斯 霍巴特 达尔文 堪培拉
+          URL="https://data.api.abs.gov.au/rest/data/ABS,RES_DWELL,1.0.0/3+4.1GSYD+2GMEL+3GBRI+4GADE+5GPER+6GHOB+7GDAR+8ACTE.Q"
+          curl -sSf --retry 3 -m 120 -H "Accept: application/vnd.sdmx.data+csv" "$URL" -o new.csv
+
+          # 安全检查：下载的数据太少或没有珀斯，就停止，不覆盖旧数据
+          LINES=$(wc -l < new.csv)
+          echo "Downloaded $LINES lines"
+          if [ "$LINES" -lt 500 ] || ! grep -q "5GPER" new.csv; then
+            echo "数据看起来不完整，保留旧数据。"
+            rm -f new.csv
+            exit 1
+          fi
+          mv new.csv data/prices.csv
+
+      - name: Save changes
+        run: |
+          rm -f new.csv
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > data/last_checked.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git commit -m "Update house price data"
+          git push
+
+      # 如果上面任何一个数据源失败，让这次运行显示为红色 ✗，方便发现问题
+      - name: Report failures
+        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure'
+        run: |
+          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}"
+          exit 1
