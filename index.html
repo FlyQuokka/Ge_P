@@ -97,6 +97,37 @@
   .legend i { width: 14px; height: 2px; display: inline-block; border-radius: 1px; }
   .chart-box { position: relative; height: 300px; }
 
+  /* 历史事件 */
+  :root { --event-line: rgba(11,11,11,0.28); --event-badge: #fcfcfb; --event-band: rgba(208,59,59,0.07); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --event-line: rgba(255,255,255,0.30); --event-badge: #1a1a19; --event-band: rgba(230,103,103,0.10); } }
+  :root[data-theme="dark"] { --event-line: rgba(255,255,255,0.30); --event-badge: #1a1a19; --event-band: rgba(230,103,103,0.10); }
+  .ev-layer { position: absolute; inset: 0; pointer-events: none; }
+  .ev-badge {
+    position: absolute; pointer-events: auto;
+    height: 20px; padding: 0; border-radius: 10px; text-align: center;
+    border: 1px solid var(--axis); background: var(--event-badge); color: var(--ink-2);
+    font: 600 11px/18px system-ui, -apple-system, sans-serif; cursor: pointer; white-space: nowrap;
+  }
+  .ev-badge:hover, .ev-badge:focus { border-color: var(--ink); color: var(--ink); outline: none; z-index: 5; }
+  .ev-pop {
+    display: none; position: absolute; top: 24px; padding: 8px 10px;
+    background: var(--surface); border: 1px solid var(--axis); border-radius: 8px;
+    color: var(--ink-2); font-weight: 400; font-size: 12px; line-height: 1.5; text-align: left; white-space: normal;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    max-height: 280px; overflow-y: auto;
+  }
+  .ev-pop p { margin: 0 0 6px; }
+  .ev-pop p:last-child { margin: 0; }
+  .ev-pop b { color: var(--ink); font-weight: 600; }
+  .ev-badge:hover .ev-pop, .ev-badge:focus .ev-pop { display: block; }
+  .ev-list { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
+  .ev-list summary { cursor: pointer; color: var(--ink-2); }
+  .ev-list table { margin-top: 8px; font-size: 13px; }
+  .ev-list td { white-space: normal; text-align: left; vertical-align: top; }
+  .ev-list td:first-child { width: 28px; color: var(--muted); }
+  .ev-list td:nth-child(2), .ev-list td:nth-child(3) { white-space: nowrap; }
+  .ev-list tr.dim td { opacity: 0.4; }
+
   /* 表格 */
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -201,10 +232,36 @@
         <button data-v="1970" aria-pressed="true">全部</button>
         <button data-v="1990">1990 起</button>
         <button data-v="2002">2002 起</button>
+        <button data-v="2015">2015 起</button>
       </div>
       <label class="check"><input type="checkbox" id="lrLog"> 对数坐标</label>
     </div>
     <p class="hint strip-hint" id="lrHint"></p>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>历史事件</h2>
+        <p class="hint">在下方的长期图表和国际对比图上，用竖虚线标出 1970 年以来的重大事件。圆圈里的数字对应下面的列表，
+        鼠标移上去（手机上点一下）可以看说明；仍在持续的事件（如战争）从开始到今天涂了浅红色底。
+        近几年事件很密，选上方的「2015 起」看得更清楚。这些只是时间参考，不代表事件一定导致了房价变化</p>
+      </div>
+    </div>
+    <div class="controls">
+      <label class="check"><input type="checkbox" id="evShow" checked> 显示历史事件</label>
+      <label>地区：<select id="evRegion">
+        <option value="all">全部</option>
+        <option value="AU">澳洲 + 全球</option>
+        <option value="US">美国 + 全球</option>
+        <option value="CN">中国 + 全球</option>
+        <option value="EU">欧洲 + 全球</option>
+      </select></label>
+    </div>
+    <details class="ev-list">
+      <summary>查看事件列表（<span id="evCount">0</span> 个）</summary>
+      <div class="table-wrap"><table><tbody id="evTable"></tbody></table></div>
+    </details>
   </section>
 
   <section class="card">
@@ -692,6 +749,127 @@ const levelSeries = (country, city, type) => levelFrom(cityEntry(country, city, 
 const growthSeries = (country, city, type) => growthFrom(cityEntry(country, city, type), o => priceOf(country, o));
 
 // ============================================================
+//  历史事件（data/longrun/events.json）
+// ============================================================
+const REGION_CN = { global: "全球", AU: "澳洲", US: "美国", CN: "中国", EU: "欧洲" };
+let events = [];   // [{ n: 编号, date, region, title, note, x }]，按时间排序
+let ev = { show: true, region: "all" };
+
+async function loadEvents() {
+  try {
+    const res = await fetch("data/longrun/events.json", { cache: "no-store" });
+    if (!res.ok) return;   // 没有这个文件就不显示事件，不影响其他图表
+    events = (await res.json())
+      .map(e => ({ ...e, x: periodX(e.date) }))
+      .sort((a, b) => a.x - b.x)
+      .map((e, i) => ({ ...e, n: i + 1 }));
+  } catch (e) {}
+}
+
+// 事件的时间文字，如"2022 年 2 月起（持续中）"
+const eventWhen = e => periodLabel(e.date) +
+  (e.end === "ongoing" ? "起（持续中）" : e.end ? " – " + periodLabel(e.end) : "");
+const eventMatches = e => ev.region === "all" || e.region === ev.region || e.region === "global";
+const visibleEvents = () => ev.show ? events.filter(eventMatches) : [];
+
+function renderEventList() {
+  document.getElementById("evCount").textContent = events.length;
+  document.getElementById("evTable").innerHTML = events.map(e => `
+    <tr class="${eventMatches(e) ? "" : "dim"}">
+      <td>${e.n}</td><td>${eventWhen(e)}</td><td>${REGION_CN[e.region] || e.region}</td>
+      <td><b>${e.title}</b><br>${e.note}</td>
+    </tr>`).join("");
+}
+
+// 图表插件：在图里画竖虚线，并在图的上方放编号标记（离得太近的事件合并成一个标记，如"10–12"）
+const eventPlugin = {
+  id: "historyEvents",
+  beforeDatasetsDraw(chart) {
+    const { ctx, chartArea: a, scales: { x } } = chart;
+    ctx.save();
+    // 持续中（或写了结束时间）的事件：从开始到结束涂一层浅色底
+    ctx.fillStyle = css("--event-band");
+    visibleEvents().forEach(e => {
+      if (!e.end) return;
+      const x1 = Math.max(a.left, x.getPixelForValue(e.x));
+      const x2 = e.end === "ongoing" ? a.right : Math.min(a.right, x.getPixelForValue(periodX(e.end)));
+      if (x2 > x1) ctx.fillRect(x1, a.top, x2 - x1, a.bottom - a.top);
+    });
+    ctx.strokeStyle = css("--event-line");
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    visibleEvents().forEach(e => {
+      const px = Math.round(x.getPixelForValue(e.x)) + 0.5;
+      if (px < a.left || px > a.right) return;
+      ctx.beginPath();
+      ctx.moveTo(px, a.top);
+      ctx.lineTo(px, a.bottom);
+      ctx.stroke();
+    });
+    ctx.restore();
+  },
+  afterRender(chart) {
+    const box = chart.canvas.parentNode;
+    let layer = box.querySelector(".ev-layer");
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "ev-layer";
+      box.appendChild(layer);
+    }
+    const { ctx, chartArea: a, scales: { x } } = chart;
+    // 量出每个标记文字的实际宽度，用来判断会不会和旁边的标记重叠
+    ctx.save();
+    ctx.font = "600 11px system-ui, -apple-system, sans-serif";
+    const labelOf = list => list.length === 1 ? String(list[0].n) : list[0].n + "–" + last(list).n;
+    const widthOf = list => Math.max(20, Math.ceil(ctx.measureText(labelOf(list)).width) + 12);
+    // 标记排成上下两排，从右往左摆（最新的事件最密，先给它们占位置）：
+    // 正对竖线放不下时，允许往左偏一点（最多 MAX_SHIFT 像素）；两排都偏太远才和左边紧挨着的标记合并（如"10–12"）
+    const MAX_SHIFT = 24;
+    const boxWidth = box.clientWidth;
+    const groups = [];                          // 按从左到右的顺序
+    const rowLeft = [Infinity, Infinity];       // 每一排最左边已经占到哪里
+    visibleEvents().slice().reverse().forEach(e => {
+      const px = x.getPixelForValue(e.x);
+      if (px < a.left - 1 || px > a.right + 1) return;
+      const w = widthOf([e]);
+      const ideal = Math.min(px + w / 2, boxWidth - 2);   // 正对着竖线时标记的右边缘（不超出图表右边）
+      const options = [0, 1].map(r => ({ row: r, right: Math.min(ideal, rowLeft[r] - 2) }))
+        .filter(o => ideal - o.right <= MAX_SHIFT && o.right - w >= 2)
+        .sort((p, q) => q.right - p.right);                 // 偏得最少的那一排优先
+      if (options.length) {
+        const { row, right } = options[0];
+        groups.unshift({ list: [e], right, row });
+        rowLeft[row] = right - w;
+      } else {
+        const g = groups[0];                    // 最近摆上去的、也就是最靠左的那个标记
+        g.list.unshift(e);
+        rowLeft[g.row] = g.right - widthOf(g.list);
+      }
+    });
+    groups.forEach(g => { g.w = widthOf(g.list); g.left = Math.max(2, g.right - g.w); });
+    ctx.restore();
+
+    // 位置没变就不重画标记（鼠标在图上移动时图表会不断重画）
+    const key = groups.map(g => labelOf(g.list) + "@" + Math.round(g.left) + "r" + g.row).join("|") + "#" + Math.round(a.top) + "w" + boxWidth;
+    if (layer.dataset.key === key) return;
+    layer.dataset.key = key;
+
+    // 说明框的宽度和位置：尽量靠着标记展开，但不超出图表左右两边（手机上图表很窄）
+    const popWidth = Math.min(260, boxWidth - 8);
+    layer.innerHTML = groups.map(g => {
+      const text = labelOf(g.list);
+      const left = g.left;
+      const wanted = left + g.w / 2 > boxWidth / 2 ? left + g.w - popWidth : left;
+      const popLeft = Math.max(4, Math.min(boxWidth - popWidth - 4, wanted)) - left;
+      const pop = g.list.map(e => `<p><b>${e.n}. ${eventWhen(e)} · ${e.title}</b><br>${e.note}</p>`).join("");
+      return `<button type="button" class="ev-badge" style="left:${left.toFixed(1)}px;width:${g.w}px;top:${(a.top - 24 - g.row * 23).toFixed(1)}px"` +
+             ` aria-label="历史事件 ${text}">${text}` +
+             `<span class="ev-pop" style="left:${popLeft.toFixed(1)}px;width:${popWidth}px">${pop}</span></button>`;
+    }).join("");
+  }
+};
+
+// ============================================================
 //  长期数据：画图（横轴是连续的年份，年度和季度数据可以画在一起）
 // ============================================================
 function xyChart(canvasId, sets, opt) {
@@ -707,13 +885,17 @@ function xyChart(canvasId, sets, opt) {
     return [1, 2, 5].some(k => Math.abs(lead - k) < 1e-6);
   };
   const isZero = ctx => opt.zeroLine && ctx.tick && ctx.tick.value === 0;
-  const endX = xs.length ? last(xs) + 0.25 : opt.start + 1;
+  let endX = xs.length ? last(xs) + 0.25 : opt.start + 1;
+  // 显示历史事件时，横轴延长到最新的事件，这样数据还没覆盖到的新事件也能看到（右边会留出一段空白）
+  if (opt.events && xs.length) visibleEvents().forEach(e => { endX = Math.max(endX, e.x + 0.15); });
   const span = endX - opt.start;
   const yearStep = span > 40 ? 10 : span > 20 ? 5 : span > 10 ? 2 : 1;   // 横轴每隔几年写一个年份
 
   if (charts[canvasId]) charts[canvasId].destroy();
+  const showEvents = opt.events && visibleEvents().length > 0;
   charts[canvasId] = new Chart(document.getElementById(canvasId), {
     type: "line",
+    plugins: opt.events ? [eventPlugin] : [],
     data: {
       datasets: sets.map(s => {
         const byX = new Map(s.points.map(o => [o.x, o.y]));
@@ -738,6 +920,7 @@ function xyChart(canvasId, sets, opt) {
     options: {
       maintainAspectRatio: false,
       animation: false,
+      layout: { padding: { top: showEvents ? 50 : 0 } },   // 给事件标记留出位置
       interaction: { mode: opt.perDataset ? "perDataset" : "index", intersect: false },
       plugins: {
         legend: { display: false },
@@ -808,7 +991,7 @@ function renderLongrun() {
   const abs = cityEntry("AU", "Perth", "house").sub;
   if (abs.length) document.getElementById("quarter").textContent = "最新：" + quarterLabel(last(abs).p);
 
-  const priceOpt = { start: lr.start, log: lr.log, value: money, axis: moneyShort, showSource: true };
+  const priceOpt = { start: lr.start, log: lr.log, value: money, axis: moneyShort, showSource: true, events: true };
 
   // ① Perth 独立屋与公寓
   xyChart("lrTypeChart", [
@@ -829,7 +1012,7 @@ function renderLongrun() {
   xyChart("lrGrowthChart", [
     { label: "Perth", color: "--series-1", points: growthSeries("AU", "Perth", lr.type) },
     { label: city, color: "--series-2", points: growthSeries(country, city, lr.type) }
-  ], { start: lr.start, zeroLine: true, showSource: true,
+  ], { start: lr.start, zeroLine: true, showSource: true, events: true,
        value: v => (v > 0 ? "+" : "") + v.toFixed(1) + "%", axis: v => v + "%" });
 }
 
@@ -933,8 +1116,8 @@ function renderCompare() {
     "想比较涨跌周期，建议选「年度涨幅 + 各自本币 + 扣除通胀」，这样不受汇率波动影响；换算成同一种货币后，曲线里包含了汇率本身的涨跌。";
 
   xyChart("cmpChart", sets, cmp.mode === "level"
-    ? { start: chartStart, perDataset: true, value: v => v.toFixed(0), axis: v => v }
-    : { start: chartStart, perDataset: true, zeroLine: true,
+    ? { start: chartStart, perDataset: true, events: true, value: v => v.toFixed(0), axis: v => v }
+    : { start: chartStart, perDataset: true, events: true, zeroLine: true,
         value: v => (v > 0 ? "+" : "") + v.toFixed(1) + "%", axis: v => v + "%" });
 }
 
@@ -959,7 +1142,7 @@ function segButtons(id, onPick) {
 
 (async function () {
   try {
-    await Promise.all([loadMonthly(), loadGrowth(), loadLongrun(), loadCompareData()]);
+    await Promise.all([loadMonthly(), loadGrowth(), loadLongrun(), loadCompareData(), loadEvents()]);
   } catch (e) {
     document.getElementById("latest").innerHTML = `<span class="error">数据加载失败：${e.message}</span>`;
     return;
@@ -1020,6 +1203,13 @@ function segButtons(id, onPick) {
   segButtons("cmpMode", btn => { cmp.mode = btn.dataset.v; renderCompare(); });
   segButtons("cmpPrice", btn => { cmp.price = btn.dataset.v; renderCompare(); });
   segButtons("cmpStart", btn => { cmp.start = Number(btn.dataset.v); renderCompare(); });
+
+  // 历史事件：开关和地区筛选
+  const evShow = document.getElementById("evShow"), evRegion = document.getElementById("evRegion");
+  const onEventChange = () => { ev.show = evShow.checked; ev.region = evRegion.value; renderEventList(); renderLongrun(); renderCompare(); };
+  evShow.addEventListener("change", onEventChange);
+  evRegion.addEventListener("change", onEventChange);
+  renderEventList();
 
   // 时间范围按钮
   segButtons("growthRange", btn => { growthMonths = Number(btn.dataset.n); renderGrowthChart(); });
