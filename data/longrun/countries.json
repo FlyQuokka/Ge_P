@@ -1,0 +1,6 @@
+[
+  { "code": "AU", "name": "澳大利亚", "name_en": "Australia", "currency": "AUD" },
+  { "code": "US", "name": "美国", "name_en": "United States", "currency": "USD" },
+  { "code": "CN", "name": "中国", "name_en": "China", "currency": "CNY" },
+  { "code": "XM", "name": "欧元区", "name_en": "Euro area", "currency": "EUR" }
+]
