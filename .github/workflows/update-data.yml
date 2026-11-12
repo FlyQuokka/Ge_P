@@ -46,6 +46,13 @@ jobs:
           fi
           mv new.csv data/prices.csv
 
+      # ③ 长期数据：全国房价指数（BIS，1970 年至今）+ 各城市长期房价（历史数据与 ABS 合并）
+      #    必须排在 ② 之后，因为它要用到刚更新的 data/prices.csv
+      - name: Update long-run data (BIS + city history)
+        id: longrun
+        continue-on-error: true
+        run: ruby scripts/update_longrun.rb
+
       - name: Save changes
         run: |
           rm -f new.csv
@@ -58,7 +65,7 @@ jobs:
 
       # 如果上面任何一个数据源失败，让这次运行显示为红色 ✗，方便发现问题
       - name: Report failures
-        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure'
+        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure' || steps.longrun.outcome == 'failure'
         run: |
-          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}"
+          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}"
           exit 1
