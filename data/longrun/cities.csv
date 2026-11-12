@@ -1,0 +1,4598 @@
+country,city,type,period,value,source
+AU,Adelaide,house,1971,11900,abelson2004
+AU,Adelaide,house,1972,13225,abelson2004
+AU,Adelaide,house,1973,16250,abelson2004
+AU,Adelaide,house,1974,22200,abelson2004
+AU,Adelaide,house,1975,26150,abelson2004
+AU,Adelaide,house,1976,29800,abelson2004
+AU,Adelaide,house,1977,32600,abelson2004
+AU,Adelaide,house,1978,33100,abelson2004
+AU,Adelaide,house,1979,33750,abelson2004
+AU,Adelaide,house,1980,36000,abelson2004
+AU,Adelaide,house,1981,39100,abelson2004
+AU,Adelaide,house,1982,42850,abelson2004
+AU,Adelaide,house,1983,47950,abelson2004
+AU,Adelaide,house,1984,61250,abelson2004
+AU,Adelaide,house,1985,72200,abelson2004
+AU,Adelaide,house,1986,73500,abelson2004
+AU,Adelaide,house,1987,74500,abelson2004
+AU,Adelaide,house,1988,80400,abelson2004
+AU,Adelaide,house,1989,90400,abelson2004
+AU,Adelaide,house,1990,97200,abelson2004
+AU,Adelaide,house,1991,103900,abelson2004
+AU,Adelaide,house,1992,108300,abelson2004
+AU,Adelaide,house,1993,111200,abelson2004
+AU,Adelaide,house,1994,113500,abelson2004
+AU,Adelaide,house,1995,111500,abelson2004
+AU,Adelaide,house,1996,110000,abelson2004
+AU,Adelaide,house,1997,113500,abelson2004
+AU,Adelaide,house,1998,118600,abelson2004
+AU,Adelaide,house,1999,127000,abelson2004
+AU,Adelaide,house,2000,135000,abelson2004
+AU,Adelaide,house,2001,150000,abelson2004
+AU,Adelaide,house,2002,180000,abelson2004
+AU,Adelaide,house,2002-Q1,166000,abs
+AU,Adelaide,house,2002-Q2,175000,abs
+AU,Adelaide,house,2002-Q3,181000,abs
+AU,Adelaide,house,2002-Q4,195000,abs
+AU,Adelaide,house,2003,225000,abelson2004
+AU,Adelaide,house,2003-Q1,209400,abs
+AU,Adelaide,house,2003-Q2,220500,abs
+AU,Adelaide,house,2003-Q3,235000,abs
+AU,Adelaide,house,2003-Q4,247500,abs
+AU,Adelaide,house,2004-Q1,250000,abs
+AU,Adelaide,house,2004-Q2,257500,abs
+AU,Adelaide,house,2004-Q3,261000,abs
+AU,Adelaide,house,2004-Q4,270000,abs
+AU,Adelaide,house,2005-Q1,270000,abs
+AU,Adelaide,house,2005-Q2,271000,abs
+AU,Adelaide,house,2005-Q3,275000,abs
+AU,Adelaide,house,2005-Q4,280000,abs
+AU,Adelaide,house,2006-Q1,280000,abs
+AU,Adelaide,house,2006-Q2,286000,abs
+AU,Adelaide,house,2006-Q3,290000,abs
+AU,Adelaide,house,2006-Q4,300000,abs
+AU,Adelaide,house,2007-Q1,305000,abs
+AU,Adelaide,house,2007-Q2,315000,abs
+AU,Adelaide,house,2007-Q3,335000,abs
+AU,Adelaide,house,2007-Q4,358000,abs
+AU,Adelaide,house,2008-Q1,360000,abs
+AU,Adelaide,house,2008-Q2,365000,abs
+AU,Adelaide,house,2008-Q3,360000,abs
+AU,Adelaide,house,2008-Q4,355000,abs
+AU,Adelaide,house,2009-Q1,353500,abs
+AU,Adelaide,house,2009-Q2,363000,abs
+AU,Adelaide,house,2009-Q3,370000,abs
+AU,Adelaide,house,2009-Q4,398800,abs
+AU,Adelaide,house,2010-Q1,402000,abs
+AU,Adelaide,house,2010-Q2,410000,abs
+AU,Adelaide,house,2010-Q3,400000,abs
+AU,Adelaide,house,2010-Q4,410000,abs
+AU,Adelaide,house,2011-Q1,400000,abs
+AU,Adelaide,house,2011-Q2,395000,abs
+AU,Adelaide,house,2011-Q3,390000,abs
+AU,Adelaide,house,2011-Q4,385000,abs
+AU,Adelaide,house,2012-Q1,382000,abs
+AU,Adelaide,house,2012-Q2,385000,abs
+AU,Adelaide,house,2012-Q3,386000,abs
+AU,Adelaide,house,2012-Q4,395000,abs
+AU,Adelaide,house,2013-Q1,395000,abs
+AU,Adelaide,house,2013-Q2,395000,abs
+AU,Adelaide,house,2013-Q3,395000,abs
+AU,Adelaide,house,2013-Q4,412000,abs
+AU,Adelaide,house,2014-Q1,407000,abs
+AU,Adelaide,house,2014-Q2,405000,abs
+AU,Adelaide,house,2014-Q3,410000,abs
+AU,Adelaide,house,2014-Q4,425000,abs
+AU,Adelaide,house,2015-Q1,415500,abs
+AU,Adelaide,house,2015-Q2,420000,abs
+AU,Adelaide,house,2015-Q3,427500,abs
+AU,Adelaide,house,2015-Q4,436000,abs
+AU,Adelaide,house,2016-Q1,436000,abs
+AU,Adelaide,house,2016-Q2,440000,abs
+AU,Adelaide,house,2016-Q3,445000,abs
+AU,Adelaide,house,2016-Q4,447000,abs
+AU,Adelaide,house,2017-Q1,451300,abs
+AU,Adelaide,house,2017-Q2,450000,abs
+AU,Adelaide,house,2017-Q3,451000,abs
+AU,Adelaide,house,2017-Q4,470000,abs
+AU,Adelaide,house,2018-Q1,465000,abs
+AU,Adelaide,house,2018-Q2,468000,abs
+AU,Adelaide,house,2018-Q3,466300,abs
+AU,Adelaide,house,2018-Q4,480000,abs
+AU,Adelaide,house,2019-Q1,475000,abs
+AU,Adelaide,house,2019-Q2,478500,abs
+AU,Adelaide,house,2019-Q3,474000,abs
+AU,Adelaide,house,2019-Q4,485000,abs
+AU,Adelaide,house,2020-Q1,472000,abs
+AU,Adelaide,house,2020-Q2,487500,abs
+AU,Adelaide,house,2020-Q3,500000,abs
+AU,Adelaide,house,2020-Q4,512500,abs
+AU,Adelaide,house,2021-Q1,523000,abs
+AU,Adelaide,house,2021-Q2,550000,abs
+AU,Adelaide,house,2021-Q3,580000,abs
+AU,Adelaide,house,2021-Q4,630000,abs
+AU,Adelaide,house,2022-Q1,650000,abs
+AU,Adelaide,house,2022-Q2,663000,abs
+AU,Adelaide,house,2022-Q3,654000,abs
+AU,Adelaide,house,2022-Q4,675000,abs
+AU,Adelaide,house,2023-Q1,680000,abs
+AU,Adelaide,house,2023-Q2,702000,abs
+AU,Adelaide,house,2023-Q3,715000,abs
+AU,Adelaide,house,2023-Q4,750000,abs
+AU,Adelaide,house,2024-Q1,765000,abs
+AU,Adelaide,house,2024-Q2,785000,abs
+AU,Adelaide,house,2024-Q3,817500,abs
+AU,Adelaide,house,2024-Q4,850000,abs
+AU,Adelaide,house,2025-Q1,852000,abs
+AU,Adelaide,house,2025-Q2,861000,abs
+AU,Adelaide,house,2025-Q3,899000,abs
+AU,Adelaide,house,2025-Q4,955200,abs
+AU,Adelaide,house,2026-Q1,985000,abs
+AU,Adelaide,house,2026-Q2,975000,abs
+AU,Adelaide,unit,1974,23113,abelson2004
+AU,Adelaide,unit,1975,24345,abelson2004
+AU,Adelaide,unit,1976,29599,abelson2004
+AU,Adelaide,unit,1977,31537,abelson2004
+AU,Adelaide,unit,1978,30750,abelson2004
+AU,Adelaide,unit,1979,31979,abelson2004
+AU,Adelaide,unit,1980,31997,abelson2004
+AU,Adelaide,unit,1981,34334,abelson2004
+AU,Adelaide,unit,1982,38887,abelson2004
+AU,Adelaide,unit,1983,45213,abelson2004
+AU,Adelaide,unit,1984,56238,abelson2004
+AU,Adelaide,unit,1985,61600,abelson2004
+AU,Adelaide,unit,1986,65400,abelson2004
+AU,Adelaide,unit,1987,64200,abelson2004
+AU,Adelaide,unit,1988,67000,abelson2004
+AU,Adelaide,unit,1989,72900,abelson2004
+AU,Adelaide,unit,1990,81300,abelson2004
+AU,Adelaide,unit,1991,86000,abelson2004
+AU,Adelaide,unit,1992,89600,abelson2004
+AU,Adelaide,unit,1993,91400,abelson2004
+AU,Adelaide,unit,1994,96000,abelson2004
+AU,Adelaide,unit,1995,94100,abelson2004
+AU,Adelaide,unit,1996,89000,abelson2004
+AU,Adelaide,unit,1997,89300,abelson2004
+AU,Adelaide,unit,1998,91100,abelson2004
+AU,Adelaide,unit,1999,94100,abelson2004
+AU,Adelaide,unit,2000,99300,abelson2004
+AU,Adelaide,unit,2001,112200,abelson2004
+AU,Adelaide,unit,2002,138300,abelson2004
+AU,Adelaide,unit,2003,159700,abelson2004
+AU,Adelaide,unit,2003-Q3,182500,abs
+AU,Adelaide,unit,2003-Q4,191000,abs
+AU,Adelaide,unit,2004-Q1,193500,abs
+AU,Adelaide,unit,2004-Q2,200000,abs
+AU,Adelaide,unit,2004-Q3,220000,abs
+AU,Adelaide,unit,2004-Q4,220000,abs
+AU,Adelaide,unit,2005-Q1,212000,abs
+AU,Adelaide,unit,2005-Q2,216500,abs
+AU,Adelaide,unit,2005-Q3,225300,abs
+AU,Adelaide,unit,2005-Q4,228800,abs
+AU,Adelaide,unit,2006-Q1,225000,abs
+AU,Adelaide,unit,2006-Q2,235000,abs
+AU,Adelaide,unit,2006-Q3,240000,abs
+AU,Adelaide,unit,2006-Q4,246000,abs
+AU,Adelaide,unit,2007-Q1,245000,abs
+AU,Adelaide,unit,2007-Q2,265000,abs
+AU,Adelaide,unit,2007-Q3,285000,abs
+AU,Adelaide,unit,2007-Q4,290000,abs
+AU,Adelaide,unit,2008-Q1,295000,abs
+AU,Adelaide,unit,2008-Q2,290000,abs
+AU,Adelaide,unit,2008-Q3,315100,abs
+AU,Adelaide,unit,2008-Q4,300800,abs
+AU,Adelaide,unit,2009-Q1,300000,abs
+AU,Adelaide,unit,2009-Q2,310000,abs
+AU,Adelaide,unit,2009-Q3,310000,abs
+AU,Adelaide,unit,2009-Q4,326800,abs
+AU,Adelaide,unit,2010-Q1,333000,abs
+AU,Adelaide,unit,2010-Q2,337500,abs
+AU,Adelaide,unit,2010-Q3,330500,abs
+AU,Adelaide,unit,2010-Q4,335000,abs
+AU,Adelaide,unit,2011-Q1,339000,abs
+AU,Adelaide,unit,2011-Q2,328500,abs
+AU,Adelaide,unit,2011-Q3,320000,abs
+AU,Adelaide,unit,2011-Q4,327300,abs
+AU,Adelaide,unit,2012-Q1,317000,abs
+AU,Adelaide,unit,2012-Q2,315000,abs
+AU,Adelaide,unit,2012-Q3,325000,abs
+AU,Adelaide,unit,2012-Q4,325000,abs
+AU,Adelaide,unit,2013-Q1,325000,abs
+AU,Adelaide,unit,2013-Q2,330000,abs
+AU,Adelaide,unit,2013-Q3,324000,abs
+AU,Adelaide,unit,2013-Q4,330000,abs
+AU,Adelaide,unit,2014-Q1,326000,abs
+AU,Adelaide,unit,2014-Q2,345000,abs
+AU,Adelaide,unit,2014-Q3,342500,abs
+AU,Adelaide,unit,2014-Q4,345000,abs
+AU,Adelaide,unit,2015-Q1,345000,abs
+AU,Adelaide,unit,2015-Q2,345000,abs
+AU,Adelaide,unit,2015-Q3,344500,abs
+AU,Adelaide,unit,2015-Q4,345000,abs
+AU,Adelaide,unit,2016-Q1,345000,abs
+AU,Adelaide,unit,2016-Q2,367000,abs
+AU,Adelaide,unit,2016-Q3,365000,abs
+AU,Adelaide,unit,2016-Q4,365000,abs
+AU,Adelaide,unit,2017-Q1,365000,abs
+AU,Adelaide,unit,2017-Q2,383500,abs
+AU,Adelaide,unit,2017-Q3,375000,abs
+AU,Adelaide,unit,2017-Q4,390000,abs
+AU,Adelaide,unit,2018-Q1,370000,abs
+AU,Adelaide,unit,2018-Q2,380000,abs
+AU,Adelaide,unit,2018-Q3,380000,abs
+AU,Adelaide,unit,2018-Q4,371000,abs
+AU,Adelaide,unit,2019-Q1,400000,abs
+AU,Adelaide,unit,2019-Q2,390000,abs
+AU,Adelaide,unit,2019-Q3,380000,abs
+AU,Adelaide,unit,2019-Q4,385000,abs
+AU,Adelaide,unit,2020-Q1,390000,abs
+AU,Adelaide,unit,2020-Q2,421300,abs
+AU,Adelaide,unit,2020-Q3,411800,abs
+AU,Adelaide,unit,2020-Q4,415000,abs
+AU,Adelaide,unit,2021-Q1,420000,abs
+AU,Adelaide,unit,2021-Q2,415000,abs
+AU,Adelaide,unit,2021-Q3,425000,abs
+AU,Adelaide,unit,2021-Q4,450000,abs
+AU,Adelaide,unit,2022-Q1,454900,abs
+AU,Adelaide,unit,2022-Q2,465000,abs
+AU,Adelaide,unit,2022-Q3,485000,abs
+AU,Adelaide,unit,2022-Q4,480000,abs
+AU,Adelaide,unit,2023-Q1,489500,abs
+AU,Adelaide,unit,2023-Q2,525000,abs
+AU,Adelaide,unit,2023-Q3,520000,abs
+AU,Adelaide,unit,2023-Q4,565500,abs
+AU,Adelaide,unit,2024-Q1,570000,abs
+AU,Adelaide,unit,2024-Q2,630000,abs
+AU,Adelaide,unit,2024-Q3,610000,abs
+AU,Adelaide,unit,2024-Q4,640000,abs
+AU,Adelaide,unit,2025-Q1,640000,abs
+AU,Adelaide,unit,2025-Q2,660000,abs
+AU,Adelaide,unit,2025-Q3,685300,abs
+AU,Adelaide,unit,2025-Q4,735000,abs
+AU,Adelaide,unit,2026-Q1,742000,abs
+AU,Adelaide,unit,2026-Q2,725000,abs
+AU,Brisbane,house,1973,17500,abelson2004
+AU,Brisbane,house,1974,21500,abelson2004
+AU,Brisbane,house,1975,23700,abelson2004
+AU,Brisbane,house,1976,26275,abelson2004
+AU,Brisbane,house,1977,28600,abelson2004
+AU,Brisbane,house,1978,29975,abelson2004
+AU,Brisbane,house,1979,31450,abelson2004
+AU,Brisbane,house,1980,35475,abelson2004
+AU,Brisbane,house,1981,45325,abelson2004
+AU,Brisbane,house,1982,55125,abelson2004
+AU,Brisbane,house,1983,55525,abelson2004
+AU,Brisbane,house,1984,58950,abelson2004
+AU,Brisbane,house,1985,61550,abelson2004
+AU,Brisbane,house,1986,63000,abelson2004
+AU,Brisbane,house,1987,63500,abelson2004
+AU,Brisbane,house,1988,71000,abelson2004
+AU,Brisbane,house,1989,96000,abelson2004
+AU,Brisbane,house,1990,113000,abelson2004
+AU,Brisbane,house,1991,120000,abelson2004
+AU,Brisbane,house,1992,129000,abelson2004
+AU,Brisbane,house,1993,136500,abelson2004
+AU,Brisbane,house,1994,143000,abelson2004
+AU,Brisbane,house,1995,147000,abelson2004
+AU,Brisbane,house,1996,148000,abelson2004
+AU,Brisbane,house,1997,150000,abelson2004
+AU,Brisbane,house,1998,159500,abelson2004
+AU,Brisbane,house,1999,161000,abelson2004
+AU,Brisbane,house,2000,170000,abelson2004
+AU,Brisbane,house,2001,178700,abelson2004
+AU,Brisbane,house,2002,205000,abelson2004
+AU,Brisbane,house,2002-Q1,185000,abs
+AU,Brisbane,house,2002-Q2,182600,abs
+AU,Brisbane,house,2002-Q3,198000,abs
+AU,Brisbane,house,2002-Q4,208000,abs
+AU,Brisbane,house,2003,249000,abelson2004
+AU,Brisbane,house,2003-Q1,225000,abs
+AU,Brisbane,house,2003-Q2,240000,abs
+AU,Brisbane,house,2003-Q3,269000,abs
+AU,Brisbane,house,2003-Q4,296400,abs
+AU,Brisbane,house,2004-Q1,302700,abs
+AU,Brisbane,house,2004-Q2,305000,abs
+AU,Brisbane,house,2004-Q3,305000,abs
+AU,Brisbane,house,2004-Q4,310000,abs
+AU,Brisbane,house,2005-Q1,312000,abs
+AU,Brisbane,house,2005-Q2,312000,abs
+AU,Brisbane,house,2005-Q3,314900,abs
+AU,Brisbane,house,2005-Q4,320000,abs
+AU,Brisbane,house,2006-Q1,325000,abs
+AU,Brisbane,house,2006-Q2,330000,abs
+AU,Brisbane,house,2006-Q3,335000,abs
+AU,Brisbane,house,2006-Q4,343500,abs
+AU,Brisbane,house,2007-Q1,352000,abs
+AU,Brisbane,house,2007-Q2,375000,abs
+AU,Brisbane,house,2007-Q3,390000,abs
+AU,Brisbane,house,2007-Q4,415000,abs
+AU,Brisbane,house,2008-Q1,425000,abs
+AU,Brisbane,house,2008-Q2,425000,abs
+AU,Brisbane,house,2008-Q3,410000,abs
+AU,Brisbane,house,2008-Q4,399000,abs
+AU,Brisbane,house,2009-Q1,400000,abs
+AU,Brisbane,house,2009-Q2,420000,abs
+AU,Brisbane,house,2009-Q3,430000,abs
+AU,Brisbane,house,2009-Q4,455000,abs
+AU,Brisbane,house,2010-Q1,460000,abs
+AU,Brisbane,house,2010-Q2,465000,abs
+AU,Brisbane,house,2010-Q3,460000,abs
+AU,Brisbane,house,2010-Q4,460000,abs
+AU,Brisbane,house,2011-Q1,450000,abs
+AU,Brisbane,house,2011-Q2,442000,abs
+AU,Brisbane,house,2011-Q3,433000,abs
+AU,Brisbane,house,2011-Q4,430000,abs
+AU,Brisbane,house,2012-Q1,430000,abs
+AU,Brisbane,house,2012-Q2,435000,abs
+AU,Brisbane,house,2012-Q3,435000,abs
+AU,Brisbane,house,2012-Q4,440000,abs
+AU,Brisbane,house,2013-Q1,440000,abs
+AU,Brisbane,house,2013-Q2,445000,abs
+AU,Brisbane,house,2013-Q3,449000,abs
+AU,Brisbane,house,2013-Q4,465000,abs
+AU,Brisbane,house,2014-Q1,448000,abs
+AU,Brisbane,house,2014-Q2,459000,abs
+AU,Brisbane,house,2014-Q3,451000,abs
+AU,Brisbane,house,2014-Q4,467000,abs
+AU,Brisbane,house,2015-Q1,462800,abs
+AU,Brisbane,house,2015-Q2,465000,abs
+AU,Brisbane,house,2015-Q3,475000,abs
+AU,Brisbane,house,2015-Q4,490000,abs
+AU,Brisbane,house,2016-Q1,483500,abs
+AU,Brisbane,house,2016-Q2,495000,abs
+AU,Brisbane,house,2016-Q3,500000,abs
+AU,Brisbane,house,2016-Q4,515000,abs
+AU,Brisbane,house,2017-Q1,510000,abs
+AU,Brisbane,house,2017-Q2,518000,abs
+AU,Brisbane,house,2017-Q3,525000,abs
+AU,Brisbane,house,2017-Q4,535000,abs
+AU,Brisbane,house,2018-Q1,526000,abs
+AU,Brisbane,house,2018-Q2,532000,abs
+AU,Brisbane,house,2018-Q3,540000,abs
+AU,Brisbane,house,2018-Q4,540000,abs
+AU,Brisbane,house,2019-Q1,533000,abs
+AU,Brisbane,house,2019-Q2,538000,abs
+AU,Brisbane,house,2019-Q3,540000,abs
+AU,Brisbane,house,2019-Q4,550000,abs
+AU,Brisbane,house,2020-Q1,540000,abs
+AU,Brisbane,house,2020-Q2,547000,abs
+AU,Brisbane,house,2020-Q3,555000,abs
+AU,Brisbane,house,2020-Q4,575000,abs
+AU,Brisbane,house,2021-Q1,600000,abs
+AU,Brisbane,house,2021-Q2,630000,abs
+AU,Brisbane,house,2021-Q3,657000,abs
+AU,Brisbane,house,2021-Q4,750000,abs
+AU,Brisbane,house,2022-Q1,765000,abs
+AU,Brisbane,house,2022-Q2,773000,abs
+AU,Brisbane,house,2022-Q3,750000,abs
+AU,Brisbane,house,2022-Q4,750000,abs
+AU,Brisbane,house,2023-Q1,757000,abs
+AU,Brisbane,house,2023-Q2,775000,abs
+AU,Brisbane,house,2023-Q3,800000,abs
+AU,Brisbane,house,2023-Q4,830000,abs
+AU,Brisbane,house,2024-Q1,850000,abs
+AU,Brisbane,house,2024-Q2,890000,abs
+AU,Brisbane,house,2024-Q3,890000,abs
+AU,Brisbane,house,2024-Q4,935000,abs
+AU,Brisbane,house,2025-Q1,947700,abs
+AU,Brisbane,house,2025-Q2,972000,abs
+AU,Brisbane,house,2025-Q3,1025000,abs
+AU,Brisbane,house,2025-Q4,1102300,abs
+AU,Brisbane,house,2026-Q1,1160000,abs
+AU,Brisbane,house,2026-Q2,1155000,abs
+AU,Brisbane,unit,1980,37379,abelson2004
+AU,Brisbane,unit,1981,48308,abelson2004
+AU,Brisbane,unit,1982,48471,abelson2004
+AU,Brisbane,unit,1983,54396,abelson2004
+AU,Brisbane,unit,1984,58738,abelson2004
+AU,Brisbane,unit,1985,55446,abelson2004
+AU,Brisbane,unit,1986,60508,abelson2004
+AU,Brisbane,unit,1987,61146,abelson2004
+AU,Brisbane,unit,1988,68875,abelson2004
+AU,Brisbane,unit,1989,85604,abelson2004
+AU,Brisbane,unit,1990,91375,abelson2004
+AU,Brisbane,unit,1991,93875,abelson2004
+AU,Brisbane,unit,1992,98896,abelson2004
+AU,Brisbane,unit,1993,101688,abelson2004
+AU,Brisbane,unit,1994,103583,abelson2004
+AU,Brisbane,unit,1995,107358,abelson2004
+AU,Brisbane,unit,1996,127583,abelson2004
+AU,Brisbane,unit,1997,128125,abelson2004
+AU,Brisbane,unit,1998,145333,abelson2004
+AU,Brisbane,unit,1999,139000,abelson2004
+AU,Brisbane,unit,2000,171500,abelson2004
+AU,Brisbane,unit,2001,165475,abelson2004
+AU,Brisbane,unit,2002,173775,abelson2004
+AU,Brisbane,unit,2003,201833,abelson2004
+AU,Brisbane,unit,2003-Q3,221000,abs
+AU,Brisbane,unit,2003-Q4,241600,abs
+AU,Brisbane,unit,2004-Q1,249000,abs
+AU,Brisbane,unit,2004-Q2,249000,abs
+AU,Brisbane,unit,2004-Q3,264000,abs
+AU,Brisbane,unit,2004-Q4,267000,abs
+AU,Brisbane,unit,2005-Q1,257000,abs
+AU,Brisbane,unit,2005-Q2,265000,abs
+AU,Brisbane,unit,2005-Q3,271700,abs
+AU,Brisbane,unit,2005-Q4,280000,abs
+AU,Brisbane,unit,2006-Q1,280000,abs
+AU,Brisbane,unit,2006-Q2,295000,abs
+AU,Brisbane,unit,2006-Q3,292000,abs
+AU,Brisbane,unit,2006-Q4,298000,abs
+AU,Brisbane,unit,2007-Q1,305000,abs
+AU,Brisbane,unit,2007-Q2,325000,abs
+AU,Brisbane,unit,2007-Q3,340000,abs
+AU,Brisbane,unit,2007-Q4,357000,abs
+AU,Brisbane,unit,2008-Q1,360000,abs
+AU,Brisbane,unit,2008-Q2,367000,abs
+AU,Brisbane,unit,2008-Q3,350000,abs
+AU,Brisbane,unit,2008-Q4,350000,abs
+AU,Brisbane,unit,2009-Q1,349800,abs
+AU,Brisbane,unit,2009-Q2,365000,abs
+AU,Brisbane,unit,2009-Q3,370000,abs
+AU,Brisbane,unit,2009-Q4,381000,abs
+AU,Brisbane,unit,2010-Q1,385000,abs
+AU,Brisbane,unit,2010-Q2,392500,abs
+AU,Brisbane,unit,2010-Q3,383800,abs
+AU,Brisbane,unit,2010-Q4,385000,abs
+AU,Brisbane,unit,2011-Q1,379000,abs
+AU,Brisbane,unit,2011-Q2,382500,abs
+AU,Brisbane,unit,2011-Q3,370000,abs
+AU,Brisbane,unit,2011-Q4,380000,abs
+AU,Brisbane,unit,2012-Q1,376000,abs
+AU,Brisbane,unit,2012-Q2,381000,abs
+AU,Brisbane,unit,2012-Q3,387500,abs
+AU,Brisbane,unit,2012-Q4,385000,abs
+AU,Brisbane,unit,2013-Q1,392000,abs
+AU,Brisbane,unit,2013-Q2,395000,abs
+AU,Brisbane,unit,2013-Q3,395000,abs
+AU,Brisbane,unit,2013-Q4,400000,abs
+AU,Brisbane,unit,2014-Q1,405000,abs
+AU,Brisbane,unit,2014-Q2,414000,abs
+AU,Brisbane,unit,2014-Q3,420000,abs
+AU,Brisbane,unit,2014-Q4,420000,abs
+AU,Brisbane,unit,2015-Q1,420000,abs
+AU,Brisbane,unit,2015-Q2,425000,abs
+AU,Brisbane,unit,2015-Q3,425000,abs
+AU,Brisbane,unit,2015-Q4,420000,abs
+AU,Brisbane,unit,2016-Q1,415000,abs
+AU,Brisbane,unit,2016-Q2,413000,abs
+AU,Brisbane,unit,2016-Q3,420000,abs
+AU,Brisbane,unit,2016-Q4,410000,abs
+AU,Brisbane,unit,2017-Q1,405000,abs
+AU,Brisbane,unit,2017-Q2,392500,abs
+AU,Brisbane,unit,2017-Q3,400000,abs
+AU,Brisbane,unit,2017-Q4,391000,abs
+AU,Brisbane,unit,2018-Q1,385000,abs
+AU,Brisbane,unit,2018-Q2,385000,abs
+AU,Brisbane,unit,2018-Q3,385000,abs
+AU,Brisbane,unit,2018-Q4,390000,abs
+AU,Brisbane,unit,2019-Q1,387800,abs
+AU,Brisbane,unit,2019-Q2,390000,abs
+AU,Brisbane,unit,2019-Q3,397500,abs
+AU,Brisbane,unit,2019-Q4,399000,abs
+AU,Brisbane,unit,2020-Q1,390000,abs
+AU,Brisbane,unit,2020-Q2,386500,abs
+AU,Brisbane,unit,2020-Q3,400000,abs
+AU,Brisbane,unit,2020-Q4,415000,abs
+AU,Brisbane,unit,2021-Q1,420000,abs
+AU,Brisbane,unit,2021-Q2,421300,abs
+AU,Brisbane,unit,2021-Q3,430000,abs
+AU,Brisbane,unit,2021-Q4,450000,abs
+AU,Brisbane,unit,2022-Q1,459000,abs
+AU,Brisbane,unit,2022-Q2,470000,abs
+AU,Brisbane,unit,2022-Q3,470000,abs
+AU,Brisbane,unit,2022-Q4,480000,abs
+AU,Brisbane,unit,2023-Q1,483000,abs
+AU,Brisbane,unit,2023-Q2,500000,abs
+AU,Brisbane,unit,2023-Q3,525000,abs
+AU,Brisbane,unit,2023-Q4,548000,abs
+AU,Brisbane,unit,2024-Q1,580000,abs
+AU,Brisbane,unit,2024-Q2,610000,abs
+AU,Brisbane,unit,2024-Q3,630000,abs
+AU,Brisbane,unit,2024-Q4,655000,abs
+AU,Brisbane,unit,2025-Q1,685000,abs
+AU,Brisbane,unit,2025-Q2,708000,abs
+AU,Brisbane,unit,2025-Q3,745000,abs
+AU,Brisbane,unit,2025-Q4,795000,abs
+AU,Brisbane,unit,2026-Q1,840000,abs
+AU,Brisbane,unit,2026-Q2,830100,abs
+AU,Canberra,house,1971,18000,abelson2004
+AU,Canberra,house,1972,20350,abelson2004
+AU,Canberra,house,1973,26850,abelson2004
+AU,Canberra,house,1974,32000,abelson2004
+AU,Canberra,house,1975,33600,abelson2004
+AU,Canberra,house,1976,35100,abelson2004
+AU,Canberra,house,1977,36700,abelson2004
+AU,Canberra,house,1978,37300,abelson2004
+AU,Canberra,house,1979,39000,abelson2004
+AU,Canberra,house,1980,44675,abelson2004
+AU,Canberra,house,1981,57750,abelson2004
+AU,Canberra,house,1982,59025,abelson2004
+AU,Canberra,house,1983,68150,abelson2004
+AU,Canberra,house,1984,84250,abelson2004
+AU,Canberra,house,1985,90625,abelson2004
+AU,Canberra,house,1986,91175,abelson2004
+AU,Canberra,house,1987,90125,abelson2004
+AU,Canberra,house,1988,101250,abelson2004
+AU,Canberra,house,1989,115000,abelson2004
+AU,Canberra,house,1990,120750,abelson2004
+AU,Canberra,house,1991,136500,abelson2004
+AU,Canberra,house,1992,155250,abelson2004
+AU,Canberra,house,1993,159375,abelson2004
+AU,Canberra,house,1994,160850,abelson2004
+AU,Canberra,house,1995,155550,abelson2004
+AU,Canberra,house,1996,152375,abelson2004
+AU,Canberra,house,1997,152750,abelson2004
+AU,Canberra,house,1998,155500,abelson2004
+AU,Canberra,house,1999,161500,abelson2004
+AU,Canberra,house,2000,180825,abelson2004
+AU,Canberra,house,2001,206250,abelson2004
+AU,Canberra,house,2002,234150,abelson2004
+AU,Canberra,house,2002-Q1,245000,abs
+AU,Canberra,house,2002-Q2,258000,abs
+AU,Canberra,house,2002-Q3,275000,abs
+AU,Canberra,house,2002-Q4,291000,abs
+AU,Canberra,house,2003,293667,abelson2004
+AU,Canberra,house,2003-Q1,300000,abs
+AU,Canberra,house,2003-Q2,334500,abs
+AU,Canberra,house,2003-Q3,360000,abs
+AU,Canberra,house,2003-Q4,375000,abs
+AU,Canberra,house,2004-Q1,375000,abs
+AU,Canberra,house,2004-Q2,375000,abs
+AU,Canberra,house,2004-Q3,352500,abs
+AU,Canberra,house,2004-Q4,372000,abs
+AU,Canberra,house,2005-Q1,374700,abs
+AU,Canberra,house,2005-Q2,373500,abs
+AU,Canberra,house,2005-Q3,365000,abs
+AU,Canberra,house,2005-Q4,387000,abs
+AU,Canberra,house,2006-Q1,385000,abs
+AU,Canberra,house,2006-Q2,399500,abs
+AU,Canberra,house,2006-Q3,413000,abs
+AU,Canberra,house,2006-Q4,420800,abs
+AU,Canberra,house,2007-Q1,430000,abs
+AU,Canberra,house,2007-Q2,445000,abs
+AU,Canberra,house,2007-Q3,460000,abs
+AU,Canberra,house,2007-Q4,468000,abs
+AU,Canberra,house,2008-Q1,470000,abs
+AU,Canberra,house,2008-Q2,474000,abs
+AU,Canberra,house,2008-Q3,447000,abs
+AU,Canberra,house,2008-Q4,450000,abs
+AU,Canberra,house,2009-Q1,459500,abs
+AU,Canberra,house,2009-Q2,455000,abs
+AU,Canberra,house,2009-Q3,456000,abs
+AU,Canberra,house,2009-Q4,509000,abs
+AU,Canberra,house,2010-Q1,530000,abs
+AU,Canberra,house,2010-Q2,516200,abs
+AU,Canberra,house,2010-Q3,530000,abs
+AU,Canberra,house,2010-Q4,534500,abs
+AU,Canberra,house,2011-Q1,530000,abs
+AU,Canberra,house,2011-Q2,533000,abs
+AU,Canberra,house,2011-Q3,490000,abs
+AU,Canberra,house,2011-Q4,500000,abs
+AU,Canberra,house,2012-Q1,512500,abs
+AU,Canberra,house,2012-Q2,482500,abs
+AU,Canberra,house,2012-Q3,490000,abs
+AU,Canberra,house,2012-Q4,519000,abs
+AU,Canberra,house,2013-Q1,505000,abs
+AU,Canberra,house,2013-Q2,510000,abs
+AU,Canberra,house,2013-Q3,505000,abs
+AU,Canberra,house,2013-Q4,503300,abs
+AU,Canberra,house,2014-Q1,553700,abs
+AU,Canberra,house,2014-Q2,550000,abs
+AU,Canberra,house,2014-Q3,554000,abs
+AU,Canberra,house,2014-Q4,570000,abs
+AU,Canberra,house,2015-Q1,585000,abs
+AU,Canberra,house,2015-Q2,580000,abs
+AU,Canberra,house,2015-Q3,587500,abs
+AU,Canberra,house,2015-Q4,615000,abs
+AU,Canberra,house,2016-Q1,590000,abs
+AU,Canberra,house,2016-Q2,623000,abs
+AU,Canberra,house,2016-Q3,615800,abs
+AU,Canberra,house,2016-Q4,636000,abs
+AU,Canberra,house,2017-Q1,654500,abs
+AU,Canberra,house,2017-Q2,670000,abs
+AU,Canberra,house,2017-Q3,667500,abs
+AU,Canberra,house,2017-Q4,690000,abs
+AU,Canberra,house,2018-Q1,698500,abs
+AU,Canberra,house,2018-Q2,690000,abs
+AU,Canberra,house,2018-Q3,700000,abs
+AU,Canberra,house,2018-Q4,720000,abs
+AU,Canberra,house,2019-Q1,690000,abs
+AU,Canberra,house,2019-Q2,715000,abs
+AU,Canberra,house,2019-Q3,676000,abs
+AU,Canberra,house,2019-Q4,745000,abs
+AU,Canberra,house,2020-Q1,720500,abs
+AU,Canberra,house,2020-Q2,720000,abs
+AU,Canberra,house,2020-Q3,755000,abs
+AU,Canberra,house,2020-Q4,785000,abs
+AU,Canberra,house,2021-Q1,835000,abs
+AU,Canberra,house,2021-Q2,905000,abs
+AU,Canberra,house,2021-Q3,940000,abs
+AU,Canberra,house,2021-Q4,1040000,abs
+AU,Canberra,house,2022-Q1,1080000,abs
+AU,Canberra,house,2022-Q2,1059000,abs
+AU,Canberra,house,2022-Q3,1000000,abs
+AU,Canberra,house,2022-Q4,1000000,abs
+AU,Canberra,house,2023-Q1,984000,abs
+AU,Canberra,house,2023-Q2,983000,abs
+AU,Canberra,house,2023-Q3,985000,abs
+AU,Canberra,house,2023-Q4,1000000,abs
+AU,Canberra,house,2024-Q1,980000,abs
+AU,Canberra,house,2024-Q2,990000,abs
+AU,Canberra,house,2024-Q3,998900,abs
+AU,Canberra,house,2024-Q4,1000000,abs
+AU,Canberra,house,2025-Q1,975000,abs
+AU,Canberra,house,2025-Q2,1000000,abs
+AU,Canberra,house,2025-Q3,1030000,abs
+AU,Canberra,house,2025-Q4,1070000,abs
+AU,Canberra,house,2026-Q1,1080000,abs
+AU,Canberra,house,2026-Q2,1030000,abs
+AU,Canberra,unit,1980,33867,abelson2004
+AU,Canberra,unit,1981,43963,abelson2004
+AU,Canberra,unit,1982,42833,abelson2004
+AU,Canberra,unit,1983,50358,abelson2004
+AU,Canberra,unit,1984,59833,abelson2004
+AU,Canberra,unit,1985,72604,abelson2004
+AU,Canberra,unit,1986,84333,abelson2004
+AU,Canberra,unit,1987,76688,abelson2004
+AU,Canberra,unit,1988,84667,abelson2004
+AU,Canberra,unit,1989,91313,abelson2004
+AU,Canberra,unit,1990,96979,abelson2004
+AU,Canberra,unit,1991,104083,abelson2004
+AU,Canberra,unit,1992,128125,abelson2004
+AU,Canberra,unit,1993,130583,abelson2004
+AU,Canberra,unit,1994,129083,abelson2004
+AU,Canberra,unit,1995,122542,abelson2004
+AU,Canberra,unit,1996,122083,abelson2004
+AU,Canberra,unit,1997,122333,abelson2004
+AU,Canberra,unit,1998,128500,abelson2004
+AU,Canberra,unit,1999,131125,abelson2004
+AU,Canberra,unit,2000,140250,abelson2004
+AU,Canberra,unit,2001,156875,abelson2004
+AU,Canberra,unit,2002,197750,abelson2004
+AU,Canberra,unit,2003,253533,abelson2004
+AU,Canberra,unit,2003-Q3,290000,abs
+AU,Canberra,unit,2003-Q4,300000,abs
+AU,Canberra,unit,2004-Q1,295000,abs
+AU,Canberra,unit,2004-Q2,300000,abs
+AU,Canberra,unit,2004-Q3,280000,abs
+AU,Canberra,unit,2004-Q4,289000,abs
+AU,Canberra,unit,2005-Q1,304500,abs
+AU,Canberra,unit,2005-Q2,307800,abs
+AU,Canberra,unit,2005-Q3,305000,abs
+AU,Canberra,unit,2005-Q4,308000,abs
+AU,Canberra,unit,2006-Q1,310000,abs
+AU,Canberra,unit,2006-Q2,325000,abs
+AU,Canberra,unit,2006-Q3,312000,abs
+AU,Canberra,unit,2006-Q4,317500,abs
+AU,Canberra,unit,2007-Q1,325000,abs
+AU,Canberra,unit,2007-Q2,355000,abs
+AU,Canberra,unit,2007-Q3,365000,abs
+AU,Canberra,unit,2007-Q4,365000,abs
+AU,Canberra,unit,2008-Q1,370000,abs
+AU,Canberra,unit,2008-Q2,352000,abs
+AU,Canberra,unit,2008-Q3,365000,abs
+AU,Canberra,unit,2008-Q4,360500,abs
+AU,Canberra,unit,2009-Q1,372500,abs
+AU,Canberra,unit,2009-Q2,375000,abs
+AU,Canberra,unit,2009-Q3,378000,abs
+AU,Canberra,unit,2009-Q4,402500,abs
+AU,Canberra,unit,2010-Q1,410000,abs
+AU,Canberra,unit,2010-Q2,413500,abs
+AU,Canberra,unit,2010-Q3,425000,abs
+AU,Canberra,unit,2010-Q4,424900,abs
+AU,Canberra,unit,2011-Q1,415000,abs
+AU,Canberra,unit,2011-Q2,415000,abs
+AU,Canberra,unit,2011-Q3,425000,abs
+AU,Canberra,unit,2011-Q4,415000,abs
+AU,Canberra,unit,2012-Q1,415000,abs
+AU,Canberra,unit,2012-Q2,416800,abs
+AU,Canberra,unit,2012-Q3,411000,abs
+AU,Canberra,unit,2012-Q4,415500,abs
+AU,Canberra,unit,2013-Q1,410000,abs
+AU,Canberra,unit,2013-Q2,412500,abs
+AU,Canberra,unit,2013-Q3,415000,abs
+AU,Canberra,unit,2013-Q4,420500,abs
+AU,Canberra,unit,2014-Q1,410000,abs
+AU,Canberra,unit,2014-Q2,410000,abs
+AU,Canberra,unit,2014-Q3,410000,abs
+AU,Canberra,unit,2014-Q4,422000,abs
+AU,Canberra,unit,2015-Q1,420000,abs
+AU,Canberra,unit,2015-Q2,425000,abs
+AU,Canberra,unit,2015-Q3,415000,abs
+AU,Canberra,unit,2015-Q4,419900,abs
+AU,Canberra,unit,2016-Q1,425000,abs
+AU,Canberra,unit,2016-Q2,435000,abs
+AU,Canberra,unit,2016-Q3,428500,abs
+AU,Canberra,unit,2016-Q4,430000,abs
+AU,Canberra,unit,2017-Q1,429900,abs
+AU,Canberra,unit,2017-Q2,445000,abs
+AU,Canberra,unit,2017-Q3,434500,abs
+AU,Canberra,unit,2017-Q4,445500,abs
+AU,Canberra,unit,2018-Q1,436000,abs
+AU,Canberra,unit,2018-Q2,431500,abs
+AU,Canberra,unit,2018-Q3,445000,abs
+AU,Canberra,unit,2018-Q4,447900,abs
+AU,Canberra,unit,2019-Q1,450000,abs
+AU,Canberra,unit,2019-Q2,450000,abs
+AU,Canberra,unit,2019-Q3,456900,abs
+AU,Canberra,unit,2019-Q4,473300,abs
+AU,Canberra,unit,2020-Q1,460000,abs
+AU,Canberra,unit,2020-Q2,460000,abs
+AU,Canberra,unit,2020-Q3,488000,abs
+AU,Canberra,unit,2020-Q4,498000,abs
+AU,Canberra,unit,2021-Q1,505000,abs
+AU,Canberra,unit,2021-Q2,542000,abs
+AU,Canberra,unit,2021-Q3,530000,abs
+AU,Canberra,unit,2021-Q4,590000,abs
+AU,Canberra,unit,2022-Q1,575000,abs
+AU,Canberra,unit,2022-Q2,600000,abs
+AU,Canberra,unit,2022-Q3,596000,abs
+AU,Canberra,unit,2022-Q4,600000,abs
+AU,Canberra,unit,2023-Q1,610000,abs
+AU,Canberra,unit,2023-Q2,600000,abs
+AU,Canberra,unit,2023-Q3,619000,abs
+AU,Canberra,unit,2023-Q4,626000,abs
+AU,Canberra,unit,2024-Q1,605000,abs
+AU,Canberra,unit,2024-Q2,630000,abs
+AU,Canberra,unit,2024-Q3,600000,abs
+AU,Canberra,unit,2024-Q4,610000,abs
+AU,Canberra,unit,2025-Q1,600000,abs
+AU,Canberra,unit,2025-Q2,605000,abs
+AU,Canberra,unit,2025-Q3,618000,abs
+AU,Canberra,unit,2025-Q4,630000,abs
+AU,Canberra,unit,2026-Q1,629900,abs
+AU,Canberra,unit,2026-Q2,615000,abs
+AU,Darwin,house,1986,87500,abelson2004
+AU,Darwin,house,1987,81075,abelson2004
+AU,Darwin,house,1988,86000,abelson2004
+AU,Darwin,house,1989,90750,abelson2004
+AU,Darwin,house,1990,101500,abelson2004
+AU,Darwin,house,1991,111550,abelson2004
+AU,Darwin,house,1992,126125,abelson2004
+AU,Darwin,house,1993,150500,abelson2004
+AU,Darwin,house,1994,157875,abelson2004
+AU,Darwin,house,1995,165375,abelson2004
+AU,Darwin,house,1996,164250,abelson2004
+AU,Darwin,house,1997,176500,abelson2004
+AU,Darwin,house,1998,173500,abelson2004
+AU,Darwin,house,1999,179375,abelson2004
+AU,Darwin,house,2000,186800,abelson2004
+AU,Darwin,house,2001,188000,abelson2004
+AU,Darwin,house,2002,202250,abelson2004
+AU,Darwin,house,2002-Q1,190000,abs
+AU,Darwin,house,2002-Q2,188300,abs
+AU,Darwin,house,2002-Q3,190000,abs
+AU,Darwin,house,2002-Q4,195000,abs
+AU,Darwin,house,2003,211333,abelson2004
+AU,Darwin,house,2003-Q1,198000,abs
+AU,Darwin,house,2003-Q2,200500,abs
+AU,Darwin,house,2003-Q3,214000,abs
+AU,Darwin,house,2003-Q4,226000,abs
+AU,Darwin,house,2004-Q1,239500,abs
+AU,Darwin,house,2004-Q2,248800,abs
+AU,Darwin,house,2004-Q3,245000,abs
+AU,Darwin,house,2004-Q4,259000,abs
+AU,Darwin,house,2005-Q1,275000,abs
+AU,Darwin,house,2005-Q2,280000,abs
+AU,Darwin,house,2005-Q3,295000,abs
+AU,Darwin,house,2005-Q4,320000,abs
+AU,Darwin,house,2006-Q1,341500,abs
+AU,Darwin,house,2006-Q2,349500,abs
+AU,Darwin,house,2006-Q3,360000,abs
+AU,Darwin,house,2006-Q4,380000,abs
+AU,Darwin,house,2007-Q1,389500,abs
+AU,Darwin,house,2007-Q2,395000,abs
+AU,Darwin,house,2007-Q3,400000,abs
+AU,Darwin,house,2007-Q4,418500,abs
+AU,Darwin,house,2008-Q1,420000,abs
+AU,Darwin,house,2008-Q2,422300,abs
+AU,Darwin,house,2008-Q3,430000,abs
+AU,Darwin,house,2008-Q4,445000,abs
+AU,Darwin,house,2009-Q1,455000,abs
+AU,Darwin,house,2009-Q2,465000,abs
+AU,Darwin,house,2009-Q3,490000,abs
+AU,Darwin,house,2009-Q4,520000,abs
+AU,Darwin,house,2010-Q1,529000,abs
+AU,Darwin,house,2010-Q2,530000,abs
+AU,Darwin,house,2010-Q3,535000,abs
+AU,Darwin,house,2010-Q4,545000,abs
+AU,Darwin,house,2011-Q1,510000,abs
+AU,Darwin,house,2011-Q2,500000,abs
+AU,Darwin,house,2011-Q3,497000,abs
+AU,Darwin,house,2011-Q4,515000,abs
+AU,Darwin,house,2012-Q1,525000,abs
+AU,Darwin,house,2012-Q2,543500,abs
+AU,Darwin,house,2012-Q3,540000,abs
+AU,Darwin,house,2012-Q4,561000,abs
+AU,Darwin,house,2013-Q1,530000,abs
+AU,Darwin,house,2013-Q2,540000,abs
+AU,Darwin,house,2013-Q3,570000,abs
+AU,Darwin,house,2013-Q4,579000,abs
+AU,Darwin,house,2014-Q1,595000,abs
+AU,Darwin,house,2014-Q2,557500,abs
+AU,Darwin,house,2014-Q3,570000,abs
+AU,Darwin,house,2014-Q4,581000,abs
+AU,Darwin,house,2015-Q1,570000,abs
+AU,Darwin,house,2015-Q2,595000,abs
+AU,Darwin,house,2015-Q3,580000,abs
+AU,Darwin,house,2015-Q4,575000,abs
+AU,Darwin,house,2016-Q1,570000,abs
+AU,Darwin,house,2016-Q2,548000,abs
+AU,Darwin,house,2016-Q3,520000,abs
+AU,Darwin,house,2016-Q4,522000,abs
+AU,Darwin,house,2017-Q1,530000,abs
+AU,Darwin,house,2017-Q2,500000,abs
+AU,Darwin,house,2017-Q3,500000,abs
+AU,Darwin,house,2017-Q4,513800,abs
+AU,Darwin,house,2018-Q1,500000,abs
+AU,Darwin,house,2018-Q2,506000,abs
+AU,Darwin,house,2018-Q3,500000,abs
+AU,Darwin,house,2018-Q4,510000,abs
+AU,Darwin,house,2019-Q1,485000,abs
+AU,Darwin,house,2019-Q2,470000,abs
+AU,Darwin,house,2019-Q3,489000,abs
+AU,Darwin,house,2019-Q4,470000,abs
+AU,Darwin,house,2020-Q1,470000,abs
+AU,Darwin,house,2020-Q2,465000,abs
+AU,Darwin,house,2020-Q3,500000,abs
+AU,Darwin,house,2020-Q4,522500,abs
+AU,Darwin,house,2021-Q1,535000,abs
+AU,Darwin,house,2021-Q2,565000,abs
+AU,Darwin,house,2021-Q3,580000,abs
+AU,Darwin,house,2021-Q4,600000,abs
+AU,Darwin,house,2022-Q1,600000,abs
+AU,Darwin,house,2022-Q2,585000,abs
+AU,Darwin,house,2022-Q3,560000,abs
+AU,Darwin,house,2022-Q4,590000,abs
+AU,Darwin,house,2023-Q1,575000,abs
+AU,Darwin,house,2023-Q2,590000,abs
+AU,Darwin,house,2023-Q3,585000,abs
+AU,Darwin,house,2023-Q4,589500,abs
+AU,Darwin,house,2024-Q1,570000,abs
+AU,Darwin,house,2024-Q2,582500,abs
+AU,Darwin,house,2024-Q3,557500,abs
+AU,Darwin,house,2024-Q4,560000,abs
+AU,Darwin,house,2025-Q1,599800,abs
+AU,Darwin,house,2025-Q2,620000,abs
+AU,Darwin,house,2025-Q3,670000,abs
+AU,Darwin,house,2025-Q4,710000,abs
+AU,Darwin,house,2026-Q1,750000,abs
+AU,Darwin,house,2026-Q2,752500,abs
+AU,Darwin,unit,1997,131667,abelson2004
+AU,Darwin,unit,1998,127167,abelson2004
+AU,Darwin,unit,1999,155550,abelson2004
+AU,Darwin,unit,2000,146550,abelson2004
+AU,Darwin,unit,2001,149750,abelson2004
+AU,Darwin,unit,2002,154750,abelson2004
+AU,Darwin,unit,2003,153167,abelson2004
+AU,Darwin,unit,2003-Q3,130000,abs
+AU,Darwin,unit,2003-Q4,135500,abs
+AU,Darwin,unit,2004-Q1,147100,abs
+AU,Darwin,unit,2004-Q2,152000,abs
+AU,Darwin,unit,2004-Q3,156500,abs
+AU,Darwin,unit,2004-Q4,171000,abs
+AU,Darwin,unit,2005-Q1,175000,abs
+AU,Darwin,unit,2005-Q2,207000,abs
+AU,Darwin,unit,2005-Q3,195000,abs
+AU,Darwin,unit,2005-Q4,225000,abs
+AU,Darwin,unit,2006-Q1,235000,abs
+AU,Darwin,unit,2006-Q2,245000,abs
+AU,Darwin,unit,2006-Q3,246500,abs
+AU,Darwin,unit,2006-Q4,260000,abs
+AU,Darwin,unit,2007-Q1,280000,abs
+AU,Darwin,unit,2007-Q2,302500,abs
+AU,Darwin,unit,2007-Q3,310000,abs
+AU,Darwin,unit,2007-Q4,307500,abs
+AU,Darwin,unit,2008-Q1,306300,abs
+AU,Darwin,unit,2008-Q2,310000,abs
+AU,Darwin,unit,2008-Q3,348000,abs
+AU,Darwin,unit,2008-Q4,329000,abs
+AU,Darwin,unit,2009-Q1,370000,abs
+AU,Darwin,unit,2009-Q2,360000,abs
+AU,Darwin,unit,2009-Q3,377000,abs
+AU,Darwin,unit,2009-Q4,400000,abs
+AU,Darwin,unit,2010-Q1,430200,abs
+AU,Darwin,unit,2010-Q2,430000,abs
+AU,Darwin,unit,2010-Q3,400000,abs
+AU,Darwin,unit,2010-Q4,420500,abs
+AU,Darwin,unit,2011-Q1,415000,abs
+AU,Darwin,unit,2011-Q2,415000,abs
+AU,Darwin,unit,2011-Q3,398000,abs
+AU,Darwin,unit,2011-Q4,399500,abs
+AU,Darwin,unit,2012-Q1,420000,abs
+AU,Darwin,unit,2012-Q2,435000,abs
+AU,Darwin,unit,2012-Q3,410000,abs
+AU,Darwin,unit,2012-Q4,410500,abs
+AU,Darwin,unit,2013-Q1,445000,abs
+AU,Darwin,unit,2013-Q2,450000,abs
+AU,Darwin,unit,2013-Q3,459800,abs
+AU,Darwin,unit,2013-Q4,481000,abs
+AU,Darwin,unit,2014-Q1,496100,abs
+AU,Darwin,unit,2014-Q2,465000,abs
+AU,Darwin,unit,2014-Q3,485000,abs
+AU,Darwin,unit,2014-Q4,465000,abs
+AU,Darwin,unit,2015-Q1,485000,abs
+AU,Darwin,unit,2015-Q2,450000,abs
+AU,Darwin,unit,2015-Q3,475000,abs
+AU,Darwin,unit,2015-Q4,460000,abs
+AU,Darwin,unit,2016-Q1,469600,abs
+AU,Darwin,unit,2016-Q2,437500,abs
+AU,Darwin,unit,2016-Q3,342500,abs
+AU,Darwin,unit,2016-Q4,381100,abs
+AU,Darwin,unit,2017-Q1,375000,abs
+AU,Darwin,unit,2017-Q2,375000,abs
+AU,Darwin,unit,2017-Q3,375000,abs
+AU,Darwin,unit,2017-Q4,340000,abs
+AU,Darwin,unit,2018-Q1,328000,abs
+AU,Darwin,unit,2018-Q2,338000,abs
+AU,Darwin,unit,2018-Q3,335000,abs
+AU,Darwin,unit,2018-Q4,340000,abs
+AU,Darwin,unit,2019-Q1,292500,abs
+AU,Darwin,unit,2019-Q2,306500,abs
+AU,Darwin,unit,2019-Q3,285000,abs
+AU,Darwin,unit,2019-Q4,320000,abs
+AU,Darwin,unit,2020-Q1,299000,abs
+AU,Darwin,unit,2020-Q2,272000,abs
+AU,Darwin,unit,2020-Q3,285000,abs
+AU,Darwin,unit,2020-Q4,292500,abs
+AU,Darwin,unit,2021-Q1,340000,abs
+AU,Darwin,unit,2021-Q2,375000,abs
+AU,Darwin,unit,2021-Q3,360000,abs
+AU,Darwin,unit,2021-Q4,382000,abs
+AU,Darwin,unit,2022-Q1,402000,abs
+AU,Darwin,unit,2022-Q2,400000,abs
+AU,Darwin,unit,2022-Q3,360000,abs
+AU,Darwin,unit,2022-Q4,382500,abs
+AU,Darwin,unit,2023-Q1,370000,abs
+AU,Darwin,unit,2023-Q2,387500,abs
+AU,Darwin,unit,2023-Q3,376000,abs
+AU,Darwin,unit,2023-Q4,375000,abs
+AU,Darwin,unit,2024-Q1,390000,abs
+AU,Darwin,unit,2024-Q2,356000,abs
+AU,Darwin,unit,2024-Q3,350000,abs
+AU,Darwin,unit,2024-Q4,341000,abs
+AU,Darwin,unit,2025-Q1,360000,abs
+AU,Darwin,unit,2025-Q2,380600,abs
+AU,Darwin,unit,2025-Q3,405000,abs
+AU,Darwin,unit,2025-Q4,432300,abs
+AU,Darwin,unit,2026-Q1,430000,abs
+AU,Darwin,unit,2026-Q2,445500,abs
+AU,Hobart,house,1971,11875,abelson2004
+AU,Hobart,house,1972,12600,abelson2004
+AU,Hobart,house,1973,15200,abelson2004
+AU,Hobart,house,1974,20500,abelson2004
+AU,Hobart,house,1975,25850,abelson2004
+AU,Hobart,house,1976,31575,abelson2004
+AU,Hobart,house,1977,34500,abelson2004
+AU,Hobart,house,1978,34000,abelson2004
+AU,Hobart,house,1979,34750,abelson2004
+AU,Hobart,house,1980,36250,abelson2004
+AU,Hobart,house,1981,37100,abelson2004
+AU,Hobart,house,1982,40325,abelson2004
+AU,Hobart,house,1983,42500,abelson2004
+AU,Hobart,house,1984,44750,abelson2004
+AU,Hobart,house,1985,55500,abelson2004
+AU,Hobart,house,1986,56725,abelson2004
+AU,Hobart,house,1987,63450,abelson2004
+AU,Hobart,house,1988,67950,abelson2004
+AU,Hobart,house,1989,77325,abelson2004
+AU,Hobart,house,1990,82000,abelson2004
+AU,Hobart,house,1991,89650,abelson2004
+AU,Hobart,house,1992,95825,abelson2004
+AU,Hobart,house,1993,104250,abelson2004
+AU,Hobart,house,1994,110500,abelson2004
+AU,Hobart,house,1995,106750,abelson2004
+AU,Hobart,house,1996,108000,abelson2004
+AU,Hobart,house,1997,108750,abelson2004
+AU,Hobart,house,1998,107250,abelson2004
+AU,Hobart,house,1999,112225,abelson2004
+AU,Hobart,house,2000,117750,abelson2004
+AU,Hobart,house,2001,120575,abelson2004
+AU,Hobart,house,2002,137150,abelson2004
+AU,Hobart,house,2002-Q1,123300,abs
+AU,Hobart,house,2002-Q2,117000,abs
+AU,Hobart,house,2002-Q3,124000,abs
+AU,Hobart,house,2002-Q4,128000,abs
+AU,Hobart,house,2003,172500,abelson2004
+AU,Hobart,house,2003-Q1,145000,abs
+AU,Hobart,house,2003-Q2,149000,abs
+AU,Hobart,house,2003-Q3,165000,abs
+AU,Hobart,house,2003-Q4,182300,abs
+AU,Hobart,house,2004-Q1,200000,abs
+AU,Hobart,house,2004-Q2,225000,abs
+AU,Hobart,house,2004-Q3,230000,abs
+AU,Hobart,house,2004-Q4,237300,abs
+AU,Hobart,house,2005-Q1,240000,abs
+AU,Hobart,house,2005-Q2,250000,abs
+AU,Hobart,house,2005-Q3,245000,abs
+AU,Hobart,house,2005-Q4,252500,abs
+AU,Hobart,house,2006-Q1,260000,abs
+AU,Hobart,house,2006-Q2,270000,abs
+AU,Hobart,house,2006-Q3,270000,abs
+AU,Hobart,house,2006-Q4,278000,abs
+AU,Hobart,house,2007-Q1,280000,abs
+AU,Hobart,house,2007-Q2,291500,abs
+AU,Hobart,house,2007-Q3,285000,abs
+AU,Hobart,house,2007-Q4,310000,abs
+AU,Hobart,house,2008-Q1,308500,abs
+AU,Hobart,house,2008-Q2,305000,abs
+AU,Hobart,house,2008-Q3,292500,abs
+AU,Hobart,house,2008-Q4,300000,abs
+AU,Hobart,house,2009-Q1,296500,abs
+AU,Hobart,house,2009-Q2,310000,abs
+AU,Hobart,house,2009-Q3,310100,abs
+AU,Hobart,house,2009-Q4,350000,abs
+AU,Hobart,house,2010-Q1,350500,abs
+AU,Hobart,house,2010-Q2,343800,abs
+AU,Hobart,house,2010-Q3,340000,abs
+AU,Hobart,house,2010-Q4,345000,abs
+AU,Hobart,house,2011-Q1,338000,abs
+AU,Hobart,house,2011-Q2,330000,abs
+AU,Hobart,house,2011-Q3,335000,abs
+AU,Hobart,house,2011-Q4,337500,abs
+AU,Hobart,house,2012-Q1,343000,abs
+AU,Hobart,house,2012-Q2,327500,abs
+AU,Hobart,house,2012-Q3,315000,abs
+AU,Hobart,house,2012-Q4,331300,abs
+AU,Hobart,house,2013-Q1,340000,abs
+AU,Hobart,house,2013-Q2,330000,abs
+AU,Hobart,house,2013-Q3,325000,abs
+AU,Hobart,house,2013-Q4,350000,abs
+AU,Hobart,house,2014-Q1,360000,abs
+AU,Hobart,house,2014-Q2,340000,abs
+AU,Hobart,house,2014-Q3,345000,abs
+AU,Hobart,house,2014-Q4,356500,abs
+AU,Hobart,house,2015-Q1,360000,abs
+AU,Hobart,house,2015-Q2,350000,abs
+AU,Hobart,house,2015-Q3,340000,abs
+AU,Hobart,house,2015-Q4,370000,abs
+AU,Hobart,house,2016-Q1,360000,abs
+AU,Hobart,house,2016-Q2,365000,abs
+AU,Hobart,house,2016-Q3,370000,abs
+AU,Hobart,house,2016-Q4,392000,abs
+AU,Hobart,house,2017-Q1,389500,abs
+AU,Hobart,house,2017-Q2,400000,abs
+AU,Hobart,house,2017-Q3,395000,abs
+AU,Hobart,house,2017-Q4,421000,abs
+AU,Hobart,house,2018-Q1,449000,abs
+AU,Hobart,house,2018-Q2,457800,abs
+AU,Hobart,house,2018-Q3,440300,abs
+AU,Hobart,house,2018-Q4,465000,abs
+AU,Hobart,house,2019-Q1,471500,abs
+AU,Hobart,house,2019-Q2,490000,abs
+AU,Hobart,house,2019-Q3,480000,abs
+AU,Hobart,house,2019-Q4,517000,abs
+AU,Hobart,house,2020-Q1,529000,abs
+AU,Hobart,house,2020-Q2,520000,abs
+AU,Hobart,house,2020-Q3,528500,abs
+AU,Hobart,house,2020-Q4,567700,abs
+AU,Hobart,house,2021-Q1,610000,abs
+AU,Hobart,house,2021-Q2,630000,abs
+AU,Hobart,house,2021-Q3,700000,abs
+AU,Hobart,house,2021-Q4,754000,abs
+AU,Hobart,house,2022-Q1,765000,abs
+AU,Hobart,house,2022-Q2,765000,abs
+AU,Hobart,house,2022-Q3,720000,abs
+AU,Hobart,house,2022-Q4,731500,abs
+AU,Hobart,house,2023-Q1,705000,abs
+AU,Hobart,house,2023-Q2,696500,abs
+AU,Hobart,house,2023-Q3,695000,abs
+AU,Hobart,house,2023-Q4,715000,abs
+AU,Hobart,house,2024-Q1,705000,abs
+AU,Hobart,house,2024-Q2,690000,abs
+AU,Hobart,house,2024-Q3,700000,abs
+AU,Hobart,house,2024-Q4,715000,abs
+AU,Hobart,house,2025-Q1,717000,abs
+AU,Hobart,house,2025-Q2,715000,abs
+AU,Hobart,house,2025-Q3,722500,abs
+AU,Hobart,house,2025-Q4,750000,abs
+AU,Hobart,house,2026-Q1,750000,abs
+AU,Hobart,house,2026-Q2,750000,abs
+AU,Hobart,unit,1984,40200,abelson2004
+AU,Hobart,unit,1985,47750,abelson2004
+AU,Hobart,unit,1986,62100,abelson2004
+AU,Hobart,unit,1987,59908,abelson2004
+AU,Hobart,unit,1988,60896,abelson2004
+AU,Hobart,unit,1989,73833,abelson2004
+AU,Hobart,unit,1990,71208,abelson2004
+AU,Hobart,unit,1991,72775,abelson2004
+AU,Hobart,unit,1992,76817,abelson2004
+AU,Hobart,unit,1993,80771,abelson2004
+AU,Hobart,unit,1994,84542,abelson2004
+AU,Hobart,unit,1995,88292,abelson2004
+AU,Hobart,unit,1996,84404,abelson2004
+AU,Hobart,unit,1997,77375,abelson2004
+AU,Hobart,unit,1998,79017,abelson2004
+AU,Hobart,unit,1999,85500,abelson2004
+AU,Hobart,unit,2000,88850,abelson2004
+AU,Hobart,unit,2001,88525,abelson2004
+AU,Hobart,unit,2002,95625,abelson2004
+AU,Hobart,unit,2003,126200,abelson2004
+AU,Hobart,unit,2003-Q3,165000,abs
+AU,Hobart,unit,2003-Q4,175000,abs
+AU,Hobart,unit,2004-Q1,192000,abs
+AU,Hobart,unit,2004-Q2,192800,abs
+AU,Hobart,unit,2004-Q3,195000,abs
+AU,Hobart,unit,2004-Q4,200000,abs
+AU,Hobart,unit,2005-Q1,220000,abs
+AU,Hobart,unit,2005-Q2,233500,abs
+AU,Hobart,unit,2005-Q3,200000,abs
+AU,Hobart,unit,2005-Q4,215000,abs
+AU,Hobart,unit,2006-Q1,225000,abs
+AU,Hobart,unit,2006-Q2,229000,abs
+AU,Hobart,unit,2006-Q3,230000,abs
+AU,Hobart,unit,2006-Q4,231000,abs
+AU,Hobart,unit,2007-Q1,240000,abs
+AU,Hobart,unit,2007-Q2,240000,abs
+AU,Hobart,unit,2007-Q3,250000,abs
+AU,Hobart,unit,2007-Q4,260000,abs
+AU,Hobart,unit,2008-Q1,245000,abs
+AU,Hobart,unit,2008-Q2,257000,abs
+AU,Hobart,unit,2008-Q3,240000,abs
+AU,Hobart,unit,2008-Q4,245000,abs
+AU,Hobart,unit,2009-Q1,255000,abs
+AU,Hobart,unit,2009-Q2,260000,abs
+AU,Hobart,unit,2009-Q3,270000,abs
+AU,Hobart,unit,2009-Q4,285000,abs
+AU,Hobart,unit,2010-Q1,278500,abs
+AU,Hobart,unit,2010-Q2,280000,abs
+AU,Hobart,unit,2010-Q3,287500,abs
+AU,Hobart,unit,2010-Q4,288000,abs
+AU,Hobart,unit,2011-Q1,291500,abs
+AU,Hobart,unit,2011-Q2,294000,abs
+AU,Hobart,unit,2011-Q3,272500,abs
+AU,Hobart,unit,2011-Q4,275000,abs
+AU,Hobart,unit,2012-Q1,268800,abs
+AU,Hobart,unit,2012-Q2,275000,abs
+AU,Hobart,unit,2012-Q3,275000,abs
+AU,Hobart,unit,2012-Q4,294000,abs
+AU,Hobart,unit,2013-Q1,276800,abs
+AU,Hobart,unit,2013-Q2,285000,abs
+AU,Hobart,unit,2013-Q3,266000,abs
+AU,Hobart,unit,2013-Q4,295000,abs
+AU,Hobart,unit,2014-Q1,275000,abs
+AU,Hobart,unit,2014-Q2,282000,abs
+AU,Hobart,unit,2014-Q3,267500,abs
+AU,Hobart,unit,2014-Q4,279500,abs
+AU,Hobart,unit,2015-Q1,285000,abs
+AU,Hobart,unit,2015-Q2,286000,abs
+AU,Hobart,unit,2015-Q3,296000,abs
+AU,Hobart,unit,2015-Q4,292000,abs
+AU,Hobart,unit,2016-Q1,295800,abs
+AU,Hobart,unit,2016-Q2,307500,abs
+AU,Hobart,unit,2016-Q3,290000,abs
+AU,Hobart,unit,2016-Q4,305000,abs
+AU,Hobart,unit,2017-Q1,315000,abs
+AU,Hobart,unit,2017-Q2,300000,abs
+AU,Hobart,unit,2017-Q3,320000,abs
+AU,Hobart,unit,2017-Q4,330000,abs
+AU,Hobart,unit,2018-Q1,338500,abs
+AU,Hobart,unit,2018-Q2,356000,abs
+AU,Hobart,unit,2018-Q3,358000,abs
+AU,Hobart,unit,2018-Q4,375000,abs
+AU,Hobart,unit,2019-Q1,390000,abs
+AU,Hobart,unit,2019-Q2,382500,abs
+AU,Hobart,unit,2019-Q3,385000,abs
+AU,Hobart,unit,2019-Q4,400000,abs
+AU,Hobart,unit,2020-Q1,425000,abs
+AU,Hobart,unit,2020-Q2,394500,abs
+AU,Hobart,unit,2020-Q3,420000,abs
+AU,Hobart,unit,2020-Q4,441000,abs
+AU,Hobart,unit,2021-Q1,471100,abs
+AU,Hobart,unit,2021-Q2,502500,abs
+AU,Hobart,unit,2021-Q3,540000,abs
+AU,Hobart,unit,2021-Q4,570000,abs
+AU,Hobart,unit,2022-Q1,586300,abs
+AU,Hobart,unit,2022-Q2,575000,abs
+AU,Hobart,unit,2022-Q3,565000,abs
+AU,Hobart,unit,2022-Q4,565000,abs
+AU,Hobart,unit,2023-Q1,560000,abs
+AU,Hobart,unit,2023-Q2,557000,abs
+AU,Hobart,unit,2023-Q3,550000,abs
+AU,Hobart,unit,2023-Q4,540000,abs
+AU,Hobart,unit,2024-Q1,551000,abs
+AU,Hobart,unit,2024-Q2,555000,abs
+AU,Hobart,unit,2024-Q3,525000,abs
+AU,Hobart,unit,2024-Q4,537500,abs
+AU,Hobart,unit,2025-Q1,550000,abs
+AU,Hobart,unit,2025-Q2,556300,abs
+AU,Hobart,unit,2025-Q3,580000,abs
+AU,Hobart,unit,2025-Q4,605000,abs
+AU,Hobart,unit,2026-Q1,610000,abs
+AU,Hobart,unit,2026-Q2,600000,abs
+AU,Melbourne,house,1970,12800,abelson2004
+AU,Melbourne,house,1971,13400,abelson2004
+AU,Melbourne,house,1972,15000,abelson2004
+AU,Melbourne,house,1973,19800,abelson2004
+AU,Melbourne,house,1974,25500,abelson2004
+AU,Melbourne,house,1975,28700,abelson2004
+AU,Melbourne,house,1976,32900,abelson2004
+AU,Melbourne,house,1977,37000,abelson2004
+AU,Melbourne,house,1978,37600,abelson2004
+AU,Melbourne,house,1979,38000,abelson2004
+AU,Melbourne,house,1980,39500,abelson2004
+AU,Melbourne,house,1981,44000,abelson2004
+AU,Melbourne,house,1982,46750,abelson2004
+AU,Melbourne,house,1983,52500,abelson2004
+AU,Melbourne,house,1984,65000,abelson2004
+AU,Melbourne,house,1985,75200,abelson2004
+AU,Melbourne,house,1986,82000,abelson2004
+AU,Melbourne,house,1987,89500,abelson2004
+AU,Melbourne,house,1988,109000,abelson2004
+AU,Melbourne,house,1989,132000,abelson2004
+AU,Melbourne,house,1990,131000,abelson2004
+AU,Melbourne,house,1991,127000,abelson2004
+AU,Melbourne,house,1992,125000,abelson2004
+AU,Melbourne,house,1993,126000,abelson2004
+AU,Melbourne,house,1994,130000,abelson2004
+AU,Melbourne,house,1995,129000,abelson2004
+AU,Melbourne,house,1996,131000,abelson2004
+AU,Melbourne,house,1997,142000,abelson2004
+AU,Melbourne,house,1998,155000,abelson2004
+AU,Melbourne,house,1999,175000,abelson2004
+AU,Melbourne,house,2000,191000,abelson2004
+AU,Melbourne,house,2001,225000,abelson2004
+AU,Melbourne,house,2002,258000,abelson2004
+AU,Melbourne,house,2002-Q1,241000,abs
+AU,Melbourne,house,2002-Q2,260000,abs
+AU,Melbourne,house,2002-Q3,265000,abs
+AU,Melbourne,house,2002-Q4,280000,abs
+AU,Melbourne,house,2003,276000,abelson2004
+AU,Melbourne,house,2003-Q1,270000,abs
+AU,Melbourne,house,2003-Q2,287500,abs
+AU,Melbourne,house,2003-Q3,295000,abs
+AU,Melbourne,house,2003-Q4,320000,abs
+AU,Melbourne,house,2004-Q1,305000,abs
+AU,Melbourne,house,2004-Q2,307500,abs
+AU,Melbourne,house,2004-Q3,302000,abs
+AU,Melbourne,house,2004-Q4,321000,abs
+AU,Melbourne,house,2005-Q1,310000,abs
+AU,Melbourne,house,2005-Q2,320000,abs
+AU,Melbourne,house,2005-Q3,320000,abs
+AU,Melbourne,house,2005-Q4,332000,abs
+AU,Melbourne,house,2006-Q1,330000,abs
+AU,Melbourne,house,2006-Q2,345000,abs
+AU,Melbourne,house,2006-Q3,346000,abs
+AU,Melbourne,house,2006-Q4,360000,abs
+AU,Melbourne,house,2007-Q1,345000,abs
+AU,Melbourne,house,2007-Q2,362000,abs
+AU,Melbourne,house,2007-Q3,370000,abs
+AU,Melbourne,house,2007-Q4,410000,abs
+AU,Melbourne,house,2008-Q1,385000,abs
+AU,Melbourne,house,2008-Q2,400000,abs
+AU,Melbourne,house,2008-Q3,385000,abs
+AU,Melbourne,house,2008-Q4,385000,abs
+AU,Melbourne,house,2009-Q1,375000,abs
+AU,Melbourne,house,2009-Q2,400000,abs
+AU,Melbourne,house,2009-Q3,422000,abs
+AU,Melbourne,house,2009-Q4,477500,abs
+AU,Melbourne,house,2010-Q1,468000,abs
+AU,Melbourne,house,2010-Q2,500000,abs
+AU,Melbourne,house,2010-Q3,488300,abs
+AU,Melbourne,house,2010-Q4,520000,abs
+AU,Melbourne,house,2011-Q1,485000,abs
+AU,Melbourne,house,2011-Q2,502500,abs
+AU,Melbourne,house,2011-Q3,487000,abs
+AU,Melbourne,house,2011-Q4,495000,abs
+AU,Melbourne,house,2012-Q1,478000,abs
+AU,Melbourne,house,2012-Q2,485000,abs
+AU,Melbourne,house,2012-Q3,480000,abs
+AU,Melbourne,house,2012-Q4,508000,abs
+AU,Melbourne,house,2013-Q1,486000,abs
+AU,Melbourne,house,2013-Q2,500000,abs
+AU,Melbourne,house,2013-Q3,520000,abs
+AU,Melbourne,house,2013-Q4,561000,abs
+AU,Melbourne,house,2014-Q1,504000,abs
+AU,Melbourne,house,2014-Q2,528900,abs
+AU,Melbourne,house,2014-Q3,505000,abs
+AU,Melbourne,house,2014-Q4,552500,abs
+AU,Melbourne,house,2015-Q1,525000,abs
+AU,Melbourne,house,2015-Q2,561000,abs
+AU,Melbourne,house,2015-Q3,580000,abs
+AU,Melbourne,house,2015-Q4,612300,abs
+AU,Melbourne,house,2016-Q1,568000,abs
+AU,Melbourne,house,2016-Q2,610000,abs
+AU,Melbourne,house,2016-Q3,605000,abs
+AU,Melbourne,house,2016-Q4,675000,abs
+AU,Melbourne,house,2017-Q1,657500,abs
+AU,Melbourne,house,2017-Q2,720000,abs
+AU,Melbourne,house,2017-Q3,692000,abs
+AU,Melbourne,house,2017-Q4,750000,abs
+AU,Melbourne,house,2018-Q1,731000,abs
+AU,Melbourne,house,2018-Q2,750000,abs
+AU,Melbourne,house,2018-Q3,720000,abs
+AU,Melbourne,house,2018-Q4,735000,abs
+AU,Melbourne,house,2019-Q1,685000,abs
+AU,Melbourne,house,2019-Q2,700000,abs
+AU,Melbourne,house,2019-Q3,705000,abs
+AU,Melbourne,house,2019-Q4,760000,abs
+AU,Melbourne,house,2020-Q1,730000,abs
+AU,Melbourne,house,2020-Q2,720000,abs
+AU,Melbourne,house,2020-Q3,710000,abs
+AU,Melbourne,house,2020-Q4,760000,abs
+AU,Melbourne,house,2021-Q1,800000,abs
+AU,Melbourne,house,2021-Q2,830000,abs
+AU,Melbourne,house,2021-Q3,840000,abs
+AU,Melbourne,house,2021-Q4,940000,abs
+AU,Melbourne,house,2022-Q1,888000,abs
+AU,Melbourne,house,2022-Q2,900000,abs
+AU,Melbourne,house,2022-Q3,850000,abs
+AU,Melbourne,house,2022-Q4,875000,abs
+AU,Melbourne,house,2023-Q1,835000,abs
+AU,Melbourne,house,2023-Q2,840300,abs
+AU,Melbourne,house,2023-Q3,832000,abs
+AU,Melbourne,house,2023-Q4,865000,abs
+AU,Melbourne,house,2024-Q1,845000,abs
+AU,Melbourne,house,2024-Q2,842000,abs
+AU,Melbourne,house,2024-Q3,822300,abs
+AU,Melbourne,house,2024-Q4,850000,abs
+AU,Melbourne,house,2025-Q1,835000,abs
+AU,Melbourne,house,2025-Q2,840000,abs
+AU,Melbourne,house,2025-Q3,845000,abs
+AU,Melbourne,house,2025-Q4,895000,abs
+AU,Melbourne,house,2026-Q1,875000,abs
+AU,Melbourne,house,2026-Q2,850000,abs
+AU,Melbourne,unit,1974,23300,abelson2004
+AU,Melbourne,unit,1975,25675,abelson2004
+AU,Melbourne,unit,1976,29625,abelson2004
+AU,Melbourne,unit,1977,32050,abelson2004
+AU,Melbourne,unit,1978,33050,abelson2004
+AU,Melbourne,unit,1979,31500,abelson2004
+AU,Melbourne,unit,1980,33000,abelson2004
+AU,Melbourne,unit,1981,36500,abelson2004
+AU,Melbourne,unit,1982,38500,abelson2004
+AU,Melbourne,unit,1983,42500,abelson2004
+AU,Melbourne,unit,1984,52500,abelson2004
+AU,Melbourne,unit,1985,60000,abelson2004
+AU,Melbourne,unit,1986,66750,abelson2004
+AU,Melbourne,unit,1987,72250,abelson2004
+AU,Melbourne,unit,1988,85000,abelson2004
+AU,Melbourne,unit,1989,104500,abelson2004
+AU,Melbourne,unit,1990,115000,abelson2004
+AU,Melbourne,unit,1991,108500,abelson2004
+AU,Melbourne,unit,1992,110000,abelson2004
+AU,Melbourne,unit,1993,110000,abelson2004
+AU,Melbourne,unit,1994,115000,abelson2004
+AU,Melbourne,unit,1995,115000,abelson2004
+AU,Melbourne,unit,1996,115000,abelson2004
+AU,Melbourne,unit,1997,127000,abelson2004
+AU,Melbourne,unit,1998,140000,abelson2004
+AU,Melbourne,unit,1999,170075,abelson2004
+AU,Melbourne,unit,2000,184000,abelson2004
+AU,Melbourne,unit,2001,215388,abelson2004
+AU,Melbourne,unit,2002,240075,abelson2004
+AU,Melbourne,unit,2003,269000,abelson2004
+AU,Melbourne,unit,2003-Q3,276000,abs
+AU,Melbourne,unit,2003-Q4,285000,abs
+AU,Melbourne,unit,2004-Q1,272500,abs
+AU,Melbourne,unit,2004-Q2,280000,abs
+AU,Melbourne,unit,2004-Q3,276000,abs
+AU,Melbourne,unit,2004-Q4,281000,abs
+AU,Melbourne,unit,2005-Q1,285000,abs
+AU,Melbourne,unit,2005-Q2,287000,abs
+AU,Melbourne,unit,2005-Q3,286000,abs
+AU,Melbourne,unit,2005-Q4,290000,abs
+AU,Melbourne,unit,2006-Q1,299500,abs
+AU,Melbourne,unit,2006-Q2,306600,abs
+AU,Melbourne,unit,2006-Q3,315000,abs
+AU,Melbourne,unit,2006-Q4,315000,abs
+AU,Melbourne,unit,2007-Q1,320000,abs
+AU,Melbourne,unit,2007-Q2,340000,abs
+AU,Melbourne,unit,2007-Q3,345000,abs
+AU,Melbourne,unit,2007-Q4,365000,abs
+AU,Melbourne,unit,2008-Q1,360000,abs
+AU,Melbourne,unit,2008-Q2,360000,abs
+AU,Melbourne,unit,2008-Q3,365000,abs
+AU,Melbourne,unit,2008-Q4,350000,abs
+AU,Melbourne,unit,2009-Q1,348000,abs
+AU,Melbourne,unit,2009-Q2,379500,abs
+AU,Melbourne,unit,2009-Q3,392000,abs
+AU,Melbourne,unit,2009-Q4,421000,abs
+AU,Melbourne,unit,2010-Q1,424000,abs
+AU,Melbourne,unit,2010-Q2,450000,abs
+AU,Melbourne,unit,2010-Q3,445000,abs
+AU,Melbourne,unit,2010-Q4,460000,abs
+AU,Melbourne,unit,2011-Q1,445000,abs
+AU,Melbourne,unit,2011-Q2,450000,abs
+AU,Melbourne,unit,2011-Q3,437500,abs
+AU,Melbourne,unit,2011-Q4,432500,abs
+AU,Melbourne,unit,2012-Q1,430000,abs
+AU,Melbourne,unit,2012-Q2,430000,abs
+AU,Melbourne,unit,2012-Q3,425000,abs
+AU,Melbourne,unit,2012-Q4,440000,abs
+AU,Melbourne,unit,2013-Q1,435000,abs
+AU,Melbourne,unit,2013-Q2,442000,abs
+AU,Melbourne,unit,2013-Q3,445000,abs
+AU,Melbourne,unit,2013-Q4,467000,abs
+AU,Melbourne,unit,2014-Q1,475500,abs
+AU,Melbourne,unit,2014-Q2,479000,abs
+AU,Melbourne,unit,2014-Q3,478500,abs
+AU,Melbourne,unit,2014-Q4,490000,abs
+AU,Melbourne,unit,2015-Q1,480800,abs
+AU,Melbourne,unit,2015-Q2,515000,abs
+AU,Melbourne,unit,2015-Q3,500000,abs
+AU,Melbourne,unit,2015-Q4,505000,abs
+AU,Melbourne,unit,2016-Q1,490000,abs
+AU,Melbourne,unit,2016-Q2,505000,abs
+AU,Melbourne,unit,2016-Q3,496000,abs
+AU,Melbourne,unit,2016-Q4,501900,abs
+AU,Melbourne,unit,2017-Q1,520000,abs
+AU,Melbourne,unit,2017-Q2,568900,abs
+AU,Melbourne,unit,2017-Q3,540000,abs
+AU,Melbourne,unit,2017-Q4,568000,abs
+AU,Melbourne,unit,2018-Q1,565000,abs
+AU,Melbourne,unit,2018-Q2,600000,abs
+AU,Melbourne,unit,2018-Q3,568000,abs
+AU,Melbourne,unit,2018-Q4,565000,abs
+AU,Melbourne,unit,2019-Q1,555000,abs
+AU,Melbourne,unit,2019-Q2,560000,abs
+AU,Melbourne,unit,2019-Q3,570000,abs
+AU,Melbourne,unit,2019-Q4,600000,abs
+AU,Melbourne,unit,2020-Q1,593000,abs
+AU,Melbourne,unit,2020-Q2,600000,abs
+AU,Melbourne,unit,2020-Q3,595000,abs
+AU,Melbourne,unit,2020-Q4,620000,abs
+AU,Melbourne,unit,2021-Q1,630000,abs
+AU,Melbourne,unit,2021-Q2,648200,abs
+AU,Melbourne,unit,2021-Q3,650800,abs
+AU,Melbourne,unit,2021-Q4,655000,abs
+AU,Melbourne,unit,2022-Q1,640000,abs
+AU,Melbourne,unit,2022-Q2,640000,abs
+AU,Melbourne,unit,2022-Q3,618000,abs
+AU,Melbourne,unit,2022-Q4,615000,abs
+AU,Melbourne,unit,2023-Q1,605000,abs
+AU,Melbourne,unit,2023-Q2,620000,abs
+AU,Melbourne,unit,2023-Q3,625000,abs
+AU,Melbourne,unit,2023-Q4,635000,abs
+AU,Melbourne,unit,2024-Q1,630000,abs
+AU,Melbourne,unit,2024-Q2,630000,abs
+AU,Melbourne,unit,2024-Q3,620000,abs
+AU,Melbourne,unit,2024-Q4,627500,abs
+AU,Melbourne,unit,2025-Q1,630000,abs
+AU,Melbourne,unit,2025-Q2,603000,abs
+AU,Melbourne,unit,2025-Q3,590000,abs
+AU,Melbourne,unit,2025-Q4,650000,abs
+AU,Melbourne,unit,2026-Q1,590800,abs
+AU,Melbourne,unit,2026-Q2,590000,abs
+AU,Perth,house,1970,17500,abelson2004
+AU,Perth,house,1971,17750,abelson2004
+AU,Perth,house,1972,17500,abelson2004
+AU,Perth,house,1973,18850,abelson2004
+AU,Perth,house,1974,18850,abelson2004
+AU,Perth,house,1975,24500,abelson2004
+AU,Perth,house,1976,33000,abelson2004
+AU,Perth,house,1977,36400,abelson2004
+AU,Perth,house,1978,38575,abelson2004
+AU,Perth,house,1979,38600,abelson2004
+AU,Perth,house,1980,40350,abelson2004
+AU,Perth,house,1981,43825,abelson2004
+AU,Perth,house,1982,48225,abelson2004
+AU,Perth,house,1983,49000,abelson2004
+AU,Perth,house,1984,48175,abelson2004
+AU,Perth,house,1985,52050,abelson2004
+AU,Perth,house,1986,58000,abelson2004
+AU,Perth,house,1987,61225,abelson2004
+AU,Perth,house,1988,78000,abelson2004
+AU,Perth,house,1989,102500,abelson2004
+AU,Perth,house,1990,101125,abelson2004
+AU,Perth,house,1991,99500,abelson2004
+AU,Perth,house,1992,102500,abelson2004
+AU,Perth,house,1993,112750,abelson2004
+AU,Perth,house,1994,123125,abelson2004
+AU,Perth,house,1995,126788,abelson2004
+AU,Perth,house,1996,126625,abelson2004
+AU,Perth,house,1997,134125,abelson2004
+AU,Perth,house,1998,141000,abelson2004
+AU,Perth,house,1999,147500,abelson2004
+AU,Perth,house,2000,156250,abelson2004
+AU,Perth,house,2001,168375,abelson2004
+AU,Perth,house,2002,189250,abelson2004
+AU,Perth,house,2002-Q1,190000,abs
+AU,Perth,house,2002-Q2,190000,abs
+AU,Perth,house,2002-Q3,195000,abs
+AU,Perth,house,2002-Q4,206000,abs
+AU,Perth,house,2003,205000,abelson2004
+AU,Perth,house,2003-Q1,216000,abs
+AU,Perth,house,2003-Q2,225000,abs
+AU,Perth,house,2003-Q3,236000,abs
+AU,Perth,house,2003-Q4,250000,abs
+AU,Perth,house,2004-Q1,255000,abs
+AU,Perth,house,2004-Q2,262000,abs
+AU,Perth,house,2004-Q3,259000,abs
+AU,Perth,house,2004-Q4,280000,abs
+AU,Perth,house,2005-Q1,290000,abs
+AU,Perth,house,2005-Q2,300000,abs
+AU,Perth,house,2005-Q3,315000,abs
+AU,Perth,house,2005-Q4,340000,abs
+AU,Perth,house,2006-Q1,370000,abs
+AU,Perth,house,2006-Q2,415000,abs
+AU,Perth,house,2006-Q3,450000,abs
+AU,Perth,house,2006-Q4,470000,abs
+AU,Perth,house,2007-Q1,475000,abs
+AU,Perth,house,2007-Q2,465000,abs
+AU,Perth,house,2007-Q3,475000,abs
+AU,Perth,house,2007-Q4,480000,abs
+AU,Perth,house,2008-Q1,470000,abs
+AU,Perth,house,2008-Q2,455000,abs
+AU,Perth,house,2008-Q3,440000,abs
+AU,Perth,house,2008-Q4,425000,abs
+AU,Perth,house,2009-Q1,439000,abs
+AU,Perth,house,2009-Q2,455000,abs
+AU,Perth,house,2009-Q3,473000,abs
+AU,Perth,house,2009-Q4,505000,abs
+AU,Perth,house,2010-Q1,518000,abs
+AU,Perth,house,2010-Q2,510000,abs
+AU,Perth,house,2010-Q3,500000,abs
+AU,Perth,house,2010-Q4,500000,abs
+AU,Perth,house,2011-Q1,500000,abs
+AU,Perth,house,2011-Q2,485000,abs
+AU,Perth,house,2011-Q3,470000,abs
+AU,Perth,house,2011-Q4,480000,abs
+AU,Perth,house,2012-Q1,489500,abs
+AU,Perth,house,2012-Q2,499000,abs
+AU,Perth,house,2012-Q3,495000,abs
+AU,Perth,house,2012-Q4,510000,abs
+AU,Perth,house,2013-Q1,520000,abs
+AU,Perth,house,2013-Q2,529000,abs
+AU,Perth,house,2013-Q3,520000,abs
+AU,Perth,house,2013-Q4,552000,abs
+AU,Perth,house,2014-Q1,530500,abs
+AU,Perth,house,2014-Q2,525000,abs
+AU,Perth,house,2014-Q3,530000,abs
+AU,Perth,house,2014-Q4,531000,abs
+AU,Perth,house,2015-Q1,536500,abs
+AU,Perth,house,2015-Q2,537000,abs
+AU,Perth,house,2015-Q3,520000,abs
+AU,Perth,house,2015-Q4,525000,abs
+AU,Perth,house,2016-Q1,518000,abs
+AU,Perth,house,2016-Q2,520000,abs
+AU,Perth,house,2016-Q3,510000,abs
+AU,Perth,house,2016-Q4,525000,abs
+AU,Perth,house,2017-Q1,510000,abs
+AU,Perth,house,2017-Q2,506000,abs
+AU,Perth,house,2017-Q3,500000,abs
+AU,Perth,house,2017-Q4,515000,abs
+AU,Perth,house,2018-Q1,510000,abs
+AU,Perth,house,2018-Q2,510000,abs
+AU,Perth,house,2018-Q3,485000,abs
+AU,Perth,house,2018-Q4,489000,abs
+AU,Perth,house,2019-Q1,490000,abs
+AU,Perth,house,2019-Q2,480000,abs
+AU,Perth,house,2019-Q3,478000,abs
+AU,Perth,house,2019-Q4,495000,abs
+AU,Perth,house,2020-Q1,477500,abs
+AU,Perth,house,2020-Q2,475000,abs
+AU,Perth,house,2020-Q3,495000,abs
+AU,Perth,house,2020-Q4,528000,abs
+AU,Perth,house,2021-Q1,535000,abs
+AU,Perth,house,2021-Q2,540000,abs
+AU,Perth,house,2021-Q3,525000,abs
+AU,Perth,house,2021-Q4,558800,abs
+AU,Perth,house,2022-Q1,550000,abs
+AU,Perth,house,2022-Q2,565000,abs
+AU,Perth,house,2022-Q3,555000,abs
+AU,Perth,house,2022-Q4,580000,abs
+AU,Perth,house,2023-Q1,578000,abs
+AU,Perth,house,2023-Q2,600000,abs
+AU,Perth,house,2023-Q3,600000,abs
+AU,Perth,house,2023-Q4,660000,abs
+AU,Perth,house,2024-Q1,699500,abs
+AU,Perth,house,2024-Q2,755000,abs
+AU,Perth,house,2024-Q3,780000,abs
+AU,Perth,house,2024-Q4,820000,abs
+AU,Perth,house,2025-Q1,820000,abs
+AU,Perth,house,2025-Q2,850000,abs
+AU,Perth,house,2025-Q3,874000,abs
+AU,Perth,house,2025-Q4,960000,abs
+AU,Perth,house,2026-Q1,1005000,abs
+AU,Perth,house,2026-Q2,1010000,abs
+AU,Perth,unit,1980,35825,abelson2004
+AU,Perth,unit,1981,36004,abelson2004
+AU,Perth,unit,1982,38958,abelson2004
+AU,Perth,unit,1983,40729,abelson2004
+AU,Perth,unit,1984,37467,abelson2004
+AU,Perth,unit,1985,40033,abelson2004
+AU,Perth,unit,1986,44042,abelson2004
+AU,Perth,unit,1987,48263,abelson2004
+AU,Perth,unit,1988,57417,abelson2004
+AU,Perth,unit,1989,75917,abelson2004
+AU,Perth,unit,1990,75625,abelson2004
+AU,Perth,unit,1991,75500,abelson2004
+AU,Perth,unit,1992,76267,abelson2004
+AU,Perth,unit,1993,79492,abelson2004
+AU,Perth,unit,1994,86200,abelson2004
+AU,Perth,unit,1995,87096,abelson2004
+AU,Perth,unit,1996,87525,abelson2004
+AU,Perth,unit,1997,92813,abelson2004
+AU,Perth,unit,1998,98473,abelson2004
+AU,Perth,unit,1999,107075,abelson2004
+AU,Perth,unit,2000,114275,abelson2004
+AU,Perth,unit,2001,123575,abelson2004
+AU,Perth,unit,2002,142150,abelson2004
+AU,Perth,unit,2003,160467,abelson2004
+AU,Perth,unit,2003-Q3,195000,abs
+AU,Perth,unit,2003-Q4,198000,abs
+AU,Perth,unit,2004-Q1,208000,abs
+AU,Perth,unit,2004-Q2,215000,abs
+AU,Perth,unit,2004-Q3,215000,abs
+AU,Perth,unit,2004-Q4,229000,abs
+AU,Perth,unit,2005-Q1,235000,abs
+AU,Perth,unit,2005-Q2,247500,abs
+AU,Perth,unit,2005-Q3,255000,abs
+AU,Perth,unit,2005-Q4,276000,abs
+AU,Perth,unit,2006-Q1,292000,abs
+AU,Perth,unit,2006-Q2,332500,abs
+AU,Perth,unit,2006-Q3,350000,abs
+AU,Perth,unit,2006-Q4,362500,abs
+AU,Perth,unit,2007-Q1,370000,abs
+AU,Perth,unit,2007-Q2,370000,abs
+AU,Perth,unit,2007-Q3,376000,abs
+AU,Perth,unit,2007-Q4,385000,abs
+AU,Perth,unit,2008-Q1,380000,abs
+AU,Perth,unit,2008-Q2,372300,abs
+AU,Perth,unit,2008-Q3,360000,abs
+AU,Perth,unit,2008-Q4,350000,abs
+AU,Perth,unit,2009-Q1,350000,abs
+AU,Perth,unit,2009-Q2,380000,abs
+AU,Perth,unit,2009-Q3,390000,abs
+AU,Perth,unit,2009-Q4,415000,abs
+AU,Perth,unit,2010-Q1,420000,abs
+AU,Perth,unit,2010-Q2,417000,abs
+AU,Perth,unit,2010-Q3,410000,abs
+AU,Perth,unit,2010-Q4,410000,abs
+AU,Perth,unit,2011-Q1,405000,abs
+AU,Perth,unit,2011-Q2,405000,abs
+AU,Perth,unit,2011-Q3,395000,abs
+AU,Perth,unit,2011-Q4,400000,abs
+AU,Perth,unit,2012-Q1,406000,abs
+AU,Perth,unit,2012-Q2,400000,abs
+AU,Perth,unit,2012-Q3,400000,abs
+AU,Perth,unit,2012-Q4,410000,abs
+AU,Perth,unit,2013-Q1,430000,abs
+AU,Perth,unit,2013-Q2,426000,abs
+AU,Perth,unit,2013-Q3,430000,abs
+AU,Perth,unit,2013-Q4,450000,abs
+AU,Perth,unit,2014-Q1,445000,abs
+AU,Perth,unit,2014-Q2,452000,abs
+AU,Perth,unit,2014-Q3,442000,abs
+AU,Perth,unit,2014-Q4,445000,abs
+AU,Perth,unit,2015-Q1,440000,abs
+AU,Perth,unit,2015-Q2,434500,abs
+AU,Perth,unit,2015-Q3,425000,abs
+AU,Perth,unit,2015-Q4,430000,abs
+AU,Perth,unit,2016-Q1,430000,abs
+AU,Perth,unit,2016-Q2,410000,abs
+AU,Perth,unit,2016-Q3,425000,abs
+AU,Perth,unit,2016-Q4,410000,abs
+AU,Perth,unit,2017-Q1,415000,abs
+AU,Perth,unit,2017-Q2,405000,abs
+AU,Perth,unit,2017-Q3,405000,abs
+AU,Perth,unit,2017-Q4,410000,abs
+AU,Perth,unit,2018-Q1,400000,abs
+AU,Perth,unit,2018-Q2,408000,abs
+AU,Perth,unit,2018-Q3,395000,abs
+AU,Perth,unit,2018-Q4,392000,abs
+AU,Perth,unit,2019-Q1,387500,abs
+AU,Perth,unit,2019-Q2,379000,abs
+AU,Perth,unit,2019-Q3,380000,abs
+AU,Perth,unit,2019-Q4,380000,abs
+AU,Perth,unit,2020-Q1,380000,abs
+AU,Perth,unit,2020-Q2,350000,abs
+AU,Perth,unit,2020-Q3,385000,abs
+AU,Perth,unit,2020-Q4,400000,abs
+AU,Perth,unit,2021-Q1,414000,abs
+AU,Perth,unit,2021-Q2,420000,abs
+AU,Perth,unit,2021-Q3,415000,abs
+AU,Perth,unit,2021-Q4,412800,abs
+AU,Perth,unit,2022-Q1,410000,abs
+AU,Perth,unit,2022-Q2,405000,abs
+AU,Perth,unit,2022-Q3,400000,abs
+AU,Perth,unit,2022-Q4,400000,abs
+AU,Perth,unit,2023-Q1,402600,abs
+AU,Perth,unit,2023-Q2,410000,abs
+AU,Perth,unit,2023-Q3,420000,abs
+AU,Perth,unit,2023-Q4,447000,abs
+AU,Perth,unit,2024-Q1,475500,abs
+AU,Perth,unit,2024-Q2,510000,abs
+AU,Perth,unit,2024-Q3,541000,abs
+AU,Perth,unit,2024-Q4,559000,abs
+AU,Perth,unit,2025-Q1,575000,abs
+AU,Perth,unit,2025-Q2,600000,abs
+AU,Perth,unit,2025-Q3,630000,abs
+AU,Perth,unit,2025-Q4,700000,abs
+AU,Perth,unit,2026-Q1,740000,abs
+AU,Perth,unit,2026-Q2,730000,abs
+AU,Sydney,house,1970,18700,abelson2004
+AU,Sydney,house,1971,21200,abelson2004
+AU,Sydney,house,1972,23700,abelson2004
+AU,Sydney,house,1973,27400,abelson2004
+AU,Sydney,house,1974,31800,abelson2004
+AU,Sydney,house,1975,34300,abelson2004
+AU,Sydney,house,1976,36800,abelson2004
+AU,Sydney,house,1977,39200,abelson2004
+AU,Sydney,house,1978,43200,abelson2004
+AU,Sydney,house,1979,50700,abelson2004
+AU,Sydney,house,1980,68850,abelson2004
+AU,Sydney,house,1981,78900,abelson2004
+AU,Sydney,house,1982,79425,abelson2004
+AU,Sydney,house,1983,81425,abelson2004
+AU,Sydney,house,1984,85900,abelson2004
+AU,Sydney,house,1985,88350,abelson2004
+AU,Sydney,house,1986,98325,abelson2004
+AU,Sydney,house,1987,120025,abelson2004
+AU,Sydney,house,1988,141000,abelson2004
+AU,Sydney,house,1989,170850,abelson2004
+AU,Sydney,house,1990,194000,abelson2004
+AU,Sydney,house,1991,182000,abelson2004
+AU,Sydney,house,1992,183300,abelson2004
+AU,Sydney,house,1993,188000,abelson2004
+AU,Sydney,house,1994,192375,abelson2004
+AU,Sydney,house,1995,196750,abelson2004
+AU,Sydney,house,1996,211125,abelson2004
+AU,Sydney,house,1997,233250,abelson2004
+AU,Sydney,house,1998,248750,abelson2004
+AU,Sydney,house,1999,272500,abelson2004
+AU,Sydney,house,2000,287000,abelson2004
+AU,Sydney,house,2001,322500,abelson2004
+AU,Sydney,house,2002,387500,abelson2004
+AU,Sydney,house,2002-Q1,365000,abs
+AU,Sydney,house,2002-Q2,393500,abs
+AU,Sydney,house,2002-Q3,413000,abs
+AU,Sydney,house,2002-Q4,444000,abs
+AU,Sydney,house,2003,454250,abelson2004
+AU,Sydney,house,2003-Q1,434500,abs
+AU,Sydney,house,2003-Q2,460000,abs
+AU,Sydney,house,2003-Q3,480000,abs
+AU,Sydney,house,2003-Q4,520000,abs
+AU,Sydney,house,2004-Q1,523000,abs
+AU,Sydney,house,2004-Q2,498000,abs
+AU,Sydney,house,2004-Q3,500000,abs
+AU,Sydney,house,2004-Q4,515000,abs
+AU,Sydney,house,2005-Q1,486000,abs
+AU,Sydney,house,2005-Q2,500000,abs
+AU,Sydney,house,2005-Q3,490000,abs
+AU,Sydney,house,2005-Q4,500000,abs
+AU,Sydney,house,2006-Q1,470000,abs
+AU,Sydney,house,2006-Q2,495000,abs
+AU,Sydney,house,2006-Q3,482000,abs
+AU,Sydney,house,2006-Q4,500000,abs
+AU,Sydney,house,2007-Q1,480000,abs
+AU,Sydney,house,2007-Q2,512300,abs
+AU,Sydney,house,2007-Q3,514000,abs
+AU,Sydney,house,2007-Q4,540000,abs
+AU,Sydney,house,2008-Q1,495000,abs
+AU,Sydney,house,2008-Q2,517000,abs
+AU,Sydney,house,2008-Q3,482000,abs
+AU,Sydney,house,2008-Q4,468000,abs
+AU,Sydney,house,2009-Q1,448000,abs
+AU,Sydney,house,2009-Q2,490000,abs
+AU,Sydney,house,2009-Q3,500000,abs
+AU,Sydney,house,2009-Q4,595000,abs
+AU,Sydney,house,2010-Q1,583000,abs
+AU,Sydney,house,2010-Q2,612500,abs
+AU,Sydney,house,2010-Q3,598000,abs
+AU,Sydney,house,2010-Q4,620000,abs
+AU,Sydney,house,2011-Q1,575000,abs
+AU,Sydney,house,2011-Q2,592000,abs
+AU,Sydney,house,2011-Q3,567000,abs
+AU,Sydney,house,2011-Q4,533000,abs
+AU,Sydney,house,2012-Q1,607500,abs
+AU,Sydney,house,2012-Q2,600000,abs
+AU,Sydney,house,2012-Q3,585000,abs
+AU,Sydney,house,2012-Q4,640000,abs
+AU,Sydney,house,2013-Q1,615000,abs
+AU,Sydney,house,2013-Q2,650000,abs
+AU,Sydney,house,2013-Q3,670000,abs
+AU,Sydney,house,2013-Q4,745000,abs
+AU,Sydney,house,2014-Q1,680000,abs
+AU,Sydney,house,2014-Q2,728000,abs
+AU,Sydney,house,2014-Q3,730000,abs
+AU,Sydney,house,2014-Q4,816000,abs
+AU,Sydney,house,2015-Q1,792500,abs
+AU,Sydney,house,2015-Q2,860000,abs
+AU,Sydney,house,2015-Q3,888200,abs
+AU,Sydney,house,2015-Q4,915000,abs
+AU,Sydney,house,2016-Q1,850000,abs
+AU,Sydney,house,2016-Q2,895000,abs
+AU,Sydney,house,2016-Q3,900000,abs
+AU,Sydney,house,2016-Q4,985500,abs
+AU,Sydney,house,2017-Q1,930000,abs
+AU,Sydney,house,2017-Q2,1050000,abs
+AU,Sydney,house,2017-Q3,950000,abs
+AU,Sydney,house,2017-Q4,1029000,abs
+AU,Sydney,house,2018-Q1,955000,abs
+AU,Sydney,house,2018-Q2,973100,abs
+AU,Sydney,house,2018-Q3,950000,abs
+AU,Sydney,house,2018-Q4,940000,abs
+AU,Sydney,house,2019-Q1,870000,abs
+AU,Sydney,house,2019-Q2,897000,abs
+AU,Sydney,house,2019-Q3,900000,abs
+AU,Sydney,house,2019-Q4,985000,abs
+AU,Sydney,house,2020-Q1,947500,abs
+AU,Sydney,house,2020-Q2,955000,abs
+AU,Sydney,house,2020-Q3,945000,abs
+AU,Sydney,house,2020-Q4,999000,abs
+AU,Sydney,house,2021-Q1,1052000,abs
+AU,Sydney,house,2021-Q2,1206400,abs
+AU,Sydney,house,2021-Q3,1300000,abs
+AU,Sydney,house,2021-Q4,1360000,abs
+AU,Sydney,house,2022-Q1,1325000,abs
+AU,Sydney,house,2022-Q2,1350000,abs
+AU,Sydney,house,2022-Q3,1300000,abs
+AU,Sydney,house,2022-Q4,1300000,abs
+AU,Sydney,house,2023-Q1,1250100,abs
+AU,Sydney,house,2023-Q2,1355000,abs
+AU,Sydney,house,2023-Q3,1370000,abs
+AU,Sydney,house,2023-Q4,1420000,abs
+AU,Sydney,house,2024-Q1,1400000,abs
+AU,Sydney,house,2024-Q2,1455000,abs
+AU,Sydney,house,2024-Q3,1410000,abs
+AU,Sydney,house,2024-Q4,1450000,abs
+AU,Sydney,house,2025-Q1,1450000,abs
+AU,Sydney,house,2025-Q2,1520000,abs
+AU,Sydney,house,2025-Q3,1521500,abs
+AU,Sydney,house,2025-Q4,1570000,abs
+AU,Sydney,house,2026-Q1,1550000,abs
+AU,Sydney,house,2026-Q2,1487600,abs
+AU,Sydney,unit,1970,13490,abelson2004
+AU,Sydney,unit,1971,15127,abelson2004
+AU,Sydney,unit,1972,17363,abelson2004
+AU,Sydney,unit,1973,20145,abelson2004
+AU,Sydney,unit,1974,24981,abelson2004
+AU,Sydney,unit,1975,26470,abelson2004
+AU,Sydney,unit,1976,28400,abelson2004
+AU,Sydney,unit,1977,30600,abelson2004
+AU,Sydney,unit,1978,33000,abelson2004
+AU,Sydney,unit,1979,40400,abelson2004
+AU,Sydney,unit,1980,56500,abelson2004
+AU,Sydney,unit,1981,67300,abelson2004
+AU,Sydney,unit,1982,70200,abelson2004
+AU,Sydney,unit,1983,66000,abelson2004
+AU,Sydney,unit,1984,67800,abelson2004
+AU,Sydney,unit,1985,70500,abelson2004
+AU,Sydney,unit,1986,72300,abelson2004
+AU,Sydney,unit,1987,86200,abelson2004
+AU,Sydney,unit,1988,118400,abelson2004
+AU,Sydney,unit,1989,138525,abelson2004
+AU,Sydney,unit,1990,135715,abelson2004
+AU,Sydney,unit,1991,139285,abelson2004
+AU,Sydney,unit,1992,140280,abelson2004
+AU,Sydney,unit,1993,142760,abelson2004
+AU,Sydney,unit,1994,156075,abelson2004
+AU,Sydney,unit,1995,173625,abelson2004
+AU,Sydney,unit,1996,186250,abelson2004
+AU,Sydney,unit,1997,214250,abelson2004
+AU,Sydney,unit,1998,228375,abelson2004
+AU,Sydney,unit,1999,243375,abelson2004
+AU,Sydney,unit,2000,256250,abelson2004
+AU,Sydney,unit,2001,291250,abelson2004
+AU,Sydney,unit,2002,329500,abelson2004
+AU,Sydney,unit,2003,360000,abelson2004
+AU,Sydney,unit,2003-Q3,371000,abs
+AU,Sydney,unit,2003-Q4,387000,abs
+AU,Sydney,unit,2004-Q1,380000,abs
+AU,Sydney,unit,2004-Q2,380000,abs
+AU,Sydney,unit,2004-Q3,380000,abs
+AU,Sydney,unit,2004-Q4,390000,abs
+AU,Sydney,unit,2005-Q1,385000,abs
+AU,Sydney,unit,2005-Q2,387000,abs
+AU,Sydney,unit,2005-Q3,380000,abs
+AU,Sydney,unit,2005-Q4,383000,abs
+AU,Sydney,unit,2006-Q1,375000,abs
+AU,Sydney,unit,2006-Q2,390000,abs
+AU,Sydney,unit,2006-Q3,380000,abs
+AU,Sydney,unit,2006-Q4,393100,abs
+AU,Sydney,unit,2007-Q1,380000,abs
+AU,Sydney,unit,2007-Q2,395000,abs
+AU,Sydney,unit,2007-Q3,400000,abs
+AU,Sydney,unit,2007-Q4,410000,abs
+AU,Sydney,unit,2008-Q1,397500,abs
+AU,Sydney,unit,2008-Q2,395000,abs
+AU,Sydney,unit,2008-Q3,385000,abs
+AU,Sydney,unit,2008-Q4,373000,abs
+AU,Sydney,unit,2009-Q1,380000,abs
+AU,Sydney,unit,2009-Q2,398000,abs
+AU,Sydney,unit,2009-Q3,423000,abs
+AU,Sydney,unit,2009-Q4,450000,abs
+AU,Sydney,unit,2010-Q1,450000,abs
+AU,Sydney,unit,2010-Q2,480000,abs
+AU,Sydney,unit,2010-Q3,477000,abs
+AU,Sydney,unit,2010-Q4,487600,abs
+AU,Sydney,unit,2011-Q1,479000,abs
+AU,Sydney,unit,2011-Q2,485000,abs
+AU,Sydney,unit,2011-Q3,480000,abs
+AU,Sydney,unit,2011-Q4,460000,abs
+AU,Sydney,unit,2012-Q1,500000,abs
+AU,Sydney,unit,2012-Q2,510000,abs
+AU,Sydney,unit,2012-Q3,487000,abs
+AU,Sydney,unit,2012-Q4,525000,abs
+AU,Sydney,unit,2013-Q1,520000,abs
+AU,Sydney,unit,2013-Q2,530000,abs
+AU,Sydney,unit,2013-Q3,550000,abs
+AU,Sydney,unit,2013-Q4,565000,abs
+AU,Sydney,unit,2014-Q1,591500,abs
+AU,Sydney,unit,2014-Q2,610000,abs
+AU,Sydney,unit,2014-Q3,620000,abs
+AU,Sydney,unit,2014-Q4,650000,abs
+AU,Sydney,unit,2015-Q1,657000,abs
+AU,Sydney,unit,2015-Q2,705000,abs
+AU,Sydney,unit,2015-Q3,710000,abs
+AU,Sydney,unit,2015-Q4,723000,abs
+AU,Sydney,unit,2016-Q1,706500,abs
+AU,Sydney,unit,2016-Q2,720000,abs
+AU,Sydney,unit,2016-Q3,710000,abs
+AU,Sydney,unit,2016-Q4,735000,abs
+AU,Sydney,unit,2017-Q1,730000,abs
+AU,Sydney,unit,2017-Q2,770000,abs
+AU,Sydney,unit,2017-Q3,720000,abs
+AU,Sydney,unit,2017-Q4,741000,abs
+AU,Sydney,unit,2018-Q1,742000,abs
+AU,Sydney,unit,2018-Q2,730000,abs
+AU,Sydney,unit,2018-Q3,730000,abs
+AU,Sydney,unit,2018-Q4,725000,abs
+AU,Sydney,unit,2019-Q1,695000,abs
+AU,Sydney,unit,2019-Q2,700000,abs
+AU,Sydney,unit,2019-Q3,710000,abs
+AU,Sydney,unit,2019-Q4,736000,abs
+AU,Sydney,unit,2020-Q1,730000,abs
+AU,Sydney,unit,2020-Q2,730000,abs
+AU,Sydney,unit,2020-Q3,730000,abs
+AU,Sydney,unit,2020-Q4,743000,abs
+AU,Sydney,unit,2021-Q1,750000,abs
+AU,Sydney,unit,2021-Q2,785000,abs
+AU,Sydney,unit,2021-Q3,800000,abs
+AU,Sydney,unit,2021-Q4,806000,abs
+AU,Sydney,unit,2022-Q1,780000,abs
+AU,Sydney,unit,2022-Q2,775000,abs
+AU,Sydney,unit,2022-Q3,750000,abs
+AU,Sydney,unit,2022-Q4,765000,abs
+AU,Sydney,unit,2023-Q1,765000,abs
+AU,Sydney,unit,2023-Q2,800000,abs
+AU,Sydney,unit,2023-Q3,795000,abs
+AU,Sydney,unit,2023-Q4,800000,abs
+AU,Sydney,unit,2024-Q1,790000,abs
+AU,Sydney,unit,2024-Q2,805000,abs
+AU,Sydney,unit,2024-Q3,815000,abs
+AU,Sydney,unit,2024-Q4,820000,abs
+AU,Sydney,unit,2025-Q1,820000,abs
+AU,Sydney,unit,2025-Q2,830000,abs
+AU,Sydney,unit,2025-Q3,845000,abs
+AU,Sydney,unit,2025-Q4,864900,abs
+AU,Sydney,unit,2026-Q1,855500,abs
+AU,Sydney,unit,2026-Q2,840000,abs
+CN,Beijing,index,2011-Q1,53.5418,bis_dpp
+CN,Beijing,index,2011-Q2,53.5415,bis_dpp
+CN,Beijing,index,2011-Q3,53.4522,bis_dpp
+CN,Beijing,index,2011-Q4,52.655,bis_dpp
+CN,Beijing,index,2012-Q1,51.7454,bis_dpp
+CN,Beijing,index,2012-Q2,51.9869,bis_dpp
+CN,Beijing,index,2012-Q3,52.3167,bis_dpp
+CN,Beijing,index,2012-Q4,52.6839,bis_dpp
+CN,Beijing,index,2013-Q1,54.9702,bis_dpp
+CN,Beijing,index,2013-Q2,58.5328,bis_dpp
+CN,Beijing,index,2013-Q3,60.944,bis_dpp
+CN,Beijing,index,2013-Q4,63.017,bis_dpp
+CN,Beijing,index,2014-Q1,63.4979,bis_dpp
+CN,Beijing,index,2014-Q2,62.8021,bis_dpp
+CN,Beijing,index,2014-Q3,60.9161,bis_dpp
+CN,Beijing,index,2014-Q4,60.6645,bis_dpp
+CN,Beijing,index,2015-Q1,60.9471,bis_dpp
+CN,Beijing,index,2015-Q2,64.7015,bis_dpp
+CN,Beijing,index,2015-Q3,69.5619,bis_dpp
+CN,Beijing,index,2015-Q4,72.5226,bis_dpp
+CN,Beijing,index,2016-Q1,78.6536,bis_dpp
+CN,Beijing,index,2016-Q2,87.4524,bis_dpp
+CN,Beijing,index,2016-Q3,94.5317,bis_dpp
+CN,Beijing,index,2016-Q4,100.5614,bis_dpp
+CN,Beijing,index,2017-Q1,103.1295,bis_dpp
+CN,Beijing,index,2017-Q2,104.0675,bis_dpp
+CN,Beijing,index,2017-Q3,101.3877,bis_dpp
+CN,Beijing,index,2017-Q4,99.6681,bis_dpp
+CN,Beijing,index,2018-Q1,98.1048,bis_dpp
+CN,Beijing,index,2018-Q2,98.1272,bis_dpp
+CN,Beijing,index,2018-Q3,98.5515,bis_dpp
+CN,Beijing,index,2018-Q4,97.6805,bis_dpp
+CN,Beijing,index,2019-Q1,97.5019,bis_dpp
+CN,Beijing,index,2019-Q2,98.4175,bis_dpp
+CN,Beijing,index,2019-Q3,97.7252,bis_dpp
+CN,Beijing,index,2019-Q4,96.6086,bis_dpp
+CN,Beijing,index,2020-Q1,97.0776,bis_dpp
+CN,Beijing,index,2020-Q2,99.5564,bis_dpp
+CN,Beijing,index,2020-Q3,101.142,bis_dpp
+CN,Beijing,index,2020-Q4,102.4819,bis_dpp
+CN,Beijing,index,2021-Q1,105.2667,bis_dpp
+CN,Beijing,index,2021-Q2,109.2333,bis_dpp
+CN,Beijing,index,2021-Q3,111.4333,bis_dpp
+CN,Beijing,index,2021-Q4,111.0667,bis_dpp
+CN,Beijing,index,2022-Q1,113.1,bis_dpp
+CN,Beijing,index,2022-Q2,115.1333,bis_dpp
+CN,Beijing,index,2022-Q3,116.1,bis_dpp
+CN,Beijing,index,2022-Q4,116.4,bis_dpp
+CN,Beijing,index,2023-Q1,117.9021,bis_dpp
+CN,Beijing,index,2023-Q2,118.1722,bis_dpp
+CN,Beijing,index,2023-Q3,117.2642,bis_dpp
+CN,Beijing,index,2023-Q4,115.1197,bis_dpp
+CN,Beijing,index,2024-Q1,112.033,bis_dpp
+CN,Beijing,index,2024-Q2,108.8093,bis_dpp
+CN,Beijing,index,2024-Q3,107.3263,bis_dpp
+CN,Beijing,index,2024-Q4,107.9164,bis_dpp
+CN,Beijing,index,2025-Q1,108.8877,bis_dpp
+CN,Beijing,index,2025-Q2,107.6563,bis_dpp
+CN,Beijing,index,2025-Q3,104.319,bis_dpp
+CN,Beijing,index,2025-Q4,100.8138,bis_dpp
+CN,Beijing,index,2026-Q1,99.6964,bis_dpp
+CN,Beijing,index,2026-Q2,100.6954,bis_dpp
+CN,Beijing,index,2026-Q3,100.7457,bis_dpp
+CN,China average,avg_price,1991,756.23,nbs_avg
+CN,China average,avg_price,1992,996.40,nbs_avg
+CN,China average,avg_price,1993,1208.23,nbs_avg
+CN,China average,avg_price,1994,1194.05,nbs_avg
+CN,China average,avg_price,1995,1508.86,nbs_avg
+CN,China average,avg_price,1996,1604.56,nbs_avg
+CN,China average,avg_price,1997,1790.00,nbs_avg
+CN,China average,avg_price,1998,1854.00,nbs_avg
+CN,China average,avg_price,1999,1857.00,nbs_avg
+CN,China average,avg_price,2000,1948.00,nbs_avg
+CN,China average,avg_price,2001,2017.00,nbs_avg
+CN,China average,avg_price,2002,2092.00,nbs_avg
+CN,China average,avg_price,2003,2197.00,nbs_avg
+CN,China average,avg_price,2004,2608.00,nbs_avg
+CN,China average,avg_price,2005,2936.96,nbs_avg
+CN,China average,avg_price,2006,3119.25,nbs_avg
+CN,China average,avg_price,2007,3645.18,nbs_avg
+CN,China average,avg_price,2008,3576.00,nbs_avg
+CN,China average,avg_price,2009,4459.00,nbs_avg
+CN,China average,avg_price,2010,4738.00,nbs_avg
+CN,China average,avg_price,2011,5029.00,nbs_avg
+CN,China average,avg_price,2012,5486.00,nbs_avg
+CN,China average,avg_price,2013,5946.00,nbs_avg
+CN,China average,avg_price,2014,6048.00,nbs_avg
+CN,China average,avg_price,2015,6622.00,nbs_avg
+US,Chicago,index,1975-Q3,30.33,fhfa
+US,Chicago,index,1975-Q4,31.33,fhfa
+US,Chicago,index,1976-Q1,31.47,fhfa
+US,Chicago,index,1976-Q2,32.33,fhfa
+US,Chicago,index,1976-Q3,34.32,fhfa
+US,Chicago,index,1976-Q4,34.47,fhfa
+US,Chicago,index,1977-Q1,36.79,fhfa
+US,Chicago,index,1977-Q2,39.29,fhfa
+US,Chicago,index,1977-Q3,38.96,fhfa
+US,Chicago,index,1977-Q4,40.86,fhfa
+US,Chicago,index,1978-Q1,41.35,fhfa
+US,Chicago,index,1978-Q2,45.77,fhfa
+US,Chicago,index,1978-Q3,45.38,fhfa
+US,Chicago,index,1978-Q4,47.35,fhfa
+US,Chicago,index,1979-Q1,45.50,fhfa
+US,Chicago,index,1979-Q2,47.13,fhfa
+US,Chicago,index,1979-Q3,46.57,fhfa
+US,Chicago,index,1979-Q4,46.88,fhfa
+US,Chicago,index,1980-Q1,46.83,fhfa
+US,Chicago,index,1980-Q2,47.47,fhfa
+US,Chicago,index,1980-Q3,45.30,fhfa
+US,Chicago,index,1980-Q4,44.77,fhfa
+US,Chicago,index,1981-Q1,47.63,fhfa
+US,Chicago,index,1981-Q2,50.42,fhfa
+US,Chicago,index,1981-Q3,49.04,fhfa
+US,Chicago,index,1981-Q4,48.87,fhfa
+US,Chicago,index,1982-Q1,44.37,fhfa
+US,Chicago,index,1982-Q2,43.79,fhfa
+US,Chicago,index,1982-Q3,42.10,fhfa
+US,Chicago,index,1982-Q4,47.19,fhfa
+US,Chicago,index,1983-Q1,47.79,fhfa
+US,Chicago,index,1983-Q2,50.17,fhfa
+US,Chicago,index,1983-Q3,51.11,fhfa
+US,Chicago,index,1983-Q4,51.79,fhfa
+US,Chicago,index,1984-Q1,52.32,fhfa
+US,Chicago,index,1984-Q2,53.39,fhfa
+US,Chicago,index,1984-Q3,53.97,fhfa
+US,Chicago,index,1984-Q4,54.60,fhfa
+US,Chicago,index,1985-Q1,54.76,fhfa
+US,Chicago,index,1985-Q2,55.71,fhfa
+US,Chicago,index,1985-Q3,56.49,fhfa
+US,Chicago,index,1985-Q4,57.50,fhfa
+US,Chicago,index,1986-Q1,58.00,fhfa
+US,Chicago,index,1986-Q2,59.39,fhfa
+US,Chicago,index,1986-Q3,61.23,fhfa
+US,Chicago,index,1986-Q4,63.04,fhfa
+US,Chicago,index,1987-Q1,64.26,fhfa
+US,Chicago,index,1987-Q2,66.98,fhfa
+US,Chicago,index,1987-Q3,68.92,fhfa
+US,Chicago,index,1987-Q4,70.25,fhfa
+US,Chicago,index,1988-Q1,71.91,fhfa
+US,Chicago,index,1988-Q2,74.31,fhfa
+US,Chicago,index,1988-Q3,76.15,fhfa
+US,Chicago,index,1988-Q4,76.71,fhfa
+US,Chicago,index,1989-Q1,78.31,fhfa
+US,Chicago,index,1989-Q2,80.12,fhfa
+US,Chicago,index,1989-Q3,81.86,fhfa
+US,Chicago,index,1989-Q4,82.86,fhfa
+US,Chicago,index,1990-Q1,83.88,fhfa
+US,Chicago,index,1990-Q2,84.87,fhfa
+US,Chicago,index,1990-Q3,85.84,fhfa
+US,Chicago,index,1990-Q4,85.89,fhfa
+US,Chicago,index,1991-Q1,86.95,fhfa
+US,Chicago,index,1991-Q2,87.77,fhfa
+US,Chicago,index,1991-Q3,88.49,fhfa
+US,Chicago,index,1991-Q4,89.80,fhfa
+US,Chicago,index,1992-Q1,90.53,fhfa
+US,Chicago,index,1992-Q2,91.17,fhfa
+US,Chicago,index,1992-Q3,92.14,fhfa
+US,Chicago,index,1992-Q4,92.91,fhfa
+US,Chicago,index,1993-Q1,93.65,fhfa
+US,Chicago,index,1993-Q2,94.41,fhfa
+US,Chicago,index,1993-Q3,95.32,fhfa
+US,Chicago,index,1993-Q4,96.11,fhfa
+US,Chicago,index,1994-Q1,97.33,fhfa
+US,Chicago,index,1994-Q2,98.44,fhfa
+US,Chicago,index,1994-Q3,99.06,fhfa
+US,Chicago,index,1994-Q4,99.17,fhfa
+US,Chicago,index,1995-Q1,100.00,fhfa
+US,Chicago,index,1995-Q2,101.44,fhfa
+US,Chicago,index,1995-Q3,102.60,fhfa
+US,Chicago,index,1995-Q4,103.50,fhfa
+US,Chicago,index,1996-Q1,104.63,fhfa
+US,Chicago,index,1996-Q2,104.75,fhfa
+US,Chicago,index,1996-Q3,104.99,fhfa
+US,Chicago,index,1996-Q4,106.03,fhfa
+US,Chicago,index,1997-Q1,107.06,fhfa
+US,Chicago,index,1997-Q2,107.59,fhfa
+US,Chicago,index,1997-Q3,108.73,fhfa
+US,Chicago,index,1997-Q4,109.93,fhfa
+US,Chicago,index,1998-Q1,110.75,fhfa
+US,Chicago,index,1998-Q2,111.40,fhfa
+US,Chicago,index,1998-Q3,112.66,fhfa
+US,Chicago,index,1998-Q4,113.40,fhfa
+US,Chicago,index,1999-Q1,114.63,fhfa
+US,Chicago,index,1999-Q2,116.27,fhfa
+US,Chicago,index,1999-Q3,118.60,fhfa
+US,Chicago,index,1999-Q4,120.17,fhfa
+US,Chicago,index,2000-Q1,123.02,fhfa
+US,Chicago,index,2000-Q2,125.65,fhfa
+US,Chicago,index,2000-Q3,128.05,fhfa
+US,Chicago,index,2000-Q4,129.80,fhfa
+US,Chicago,index,2001-Q1,131.57,fhfa
+US,Chicago,index,2001-Q2,134.15,fhfa
+US,Chicago,index,2001-Q3,137.24,fhfa
+US,Chicago,index,2001-Q4,138.84,fhfa
+US,Chicago,index,2002-Q1,141.63,fhfa
+US,Chicago,index,2002-Q2,144.73,fhfa
+US,Chicago,index,2002-Q3,147.12,fhfa
+US,Chicago,index,2002-Q4,149.06,fhfa
+US,Chicago,index,2003-Q1,150.90,fhfa
+US,Chicago,index,2003-Q2,152.77,fhfa
+US,Chicago,index,2003-Q3,155.20,fhfa
+US,Chicago,index,2003-Q4,160.84,fhfa
+US,Chicago,index,2004-Q1,162.91,fhfa
+US,Chicago,index,2004-Q2,167.23,fhfa
+US,Chicago,index,2004-Q3,174.36,fhfa
+US,Chicago,index,2004-Q4,176.91,fhfa
+US,Chicago,index,2005-Q1,181.15,fhfa
+US,Chicago,index,2005-Q2,186.65,fhfa
+US,Chicago,index,2005-Q3,191.02,fhfa
+US,Chicago,index,2005-Q4,195.56,fhfa
+US,Chicago,index,2006-Q1,198.70,fhfa
+US,Chicago,index,2006-Q2,201.16,fhfa
+US,Chicago,index,2006-Q3,203.13,fhfa
+US,Chicago,index,2006-Q4,204.90,fhfa
+US,Chicago,index,2007-Q1,205.93,fhfa
+US,Chicago,index,2007-Q2,205.46,fhfa
+US,Chicago,index,2007-Q3,203.30,fhfa
+US,Chicago,index,2007-Q4,203.31,fhfa
+US,Chicago,index,2008-Q1,201.51,fhfa
+US,Chicago,index,2008-Q2,196.20,fhfa
+US,Chicago,index,2008-Q3,188.21,fhfa
+US,Chicago,index,2008-Q4,186.64,fhfa
+US,Chicago,index,2009-Q1,185.42,fhfa
+US,Chicago,index,2009-Q2,177.53,fhfa
+US,Chicago,index,2009-Q3,170.62,fhfa
+US,Chicago,index,2009-Q4,168.48,fhfa
+US,Chicago,index,2010-Q1,164.80,fhfa
+US,Chicago,index,2010-Q2,161.99,fhfa
+US,Chicago,index,2010-Q3,162.97,fhfa
+US,Chicago,index,2010-Q4,161.37,fhfa
+US,Chicago,index,2011-Q1,155.47,fhfa
+US,Chicago,index,2011-Q2,151.12,fhfa
+US,Chicago,index,2011-Q3,151.52,fhfa
+US,Chicago,index,2011-Q4,151.25,fhfa
+US,Chicago,index,2012-Q1,148.62,fhfa
+US,Chicago,index,2012-Q2,146.37,fhfa
+US,Chicago,index,2012-Q3,148.17,fhfa
+US,Chicago,index,2012-Q4,148.26,fhfa
+US,Chicago,index,2013-Q1,147.61,fhfa
+US,Chicago,index,2013-Q2,149.10,fhfa
+US,Chicago,index,2013-Q3,150.61,fhfa
+US,Chicago,index,2013-Q4,151.90,fhfa
+US,Chicago,index,2014-Q1,152.69,fhfa
+US,Chicago,index,2014-Q2,156.33,fhfa
+US,Chicago,index,2014-Q3,158.55,fhfa
+US,Chicago,index,2014-Q4,159.68,fhfa
+US,Chicago,index,2015-Q1,161.58,fhfa
+US,Chicago,index,2015-Q2,163.47,fhfa
+US,Chicago,index,2015-Q3,164.13,fhfa
+US,Chicago,index,2015-Q4,165.16,fhfa
+US,Chicago,index,2016-Q1,166.13,fhfa
+US,Chicago,index,2016-Q2,168.59,fhfa
+US,Chicago,index,2016-Q3,171.05,fhfa
+US,Chicago,index,2016-Q4,171.84,fhfa
+US,Chicago,index,2017-Q1,171.53,fhfa
+US,Chicago,index,2017-Q2,174.38,fhfa
+US,Chicago,index,2017-Q3,176.64,fhfa
+US,Chicago,index,2017-Q4,176.89,fhfa
+US,Chicago,index,2018-Q1,178.15,fhfa
+US,Chicago,index,2018-Q2,179.34,fhfa
+US,Chicago,index,2018-Q3,180.11,fhfa
+US,Chicago,index,2018-Q4,179.49,fhfa
+US,Chicago,index,2019-Q1,181.28,fhfa
+US,Chicago,index,2019-Q2,184.01,fhfa
+US,Chicago,index,2019-Q3,185.81,fhfa
+US,Chicago,index,2019-Q4,186.45,fhfa
+US,Chicago,index,2020-Q1,187.39,fhfa
+US,Chicago,index,2020-Q2,188.49,fhfa
+US,Chicago,index,2020-Q3,190.31,fhfa
+US,Chicago,index,2020-Q4,192.54,fhfa
+US,Chicago,index,2021-Q1,194.70,fhfa
+US,Chicago,index,2021-Q2,203.60,fhfa
+US,Chicago,index,2021-Q3,210.28,fhfa
+US,Chicago,index,2021-Q4,214.45,fhfa
+US,Chicago,index,2022-Q1,220.83,fhfa
+US,Chicago,index,2022-Q2,233.89,fhfa
+US,Chicago,index,2022-Q3,235.40,fhfa
+US,Chicago,index,2022-Q4,232.14,fhfa
+US,Chicago,index,2023-Q1,234.43,fhfa
+US,Chicago,index,2023-Q2,243.10,fhfa
+US,Chicago,index,2023-Q3,248.29,fhfa
+US,Chicago,index,2023-Q4,249.58,fhfa
+US,Chicago,index,2024-Q1,254.07,fhfa
+US,Chicago,index,2024-Q2,262.07,fhfa
+US,Chicago,index,2024-Q3,265.78,fhfa
+US,Chicago,index,2024-Q4,266.95,fhfa
+US,Chicago,index,2025-Q1,272.20,fhfa
+US,Chicago,index,2025-Q2,278.91,fhfa
+US,Chicago,index,2025-Q3,282.50,fhfa
+US,Chicago,index,2025-Q4,284.48,fhfa
+US,Chicago,index,2026-Q1,287.73,fhfa
+US,Chicago,index,2026-Q2,296.21,fhfa
+US,Dallas,index,1975-Q4,40.83,fhfa
+US,Dallas,index,1976-Q1,39.81,fhfa
+US,Dallas,index,1976-Q2,45.45,fhfa
+US,Dallas,index,1976-Q3,42.32,fhfa
+US,Dallas,index,1976-Q4,42.27,fhfa
+US,Dallas,index,1977-Q1,44.73,fhfa
+US,Dallas,index,1977-Q2,51.57,fhfa
+US,Dallas,index,1977-Q3,47.14,fhfa
+US,Dallas,index,1977-Q4,49.30,fhfa
+US,Dallas,index,1978-Q1,51.71,fhfa
+US,Dallas,index,1978-Q2,56.89,fhfa
+US,Dallas,index,1978-Q3,57.94,fhfa
+US,Dallas,index,1978-Q4,59.87,fhfa
+US,Dallas,index,1979-Q1,62.23,fhfa
+US,Dallas,index,1979-Q2,67.76,fhfa
+US,Dallas,index,1979-Q3,69.13,fhfa
+US,Dallas,index,1979-Q4,71.82,fhfa
+US,Dallas,index,1980-Q1,74.69,fhfa
+US,Dallas,index,1980-Q2,75.92,fhfa
+US,Dallas,index,1980-Q3,78.01,fhfa
+US,Dallas,index,1980-Q4,79.80,fhfa
+US,Dallas,index,1981-Q1,81.92,fhfa
+US,Dallas,index,1981-Q2,83.63,fhfa
+US,Dallas,index,1981-Q3,84.81,fhfa
+US,Dallas,index,1981-Q4,77.55,fhfa
+US,Dallas,index,1982-Q1,87.63,fhfa
+US,Dallas,index,1982-Q2,81.84,fhfa
+US,Dallas,index,1982-Q3,85.02,fhfa
+US,Dallas,index,1982-Q4,87.34,fhfa
+US,Dallas,index,1983-Q1,91.15,fhfa
+US,Dallas,index,1983-Q2,93.11,fhfa
+US,Dallas,index,1983-Q3,94.60,fhfa
+US,Dallas,index,1983-Q4,96.93,fhfa
+US,Dallas,index,1984-Q1,97.34,fhfa
+US,Dallas,index,1984-Q2,99.41,fhfa
+US,Dallas,index,1984-Q3,101.82,fhfa
+US,Dallas,index,1984-Q4,101.90,fhfa
+US,Dallas,index,1985-Q1,102.46,fhfa
+US,Dallas,index,1985-Q2,104.83,fhfa
+US,Dallas,index,1985-Q3,105.76,fhfa
+US,Dallas,index,1985-Q4,106.19,fhfa
+US,Dallas,index,1986-Q1,106.62,fhfa
+US,Dallas,index,1986-Q2,109.17,fhfa
+US,Dallas,index,1986-Q3,107.97,fhfa
+US,Dallas,index,1986-Q4,107.41,fhfa
+US,Dallas,index,1987-Q1,107.03,fhfa
+US,Dallas,index,1987-Q2,102.46,fhfa
+US,Dallas,index,1987-Q3,102.07,fhfa
+US,Dallas,index,1987-Q4,99.10,fhfa
+US,Dallas,index,1988-Q1,98.66,fhfa
+US,Dallas,index,1988-Q2,98.34,fhfa
+US,Dallas,index,1988-Q3,95.82,fhfa
+US,Dallas,index,1988-Q4,94.25,fhfa
+US,Dallas,index,1989-Q1,93.58,fhfa
+US,Dallas,index,1989-Q2,93.86,fhfa
+US,Dallas,index,1989-Q3,95.50,fhfa
+US,Dallas,index,1989-Q4,95.02,fhfa
+US,Dallas,index,1990-Q1,94.50,fhfa
+US,Dallas,index,1990-Q2,94.94,fhfa
+US,Dallas,index,1990-Q3,95.13,fhfa
+US,Dallas,index,1990-Q4,94.40,fhfa
+US,Dallas,index,1991-Q1,95.58,fhfa
+US,Dallas,index,1991-Q2,96.21,fhfa
+US,Dallas,index,1991-Q3,95.61,fhfa
+US,Dallas,index,1991-Q4,97.22,fhfa
+US,Dallas,index,1992-Q1,98.44,fhfa
+US,Dallas,index,1992-Q2,97.56,fhfa
+US,Dallas,index,1992-Q3,99.16,fhfa
+US,Dallas,index,1992-Q4,99.25,fhfa
+US,Dallas,index,1993-Q1,99.09,fhfa
+US,Dallas,index,1993-Q2,99.95,fhfa
+US,Dallas,index,1993-Q3,100.51,fhfa
+US,Dallas,index,1993-Q4,101.20,fhfa
+US,Dallas,index,1994-Q1,101.40,fhfa
+US,Dallas,index,1994-Q2,100.81,fhfa
+US,Dallas,index,1994-Q3,100.51,fhfa
+US,Dallas,index,1994-Q4,100.11,fhfa
+US,Dallas,index,1995-Q1,100.00,fhfa
+US,Dallas,index,1995-Q2,101.50,fhfa
+US,Dallas,index,1995-Q3,103.19,fhfa
+US,Dallas,index,1995-Q4,104.03,fhfa
+US,Dallas,index,1996-Q1,105.02,fhfa
+US,Dallas,index,1996-Q2,104.88,fhfa
+US,Dallas,index,1996-Q3,105.73,fhfa
+US,Dallas,index,1996-Q4,106.14,fhfa
+US,Dallas,index,1997-Q1,106.95,fhfa
+US,Dallas,index,1997-Q2,107.75,fhfa
+US,Dallas,index,1997-Q3,108.88,fhfa
+US,Dallas,index,1997-Q4,110.42,fhfa
+US,Dallas,index,1998-Q1,112.18,fhfa
+US,Dallas,index,1998-Q2,112.95,fhfa
+US,Dallas,index,1998-Q3,115.30,fhfa
+US,Dallas,index,1998-Q4,116.74,fhfa
+US,Dallas,index,1999-Q1,117.75,fhfa
+US,Dallas,index,1999-Q2,120.26,fhfa
+US,Dallas,index,1999-Q3,121.93,fhfa
+US,Dallas,index,1999-Q4,123.51,fhfa
+US,Dallas,index,2000-Q1,125.80,fhfa
+US,Dallas,index,2000-Q2,127.70,fhfa
+US,Dallas,index,2000-Q3,129.40,fhfa
+US,Dallas,index,2000-Q4,131.06,fhfa
+US,Dallas,index,2001-Q1,134.55,fhfa
+US,Dallas,index,2001-Q2,136.61,fhfa
+US,Dallas,index,2001-Q3,137.81,fhfa
+US,Dallas,index,2001-Q4,139.58,fhfa
+US,Dallas,index,2002-Q1,140.18,fhfa
+US,Dallas,index,2002-Q2,141.33,fhfa
+US,Dallas,index,2002-Q3,143.46,fhfa
+US,Dallas,index,2002-Q4,144.52,fhfa
+US,Dallas,index,2003-Q1,145.14,fhfa
+US,Dallas,index,2003-Q2,145.92,fhfa
+US,Dallas,index,2003-Q3,146.52,fhfa
+US,Dallas,index,2003-Q4,147.10,fhfa
+US,Dallas,index,2004-Q1,147.96,fhfa
+US,Dallas,index,2004-Q2,148.93,fhfa
+US,Dallas,index,2004-Q3,149.53,fhfa
+US,Dallas,index,2004-Q4,151.04,fhfa
+US,Dallas,index,2005-Q1,151.71,fhfa
+US,Dallas,index,2005-Q2,153.28,fhfa
+US,Dallas,index,2005-Q3,154.96,fhfa
+US,Dallas,index,2005-Q4,155.82,fhfa
+US,Dallas,index,2006-Q1,156.94,fhfa
+US,Dallas,index,2006-Q2,158.01,fhfa
+US,Dallas,index,2006-Q3,159.14,fhfa
+US,Dallas,index,2006-Q4,160.22,fhfa
+US,Dallas,index,2007-Q1,161.50,fhfa
+US,Dallas,index,2007-Q2,164.26,fhfa
+US,Dallas,index,2007-Q3,163.02,fhfa
+US,Dallas,index,2007-Q4,163.94,fhfa
+US,Dallas,index,2008-Q1,165.22,fhfa
+US,Dallas,index,2008-Q2,164.97,fhfa
+US,Dallas,index,2008-Q3,164.24,fhfa
+US,Dallas,index,2008-Q4,164.92,fhfa
+US,Dallas,index,2009-Q1,167.32,fhfa
+US,Dallas,index,2009-Q2,165.50,fhfa
+US,Dallas,index,2009-Q3,162.59,fhfa
+US,Dallas,index,2009-Q4,162.82,fhfa
+US,Dallas,index,2010-Q1,162.28,fhfa
+US,Dallas,index,2010-Q2,162.31,fhfa
+US,Dallas,index,2010-Q3,163.40,fhfa
+US,Dallas,index,2010-Q4,162.27,fhfa
+US,Dallas,index,2011-Q1,159.37,fhfa
+US,Dallas,index,2011-Q2,157.87,fhfa
+US,Dallas,index,2011-Q3,160.19,fhfa
+US,Dallas,index,2011-Q4,159.69,fhfa
+US,Dallas,index,2012-Q1,159.38,fhfa
+US,Dallas,index,2012-Q2,160.05,fhfa
+US,Dallas,index,2012-Q3,161.63,fhfa
+US,Dallas,index,2012-Q4,163.26,fhfa
+US,Dallas,index,2013-Q1,164.44,fhfa
+US,Dallas,index,2013-Q2,168.46,fhfa
+US,Dallas,index,2013-Q3,171.90,fhfa
+US,Dallas,index,2013-Q4,174.10,fhfa
+US,Dallas,index,2014-Q1,177.87,fhfa
+US,Dallas,index,2014-Q2,183.53,fhfa
+US,Dallas,index,2014-Q3,187.30,fhfa
+US,Dallas,index,2014-Q4,189.45,fhfa
+US,Dallas,index,2015-Q1,194.07,fhfa
+US,Dallas,index,2015-Q2,200.77,fhfa
+US,Dallas,index,2015-Q3,206.36,fhfa
+US,Dallas,index,2015-Q4,209.17,fhfa
+US,Dallas,index,2016-Q1,213.57,fhfa
+US,Dallas,index,2016-Q2,221.55,fhfa
+US,Dallas,index,2016-Q3,226.35,fhfa
+US,Dallas,index,2016-Q4,230.32,fhfa
+US,Dallas,index,2017-Q1,235.30,fhfa
+US,Dallas,index,2017-Q2,244.52,fhfa
+US,Dallas,index,2017-Q3,248.88,fhfa
+US,Dallas,index,2017-Q4,251.40,fhfa
+US,Dallas,index,2018-Q1,255.45,fhfa
+US,Dallas,index,2018-Q2,260.52,fhfa
+US,Dallas,index,2018-Q3,263.67,fhfa
+US,Dallas,index,2018-Q4,264.05,fhfa
+US,Dallas,index,2019-Q1,266.42,fhfa
+US,Dallas,index,2019-Q2,271.02,fhfa
+US,Dallas,index,2019-Q3,273.70,fhfa
+US,Dallas,index,2019-Q4,275.30,fhfa
+US,Dallas,index,2020-Q1,277.26,fhfa
+US,Dallas,index,2020-Q2,278.55,fhfa
+US,Dallas,index,2020-Q3,283.12,fhfa
+US,Dallas,index,2020-Q4,288.91,fhfa
+US,Dallas,index,2021-Q1,295.75,fhfa
+US,Dallas,index,2021-Q2,314.90,fhfa
+US,Dallas,index,2021-Q3,336.06,fhfa
+US,Dallas,index,2021-Q4,350.74,fhfa
+US,Dallas,index,2022-Q1,370.63,fhfa
+US,Dallas,index,2022-Q2,402.19,fhfa
+US,Dallas,index,2022-Q3,411.39,fhfa
+US,Dallas,index,2022-Q4,402.28,fhfa
+US,Dallas,index,2023-Q1,403.24,fhfa
+US,Dallas,index,2023-Q2,409.70,fhfa
+US,Dallas,index,2023-Q3,413.85,fhfa
+US,Dallas,index,2023-Q4,410.09,fhfa
+US,Dallas,index,2024-Q1,415.76,fhfa
+US,Dallas,index,2024-Q2,421.50,fhfa
+US,Dallas,index,2024-Q3,422.62,fhfa
+US,Dallas,index,2024-Q4,425.96,fhfa
+US,Dallas,index,2025-Q1,421.61,fhfa
+US,Dallas,index,2025-Q2,424.22,fhfa
+US,Dallas,index,2025-Q3,425.10,fhfa
+US,Dallas,index,2025-Q4,425.19,fhfa
+US,Dallas,index,2026-Q1,427.83,fhfa
+US,Dallas,index,2026-Q2,426.45,fhfa
+US,Houston,index,1976-Q1,51.47,fhfa
+US,Houston,index,1976-Q2,58.55,fhfa
+US,Houston,index,1976-Q3,58.43,fhfa
+US,Houston,index,1976-Q4,58.23,fhfa
+US,Houston,index,1977-Q1,60.02,fhfa
+US,Houston,index,1977-Q2,66.96,fhfa
+US,Houston,index,1977-Q3,64.42,fhfa
+US,Houston,index,1977-Q4,68.00,fhfa
+US,Houston,index,1978-Q1,69.92,fhfa
+US,Houston,index,1978-Q2,75.32,fhfa
+US,Houston,index,1978-Q3,73.52,fhfa
+US,Houston,index,1978-Q4,76.73,fhfa
+US,Houston,index,1979-Q1,80.55,fhfa
+US,Houston,index,1979-Q2,84.81,fhfa
+US,Houston,index,1979-Q3,86.32,fhfa
+US,Houston,index,1979-Q4,86.56,fhfa
+US,Houston,index,1980-Q1,88.96,fhfa
+US,Houston,index,1980-Q2,92.84,fhfa
+US,Houston,index,1980-Q3,91.44,fhfa
+US,Houston,index,1980-Q4,93.41,fhfa
+US,Houston,index,1981-Q1,90.22,fhfa
+US,Houston,index,1981-Q2,96.11,fhfa
+US,Houston,index,1981-Q3,97.95,fhfa
+US,Houston,index,1981-Q4,100.70,fhfa
+US,Houston,index,1982-Q1,107.02,fhfa
+US,Houston,index,1982-Q2,107.75,fhfa
+US,Houston,index,1982-Q3,106.07,fhfa
+US,Houston,index,1982-Q4,107.85,fhfa
+US,Houston,index,1983-Q1,108.13,fhfa
+US,Houston,index,1983-Q2,108.59,fhfa
+US,Houston,index,1983-Q3,107.50,fhfa
+US,Houston,index,1983-Q4,107.08,fhfa
+US,Houston,index,1984-Q1,103.69,fhfa
+US,Houston,index,1984-Q2,103.72,fhfa
+US,Houston,index,1984-Q3,104.35,fhfa
+US,Houston,index,1984-Q4,101.40,fhfa
+US,Houston,index,1985-Q1,98.43,fhfa
+US,Houston,index,1985-Q2,96.28,fhfa
+US,Houston,index,1985-Q3,94.36,fhfa
+US,Houston,index,1985-Q4,92.22,fhfa
+US,Houston,index,1986-Q1,93.30,fhfa
+US,Houston,index,1986-Q2,94.57,fhfa
+US,Houston,index,1986-Q3,92.70,fhfa
+US,Houston,index,1986-Q4,88.73,fhfa
+US,Houston,index,1987-Q1,88.26,fhfa
+US,Houston,index,1987-Q2,86.83,fhfa
+US,Houston,index,1987-Q3,84.02,fhfa
+US,Houston,index,1987-Q4,81.91,fhfa
+US,Houston,index,1988-Q1,82.15,fhfa
+US,Houston,index,1988-Q2,84.44,fhfa
+US,Houston,index,1988-Q3,85.43,fhfa
+US,Houston,index,1988-Q4,86.02,fhfa
+US,Houston,index,1989-Q1,86.70,fhfa
+US,Houston,index,1989-Q2,88.83,fhfa
+US,Houston,index,1989-Q3,90.64,fhfa
+US,Houston,index,1989-Q4,91.30,fhfa
+US,Houston,index,1990-Q1,91.91,fhfa
+US,Houston,index,1990-Q2,92.94,fhfa
+US,Houston,index,1990-Q3,94.24,fhfa
+US,Houston,index,1990-Q4,93.93,fhfa
+US,Houston,index,1991-Q1,94.96,fhfa
+US,Houston,index,1991-Q2,95.89,fhfa
+US,Houston,index,1991-Q3,96.55,fhfa
+US,Houston,index,1991-Q4,97.60,fhfa
+US,Houston,index,1992-Q1,99.26,fhfa
+US,Houston,index,1992-Q2,98.80,fhfa
+US,Houston,index,1992-Q3,100.46,fhfa
+US,Houston,index,1992-Q4,100.44,fhfa
+US,Houston,index,1993-Q1,100.72,fhfa
+US,Houston,index,1993-Q2,101.32,fhfa
+US,Houston,index,1993-Q3,102.10,fhfa
+US,Houston,index,1993-Q4,102.69,fhfa
+US,Houston,index,1994-Q1,102.54,fhfa
+US,Houston,index,1994-Q2,101.87,fhfa
+US,Houston,index,1994-Q3,101.84,fhfa
+US,Houston,index,1994-Q4,100.42,fhfa
+US,Houston,index,1995-Q1,100.00,fhfa
+US,Houston,index,1995-Q2,101.70,fhfa
+US,Houston,index,1995-Q3,102.52,fhfa
+US,Houston,index,1995-Q4,102.74,fhfa
+US,Houston,index,1996-Q1,104.30,fhfa
+US,Houston,index,1996-Q2,103.80,fhfa
+US,Houston,index,1996-Q3,104.05,fhfa
+US,Houston,index,1996-Q4,104.61,fhfa
+US,Houston,index,1997-Q1,104.57,fhfa
+US,Houston,index,1997-Q2,106.10,fhfa
+US,Houston,index,1997-Q3,107.14,fhfa
+US,Houston,index,1997-Q4,108.19,fhfa
+US,Houston,index,1998-Q1,110.74,fhfa
+US,Houston,index,1998-Q2,111.86,fhfa
+US,Houston,index,1998-Q3,113.86,fhfa
+US,Houston,index,1998-Q4,115.42,fhfa
+US,Houston,index,1999-Q1,116.82,fhfa
+US,Houston,index,1999-Q2,119.71,fhfa
+US,Houston,index,1999-Q3,122.65,fhfa
+US,Houston,index,1999-Q4,124.83,fhfa
+US,Houston,index,2000-Q1,126.47,fhfa
+US,Houston,index,2000-Q2,128.54,fhfa
+US,Houston,index,2000-Q3,130.29,fhfa
+US,Houston,index,2000-Q4,131.19,fhfa
+US,Houston,index,2001-Q1,135.41,fhfa
+US,Houston,index,2001-Q2,136.86,fhfa
+US,Houston,index,2001-Q3,138.61,fhfa
+US,Houston,index,2001-Q4,139.99,fhfa
+US,Houston,index,2002-Q1,140.74,fhfa
+US,Houston,index,2002-Q2,142.46,fhfa
+US,Houston,index,2002-Q3,144.33,fhfa
+US,Houston,index,2002-Q4,146.29,fhfa
+US,Houston,index,2003-Q1,147.35,fhfa
+US,Houston,index,2003-Q2,148.29,fhfa
+US,Houston,index,2003-Q3,149.16,fhfa
+US,Houston,index,2003-Q4,150.66,fhfa
+US,Houston,index,2004-Q1,152.16,fhfa
+US,Houston,index,2004-Q2,153.66,fhfa
+US,Houston,index,2004-Q3,155.71,fhfa
+US,Houston,index,2004-Q4,156.75,fhfa
+US,Houston,index,2005-Q1,158.83,fhfa
+US,Houston,index,2005-Q2,160.38,fhfa
+US,Houston,index,2005-Q3,162.51,fhfa
+US,Houston,index,2005-Q4,165.36,fhfa
+US,Houston,index,2006-Q1,167.55,fhfa
+US,Houston,index,2006-Q2,170.32,fhfa
+US,Houston,index,2006-Q3,172.66,fhfa
+US,Houston,index,2006-Q4,174.09,fhfa
+US,Houston,index,2007-Q1,176.40,fhfa
+US,Houston,index,2007-Q2,179.42,fhfa
+US,Houston,index,2007-Q3,179.97,fhfa
+US,Houston,index,2007-Q4,181.40,fhfa
+US,Houston,index,2008-Q1,183.27,fhfa
+US,Houston,index,2008-Q2,183.90,fhfa
+US,Houston,index,2008-Q3,184.83,fhfa
+US,Houston,index,2008-Q4,184.68,fhfa
+US,Houston,index,2009-Q1,187.03,fhfa
+US,Houston,index,2009-Q2,185.74,fhfa
+US,Houston,index,2009-Q3,184.87,fhfa
+US,Houston,index,2009-Q4,184.34,fhfa
+US,Houston,index,2010-Q1,183.17,fhfa
+US,Houston,index,2010-Q2,183.45,fhfa
+US,Houston,index,2010-Q3,184.16,fhfa
+US,Houston,index,2010-Q4,183.89,fhfa
+US,Houston,index,2011-Q1,180.56,fhfa
+US,Houston,index,2011-Q2,179.98,fhfa
+US,Houston,index,2011-Q3,181.52,fhfa
+US,Houston,index,2011-Q4,182.36,fhfa
+US,Houston,index,2012-Q1,183.40,fhfa
+US,Houston,index,2012-Q2,185.93,fhfa
+US,Houston,index,2012-Q3,187.61,fhfa
+US,Houston,index,2012-Q4,189.23,fhfa
+US,Houston,index,2013-Q1,191.43,fhfa
+US,Houston,index,2013-Q2,195.42,fhfa
+US,Houston,index,2013-Q3,199.75,fhfa
+US,Houston,index,2013-Q4,204.49,fhfa
+US,Houston,index,2014-Q1,208.40,fhfa
+US,Houston,index,2014-Q2,215.93,fhfa
+US,Houston,index,2014-Q3,223.20,fhfa
+US,Houston,index,2014-Q4,227.09,fhfa
+US,Houston,index,2015-Q1,229.93,fhfa
+US,Houston,index,2015-Q2,236.46,fhfa
+US,Houston,index,2015-Q3,239.30,fhfa
+US,Houston,index,2015-Q4,239.25,fhfa
+US,Houston,index,2016-Q1,240.12,fhfa
+US,Houston,index,2016-Q2,245.32,fhfa
+US,Houston,index,2016-Q3,248.54,fhfa
+US,Houston,index,2016-Q4,249.19,fhfa
+US,Houston,index,2017-Q1,251.04,fhfa
+US,Houston,index,2017-Q2,255.68,fhfa
+US,Houston,index,2017-Q3,256.59,fhfa
+US,Houston,index,2017-Q4,259.85,fhfa
+US,Houston,index,2018-Q1,262.19,fhfa
+US,Houston,index,2018-Q2,266.65,fhfa
+US,Houston,index,2018-Q3,270.11,fhfa
+US,Houston,index,2018-Q4,269.89,fhfa
+US,Houston,index,2019-Q1,272.84,fhfa
+US,Houston,index,2019-Q2,277.16,fhfa
+US,Houston,index,2019-Q3,279.83,fhfa
+US,Houston,index,2019-Q4,280.87,fhfa
+US,Houston,index,2020-Q1,285.24,fhfa
+US,Houston,index,2020-Q2,289.19,fhfa
+US,Houston,index,2020-Q3,291.12,fhfa
+US,Houston,index,2020-Q4,295.10,fhfa
+US,Houston,index,2021-Q1,299.04,fhfa
+US,Houston,index,2021-Q2,312.05,fhfa
+US,Houston,index,2021-Q3,325.44,fhfa
+US,Houston,index,2021-Q4,336.71,fhfa
+US,Houston,index,2022-Q1,351.49,fhfa
+US,Houston,index,2022-Q2,364.95,fhfa
+US,Houston,index,2022-Q3,376.03,fhfa
+US,Houston,index,2022-Q4,376.64,fhfa
+US,Houston,index,2023-Q1,376.92,fhfa
+US,Houston,index,2023-Q2,384.92,fhfa
+US,Houston,index,2023-Q3,388.05,fhfa
+US,Houston,index,2023-Q4,386.60,fhfa
+US,Houston,index,2024-Q1,392.34,fhfa
+US,Houston,index,2024-Q2,393.65,fhfa
+US,Houston,index,2024-Q3,400.28,fhfa
+US,Houston,index,2024-Q4,401.34,fhfa
+US,Houston,index,2025-Q1,404.26,fhfa
+US,Houston,index,2025-Q2,400.58,fhfa
+US,Houston,index,2025-Q3,407.49,fhfa
+US,Houston,index,2025-Q4,409.42,fhfa
+US,Houston,index,2026-Q1,410.91,fhfa
+US,Houston,index,2026-Q2,414.19,fhfa
+US,Los Angeles,index,1975-Q1,20.47,fhfa
+US,Los Angeles,index,1975-Q2,21.33,fhfa
+US,Los Angeles,index,1975-Q3,21.56,fhfa
+US,Los Angeles,index,1975-Q4,22.64,fhfa
+US,Los Angeles,index,1976-Q1,24.01,fhfa
+US,Los Angeles,index,1976-Q2,25.45,fhfa
+US,Los Angeles,index,1976-Q3,26.82,fhfa
+US,Los Angeles,index,1976-Q4,27.50,fhfa
+US,Los Angeles,index,1977-Q1,28.64,fhfa
+US,Los Angeles,index,1977-Q2,31.00,fhfa
+US,Los Angeles,index,1977-Q3,33.13,fhfa
+US,Los Angeles,index,1977-Q4,34.57,fhfa
+US,Los Angeles,index,1978-Q1,35.79,fhfa
+US,Los Angeles,index,1978-Q2,37.46,fhfa
+US,Los Angeles,index,1978-Q3,39.03,fhfa
+US,Los Angeles,index,1978-Q4,40.71,fhfa
+US,Los Angeles,index,1979-Q1,42.30,fhfa
+US,Los Angeles,index,1979-Q2,44.67,fhfa
+US,Los Angeles,index,1979-Q3,46.65,fhfa
+US,Los Angeles,index,1979-Q4,48.59,fhfa
+US,Los Angeles,index,1980-Q1,50.47,fhfa
+US,Los Angeles,index,1980-Q2,52.20,fhfa
+US,Los Angeles,index,1980-Q3,54.34,fhfa
+US,Los Angeles,index,1980-Q4,55.12,fhfa
+US,Los Angeles,index,1981-Q1,55.35,fhfa
+US,Los Angeles,index,1981-Q2,56.66,fhfa
+US,Los Angeles,index,1981-Q3,58.57,fhfa
+US,Los Angeles,index,1981-Q4,58.96,fhfa
+US,Los Angeles,index,1982-Q1,45.17,fhfa
+US,Los Angeles,index,1982-Q2,52.82,fhfa
+US,Los Angeles,index,1982-Q3,50.49,fhfa
+US,Los Angeles,index,1982-Q4,58.39,fhfa
+US,Los Angeles,index,1983-Q1,59.33,fhfa
+US,Los Angeles,index,1983-Q2,60.06,fhfa
+US,Los Angeles,index,1983-Q3,60.35,fhfa
+US,Los Angeles,index,1983-Q4,60.49,fhfa
+US,Los Angeles,index,1984-Q1,61.57,fhfa
+US,Los Angeles,index,1984-Q2,61.63,fhfa
+US,Los Angeles,index,1984-Q3,62.47,fhfa
+US,Los Angeles,index,1984-Q4,62.99,fhfa
+US,Los Angeles,index,1985-Q1,63.92,fhfa
+US,Los Angeles,index,1985-Q2,64.90,fhfa
+US,Los Angeles,index,1985-Q3,66.42,fhfa
+US,Los Angeles,index,1985-Q4,67.29,fhfa
+US,Los Angeles,index,1986-Q1,68.00,fhfa
+US,Los Angeles,index,1986-Q2,69.32,fhfa
+US,Los Angeles,index,1986-Q3,71.11,fhfa
+US,Los Angeles,index,1986-Q4,73.12,fhfa
+US,Los Angeles,index,1987-Q1,75.62,fhfa
+US,Los Angeles,index,1987-Q2,77.95,fhfa
+US,Los Angeles,index,1987-Q3,81.23,fhfa
+US,Los Angeles,index,1987-Q4,84.61,fhfa
+US,Los Angeles,index,1988-Q1,88.49,fhfa
+US,Los Angeles,index,1988-Q2,92.91,fhfa
+US,Los Angeles,index,1988-Q3,98.24,fhfa
+US,Los Angeles,index,1988-Q4,104.63,fhfa
+US,Los Angeles,index,1989-Q1,110.06,fhfa
+US,Los Angeles,index,1989-Q2,116.15,fhfa
+US,Los Angeles,index,1989-Q3,122.10,fhfa
+US,Los Angeles,index,1989-Q4,125.64,fhfa
+US,Los Angeles,index,1990-Q1,126.75,fhfa
+US,Los Angeles,index,1990-Q2,126.67,fhfa
+US,Los Angeles,index,1990-Q3,126.76,fhfa
+US,Los Angeles,index,1990-Q4,125.03,fhfa
+US,Los Angeles,index,1991-Q1,124.95,fhfa
+US,Los Angeles,index,1991-Q2,123.38,fhfa
+US,Los Angeles,index,1991-Q3,123.13,fhfa
+US,Los Angeles,index,1991-Q4,124.38,fhfa
+US,Los Angeles,index,1992-Q1,123.78,fhfa
+US,Los Angeles,index,1992-Q2,122.10,fhfa
+US,Los Angeles,index,1992-Q3,121.22,fhfa
+US,Los Angeles,index,1992-Q4,119.59,fhfa
+US,Los Angeles,index,1993-Q1,116.85,fhfa
+US,Los Angeles,index,1993-Q2,114.95,fhfa
+US,Los Angeles,index,1993-Q3,113.09,fhfa
+US,Los Angeles,index,1993-Q4,111.71,fhfa
+US,Los Angeles,index,1994-Q1,110.23,fhfa
+US,Los Angeles,index,1994-Q2,105.53,fhfa
+US,Los Angeles,index,1994-Q3,103.28,fhfa
+US,Los Angeles,index,1994-Q4,101.06,fhfa
+US,Los Angeles,index,1995-Q1,100.00,fhfa
+US,Los Angeles,index,1995-Q2,100.95,fhfa
+US,Los Angeles,index,1995-Q3,102.75,fhfa
+US,Los Angeles,index,1995-Q4,102.98,fhfa
+US,Los Angeles,index,1996-Q1,102.82,fhfa
+US,Los Angeles,index,1996-Q2,100.23,fhfa
+US,Los Angeles,index,1996-Q3,99.64,fhfa
+US,Los Angeles,index,1996-Q4,100.38,fhfa
+US,Los Angeles,index,1997-Q1,100.54,fhfa
+US,Los Angeles,index,1997-Q2,100.76,fhfa
+US,Los Angeles,index,1997-Q3,102.87,fhfa
+US,Los Angeles,index,1997-Q4,105.32,fhfa
+US,Los Angeles,index,1998-Q1,108.02,fhfa
+US,Los Angeles,index,1998-Q2,110.43,fhfa
+US,Los Angeles,index,1998-Q3,113.30,fhfa
+US,Los Angeles,index,1998-Q4,115.93,fhfa
+US,Los Angeles,index,1999-Q1,117.85,fhfa
+US,Los Angeles,index,1999-Q2,119.05,fhfa
+US,Los Angeles,index,1999-Q3,120.80,fhfa
+US,Los Angeles,index,1999-Q4,122.63,fhfa
+US,Los Angeles,index,2000-Q1,126.20,fhfa
+US,Los Angeles,index,2000-Q2,127.82,fhfa
+US,Los Angeles,index,2000-Q3,130.75,fhfa
+US,Los Angeles,index,2000-Q4,133.67,fhfa
+US,Los Angeles,index,2001-Q1,137.42,fhfa
+US,Los Angeles,index,2001-Q2,140.55,fhfa
+US,Los Angeles,index,2001-Q3,143.75,fhfa
+US,Los Angeles,index,2001-Q4,147.05,fhfa
+US,Los Angeles,index,2002-Q1,152.00,fhfa
+US,Los Angeles,index,2002-Q2,158.05,fhfa
+US,Los Angeles,index,2002-Q3,164.12,fhfa
+US,Los Angeles,index,2002-Q4,169.34,fhfa
+US,Los Angeles,index,2003-Q1,173.96,fhfa
+US,Los Angeles,index,2003-Q2,178.25,fhfa
+US,Los Angeles,index,2003-Q3,185.64,fhfa
+US,Los Angeles,index,2003-Q4,199.80,fhfa
+US,Los Angeles,index,2004-Q1,208.16,fhfa
+US,Los Angeles,index,2004-Q2,221.69,fhfa
+US,Los Angeles,index,2004-Q3,245.64,fhfa
+US,Los Angeles,index,2004-Q4,254.55,fhfa
+US,Los Angeles,index,2005-Q1,264.87,fhfa
+US,Los Angeles,index,2005-Q2,280.19,fhfa
+US,Los Angeles,index,2005-Q3,296.01,fhfa
+US,Los Angeles,index,2005-Q4,315.00,fhfa
+US,Los Angeles,index,2006-Q1,326.68,fhfa
+US,Los Angeles,index,2006-Q2,333.97,fhfa
+US,Los Angeles,index,2006-Q3,339.85,fhfa
+US,Los Angeles,index,2006-Q4,340.22,fhfa
+US,Los Angeles,index,2007-Q1,338.12,fhfa
+US,Los Angeles,index,2007-Q2,335.99,fhfa
+US,Los Angeles,index,2007-Q3,328.95,fhfa
+US,Los Angeles,index,2007-Q4,317.92,fhfa
+US,Los Angeles,index,2008-Q1,299.62,fhfa
+US,Los Angeles,index,2008-Q2,275.91,fhfa
+US,Los Angeles,index,2008-Q3,255.48,fhfa
+US,Los Angeles,index,2008-Q4,245.45,fhfa
+US,Los Angeles,index,2009-Q1,242.29,fhfa
+US,Los Angeles,index,2009-Q2,232.72,fhfa
+US,Los Angeles,index,2009-Q3,229.12,fhfa
+US,Los Angeles,index,2009-Q4,231.86,fhfa
+US,Los Angeles,index,2010-Q1,230.55,fhfa
+US,Los Angeles,index,2010-Q2,230.22,fhfa
+US,Los Angeles,index,2010-Q3,232.28,fhfa
+US,Los Angeles,index,2010-Q4,230.53,fhfa
+US,Los Angeles,index,2011-Q1,223.57,fhfa
+US,Los Angeles,index,2011-Q2,220.30,fhfa
+US,Los Angeles,index,2011-Q3,221.39,fhfa
+US,Los Angeles,index,2011-Q4,220.75,fhfa
+US,Los Angeles,index,2012-Q1,218.47,fhfa
+US,Los Angeles,index,2012-Q2,218.29,fhfa
+US,Los Angeles,index,2012-Q3,221.87,fhfa
+US,Los Angeles,index,2012-Q4,225.75,fhfa
+US,Los Angeles,index,2013-Q1,230.34,fhfa
+US,Los Angeles,index,2013-Q2,239.04,fhfa
+US,Los Angeles,index,2013-Q3,250.87,fhfa
+US,Los Angeles,index,2013-Q4,259.45,fhfa
+US,Los Angeles,index,2014-Q1,264.51,fhfa
+US,Los Angeles,index,2014-Q2,270.57,fhfa
+US,Los Angeles,index,2014-Q3,276.28,fhfa
+US,Los Angeles,index,2014-Q4,279.69,fhfa
+US,Los Angeles,index,2015-Q1,282.60,fhfa
+US,Los Angeles,index,2015-Q2,287.70,fhfa
+US,Los Angeles,index,2015-Q3,294.46,fhfa
+US,Los Angeles,index,2015-Q4,298.94,fhfa
+US,Los Angeles,index,2016-Q1,302.92,fhfa
+US,Los Angeles,index,2016-Q2,307.29,fhfa
+US,Los Angeles,index,2016-Q3,314.20,fhfa
+US,Los Angeles,index,2016-Q4,318.92,fhfa
+US,Los Angeles,index,2017-Q1,323.80,fhfa
+US,Los Angeles,index,2017-Q2,329.16,fhfa
+US,Los Angeles,index,2017-Q3,336.13,fhfa
+US,Los Angeles,index,2017-Q4,341.19,fhfa
+US,Los Angeles,index,2018-Q1,347.60,fhfa
+US,Los Angeles,index,2018-Q2,353.67,fhfa
+US,Los Angeles,index,2018-Q3,358.81,fhfa
+US,Los Angeles,index,2018-Q4,359.52,fhfa
+US,Los Angeles,index,2019-Q1,362.05,fhfa
+US,Los Angeles,index,2019-Q2,364.79,fhfa
+US,Los Angeles,index,2019-Q3,368.42,fhfa
+US,Los Angeles,index,2019-Q4,371.45,fhfa
+US,Los Angeles,index,2020-Q1,375.69,fhfa
+US,Los Angeles,index,2020-Q2,380.26,fhfa
+US,Los Angeles,index,2020-Q3,383.81,fhfa
+US,Los Angeles,index,2020-Q4,391.57,fhfa
+US,Los Angeles,index,2021-Q1,401.62,fhfa
+US,Los Angeles,index,2021-Q2,422.50,fhfa
+US,Los Angeles,index,2021-Q3,442.82,fhfa
+US,Los Angeles,index,2021-Q4,458.85,fhfa
+US,Los Angeles,index,2022-Q1,477.69,fhfa
+US,Los Angeles,index,2022-Q2,507.48,fhfa
+US,Los Angeles,index,2022-Q3,505.67,fhfa
+US,Los Angeles,index,2022-Q4,495.11,fhfa
+US,Los Angeles,index,2023-Q1,494.19,fhfa
+US,Los Angeles,index,2023-Q2,504.60,fhfa
+US,Los Angeles,index,2023-Q3,511.43,fhfa
+US,Los Angeles,index,2023-Q4,515.91,fhfa
+US,Los Angeles,index,2024-Q1,524.26,fhfa
+US,Los Angeles,index,2024-Q2,533.55,fhfa
+US,Los Angeles,index,2024-Q3,541.33,fhfa
+US,Los Angeles,index,2024-Q4,544.27,fhfa
+US,Los Angeles,index,2025-Q1,545.27,fhfa
+US,Los Angeles,index,2025-Q2,550.77,fhfa
+US,Los Angeles,index,2025-Q3,551.82,fhfa
+US,Los Angeles,index,2025-Q4,554.76,fhfa
+US,Los Angeles,index,2026-Q1,558.88,fhfa
+US,Los Angeles,index,2026-Q2,557.38,fhfa
+US,Miami,index,1975-Q4,36.87,fhfa
+US,Miami,index,1976-Q1,35.28,fhfa
+US,Miami,index,1976-Q2,35.95,fhfa
+US,Miami,index,1976-Q3,36.59,fhfa
+US,Miami,index,1976-Q4,38.01,fhfa
+US,Miami,index,1977-Q1,37.30,fhfa
+US,Miami,index,1977-Q2,39.57,fhfa
+US,Miami,index,1977-Q3,40.41,fhfa
+US,Miami,index,1977-Q4,42.03,fhfa
+US,Miami,index,1978-Q1,39.69,fhfa
+US,Miami,index,1978-Q2,43.17,fhfa
+US,Miami,index,1978-Q3,42.33,fhfa
+US,Miami,index,1978-Q4,45.84,fhfa
+US,Miami,index,1979-Q1,48.40,fhfa
+US,Miami,index,1979-Q2,48.16,fhfa
+US,Miami,index,1979-Q3,53.44,fhfa
+US,Miami,index,1979-Q4,56.71,fhfa
+US,Miami,index,1980-Q1,58.81,fhfa
+US,Miami,index,1980-Q2,57.17,fhfa
+US,Miami,index,1980-Q3,63.68,fhfa
+US,Miami,index,1980-Q4,64.94,fhfa
+US,Miami,index,1981-Q1,67.02,fhfa
+US,Miami,index,1981-Q2,66.76,fhfa
+US,Miami,index,1981-Q3,55.25,fhfa
+US,Miami,index,1981-Q4,63.56,fhfa
+US,Miami,index,1982-Q1,63.71,fhfa
+US,Miami,index,1982-Q2,70.17,fhfa
+US,Miami,index,1982-Q3,66.49,fhfa
+US,Miami,index,1982-Q4,69.12,fhfa
+US,Miami,index,1983-Q1,69.08,fhfa
+US,Miami,index,1983-Q2,68.57,fhfa
+US,Miami,index,1983-Q3,69.01,fhfa
+US,Miami,index,1983-Q4,68.98,fhfa
+US,Miami,index,1984-Q1,68.45,fhfa
+US,Miami,index,1984-Q2,69.66,fhfa
+US,Miami,index,1984-Q3,67.14,fhfa
+US,Miami,index,1984-Q4,68.56,fhfa
+US,Miami,index,1985-Q1,68.87,fhfa
+US,Miami,index,1985-Q2,67.63,fhfa
+US,Miami,index,1985-Q3,66.83,fhfa
+US,Miami,index,1985-Q4,66.70,fhfa
+US,Miami,index,1986-Q1,68.69,fhfa
+US,Miami,index,1986-Q2,70.14,fhfa
+US,Miami,index,1986-Q3,71.34,fhfa
+US,Miami,index,1986-Q4,71.03,fhfa
+US,Miami,index,1987-Q1,68.01,fhfa
+US,Miami,index,1987-Q2,72.51,fhfa
+US,Miami,index,1987-Q3,73.72,fhfa
+US,Miami,index,1987-Q4,74.65,fhfa
+US,Miami,index,1988-Q1,74.66,fhfa
+US,Miami,index,1988-Q2,76.61,fhfa
+US,Miami,index,1988-Q3,77.91,fhfa
+US,Miami,index,1988-Q4,79.17,fhfa
+US,Miami,index,1989-Q1,79.56,fhfa
+US,Miami,index,1989-Q2,80.04,fhfa
+US,Miami,index,1989-Q3,81.77,fhfa
+US,Miami,index,1989-Q4,81.57,fhfa
+US,Miami,index,1990-Q1,83.43,fhfa
+US,Miami,index,1990-Q2,82.90,fhfa
+US,Miami,index,1990-Q3,83.78,fhfa
+US,Miami,index,1990-Q4,83.50,fhfa
+US,Miami,index,1991-Q1,84.62,fhfa
+US,Miami,index,1991-Q2,84.71,fhfa
+US,Miami,index,1991-Q3,85.38,fhfa
+US,Miami,index,1991-Q4,87.02,fhfa
+US,Miami,index,1992-Q1,87.97,fhfa
+US,Miami,index,1992-Q2,87.77,fhfa
+US,Miami,index,1992-Q3,89.11,fhfa
+US,Miami,index,1992-Q4,89.12,fhfa
+US,Miami,index,1993-Q1,90.38,fhfa
+US,Miami,index,1993-Q2,92.75,fhfa
+US,Miami,index,1993-Q3,95.56,fhfa
+US,Miami,index,1993-Q4,96.92,fhfa
+US,Miami,index,1994-Q1,97.67,fhfa
+US,Miami,index,1994-Q2,98.53,fhfa
+US,Miami,index,1994-Q3,98.76,fhfa
+US,Miami,index,1994-Q4,98.94,fhfa
+US,Miami,index,1995-Q1,100.00,fhfa
+US,Miami,index,1995-Q2,101.55,fhfa
+US,Miami,index,1995-Q3,103.56,fhfa
+US,Miami,index,1995-Q4,105.16,fhfa
+US,Miami,index,1996-Q1,106.59,fhfa
+US,Miami,index,1996-Q2,105.91,fhfa
+US,Miami,index,1996-Q3,105.64,fhfa
+US,Miami,index,1996-Q4,106.98,fhfa
+US,Miami,index,1997-Q1,108.07,fhfa
+US,Miami,index,1997-Q2,107.66,fhfa
+US,Miami,index,1997-Q3,107.99,fhfa
+US,Miami,index,1997-Q4,110.12,fhfa
+US,Miami,index,1998-Q1,113.43,fhfa
+US,Miami,index,1998-Q2,113.10,fhfa
+US,Miami,index,1998-Q3,113.64,fhfa
+US,Miami,index,1998-Q4,115.75,fhfa
+US,Miami,index,1999-Q1,116.18,fhfa
+US,Miami,index,1999-Q2,115.46,fhfa
+US,Miami,index,1999-Q3,116.78,fhfa
+US,Miami,index,1999-Q4,118.37,fhfa
+US,Miami,index,2000-Q1,121.08,fhfa
+US,Miami,index,2000-Q2,122.93,fhfa
+US,Miami,index,2000-Q3,125.12,fhfa
+US,Miami,index,2000-Q4,128.03,fhfa
+US,Miami,index,2001-Q1,132.04,fhfa
+US,Miami,index,2001-Q2,136.41,fhfa
+US,Miami,index,2001-Q3,140.16,fhfa
+US,Miami,index,2001-Q4,144.83,fhfa
+US,Miami,index,2002-Q1,148.85,fhfa
+US,Miami,index,2002-Q2,154.62,fhfa
+US,Miami,index,2002-Q3,160.91,fhfa
+US,Miami,index,2002-Q4,165.81,fhfa
+US,Miami,index,2003-Q1,170.61,fhfa
+US,Miami,index,2003-Q2,176.04,fhfa
+US,Miami,index,2003-Q3,180.74,fhfa
+US,Miami,index,2003-Q4,190.69,fhfa
+US,Miami,index,2004-Q1,197.35,fhfa
+US,Miami,index,2004-Q2,206.82,fhfa
+US,Miami,index,2004-Q3,220.75,fhfa
+US,Miami,index,2004-Q4,229.93,fhfa
+US,Miami,index,2005-Q1,242.05,fhfa
+US,Miami,index,2005-Q2,258.63,fhfa
+US,Miami,index,2005-Q3,276.00,fhfa
+US,Miami,index,2005-Q4,294.63,fhfa
+US,Miami,index,2006-Q1,309.23,fhfa
+US,Miami,index,2006-Q2,322.15,fhfa
+US,Miami,index,2006-Q3,330.69,fhfa
+US,Miami,index,2006-Q4,337.28,fhfa
+US,Miami,index,2007-Q1,342.76,fhfa
+US,Miami,index,2007-Q2,343.52,fhfa
+US,Miami,index,2007-Q3,337.95,fhfa
+US,Miami,index,2007-Q4,331.51,fhfa
+US,Miami,index,2008-Q1,315.85,fhfa
+US,Miami,index,2008-Q2,292.33,fhfa
+US,Miami,index,2008-Q3,256.91,fhfa
+US,Miami,index,2008-Q4,235.95,fhfa
+US,Miami,index,2009-Q1,226.14,fhfa
+US,Miami,index,2009-Q2,213.12,fhfa
+US,Miami,index,2009-Q3,199.53,fhfa
+US,Miami,index,2009-Q4,200.22,fhfa
+US,Miami,index,2010-Q1,195.88,fhfa
+US,Miami,index,2010-Q2,194.14,fhfa
+US,Miami,index,2010-Q3,197.12,fhfa
+US,Miami,index,2010-Q4,194.44,fhfa
+US,Miami,index,2011-Q1,185.16,fhfa
+US,Miami,index,2011-Q2,180.64,fhfa
+US,Miami,index,2011-Q3,182.15,fhfa
+US,Miami,index,2011-Q4,184.84,fhfa
+US,Miami,index,2012-Q1,181.08,fhfa
+US,Miami,index,2012-Q2,182.31,fhfa
+US,Miami,index,2012-Q3,186.48,fhfa
+US,Miami,index,2012-Q4,193.64,fhfa
+US,Miami,index,2013-Q1,196.55,fhfa
+US,Miami,index,2013-Q2,206.10,fhfa
+US,Miami,index,2013-Q3,210.71,fhfa
+US,Miami,index,2013-Q4,217.88,fhfa
+US,Miami,index,2014-Q1,221.78,fhfa
+US,Miami,index,2014-Q2,228.62,fhfa
+US,Miami,index,2014-Q3,236.34,fhfa
+US,Miami,index,2014-Q4,242.20,fhfa
+US,Miami,index,2015-Q1,244.86,fhfa
+US,Miami,index,2015-Q2,251.86,fhfa
+US,Miami,index,2015-Q3,259.92,fhfa
+US,Miami,index,2015-Q4,264.84,fhfa
+US,Miami,index,2016-Q1,270.56,fhfa
+US,Miami,index,2016-Q2,275.35,fhfa
+US,Miami,index,2016-Q3,282.79,fhfa
+US,Miami,index,2016-Q4,287.72,fhfa
+US,Miami,index,2017-Q1,292.04,fhfa
+US,Miami,index,2017-Q2,298.59,fhfa
+US,Miami,index,2017-Q3,303.14,fhfa
+US,Miami,index,2017-Q4,307.43,fhfa
+US,Miami,index,2018-Q1,315.01,fhfa
+US,Miami,index,2018-Q2,317.82,fhfa
+US,Miami,index,2018-Q3,324.65,fhfa
+US,Miami,index,2018-Q4,327.80,fhfa
+US,Miami,index,2019-Q1,330.09,fhfa
+US,Miami,index,2019-Q2,335.15,fhfa
+US,Miami,index,2019-Q3,341.66,fhfa
+US,Miami,index,2019-Q4,343.43,fhfa
+US,Miami,index,2020-Q1,349.12,fhfa
+US,Miami,index,2020-Q2,353.43,fhfa
+US,Miami,index,2020-Q3,358.66,fhfa
+US,Miami,index,2020-Q4,365.82,fhfa
+US,Miami,index,2021-Q1,377.59,fhfa
+US,Miami,index,2021-Q2,397.26,fhfa
+US,Miami,index,2021-Q3,423.37,fhfa
+US,Miami,index,2021-Q4,444.20,fhfa
+US,Miami,index,2022-Q1,467.82,fhfa
+US,Miami,index,2022-Q2,504.63,fhfa
+US,Miami,index,2022-Q3,527.49,fhfa
+US,Miami,index,2022-Q4,536.19,fhfa
+US,Miami,index,2023-Q1,547.27,fhfa
+US,Miami,index,2023-Q2,557.21,fhfa
+US,Miami,index,2023-Q3,581.34,fhfa
+US,Miami,index,2023-Q4,591.85,fhfa
+US,Miami,index,2024-Q1,609.07,fhfa
+US,Miami,index,2024-Q2,627.72,fhfa
+US,Miami,index,2024-Q3,632.59,fhfa
+US,Miami,index,2024-Q4,646.60,fhfa
+US,Miami,index,2025-Q1,641.00,fhfa
+US,Miami,index,2025-Q2,657.88,fhfa
+US,Miami,index,2025-Q3,646.62,fhfa
+US,Miami,index,2025-Q4,655.49,fhfa
+US,Miami,index,2026-Q1,670.57,fhfa
+US,Miami,index,2026-Q2,666.21,fhfa
+US,New York,index,1975-Q3,23.95,fhfa
+US,New York,index,1975-Q4,23.99,fhfa
+US,New York,index,1976-Q1,23.86,fhfa
+US,New York,index,1976-Q2,23.38,fhfa
+US,New York,index,1976-Q3,24.72,fhfa
+US,New York,index,1976-Q4,24.74,fhfa
+US,New York,index,1977-Q1,25.81,fhfa
+US,New York,index,1977-Q2,25.01,fhfa
+US,New York,index,1977-Q3,25.72,fhfa
+US,New York,index,1977-Q4,25.96,fhfa
+US,New York,index,1978-Q1,26.12,fhfa
+US,New York,index,1978-Q2,28.07,fhfa
+US,New York,index,1978-Q3,28.37,fhfa
+US,New York,index,1978-Q4,28.74,fhfa
+US,New York,index,1979-Q1,31.71,fhfa
+US,New York,index,1979-Q2,32.70,fhfa
+US,New York,index,1979-Q3,33.86,fhfa
+US,New York,index,1979-Q4,34.18,fhfa
+US,New York,index,1980-Q1,36.32,fhfa
+US,New York,index,1980-Q2,37.49,fhfa
+US,New York,index,1980-Q3,37.28,fhfa
+US,New York,index,1980-Q4,37.20,fhfa
+US,New York,index,1981-Q1,38.38,fhfa
+US,New York,index,1981-Q2,39.80,fhfa
+US,New York,index,1981-Q3,40.93,fhfa
+US,New York,index,1981-Q4,40.83,fhfa
+US,New York,index,1982-Q1,39.58,fhfa
+US,New York,index,1982-Q2,42.14,fhfa
+US,New York,index,1982-Q3,43.36,fhfa
+US,New York,index,1982-Q4,43.47,fhfa
+US,New York,index,1983-Q1,44.38,fhfa
+US,New York,index,1983-Q2,45.54,fhfa
+US,New York,index,1983-Q3,48.06,fhfa
+US,New York,index,1983-Q4,49.87,fhfa
+US,New York,index,1984-Q1,51.42,fhfa
+US,New York,index,1984-Q2,54.40,fhfa
+US,New York,index,1984-Q3,56.42,fhfa
+US,New York,index,1984-Q4,59.28,fhfa
+US,New York,index,1985-Q1,62.01,fhfa
+US,New York,index,1985-Q2,65.13,fhfa
+US,New York,index,1985-Q3,67.77,fhfa
+US,New York,index,1985-Q4,71.16,fhfa
+US,New York,index,1986-Q1,75.07,fhfa
+US,New York,index,1986-Q2,80.15,fhfa
+US,New York,index,1986-Q3,85.13,fhfa
+US,New York,index,1986-Q4,89.02,fhfa
+US,New York,index,1987-Q1,93.95,fhfa
+US,New York,index,1987-Q2,98.85,fhfa
+US,New York,index,1987-Q3,102.43,fhfa
+US,New York,index,1987-Q4,104.65,fhfa
+US,New York,index,1988-Q1,106.95,fhfa
+US,New York,index,1988-Q2,108.82,fhfa
+US,New York,index,1988-Q3,108.73,fhfa
+US,New York,index,1988-Q4,108.40,fhfa
+US,New York,index,1989-Q1,108.74,fhfa
+US,New York,index,1989-Q2,108.14,fhfa
+US,New York,index,1989-Q3,108.22,fhfa
+US,New York,index,1989-Q4,108.21,fhfa
+US,New York,index,1990-Q1,106.90,fhfa
+US,New York,index,1990-Q2,104.74,fhfa
+US,New York,index,1990-Q3,103.76,fhfa
+US,New York,index,1990-Q4,101.45,fhfa
+US,New York,index,1991-Q1,100.92,fhfa
+US,New York,index,1991-Q2,100.81,fhfa
+US,New York,index,1991-Q3,100.26,fhfa
+US,New York,index,1991-Q4,100.40,fhfa
+US,New York,index,1992-Q1,101.57,fhfa
+US,New York,index,1992-Q2,100.88,fhfa
+US,New York,index,1992-Q3,101.41,fhfa
+US,New York,index,1992-Q4,101.91,fhfa
+US,New York,index,1993-Q1,101.50,fhfa
+US,New York,index,1993-Q2,102.03,fhfa
+US,New York,index,1993-Q3,102.40,fhfa
+US,New York,index,1993-Q4,102.76,fhfa
+US,New York,index,1994-Q1,102.61,fhfa
+US,New York,index,1994-Q2,102.04,fhfa
+US,New York,index,1994-Q3,101.49,fhfa
+US,New York,index,1994-Q4,99.46,fhfa
+US,New York,index,1995-Q1,100.00,fhfa
+US,New York,index,1995-Q2,101.52,fhfa
+US,New York,index,1995-Q3,102.84,fhfa
+US,New York,index,1995-Q4,102.87,fhfa
+US,New York,index,1996-Q1,104.60,fhfa
+US,New York,index,1996-Q2,104.50,fhfa
+US,New York,index,1996-Q3,103.78,fhfa
+US,New York,index,1996-Q4,104.03,fhfa
+US,New York,index,1997-Q1,104.64,fhfa
+US,New York,index,1997-Q2,105.69,fhfa
+US,New York,index,1997-Q3,106.87,fhfa
+US,New York,index,1997-Q4,108.07,fhfa
+US,New York,index,1998-Q1,110.12,fhfa
+US,New York,index,1998-Q2,111.44,fhfa
+US,New York,index,1998-Q3,113.07,fhfa
+US,New York,index,1998-Q4,114.14,fhfa
+US,New York,index,1999-Q1,116.43,fhfa
+US,New York,index,1999-Q2,118.63,fhfa
+US,New York,index,1999-Q3,123.34,fhfa
+US,New York,index,1999-Q4,125.83,fhfa
+US,New York,index,2000-Q1,129.64,fhfa
+US,New York,index,2000-Q2,133.59,fhfa
+US,New York,index,2000-Q3,137.85,fhfa
+US,New York,index,2000-Q4,140.26,fhfa
+US,New York,index,2001-Q1,143.96,fhfa
+US,New York,index,2001-Q2,147.39,fhfa
+US,New York,index,2001-Q3,152.01,fhfa
+US,New York,index,2001-Q4,155.01,fhfa
+US,New York,index,2002-Q1,159.37,fhfa
+US,New York,index,2002-Q2,165.10,fhfa
+US,New York,index,2002-Q3,170.60,fhfa
+US,New York,index,2002-Q4,174.23,fhfa
+US,New York,index,2003-Q1,177.82,fhfa
+US,New York,index,2003-Q2,181.41,fhfa
+US,New York,index,2003-Q3,184.73,fhfa
+US,New York,index,2003-Q4,194.21,fhfa
+US,New York,index,2004-Q1,198.68,fhfa
+US,New York,index,2004-Q2,205.50,fhfa
+US,New York,index,2004-Q3,219.11,fhfa
+US,New York,index,2004-Q4,224.26,fhfa
+US,New York,index,2005-Q1,231.08,fhfa
+US,New York,index,2005-Q2,241.45,fhfa
+US,New York,index,2005-Q3,250.61,fhfa
+US,New York,index,2005-Q4,258.15,fhfa
+US,New York,index,2006-Q1,263.80,fhfa
+US,New York,index,2006-Q2,266.03,fhfa
+US,New York,index,2006-Q3,267.92,fhfa
+US,New York,index,2006-Q4,269.92,fhfa
+US,New York,index,2007-Q1,270.97,fhfa
+US,New York,index,2007-Q2,270.40,fhfa
+US,New York,index,2007-Q3,267.18,fhfa
+US,New York,index,2007-Q4,266.54,fhfa
+US,New York,index,2008-Q1,266.04,fhfa
+US,New York,index,2008-Q2,259.38,fhfa
+US,New York,index,2008-Q3,250.99,fhfa
+US,New York,index,2008-Q4,248.43,fhfa
+US,New York,index,2009-Q1,248.67,fhfa
+US,New York,index,2009-Q2,242.22,fhfa
+US,New York,index,2009-Q3,235.68,fhfa
+US,New York,index,2009-Q4,233.78,fhfa
+US,New York,index,2010-Q1,232.18,fhfa
+US,New York,index,2010-Q2,230.80,fhfa
+US,New York,index,2010-Q3,232.09,fhfa
+US,New York,index,2010-Q4,232.47,fhfa
+US,New York,index,2011-Q1,229.30,fhfa
+US,New York,index,2011-Q2,225.77,fhfa
+US,New York,index,2011-Q3,224.75,fhfa
+US,New York,index,2011-Q4,225.52,fhfa
+US,New York,index,2012-Q1,224.24,fhfa
+US,New York,index,2012-Q2,221.58,fhfa
+US,New York,index,2012-Q3,222.68,fhfa
+US,New York,index,2012-Q4,223.31,fhfa
+US,New York,index,2013-Q1,223.87,fhfa
+US,New York,index,2013-Q2,224.16,fhfa
+US,New York,index,2013-Q3,225.53,fhfa
+US,New York,index,2013-Q4,226.20,fhfa
+US,New York,index,2014-Q1,227.43,fhfa
+US,New York,index,2014-Q2,230.11,fhfa
+US,New York,index,2014-Q3,233.25,fhfa
+US,New York,index,2014-Q4,235.53,fhfa
+US,New York,index,2015-Q1,238.25,fhfa
+US,New York,index,2015-Q2,239.92,fhfa
+US,New York,index,2015-Q3,243.25,fhfa
+US,New York,index,2015-Q4,244.65,fhfa
+US,New York,index,2016-Q1,246.66,fhfa
+US,New York,index,2016-Q2,250.37,fhfa
+US,New York,index,2016-Q3,253.60,fhfa
+US,New York,index,2016-Q4,256.21,fhfa
+US,New York,index,2017-Q1,258.07,fhfa
+US,New York,index,2017-Q2,262.51,fhfa
+US,New York,index,2017-Q3,265.98,fhfa
+US,New York,index,2017-Q4,268.44,fhfa
+US,New York,index,2018-Q1,272.07,fhfa
+US,New York,index,2018-Q2,273.94,fhfa
+US,New York,index,2018-Q3,276.47,fhfa
+US,New York,index,2018-Q4,276.08,fhfa
+US,New York,index,2019-Q1,278.55,fhfa
+US,New York,index,2019-Q2,281.79,fhfa
+US,New York,index,2019-Q3,285.18,fhfa
+US,New York,index,2019-Q4,287.46,fhfa
+US,New York,index,2020-Q1,289.55,fhfa
+US,New York,index,2020-Q2,290.65,fhfa
+US,New York,index,2020-Q3,294.41,fhfa
+US,New York,index,2020-Q4,299.59,fhfa
+US,New York,index,2021-Q1,304.92,fhfa
+US,New York,index,2021-Q2,313.09,fhfa
+US,New York,index,2021-Q3,325.97,fhfa
+US,New York,index,2021-Q4,333.33,fhfa
+US,New York,index,2022-Q1,339.76,fhfa
+US,New York,index,2022-Q2,357.01,fhfa
+US,New York,index,2022-Q3,359.78,fhfa
+US,New York,index,2022-Q4,357.65,fhfa
+US,New York,index,2023-Q1,358.34,fhfa
+US,New York,index,2023-Q2,370.11,fhfa
+US,New York,index,2023-Q3,375.76,fhfa
+US,New York,index,2023-Q4,380.88,fhfa
+US,New York,index,2024-Q1,386.16,fhfa
+US,New York,index,2024-Q2,400.55,fhfa
+US,New York,index,2024-Q3,406.14,fhfa
+US,New York,index,2024-Q4,411.16,fhfa
+US,New York,index,2025-Q1,417.65,fhfa
+US,New York,index,2025-Q2,429.58,fhfa
+US,New York,index,2025-Q3,433.75,fhfa
+US,New York,index,2025-Q4,436.06,fhfa
+US,New York,index,2026-Q1,441.94,fhfa
+US,New York,index,2026-Q2,454.16,fhfa
+US,San Francisco,index,1975-Q3,18.71,fhfa
+US,San Francisco,index,1975-Q4,19.28,fhfa
+US,San Francisco,index,1976-Q1,20.20,fhfa
+US,San Francisco,index,1976-Q2,21.56,fhfa
+US,San Francisco,index,1976-Q3,21.99,fhfa
+US,San Francisco,index,1976-Q4,23.70,fhfa
+US,San Francisco,index,1977-Q1,24.25,fhfa
+US,San Francisco,index,1977-Q2,26.63,fhfa
+US,San Francisco,index,1977-Q3,28.27,fhfa
+US,San Francisco,index,1977-Q4,28.62,fhfa
+US,San Francisco,index,1978-Q1,29.23,fhfa
+US,San Francisco,index,1978-Q2,30.05,fhfa
+US,San Francisco,index,1978-Q3,30.63,fhfa
+US,San Francisco,index,1978-Q4,31.52,fhfa
+US,San Francisco,index,1979-Q1,33.76,fhfa
+US,San Francisco,index,1979-Q2,35.30,fhfa
+US,San Francisco,index,1979-Q3,37.91,fhfa
+US,San Francisco,index,1979-Q4,40.23,fhfa
+US,San Francisco,index,1980-Q1,42.37,fhfa
+US,San Francisco,index,1980-Q2,43.73,fhfa
+US,San Francisco,index,1980-Q3,45.51,fhfa
+US,San Francisco,index,1980-Q4,45.17,fhfa
+US,San Francisco,index,1981-Q1,45.13,fhfa
+US,San Francisco,index,1981-Q2,46.31,fhfa
+US,San Francisco,index,1981-Q3,46.12,fhfa
+US,San Francisco,index,1981-Q4,46.03,fhfa
+US,San Francisco,index,1982-Q1,43.73,fhfa
+US,San Francisco,index,1982-Q2,40.11,fhfa
+US,San Francisco,index,1982-Q3,42.01,fhfa
+US,San Francisco,index,1982-Q4,45.89,fhfa
+US,San Francisco,index,1983-Q1,48.41,fhfa
+US,San Francisco,index,1983-Q2,49.35,fhfa
+US,San Francisco,index,1983-Q3,49.69,fhfa
+US,San Francisco,index,1983-Q4,49.44,fhfa
+US,San Francisco,index,1984-Q1,50.06,fhfa
+US,San Francisco,index,1984-Q2,51.17,fhfa
+US,San Francisco,index,1984-Q3,52.23,fhfa
+US,San Francisco,index,1984-Q4,52.64,fhfa
+US,San Francisco,index,1985-Q1,53.72,fhfa
+US,San Francisco,index,1985-Q2,54.90,fhfa
+US,San Francisco,index,1985-Q3,56.68,fhfa
+US,San Francisco,index,1985-Q4,58.13,fhfa
+US,San Francisco,index,1986-Q1,58.94,fhfa
+US,San Francisco,index,1986-Q2,60.76,fhfa
+US,San Francisco,index,1986-Q3,63.15,fhfa
+US,San Francisco,index,1986-Q4,65.71,fhfa
+US,San Francisco,index,1987-Q1,68.20,fhfa
+US,San Francisco,index,1987-Q2,70.47,fhfa
+US,San Francisco,index,1987-Q3,74.18,fhfa
+US,San Francisco,index,1987-Q4,78.06,fhfa
+US,San Francisco,index,1988-Q1,82.20,fhfa
+US,San Francisco,index,1988-Q2,86.72,fhfa
+US,San Francisco,index,1988-Q3,91.39,fhfa
+US,San Francisco,index,1988-Q4,98.50,fhfa
+US,San Francisco,index,1989-Q1,102.47,fhfa
+US,San Francisco,index,1989-Q2,106.75,fhfa
+US,San Francisco,index,1989-Q3,111.66,fhfa
+US,San Francisco,index,1989-Q4,113.64,fhfa
+US,San Francisco,index,1990-Q1,114.13,fhfa
+US,San Francisco,index,1990-Q2,113.19,fhfa
+US,San Francisco,index,1990-Q3,112.26,fhfa
+US,San Francisco,index,1990-Q4,109.68,fhfa
+US,San Francisco,index,1991-Q1,107.57,fhfa
+US,San Francisco,index,1991-Q2,106.69,fhfa
+US,San Francisco,index,1991-Q3,106.44,fhfa
+US,San Francisco,index,1991-Q4,107.13,fhfa
+US,San Francisco,index,1992-Q1,106.02,fhfa
+US,San Francisco,index,1992-Q2,105.18,fhfa
+US,San Francisco,index,1992-Q3,105.02,fhfa
+US,San Francisco,index,1992-Q4,104.16,fhfa
+US,San Francisco,index,1993-Q1,102.79,fhfa
+US,San Francisco,index,1993-Q2,102.13,fhfa
+US,San Francisco,index,1993-Q3,101.69,fhfa
+US,San Francisco,index,1993-Q4,101.60,fhfa
+US,San Francisco,index,1994-Q1,101.22,fhfa
+US,San Francisco,index,1994-Q2,100.43,fhfa
+US,San Francisco,index,1994-Q3,100.03,fhfa
+US,San Francisco,index,1994-Q4,98.88,fhfa
+US,San Francisco,index,1995-Q1,100.00,fhfa
+US,San Francisco,index,1995-Q2,100.09,fhfa
+US,San Francisco,index,1995-Q3,100.89,fhfa
+US,San Francisco,index,1995-Q4,100.94,fhfa
+US,San Francisco,index,1996-Q1,100.84,fhfa
+US,San Francisco,index,1996-Q2,100.83,fhfa
+US,San Francisco,index,1996-Q3,102.07,fhfa
+US,San Francisco,index,1996-Q4,103.59,fhfa
+US,San Francisco,index,1997-Q1,105.13,fhfa
+US,San Francisco,index,1997-Q2,108.09,fhfa
+US,San Francisco,index,1997-Q3,111.72,fhfa
+US,San Francisco,index,1997-Q4,114.45,fhfa
+US,San Francisco,index,1998-Q1,117.51,fhfa
+US,San Francisco,index,1998-Q2,121.42,fhfa
+US,San Francisco,index,1998-Q3,126.00,fhfa
+US,San Francisco,index,1998-Q4,127.97,fhfa
+US,San Francisco,index,1999-Q1,130.95,fhfa
+US,San Francisco,index,1999-Q2,136.38,fhfa
+US,San Francisco,index,1999-Q3,142.37,fhfa
+US,San Francisco,index,1999-Q4,150.39,fhfa
+US,San Francisco,index,2000-Q1,158.92,fhfa
+US,San Francisco,index,2000-Q2,169.84,fhfa
+US,San Francisco,index,2000-Q3,178.46,fhfa
+US,San Francisco,index,2000-Q4,184.16,fhfa
+US,San Francisco,index,2001-Q1,190.41,fhfa
+US,San Francisco,index,2001-Q2,194.11,fhfa
+US,San Francisco,index,2001-Q3,195.58,fhfa
+US,San Francisco,index,2001-Q4,192.89,fhfa
+US,San Francisco,index,2002-Q1,195.46,fhfa
+US,San Francisco,index,2002-Q2,200.26,fhfa
+US,San Francisco,index,2002-Q3,205.01,fhfa
+US,San Francisco,index,2002-Q4,206.94,fhfa
+US,San Francisco,index,2003-Q1,208.98,fhfa
+US,San Francisco,index,2003-Q2,209.97,fhfa
+US,San Francisco,index,2003-Q3,212.00,fhfa
+US,San Francisco,index,2003-Q4,219.05,fhfa
+US,San Francisco,index,2004-Q1,223.12,fhfa
+US,San Francisco,index,2004-Q2,232.46,fhfa
+US,San Francisco,index,2004-Q3,249.06,fhfa
+US,San Francisco,index,2004-Q4,256.29,fhfa
+US,San Francisco,index,2005-Q1,267.20,fhfa
+US,San Francisco,index,2005-Q2,283.22,fhfa
+US,San Francisco,index,2005-Q3,293.39,fhfa
+US,San Francisco,index,2005-Q4,301.62,fhfa
+US,San Francisco,index,2006-Q1,306.18,fhfa
+US,San Francisco,index,2006-Q2,306.74,fhfa
+US,San Francisco,index,2006-Q3,311.15,fhfa
+US,San Francisco,index,2006-Q4,307.14,fhfa
+US,San Francisco,index,2007-Q1,307.50,fhfa
+US,San Francisco,index,2007-Q2,306.36,fhfa
+US,San Francisco,index,2007-Q3,306.14,fhfa
+US,San Francisco,index,2007-Q4,298.91,fhfa
+US,San Francisco,index,2008-Q1,292.08,fhfa
+US,San Francisco,index,2008-Q2,280.38,fhfa
+US,San Francisco,index,2008-Q3,271.32,fhfa
+US,San Francisco,index,2008-Q4,267.06,fhfa
+US,San Francisco,index,2009-Q1,262.60,fhfa
+US,San Francisco,index,2009-Q2,252.50,fhfa
+US,San Francisco,index,2009-Q3,249.32,fhfa
+US,San Francisco,index,2009-Q4,250.31,fhfa
+US,San Francisco,index,2010-Q1,249.17,fhfa
+US,San Francisco,index,2010-Q2,248.91,fhfa
+US,San Francisco,index,2010-Q3,250.14,fhfa
+US,San Francisco,index,2010-Q4,248.26,fhfa
+US,San Francisco,index,2011-Q1,242.50,fhfa
+US,San Francisco,index,2011-Q2,239.43,fhfa
+US,San Francisco,index,2011-Q3,240.94,fhfa
+US,San Francisco,index,2011-Q4,240.50,fhfa
+US,San Francisco,index,2012-Q1,239.82,fhfa
+US,San Francisco,index,2012-Q2,243.15,fhfa
+US,San Francisco,index,2012-Q3,249.58,fhfa
+US,San Francisco,index,2012-Q4,257.01,fhfa
+US,San Francisco,index,2013-Q1,263.40,fhfa
+US,San Francisco,index,2013-Q2,276.12,fhfa
+US,San Francisco,index,2013-Q3,289.42,fhfa
+US,San Francisco,index,2013-Q4,296.34,fhfa
+US,San Francisco,index,2014-Q1,302.59,fhfa
+US,San Francisco,index,2014-Q2,315.35,fhfa
+US,San Francisco,index,2014-Q3,324.93,fhfa
+US,San Francisco,index,2014-Q4,329.82,fhfa
+US,San Francisco,index,2015-Q1,336.10,fhfa
+US,San Francisco,index,2015-Q2,350.48,fhfa
+US,San Francisco,index,2015-Q3,366.32,fhfa
+US,San Francisco,index,2015-Q4,374.38,fhfa
+US,San Francisco,index,2016-Q1,379.89,fhfa
+US,San Francisco,index,2016-Q2,385.01,fhfa
+US,San Francisco,index,2016-Q3,394.03,fhfa
+US,San Francisco,index,2016-Q4,396.57,fhfa
+US,San Francisco,index,2017-Q1,396.62,fhfa
+US,San Francisco,index,2017-Q2,403.75,fhfa
+US,San Francisco,index,2017-Q3,411.22,fhfa
+US,San Francisco,index,2017-Q4,416.06,fhfa
+US,San Francisco,index,2018-Q1,427.13,fhfa
+US,San Francisco,index,2018-Q2,446.44,fhfa
+US,San Francisco,index,2018-Q3,455.13,fhfa
+US,San Francisco,index,2018-Q4,445.81,fhfa
+US,San Francisco,index,2019-Q1,441.63,fhfa
+US,San Francisco,index,2019-Q2,440.47,fhfa
+US,San Francisco,index,2019-Q3,442.19,fhfa
+US,San Francisco,index,2019-Q4,442.90,fhfa
+US,San Francisco,index,2020-Q1,435.68,fhfa
+US,San Francisco,index,2020-Q2,431.94,fhfa
+US,San Francisco,index,2020-Q3,425.23,fhfa
+US,San Francisco,index,2020-Q4,425.06,fhfa
+US,San Francisco,index,2021-Q1,422.26,fhfa
+US,San Francisco,index,2021-Q2,431.10,fhfa
+US,San Francisco,index,2021-Q3,434.60,fhfa
+US,San Francisco,index,2021-Q4,451.73,fhfa
+US,San Francisco,index,2022-Q1,464.15,fhfa
+US,San Francisco,index,2022-Q2,509.28,fhfa
+US,San Francisco,index,2022-Q3,491.35,fhfa
+US,San Francisco,index,2022-Q4,487.95,fhfa
+US,San Francisco,index,2023-Q1,470.78,fhfa
+US,San Francisco,index,2023-Q2,489.88,fhfa
+US,San Francisco,index,2023-Q3,491.83,fhfa
+US,San Francisco,index,2023-Q4,495.49,fhfa
+US,San Francisco,index,2024-Q1,503.60,fhfa
+US,San Francisco,index,2024-Q2,509.43,fhfa
+US,San Francisco,index,2024-Q3,508.24,fhfa
+US,San Francisco,index,2024-Q4,505.79,fhfa
+US,San Francisco,index,2025-Q1,511.35,fhfa
+US,San Francisco,index,2025-Q2,507.95,fhfa
+US,San Francisco,index,2025-Q3,510.86,fhfa
+US,San Francisco,index,2025-Q4,512.99,fhfa
+US,San Francisco,index,2026-Q1,510.36,fhfa
+US,San Francisco,index,2026-Q2,506.53,fhfa
+US,Washington DC,index,1976-Q3,34.49,fhfa
+US,Washington DC,index,1976-Q4,33.82,fhfa
+US,Washington DC,index,1977-Q1,33.90,fhfa
+US,Washington DC,index,1977-Q2,35.34,fhfa
+US,Washington DC,index,1977-Q3,37.36,fhfa
+US,Washington DC,index,1977-Q4,38.76,fhfa
+US,Washington DC,index,1978-Q1,38.99,fhfa
+US,Washington DC,index,1978-Q2,40.95,fhfa
+US,Washington DC,index,1978-Q3,42.05,fhfa
+US,Washington DC,index,1978-Q4,42.95,fhfa
+US,Washington DC,index,1979-Q1,45.54,fhfa
+US,Washington DC,index,1979-Q2,46.35,fhfa
+US,Washington DC,index,1979-Q3,46.99,fhfa
+US,Washington DC,index,1979-Q4,49.42,fhfa
+US,Washington DC,index,1980-Q1,51.34,fhfa
+US,Washington DC,index,1980-Q2,51.78,fhfa
+US,Washington DC,index,1980-Q3,51.73,fhfa
+US,Washington DC,index,1980-Q4,54.08,fhfa
+US,Washington DC,index,1981-Q1,52.29,fhfa
+US,Washington DC,index,1981-Q2,55.03,fhfa
+US,Washington DC,index,1981-Q3,52.38,fhfa
+US,Washington DC,index,1981-Q4,52.48,fhfa
+US,Washington DC,index,1982-Q1,42.43,fhfa
+US,Washington DC,index,1982-Q2,55.14,fhfa
+US,Washington DC,index,1982-Q3,53.97,fhfa
+US,Washington DC,index,1982-Q4,56.56,fhfa
+US,Washington DC,index,1983-Q1,54.95,fhfa
+US,Washington DC,index,1983-Q2,56.76,fhfa
+US,Washington DC,index,1983-Q3,56.64,fhfa
+US,Washington DC,index,1983-Q4,57.66,fhfa
+US,Washington DC,index,1984-Q1,56.61,fhfa
+US,Washington DC,index,1984-Q2,60.30,fhfa
+US,Washington DC,index,1984-Q3,60.45,fhfa
+US,Washington DC,index,1984-Q4,61.29,fhfa
+US,Washington DC,index,1985-Q1,61.06,fhfa
+US,Washington DC,index,1985-Q2,62.73,fhfa
+US,Washington DC,index,1985-Q3,64.39,fhfa
+US,Washington DC,index,1985-Q4,64.05,fhfa
+US,Washington DC,index,1986-Q1,64.44,fhfa
+US,Washington DC,index,1986-Q2,67.71,fhfa
+US,Washington DC,index,1986-Q3,69.61,fhfa
+US,Washington DC,index,1986-Q4,71.32,fhfa
+US,Washington DC,index,1987-Q1,73.13,fhfa
+US,Washington DC,index,1987-Q2,75.28,fhfa
+US,Washington DC,index,1987-Q3,78.08,fhfa
+US,Washington DC,index,1987-Q4,80.42,fhfa
+US,Washington DC,index,1988-Q1,82.90,fhfa
+US,Washington DC,index,1988-Q2,85.63,fhfa
+US,Washington DC,index,1988-Q3,87.83,fhfa
+US,Washington DC,index,1988-Q4,90.19,fhfa
+US,Washington DC,index,1989-Q1,92.85,fhfa
+US,Washington DC,index,1989-Q2,94.75,fhfa
+US,Washington DC,index,1989-Q3,96.92,fhfa
+US,Washington DC,index,1989-Q4,98.46,fhfa
+US,Washington DC,index,1990-Q1,100.11,fhfa
+US,Washington DC,index,1990-Q2,100.99,fhfa
+US,Washington DC,index,1990-Q3,100.19,fhfa
+US,Washington DC,index,1990-Q4,100.50,fhfa
+US,Washington DC,index,1991-Q1,101.17,fhfa
+US,Washington DC,index,1991-Q2,102.36,fhfa
+US,Washington DC,index,1991-Q3,101.52,fhfa
+US,Washington DC,index,1991-Q4,103.78,fhfa
+US,Washington DC,index,1992-Q1,104.66,fhfa
+US,Washington DC,index,1992-Q2,103.77,fhfa
+US,Washington DC,index,1992-Q3,104.49,fhfa
+US,Washington DC,index,1992-Q4,104.44,fhfa
+US,Washington DC,index,1993-Q1,104.01,fhfa
+US,Washington DC,index,1993-Q2,104.07,fhfa
+US,Washington DC,index,1993-Q3,104.50,fhfa
+US,Washington DC,index,1993-Q4,104.97,fhfa
+US,Washington DC,index,1994-Q1,105.22,fhfa
+US,Washington DC,index,1994-Q2,103.07,fhfa
+US,Washington DC,index,1994-Q3,101.65,fhfa
+US,Washington DC,index,1994-Q4,100.07,fhfa
+US,Washington DC,index,1995-Q1,100.00,fhfa
+US,Washington DC,index,1995-Q2,100.80,fhfa
+US,Washington DC,index,1995-Q3,103.23,fhfa
+US,Washington DC,index,1995-Q4,104.18,fhfa
+US,Washington DC,index,1996-Q1,105.72,fhfa
+US,Washington DC,index,1996-Q2,103.84,fhfa
+US,Washington DC,index,1996-Q3,102.85,fhfa
+US,Washington DC,index,1996-Q4,103.94,fhfa
+US,Washington DC,index,1997-Q1,103.78,fhfa
+US,Washington DC,index,1997-Q2,103.30,fhfa
+US,Washington DC,index,1997-Q3,103.78,fhfa
+US,Washington DC,index,1997-Q4,103.77,fhfa
+US,Washington DC,index,1998-Q1,106.50,fhfa
+US,Washington DC,index,1998-Q2,106.37,fhfa
+US,Washington DC,index,1998-Q3,106.78,fhfa
+US,Washington DC,index,1998-Q4,107.97,fhfa
+US,Washington DC,index,1999-Q1,109.22,fhfa
+US,Washington DC,index,1999-Q2,108.96,fhfa
+US,Washington DC,index,1999-Q3,109.92,fhfa
+US,Washington DC,index,1999-Q4,111.18,fhfa
+US,Washington DC,index,2000-Q1,113.26,fhfa
+US,Washington DC,index,2000-Q2,115.22,fhfa
+US,Washington DC,index,2000-Q3,117.63,fhfa
+US,Washington DC,index,2000-Q4,119.46,fhfa
+US,Washington DC,index,2001-Q1,122.84,fhfa
+US,Washington DC,index,2001-Q2,125.83,fhfa
+US,Washington DC,index,2001-Q3,129.03,fhfa
+US,Washington DC,index,2001-Q4,132.06,fhfa
+US,Washington DC,index,2002-Q1,135.32,fhfa
+US,Washington DC,index,2002-Q2,139.36,fhfa
+US,Washington DC,index,2002-Q3,144.37,fhfa
+US,Washington DC,index,2002-Q4,147.79,fhfa
+US,Washington DC,index,2003-Q1,151.16,fhfa
+US,Washington DC,index,2003-Q2,154.87,fhfa
+US,Washington DC,index,2003-Q3,160.52,fhfa
+US,Washington DC,index,2003-Q4,168.82,fhfa
+US,Washington DC,index,2004-Q1,175.14,fhfa
+US,Washington DC,index,2004-Q2,183.89,fhfa
+US,Washington DC,index,2004-Q3,198.37,fhfa
+US,Washington DC,index,2004-Q4,206.96,fhfa
+US,Washington DC,index,2005-Q1,217.05,fhfa
+US,Washington DC,index,2005-Q2,231.17,fhfa
+US,Washington DC,index,2005-Q3,245.75,fhfa
+US,Washington DC,index,2005-Q4,259.28,fhfa
+US,Washington DC,index,2006-Q1,266.66,fhfa
+US,Washington DC,index,2006-Q2,273.66,fhfa
+US,Washington DC,index,2006-Q3,278.47,fhfa
+US,Washington DC,index,2006-Q4,283.62,fhfa
+US,Washington DC,index,2007-Q1,285.21,fhfa
+US,Washington DC,index,2007-Q2,284.95,fhfa
+US,Washington DC,index,2007-Q3,282.08,fhfa
+US,Washington DC,index,2007-Q4,278.12,fhfa
+US,Washington DC,index,2008-Q1,271.21,fhfa
+US,Washington DC,index,2008-Q2,256.99,fhfa
+US,Washington DC,index,2008-Q3,244.35,fhfa
+US,Washington DC,index,2008-Q4,237.13,fhfa
+US,Washington DC,index,2009-Q1,234.87,fhfa
+US,Washington DC,index,2009-Q2,222.81,fhfa
+US,Washington DC,index,2009-Q3,216.56,fhfa
+US,Washington DC,index,2009-Q4,213.95,fhfa
+US,Washington DC,index,2010-Q1,210.15,fhfa
+US,Washington DC,index,2010-Q2,208.45,fhfa
+US,Washington DC,index,2010-Q3,210.37,fhfa
+US,Washington DC,index,2010-Q4,209.12,fhfa
+US,Washington DC,index,2011-Q1,203.10,fhfa
+US,Washington DC,index,2011-Q2,200.53,fhfa
+US,Washington DC,index,2011-Q3,202.57,fhfa
+US,Washington DC,index,2011-Q4,205.06,fhfa
+US,Washington DC,index,2012-Q1,204.63,fhfa
+US,Washington DC,index,2012-Q2,202.83,fhfa
+US,Washington DC,index,2012-Q3,205.81,fhfa
+US,Washington DC,index,2012-Q4,207.49,fhfa
+US,Washington DC,index,2013-Q1,209.15,fhfa
+US,Washington DC,index,2013-Q2,213.65,fhfa
+US,Washington DC,index,2013-Q3,217.09,fhfa
+US,Washington DC,index,2013-Q4,219.13,fhfa
+US,Washington DC,index,2014-Q1,221.55,fhfa
+US,Washington DC,index,2014-Q2,228.23,fhfa
+US,Washington DC,index,2014-Q3,229.72,fhfa
+US,Washington DC,index,2014-Q4,235.59,fhfa
+US,Washington DC,index,2015-Q1,237.24,fhfa
+US,Washington DC,index,2015-Q2,241.87,fhfa
+US,Washington DC,index,2015-Q3,245.04,fhfa
+US,Washington DC,index,2015-Q4,248.32,fhfa
+US,Washington DC,index,2016-Q1,250.11,fhfa
+US,Washington DC,index,2016-Q2,255.56,fhfa
+US,Washington DC,index,2016-Q3,258.91,fhfa
+US,Washington DC,index,2016-Q4,262.68,fhfa
+US,Washington DC,index,2017-Q1,260.61,fhfa
+US,Washington DC,index,2017-Q2,268.86,fhfa
+US,Washington DC,index,2017-Q3,271.36,fhfa
+US,Washington DC,index,2017-Q4,272.30,fhfa
+US,Washington DC,index,2018-Q1,274.70,fhfa
+US,Washington DC,index,2018-Q2,279.84,fhfa
+US,Washington DC,index,2018-Q3,281.77,fhfa
+US,Washington DC,index,2018-Q4,283.13,fhfa
+US,Washington DC,index,2019-Q1,285.79,fhfa
+US,Washington DC,index,2019-Q2,289.43,fhfa
+US,Washington DC,index,2019-Q3,293.43,fhfa
+US,Washington DC,index,2019-Q4,295.95,fhfa
+US,Washington DC,index,2020-Q1,299.19,fhfa
+US,Washington DC,index,2020-Q2,301.95,fhfa
+US,Washington DC,index,2020-Q3,306.79,fhfa
+US,Washington DC,index,2020-Q4,313.16,fhfa
+US,Washington DC,index,2021-Q1,319.59,fhfa
+US,Washington DC,index,2021-Q2,333.20,fhfa
+US,Washington DC,index,2021-Q3,344.79,fhfa
+US,Washington DC,index,2021-Q4,351.07,fhfa
+US,Washington DC,index,2022-Q1,358.48,fhfa
+US,Washington DC,index,2022-Q2,371.85,fhfa
+US,Washington DC,index,2022-Q3,370.86,fhfa
+US,Washington DC,index,2022-Q4,362.73,fhfa
+US,Washington DC,index,2023-Q1,364.72,fhfa
+US,Washington DC,index,2023-Q2,371.59,fhfa
+US,Washington DC,index,2023-Q3,370.87,fhfa
+US,Washington DC,index,2023-Q4,367.73,fhfa
+US,Washington DC,index,2024-Q1,370.25,fhfa
+US,Washington DC,index,2024-Q2,381.50,fhfa
+US,Washington DC,index,2024-Q3,383.53,fhfa
+US,Washington DC,index,2024-Q4,383.28,fhfa
+US,Washington DC,index,2025-Q1,383.04,fhfa
+US,Washington DC,index,2025-Q2,387.03,fhfa
+US,Washington DC,index,2025-Q3,391.39,fhfa
+US,Washington DC,index,2025-Q4,395.11,fhfa
+US,Washington DC,index,2026-Q1,389.20,fhfa
+US,Washington DC,index,2026-Q2,388.86,fhfa
+XM,Amsterdam,index,1995-Q1,18.8,bis_dpp
+XM,Amsterdam,index,1995-Q2,19.0,bis_dpp
+XM,Amsterdam,index,1995-Q3,19.5,bis_dpp
+XM,Amsterdam,index,1995-Q4,19.9,bis_dpp
+XM,Amsterdam,index,1996-Q1,19.7,bis_dpp
+XM,Amsterdam,index,1996-Q2,20.4,bis_dpp
+XM,Amsterdam,index,1996-Q3,21.3,bis_dpp
+XM,Amsterdam,index,1996-Q4,21.8,bis_dpp
+XM,Amsterdam,index,1997-Q1,22.5,bis_dpp
+XM,Amsterdam,index,1997-Q2,23.4,bis_dpp
+XM,Amsterdam,index,1997-Q3,24.5,bis_dpp
+XM,Amsterdam,index,1997-Q4,24.8,bis_dpp
+XM,Amsterdam,index,1998-Q1,26.3,bis_dpp
+XM,Amsterdam,index,1998-Q2,27.1,bis_dpp
+XM,Amsterdam,index,1998-Q3,28.5,bis_dpp
+XM,Amsterdam,index,1998-Q4,29.4,bis_dpp
+XM,Amsterdam,index,1999-Q1,31.7,bis_dpp
+XM,Amsterdam,index,1999-Q2,33.7,bis_dpp
+XM,Amsterdam,index,1999-Q3,35.4,bis_dpp
+XM,Amsterdam,index,1999-Q4,37.4,bis_dpp
+XM,Amsterdam,index,2000-Q1,39.6,bis_dpp
+XM,Amsterdam,index,2000-Q2,40.9,bis_dpp
+XM,Amsterdam,index,2000-Q3,42.2,bis_dpp
+XM,Amsterdam,index,2000-Q4,43.7,bis_dpp
+XM,Amsterdam,index,2001-Q1,45.8,bis_dpp
+XM,Amsterdam,index,2001-Q2,47.2,bis_dpp
+XM,Amsterdam,index,2001-Q3,48.0,bis_dpp
+XM,Amsterdam,index,2001-Q4,48.2,bis_dpp
+XM,Amsterdam,index,2002-Q1,48.3,bis_dpp
+XM,Amsterdam,index,2002-Q2,48.0,bis_dpp
+XM,Amsterdam,index,2002-Q3,48.6,bis_dpp
+XM,Amsterdam,index,2002-Q4,47.8,bis_dpp
+XM,Amsterdam,index,2003-Q1,47.5,bis_dpp
+XM,Amsterdam,index,2003-Q2,46.7,bis_dpp
+XM,Amsterdam,index,2003-Q3,46.4,bis_dpp
+XM,Amsterdam,index,2003-Q4,46.7,bis_dpp
+XM,Amsterdam,index,2004-Q1,46.8,bis_dpp
+XM,Amsterdam,index,2004-Q2,47.3,bis_dpp
+XM,Amsterdam,index,2004-Q3,47.8,bis_dpp
+XM,Amsterdam,index,2004-Q4,47.2,bis_dpp
+XM,Amsterdam,index,2005-Q1,48.2,bis_dpp
+XM,Amsterdam,index,2005-Q2,49.3,bis_dpp
+XM,Amsterdam,index,2005-Q3,50.1,bis_dpp
+XM,Amsterdam,index,2005-Q4,50.6,bis_dpp
+XM,Amsterdam,index,2006-Q1,51.8,bis_dpp
+XM,Amsterdam,index,2006-Q2,52.5,bis_dpp
+XM,Amsterdam,index,2006-Q3,54.9,bis_dpp
+XM,Amsterdam,index,2006-Q4,55.7,bis_dpp
+XM,Amsterdam,index,2007-Q1,57.0,bis_dpp
+XM,Amsterdam,index,2007-Q2,59.1,bis_dpp
+XM,Amsterdam,index,2007-Q3,61.6,bis_dpp
+XM,Amsterdam,index,2007-Q4,61.8,bis_dpp
+XM,Amsterdam,index,2008-Q1,64.1,bis_dpp
+XM,Amsterdam,index,2008-Q2,64.5,bis_dpp
+XM,Amsterdam,index,2008-Q3,65.0,bis_dpp
+XM,Amsterdam,index,2008-Q4,63.1,bis_dpp
+XM,Amsterdam,index,2009-Q1,61.9,bis_dpp
+XM,Amsterdam,index,2009-Q2,60.2,bis_dpp
+XM,Amsterdam,index,2009-Q3,59.5,bis_dpp
+XM,Amsterdam,index,2009-Q4,60.3,bis_dpp
+XM,Amsterdam,index,2010-Q1,59.8,bis_dpp
+XM,Amsterdam,index,2010-Q2,60.8,bis_dpp
+XM,Amsterdam,index,2010-Q3,60.2,bis_dpp
+XM,Amsterdam,index,2010-Q4,60.0,bis_dpp
+XM,Amsterdam,index,2011-Q1,61.0,bis_dpp
+XM,Amsterdam,index,2011-Q2,60.3,bis_dpp
+XM,Amsterdam,index,2011-Q3,60.2,bis_dpp
+XM,Amsterdam,index,2011-Q4,58.5,bis_dpp
+XM,Amsterdam,index,2012-Q1,58.6,bis_dpp
+XM,Amsterdam,index,2012-Q2,57.2,bis_dpp
+XM,Amsterdam,index,2012-Q3,55.7,bis_dpp
+XM,Amsterdam,index,2012-Q4,54.8,bis_dpp
+XM,Amsterdam,index,2013-Q1,53.2,bis_dpp
+XM,Amsterdam,index,2013-Q2,54.1,bis_dpp
+XM,Amsterdam,index,2013-Q3,53.9,bis_dpp
+XM,Amsterdam,index,2013-Q4,53.4,bis_dpp
+XM,Amsterdam,index,2014-Q1,54.5,bis_dpp
+XM,Amsterdam,index,2014-Q2,56.0,bis_dpp
+XM,Amsterdam,index,2014-Q3,57.2,bis_dpp
+XM,Amsterdam,index,2014-Q4,57.8,bis_dpp
+XM,Amsterdam,index,2015-Q1,59.9,bis_dpp
+XM,Amsterdam,index,2015-Q2,60.5,bis_dpp
+XM,Amsterdam,index,2015-Q3,62.9,bis_dpp
+XM,Amsterdam,index,2015-Q4,64.1,bis_dpp
+XM,Amsterdam,index,2016-Q1,66.4,bis_dpp
+XM,Amsterdam,index,2016-Q2,69.4,bis_dpp
+XM,Amsterdam,index,2016-Q3,71.8,bis_dpp
+XM,Amsterdam,index,2016-Q4,73.4,bis_dpp
+XM,Amsterdam,index,2017-Q1,76.7,bis_dpp
+XM,Amsterdam,index,2017-Q2,78.7,bis_dpp
+XM,Amsterdam,index,2017-Q3,81.8,bis_dpp
+XM,Amsterdam,index,2017-Q4,83.2,bis_dpp
+XM,Amsterdam,index,2018-Q1,85.9,bis_dpp
+XM,Amsterdam,index,2018-Q2,89.3,bis_dpp
+XM,Amsterdam,index,2018-Q3,92.5,bis_dpp
+XM,Amsterdam,index,2018-Q4,93.6,bis_dpp
+XM,Amsterdam,index,2019-Q1,93.8,bis_dpp
+XM,Amsterdam,index,2019-Q2,95.4,bis_dpp
+XM,Amsterdam,index,2019-Q3,96.0,bis_dpp
+XM,Amsterdam,index,2019-Q4,96.7,bis_dpp
+XM,Amsterdam,index,2020-Q1,98.1,bis_dpp
+XM,Amsterdam,index,2020-Q2,100.5,bis_dpp
+XM,Amsterdam,index,2020-Q3,101.3,bis_dpp
+XM,Amsterdam,index,2020-Q4,100.1,bis_dpp
+XM,Amsterdam,index,2021-Q1,104.0,bis_dpp
+XM,Amsterdam,index,2021-Q2,108.0,bis_dpp
+XM,Amsterdam,index,2021-Q3,116.4,bis_dpp
+XM,Amsterdam,index,2021-Q4,117.7,bis_dpp
+XM,Amsterdam,index,2022-Q1,123.4,bis_dpp
+XM,Amsterdam,index,2022-Q2,126.5,bis_dpp
+XM,Amsterdam,index,2022-Q3,126.3,bis_dpp
+XM,Amsterdam,index,2022-Q4,119.0,bis_dpp
+XM,Amsterdam,index,2023-Q1,116.5,bis_dpp
+XM,Amsterdam,index,2023-Q2,115.0,bis_dpp
+XM,Amsterdam,index,2023-Q3,119.1,bis_dpp
+XM,Amsterdam,index,2023-Q4,120.0,bis_dpp
+XM,Amsterdam,index,2024-Q1,122.6,bis_dpp
+XM,Amsterdam,index,2024-Q2,126.9,bis_dpp
+XM,Amsterdam,index,2024-Q3,131.1,bis_dpp
+XM,Amsterdam,index,2024-Q4,130.8,bis_dpp
+XM,Amsterdam,index,2025-Q1,130.4,bis_dpp
+XM,Amsterdam,index,2025-Q2,132.4,bis_dpp
+XM,Amsterdam,index,2025-Q3,134.1,bis_dpp
+XM,Amsterdam,index,2025-Q4,132.9,bis_dpp
+XM,Amsterdam,index,2026-Q1,132.9,bis_dpp
+XM,Amsterdam,index,2026-Q2,133.5,bis_dpp
+XM,Berlin,index,2003-Q1,35.9,bis_dpp
+XM,Berlin,index,2003-Q2,35.7,bis_dpp
+XM,Berlin,index,2003-Q3,36.1,bis_dpp
+XM,Berlin,index,2003-Q4,35.1,bis_dpp
+XM,Berlin,index,2004-Q1,35.0,bis_dpp
+XM,Berlin,index,2004-Q2,34.7,bis_dpp
+XM,Berlin,index,2004-Q3,34.7,bis_dpp
+XM,Berlin,index,2004-Q4,35.4,bis_dpp
+XM,Berlin,index,2005-Q1,35.8,bis_dpp
+XM,Berlin,index,2005-Q2,35.7,bis_dpp
+XM,Berlin,index,2005-Q3,35.7,bis_dpp
+XM,Berlin,index,2005-Q4,36.0,bis_dpp
+XM,Berlin,index,2006-Q1,35.8,bis_dpp
+XM,Berlin,index,2006-Q2,35.4,bis_dpp
+XM,Berlin,index,2006-Q3,35.9,bis_dpp
+XM,Berlin,index,2006-Q4,35.7,bis_dpp
+XM,Berlin,index,2007-Q1,36.1,bis_dpp
+XM,Berlin,index,2007-Q2,36.1,bis_dpp
+XM,Berlin,index,2007-Q3,36.0,bis_dpp
+XM,Berlin,index,2007-Q4,35.8,bis_dpp
+XM,Berlin,index,2008-Q1,35.9,bis_dpp
+XM,Berlin,index,2008-Q2,35.7,bis_dpp
+XM,Berlin,index,2008-Q3,35.5,bis_dpp
+XM,Berlin,index,2008-Q4,36.2,bis_dpp
+XM,Berlin,index,2009-Q1,36.1,bis_dpp
+XM,Berlin,index,2009-Q2,35.8,bis_dpp
+XM,Berlin,index,2009-Q3,35.6,bis_dpp
+XM,Berlin,index,2009-Q4,35.6,bis_dpp
+XM,Berlin,index,2010-Q1,36.2,bis_dpp
+XM,Berlin,index,2010-Q2,36.6,bis_dpp
+XM,Berlin,index,2010-Q3,37.3,bis_dpp
+XM,Berlin,index,2010-Q4,38.4,bis_dpp
+XM,Berlin,index,2011-Q1,39.0,bis_dpp
+XM,Berlin,index,2011-Q2,39.1,bis_dpp
+XM,Berlin,index,2011-Q3,39.0,bis_dpp
+XM,Berlin,index,2011-Q4,40.0,bis_dpp
+XM,Berlin,index,2012-Q1,40.4,bis_dpp
+XM,Berlin,index,2012-Q2,41.8,bis_dpp
+XM,Berlin,index,2012-Q3,42.6,bis_dpp
+XM,Berlin,index,2012-Q4,43.0,bis_dpp
+XM,Berlin,index,2013-Q1,43.4,bis_dpp
+XM,Berlin,index,2013-Q2,43.9,bis_dpp
+XM,Berlin,index,2013-Q3,44.6,bis_dpp
+XM,Berlin,index,2013-Q4,45.5,bis_dpp
+XM,Berlin,index,2014-Q1,46.1,bis_dpp
+XM,Berlin,index,2014-Q2,47.1,bis_dpp
+XM,Berlin,index,2014-Q3,48.0,bis_dpp
+XM,Berlin,index,2014-Q4,49.2,bis_dpp
+XM,Berlin,index,2015-Q1,51.0,bis_dpp
+XM,Berlin,index,2015-Q2,52.7,bis_dpp
+XM,Berlin,index,2015-Q3,53.6,bis_dpp
+XM,Berlin,index,2015-Q4,55.1,bis_dpp
+XM,Berlin,index,2016-Q1,56.8,bis_dpp
+XM,Berlin,index,2016-Q2,58.6,bis_dpp
+XM,Berlin,index,2016-Q3,60.4,bis_dpp
+XM,Berlin,index,2016-Q4,62.0,bis_dpp
+XM,Berlin,index,2017-Q1,64.6,bis_dpp
+XM,Berlin,index,2017-Q2,67.2,bis_dpp
+XM,Berlin,index,2017-Q3,70.1,bis_dpp
+XM,Berlin,index,2017-Q4,72.8,bis_dpp
+XM,Berlin,index,2018-Q1,74.2,bis_dpp
+XM,Berlin,index,2018-Q2,75.5,bis_dpp
+XM,Berlin,index,2018-Q3,77.3,bis_dpp
+XM,Berlin,index,2018-Q4,78.1,bis_dpp
+XM,Berlin,index,2019-Q1,78.5,bis_dpp
+XM,Berlin,index,2019-Q2,79.7,bis_dpp
+XM,Berlin,index,2019-Q3,80.6,bis_dpp
+XM,Berlin,index,2019-Q4,81.5,bis_dpp
+XM,Berlin,index,2020-Q1,82.4,bis_dpp
+XM,Berlin,index,2020-Q2,83.2,bis_dpp
+XM,Berlin,index,2020-Q3,84.3,bis_dpp
+XM,Berlin,index,2020-Q4,85.2,bis_dpp
+XM,Berlin,index,2021-Q1,87.2,bis_dpp
+XM,Berlin,index,2021-Q2,90.3,bis_dpp
+XM,Berlin,index,2021-Q3,93.1,bis_dpp
+XM,Berlin,index,2021-Q4,95.1,bis_dpp
+XM,Berlin,index,2022-Q1,98.2,bis_dpp
+XM,Berlin,index,2022-Q2,100.9,bis_dpp
+XM,Berlin,index,2022-Q3,100.9,bis_dpp
+XM,Berlin,index,2022-Q4,100.0,bis_dpp
+XM,Berlin,index,2023-Q1,96.8,bis_dpp
+XM,Berlin,index,2023-Q2,96.8,bis_dpp
+XM,Berlin,index,2023-Q3,95.7,bis_dpp
+XM,Berlin,index,2023-Q4,95.3,bis_dpp
+XM,Berlin,index,2024-Q1,94.9,bis_dpp
+XM,Berlin,index,2024-Q2,95.9,bis_dpp
+XM,Berlin,index,2024-Q3,96.7,bis_dpp
+XM,Berlin,index,2024-Q4,97.1,bis_dpp
+XM,Berlin,index,2025-Q1,98.0,bis_dpp
+XM,Berlin,index,2025-Q2,99.0,bis_dpp
+XM,Berlin,index,2025-Q3,99.4,bis_dpp
+XM,Berlin,index,2025-Q4,100.4,bis_dpp
+XM,Berlin,index,2026-Q1,100.8,bis_dpp
+XM,Berlin,index,2026-Q2,100.9,bis_dpp
+XM,Brussels,index,1973-Q1,11.59,bis_dpp
+XM,Brussels,index,1973-Q2,12.14,bis_dpp
+XM,Brussels,index,1973-Q3,13.64,bis_dpp
+XM,Brussels,index,1973-Q4,12.79,bis_dpp
+XM,Brussels,index,1974-Q1,12.97,bis_dpp
+XM,Brussels,index,1974-Q2,13.01,bis_dpp
+XM,Brussels,index,1974-Q3,13.25,bis_dpp
+XM,Brussels,index,1974-Q4,12.46,bis_dpp
+XM,Brussels,index,1975-Q1,13.32,bis_dpp
+XM,Brussels,index,1975-Q2,12.98,bis_dpp
+XM,Brussels,index,1975-Q3,13.69,bis_dpp
+XM,Brussels,index,1975-Q4,13.73,bis_dpp
+XM,Brussels,index,1976-Q1,15.63,bis_dpp
+XM,Brussels,index,1976-Q2,15.87,bis_dpp
+XM,Brussels,index,1976-Q3,17.25,bis_dpp
+XM,Brussels,index,1976-Q4,17.86,bis_dpp
+XM,Brussels,index,1977-Q1,18.67,bis_dpp
+XM,Brussels,index,1977-Q2,18.32,bis_dpp
+XM,Brussels,index,1977-Q3,19.86,bis_dpp
+XM,Brussels,index,1977-Q4,21.57,bis_dpp
+XM,Brussels,index,1978-Q1,19.75,bis_dpp
+XM,Brussels,index,1978-Q2,19.71,bis_dpp
+XM,Brussels,index,1978-Q3,21.62,bis_dpp
+XM,Brussels,index,1978-Q4,20.79,bis_dpp
+XM,Brussels,index,1979-Q1,20.62,bis_dpp
+XM,Brussels,index,1979-Q2,21.69,bis_dpp
+XM,Brussels,index,1979-Q3,22.2,bis_dpp
+XM,Brussels,index,1979-Q4,21.91,bis_dpp
+XM,Brussels,index,1980-Q1,22.97,bis_dpp
+XM,Brussels,index,1980-Q2,21.35,bis_dpp
+XM,Brussels,index,1980-Q3,21.81,bis_dpp
+XM,Brussels,index,1980-Q4,20.12,bis_dpp
+XM,Brussels,index,1981-Q1,21.03,bis_dpp
+XM,Brussels,index,1981-Q2,19.53,bis_dpp
+XM,Brussels,index,1981-Q3,20.43,bis_dpp
+XM,Brussels,index,1981-Q4,19.56,bis_dpp
+XM,Brussels,index,1982-Q1,19.33,bis_dpp
+XM,Brussels,index,1982-Q2,18.82,bis_dpp
+XM,Brussels,index,1982-Q3,19.1,bis_dpp
+XM,Brussels,index,1982-Q4,18.23,bis_dpp
+XM,Brussels,index,1983-Q1,19.06,bis_dpp
+XM,Brussels,index,1983-Q2,19.27,bis_dpp
+XM,Brussels,index,1983-Q3,19.41,bis_dpp
+XM,Brussels,index,1983-Q4,19.32,bis_dpp
+XM,Brussels,index,1984-Q1,19.28,bis_dpp
+XM,Brussels,index,1984-Q2,19.38,bis_dpp
+XM,Brussels,index,1984-Q3,20.19,bis_dpp
+XM,Brussels,index,1984-Q4,19.61,bis_dpp
+XM,Brussels,index,1985-Q1,19.46,bis_dpp
+XM,Brussels,index,1985-Q2,19.39,bis_dpp
+XM,Brussels,index,1985-Q3,20.28,bis_dpp
+XM,Brussels,index,1985-Q4,20.68,bis_dpp
+XM,Brussels,index,1986-Q1,19.93,bis_dpp
+XM,Brussels,index,1986-Q2,20.49,bis_dpp
+XM,Brussels,index,1986-Q3,23.06,bis_dpp
+XM,Brussels,index,1986-Q4,22.31,bis_dpp
+XM,Brussels,index,1987-Q1,22.08,bis_dpp
+XM,Brussels,index,1987-Q2,22.73,bis_dpp
+XM,Brussels,index,1987-Q3,23.72,bis_dpp
+XM,Brussels,index,1987-Q4,22.72,bis_dpp
+XM,Brussels,index,1988-Q1,23.24,bis_dpp
+XM,Brussels,index,1988-Q2,24.22,bis_dpp
+XM,Brussels,index,1988-Q3,26.44,bis_dpp
+XM,Brussels,index,1988-Q4,26.32,bis_dpp
+XM,Brussels,index,1989-Q1,29.36,bis_dpp
+XM,Brussels,index,1989-Q2,32.97,bis_dpp
+XM,Brussels,index,1989-Q3,33.54,bis_dpp
+XM,Brussels,index,1989-Q4,36.18,bis_dpp
+XM,Brussels,index,1990-Q1,37.81,bis_dpp
+XM,Brussels,index,1990-Q2,36.46,bis_dpp
+XM,Brussels,index,1990-Q3,40.01,bis_dpp
+XM,Brussels,index,1990-Q4,39.25,bis_dpp
+XM,Brussels,index,1991-Q1,38.52,bis_dpp
+XM,Brussels,index,1991-Q2,38.97,bis_dpp
+XM,Brussels,index,1991-Q3,42.55,bis_dpp
+XM,Brussels,index,1991-Q4,40.49,bis_dpp
+XM,Brussels,index,1992-Q1,39.1,bis_dpp
+XM,Brussels,index,1992-Q2,40.8,bis_dpp
+XM,Brussels,index,1992-Q3,42.17,bis_dpp
+XM,Brussels,index,1992-Q4,41.86,bis_dpp
+XM,Brussels,index,1993-Q1,39.86,bis_dpp
+XM,Brussels,index,1993-Q2,42.5,bis_dpp
+XM,Brussels,index,1993-Q3,43.56,bis_dpp
+XM,Brussels,index,1993-Q4,45.06,bis_dpp
+XM,Brussels,index,1994-Q1,44.03,bis_dpp
+XM,Brussels,index,1994-Q2,45.15,bis_dpp
+XM,Brussels,index,1994-Q3,46.64,bis_dpp
+XM,Brussels,index,1994-Q4,46.97,bis_dpp
+XM,Brussels,index,1995-Q1,46.47,bis_dpp
+XM,Brussels,index,1995-Q2,44.66,bis_dpp
+XM,Brussels,index,1995-Q3,48.35,bis_dpp
+XM,Brussels,index,1995-Q4,47.82,bis_dpp
+XM,Brussels,index,1996-Q1,44.94,bis_dpp
+XM,Brussels,index,1996-Q2,48.08,bis_dpp
+XM,Brussels,index,1996-Q3,47.78,bis_dpp
+XM,Brussels,index,1996-Q4,46.67,bis_dpp
+XM,Brussels,index,1997-Q1,44.64,bis_dpp
+XM,Brussels,index,1997-Q2,48.27,bis_dpp
+XM,Brussels,index,1997-Q3,50.57,bis_dpp
+XM,Brussels,index,1997-Q4,49.77,bis_dpp
+XM,Brussels,index,1998-Q1,47.3,bis_dpp
+XM,Brussels,index,1998-Q2,48.79,bis_dpp
+XM,Brussels,index,1998-Q3,51.2,bis_dpp
+XM,Brussels,index,1998-Q4,50.22,bis_dpp
+XM,Brussels,index,1999-Q1,50.23,bis_dpp
+XM,Brussels,index,1999-Q2,53.59,bis_dpp
+XM,Brussels,index,1999-Q3,53.08,bis_dpp
+XM,Brussels,index,1999-Q4,51.57,bis_dpp
+XM,Brussels,index,2000-Q1,55.12,bis_dpp
+XM,Brussels,index,2000-Q2,51.77,bis_dpp
+XM,Brussels,index,2000-Q3,54.81,bis_dpp
+XM,Brussels,index,2000-Q4,55.55,bis_dpp
+XM,Brussels,index,2001-Q1,57.1,bis_dpp
+XM,Brussels,index,2001-Q2,57.03,bis_dpp
+XM,Brussels,index,2001-Q3,60.28,bis_dpp
+XM,Brussels,index,2001-Q4,55.57,bis_dpp
+XM,Brussels,index,2002-Q1,57.81,bis_dpp
+XM,Brussels,index,2002-Q2,56.98,bis_dpp
+XM,Brussels,index,2002-Q3,58.86,bis_dpp
+XM,Brussels,index,2002-Q4,63.51,bis_dpp
+XM,Brussels,index,2003-Q1,61.29,bis_dpp
+XM,Brussels,index,2003-Q2,64.91,bis_dpp
+XM,Brussels,index,2003-Q3,64.35,bis_dpp
+XM,Brussels,index,2003-Q4,69.86,bis_dpp
+XM,Brussels,index,2004-Q1,66.59,bis_dpp
+XM,Brussels,index,2004-Q2,68.67,bis_dpp
+XM,Brussels,index,2004-Q3,67.48,bis_dpp
+XM,Brussels,index,2004-Q4,70.41,bis_dpp
+XM,Brussels,index,2005-Q1,97.57,bis_dpp
+XM,Brussels,index,2005-Q2,97.67,bis_dpp
+XM,Brussels,index,2005-Q3,101.55,bis_dpp
+XM,Brussels,index,2005-Q4,103.21,bis_dpp
+XM,Brussels,index,2006-Q1,110.16,bis_dpp
+XM,Brussels,index,2006-Q2,110.57,bis_dpp
+XM,Brussels,index,2006-Q3,112.8,bis_dpp
+XM,Brussels,index,2006-Q4,120.69,bis_dpp
+XM,Brussels,index,2007-Q1,122.36,bis_dpp
+XM,Brussels,index,2007-Q2,124.53,bis_dpp
+XM,Brussels,index,2007-Q3,132.84,bis_dpp
+XM,Brussels,index,2007-Q4,126.52,bis_dpp
+XM,Brussels,index,2008-Q1,131.27,bis_dpp
+XM,Brussels,index,2008-Q2,132.54,bis_dpp
+XM,Brussels,index,2008-Q3,133.11,bis_dpp
+XM,Brussels,index,2008-Q4,127.32,bis_dpp
+XM,Brussels,index,2009-Q1,121.46,bis_dpp
+XM,Brussels,index,2009-Q2,124.0,bis_dpp
+XM,Brussels,index,2009-Q3,127.88,bis_dpp
+XM,Brussels,index,2009-Q4,131.47,bis_dpp
+XM,Brussels,index,2010-Q1,137.71,bis_dpp
+XM,Brussels,index,2010-Q2,139.9371,bis_dpp
+XM,Brussels,index,2010-Q3,147.3465,bis_dpp
+XM,Brussels,index,2010-Q4,150.8091,bis_dpp
+XM,Brussels,index,2011-Q1,152.7007,bis_dpp
+XM,Brussels,index,2011-Q2,156.4178,bis_dpp
+XM,Brussels,index,2011-Q3,153.687,bis_dpp
+XM,Brussels,index,2011-Q4,158.6389,bis_dpp
+XM,Brussels,index,2012-Q1,142.4271,bis_dpp
+XM,Brussels,index,2012-Q2,161.4119,bis_dpp
+XM,Brussels,index,2012-Q3,149.1378,bis_dpp
+XM,Brussels,index,2012-Q4,146.1763,bis_dpp
+XM,Brussels,index,2013-Q1,147.0437,bis_dpp
+XM,Brussels,index,2013-Q2,162.1586,bis_dpp
+XM,Brussels,index,2013-Q3,157.6858,bis_dpp
+XM,Brussels,index,2013-Q4,152.9098,bis_dpp
+XM,Brussels,index,2014-Q1,148.066,bis_dpp
+XM,Brussels,index,2014-Q2,154.986,bis_dpp
+XM,Brussels,index,2014-Q3,165.2498,bis_dpp
+XM,Brussels,index,2014-Q4,161.3359,bis_dpp
+XM,Brussels,index,2015-Q1,163.3528,bis_dpp
+XM,Brussels,index,2015-Q2,158.8208,bis_dpp
+XM,Brussels,index,2015-Q3,157.6581,bis_dpp
+XM,Brussels,index,2015-Q4,161.2749,bis_dpp
+XM,Brussels,index,2016-Q1,154.9798,bis_dpp
+XM,Brussels,index,2016-Q2,160.133,bis_dpp
+XM,Brussels,index,2016-Q3,164.4879,bis_dpp
+XM,Brussels,index,2016-Q4,165.5914,bis_dpp
+XM,Brussels,index,2017-Q1,162.9671,bis_dpp
+XM,Brussels,index,2017-Q2,162.72,bis_dpp
+XM,Brussels,index,2017-Q3,164.6994,bis_dpp
+XM,Brussels,index,2017-Q4,166.176,bis_dpp
+XM,Brussels,index,2018-Q1,177.1487,bis_dpp
+XM,Brussels,index,2018-Q2,163.438,bis_dpp
+XM,Brussels,index,2018-Q3,173.9787,bis_dpp
+XM,Brussels,index,2018-Q4,173.2379,bis_dpp
+XM,Brussels,index,2019-Q1,178.561,bis_dpp
+XM,Brussels,index,2019-Q2,172.9091,bis_dpp
+XM,Brussels,index,2019-Q3,182.3691,bis_dpp
+XM,Brussels,index,2019-Q4,187.8391,bis_dpp
+XM,Brussels,index,2020-Q1,180.032,bis_dpp
+XM,Brussels,index,2020-Q2,199.9296,bis_dpp
+XM,Brussels,index,2020-Q3,196.2497,bis_dpp
+XM,Brussels,index,2020-Q4,200.0556,bis_dpp
+XM,Brussels,index,2021-Q1,200.4628,bis_dpp
+XM,Brussels,index,2021-Q2,200.5485,bis_dpp
+XM,Brussels,index,2021-Q3,212.3329,bis_dpp
+XM,Brussels,index,2021-Q4,227.9209,bis_dpp
+XM,Brussels,index,2022-Q1,218.9565,bis_dpp
+XM,Brussels,index,2022-Q2,217.2267,bis_dpp
+XM,Brussels,index,2022-Q3,231.8702,bis_dpp
+XM,Brussels,index,2022-Q4,232.2173,bis_dpp
+XM,Brussels,index,2023-Q1,217.2383,bis_dpp
+XM,Brussels,index,2023-Q2,204.1408,bis_dpp
+XM,Brussels,index,2023-Q3,208.559,bis_dpp
+XM,Brussels,index,2023-Q4,208.8694,bis_dpp
+XM,Brussels,index,2024-Q1,204.213,bis_dpp
+XM,Brussels,index,2024-Q2,208.7147,bis_dpp
+XM,Brussels,index,2024-Q3,208.9194,bis_dpp
+XM,Brussels,index,2024-Q4,214.0997,bis_dpp
+XM,Brussels,index,2025-Q1,230.2982,bis_dpp
+XM,Brussels,index,2025-Q2,204.072,bis_dpp
+XM,Brussels,index,2025-Q3,211.2046,bis_dpp
+XM,Brussels,index,2025-Q4,211.1364,bis_dpp
+XM,Brussels,index,2026-Q1,225.8796,bis_dpp
+XM,Brussels,index,2026-Q2,233.8301,bis_dpp
+XM,Madrid,index,2007-Q1,157.2,bis_dpp
+XM,Madrid,index,2007-Q2,160.7,bis_dpp
+XM,Madrid,index,2007-Q3,161.3,bis_dpp
+XM,Madrid,index,2007-Q4,154.5,bis_dpp
+XM,Madrid,index,2008-Q1,152.9,bis_dpp
+XM,Madrid,index,2008-Q2,153.0,bis_dpp
+XM,Madrid,index,2008-Q3,150.0,bis_dpp
+XM,Madrid,index,2008-Q4,142.0,bis_dpp
+XM,Madrid,index,2009-Q1,135.8,bis_dpp
+XM,Madrid,index,2009-Q2,134.0,bis_dpp
+XM,Madrid,index,2009-Q3,133.5,bis_dpp
+XM,Madrid,index,2009-Q4,132.6,bis_dpp
+XM,Madrid,index,2010-Q1,132.7,bis_dpp
+XM,Madrid,index,2010-Q2,135.9,bis_dpp
+XM,Madrid,index,2010-Q3,134.6,bis_dpp
+XM,Madrid,index,2010-Q4,134.8,bis_dpp
+XM,Madrid,index,2011-Q1,128.6,bis_dpp
+XM,Madrid,index,2011-Q2,126.3,bis_dpp
+XM,Madrid,index,2011-Q3,122.7,bis_dpp
+XM,Madrid,index,2011-Q4,113.7,bis_dpp
+XM,Madrid,index,2012-Q1,110.3,bis_dpp
+XM,Madrid,index,2012-Q2,106.0,bis_dpp
+XM,Madrid,index,2012-Q3,100.7,bis_dpp
+XM,Madrid,index,2012-Q4,98.8,bis_dpp
+XM,Madrid,index,2013-Q1,91.8,bis_dpp
+XM,Madrid,index,2013-Q2,92.1,bis_dpp
+XM,Madrid,index,2013-Q3,92.5,bis_dpp
+XM,Madrid,index,2013-Q4,92.4,bis_dpp
+XM,Madrid,index,2014-Q1,93.5,bis_dpp
+XM,Madrid,index,2014-Q2,94.5,bis_dpp
+XM,Madrid,index,2014-Q3,95.1,bis_dpp
+XM,Madrid,index,2014-Q4,95.1,bis_dpp
+XM,Madrid,index,2015-Q1,95.7,bis_dpp
+XM,Madrid,index,2015-Q2,100.5,bis_dpp
+XM,Madrid,index,2015-Q3,101.7,bis_dpp
+XM,Madrid,index,2015-Q4,102.1,bis_dpp
+XM,Madrid,index,2016-Q1,105.0,bis_dpp
+XM,Madrid,index,2016-Q2,108.3,bis_dpp
+XM,Madrid,index,2016-Q3,109.6,bis_dpp
+XM,Madrid,index,2016-Q4,111.3,bis_dpp
+XM,Madrid,index,2017-Q1,116.2,bis_dpp
+XM,Madrid,index,2017-Q2,120.1,bis_dpp
+XM,Madrid,index,2017-Q3,123.2,bis_dpp
+XM,Madrid,index,2017-Q4,124.5,bis_dpp
+XM,Madrid,index,2018-Q1,128.0,bis_dpp
+XM,Madrid,index,2018-Q2,132.3,bis_dpp
+XM,Madrid,index,2018-Q3,136.6,bis_dpp
+XM,Madrid,index,2018-Q4,136.5,bis_dpp
+XM,Madrid,index,2019-Q1,140.4,bis_dpp
+XM,Madrid,index,2019-Q2,140.8,bis_dpp
+XM,Madrid,index,2019-Q3,142.9,bis_dpp
+XM,Madrid,index,2019-Q4,140.5,bis_dpp
+XM,Madrid,index,2020-Q1,144.0,bis_dpp
+XM,Madrid,index,2020-Q2,143.1,bis_dpp
+XM,Madrid,index,2020-Q3,144.6,bis_dpp
+XM,Madrid,index,2020-Q4,142.5,bis_dpp
+XM,Madrid,index,2021-Q1,143.9,bis_dpp
+XM,Madrid,index,2021-Q2,145.8,bis_dpp
+XM,Madrid,index,2021-Q3,148.7,bis_dpp
+XM,Madrid,index,2021-Q4,150.3,bis_dpp
+XM,Madrid,index,2022-Q1,154.7,bis_dpp
+XM,Madrid,index,2022-Q2,156.5,bis_dpp
+XM,Madrid,index,2022-Q3,160.0,bis_dpp
+XM,Madrid,index,2022-Q4,157.8,bis_dpp
+XM,Madrid,index,2023-Q1,159.4,bis_dpp
+XM,Madrid,index,2023-Q2,162.8,bis_dpp
+XM,Madrid,index,2023-Q3,166.6,bis_dpp
+XM,Madrid,index,2023-Q4,164.8,bis_dpp
+XM,Madrid,index,2024-Q1,168.8,bis_dpp
+XM,Madrid,index,2024-Q2,174.5,bis_dpp
+XM,Madrid,index,2024-Q3,178.7,bis_dpp
+XM,Madrid,index,2024-Q4,181.8,bis_dpp
+XM,Madrid,index,2025-Q1,188.4,bis_dpp
+XM,Madrid,index,2025-Q2,197.7,bis_dpp
+XM,Madrid,index,2025-Q3,204.1,bis_dpp
+XM,Madrid,index,2025-Q4,207.7,bis_dpp
+XM,Milan,index,2010-Q1,126.6,bis_dpp
+XM,Milan,index,2010-Q2,128.5,bis_dpp
+XM,Milan,index,2010-Q3,128.9,bis_dpp
+XM,Milan,index,2010-Q4,127.5,bis_dpp
+XM,Milan,index,2011-Q1,124.4,bis_dpp
+XM,Milan,index,2011-Q2,125.2,bis_dpp
+XM,Milan,index,2011-Q3,127.7,bis_dpp
+XM,Milan,index,2011-Q4,124.5,bis_dpp
+XM,Milan,index,2012-Q1,123.6,bis_dpp
+XM,Milan,index,2012-Q2,122.3,bis_dpp
+XM,Milan,index,2012-Q3,117.1,bis_dpp
+XM,Milan,index,2012-Q4,116.2,bis_dpp
+XM,Milan,index,2013-Q1,113.8,bis_dpp
+XM,Milan,index,2013-Q2,111.0,bis_dpp
+XM,Milan,index,2013-Q3,109.4,bis_dpp
+XM,Milan,index,2013-Q4,108.2,bis_dpp
+XM,Milan,index,2014-Q1,108.4,bis_dpp
+XM,Milan,index,2014-Q2,106.4,bis_dpp
+XM,Milan,index,2014-Q3,103.6,bis_dpp
+XM,Milan,index,2014-Q4,102.0,bis_dpp
+XM,Milan,index,2015-Q1,98.7,bis_dpp
+XM,Milan,index,2015-Q2,97.5,bis_dpp
+XM,Milan,index,2015-Q3,101.3,bis_dpp
+XM,Milan,index,2015-Q4,102.5,bis_dpp
+XM,Milan,index,2016-Q1,102.2,bis_dpp
+XM,Milan,index,2016-Q2,103.0,bis_dpp
+XM,Milan,index,2016-Q3,104.8,bis_dpp
+XM,Milan,index,2016-Q4,104.5,bis_dpp
+XM,Milan,index,2017-Q1,107.0,bis_dpp
+XM,Milan,index,2017-Q2,106.8,bis_dpp
+XM,Milan,index,2017-Q3,108.6,bis_dpp
+XM,Milan,index,2017-Q4,107.1,bis_dpp
+XM,Milan,index,2018-Q1,108.4,bis_dpp
+XM,Milan,index,2018-Q2,110.3,bis_dpp
+XM,Milan,index,2018-Q3,111.7,bis_dpp
+XM,Milan,index,2018-Q4,111.8,bis_dpp
+XM,Milan,index,2019-Q1,115.9,bis_dpp
+XM,Milan,index,2019-Q2,117.9,bis_dpp
+XM,Milan,index,2019-Q3,122.2,bis_dpp
+XM,Milan,index,2019-Q4,125.8,bis_dpp
+XM,Milan,index,2020-Q1,131.6,bis_dpp
+XM,Milan,index,2020-Q2,136.7,bis_dpp
+XM,Milan,index,2020-Q3,136.9,bis_dpp
+XM,Milan,index,2020-Q4,135.1,bis_dpp
+XM,Milan,index,2021-Q1,138.5,bis_dpp
+XM,Milan,index,2021-Q2,138.6,bis_dpp
+XM,Milan,index,2021-Q3,142.1,bis_dpp
+XM,Milan,index,2021-Q4,143.5,bis_dpp
+XM,Milan,index,2022-Q1,147.4,bis_dpp
+XM,Milan,index,2022-Q2,150.2,bis_dpp
+XM,Milan,index,2022-Q3,150.0,bis_dpp
+XM,Milan,index,2022-Q4,152.7,bis_dpp
+XM,Milan,index,2023-Q1,156.0,bis_dpp
+XM,Milan,index,2023-Q2,160.9,bis_dpp
+XM,Milan,index,2023-Q3,156.6,bis_dpp
+XM,Milan,index,2023-Q4,159.0,bis_dpp
+XM,Paris,index,1992-Q1,39.7,bis_dpp
+XM,Paris,index,1992-Q2,38.6,bis_dpp
+XM,Paris,index,1992-Q3,38.5,bis_dpp
+XM,Paris,index,1992-Q4,38.1,bis_dpp
+XM,Paris,index,1993-Q1,35.9,bis_dpp
+XM,Paris,index,1993-Q2,35.9,bis_dpp
+XM,Paris,index,1993-Q3,36.0,bis_dpp
+XM,Paris,index,1993-Q4,35.8,bis_dpp
+XM,Paris,index,1994-Q1,35.4,bis_dpp
+XM,Paris,index,1994-Q2,35.7,bis_dpp
+XM,Paris,index,1994-Q3,35.8,bis_dpp
+XM,Paris,index,1994-Q4,34.8,bis_dpp
+XM,Paris,index,1995-Q1,34.0,bis_dpp
+XM,Paris,index,1995-Q2,33.3,bis_dpp
+XM,Paris,index,1995-Q3,33.0,bis_dpp
+XM,Paris,index,1995-Q4,32.0,bis_dpp
+XM,Paris,index,1996-Q1,30.6,bis_dpp
+XM,Paris,index,1996-Q2,30.4,bis_dpp
+XM,Paris,index,1996-Q3,30.4,bis_dpp
+XM,Paris,index,1996-Q4,30.0,bis_dpp
+XM,Paris,index,1997-Q1,28.6,bis_dpp
+XM,Paris,index,1997-Q2,28.9,bis_dpp
+XM,Paris,index,1997-Q3,28.6,bis_dpp
+XM,Paris,index,1997-Q4,28.4,bis_dpp
+XM,Paris,index,1998-Q1,28.2,bis_dpp
+XM,Paris,index,1998-Q2,28.7,bis_dpp
+XM,Paris,index,1998-Q3,29.1,bis_dpp
+XM,Paris,index,1998-Q4,29.5,bis_dpp
+XM,Paris,index,1999-Q1,30.3,bis_dpp
+XM,Paris,index,1999-Q2,31.0,bis_dpp
+XM,Paris,index,1999-Q3,32.4,bis_dpp
+XM,Paris,index,1999-Q4,33.1,bis_dpp
+XM,Paris,index,2000-Q1,34.4,bis_dpp
+XM,Paris,index,2000-Q2,35.7,bis_dpp
+XM,Paris,index,2000-Q3,36.9,bis_dpp
+XM,Paris,index,2000-Q4,37.2,bis_dpp
+XM,Paris,index,2001-Q1,38.3,bis_dpp
+XM,Paris,index,2001-Q2,38.7,bis_dpp
+XM,Paris,index,2001-Q3,40.3,bis_dpp
+XM,Paris,index,2001-Q4,40.5,bis_dpp
+XM,Paris,index,2002-Q1,40.8,bis_dpp
+XM,Paris,index,2002-Q2,41.9,bis_dpp
+XM,Paris,index,2002-Q3,44.0,bis_dpp
+XM,Paris,index,2002-Q4,44.9,bis_dpp
+XM,Paris,index,2003-Q1,46.0,bis_dpp
+XM,Paris,index,2003-Q2,47.7,bis_dpp
+XM,Paris,index,2003-Q3,49.3,bis_dpp
+XM,Paris,index,2003-Q4,50.2,bis_dpp
+XM,Paris,index,2004-Q1,51.8,bis_dpp
+XM,Paris,index,2004-Q2,54.1,bis_dpp
+XM,Paris,index,2004-Q3,55.9,bis_dpp
+XM,Paris,index,2004-Q4,57.5,bis_dpp
+XM,Paris,index,2005-Q1,59.3,bis_dpp
+XM,Paris,index,2005-Q2,61.2,bis_dpp
+XM,Paris,index,2005-Q3,64.5,bis_dpp
+XM,Paris,index,2005-Q4,65.6,bis_dpp
+XM,Paris,index,2006-Q1,67.4,bis_dpp
+XM,Paris,index,2006-Q2,68.9,bis_dpp
+XM,Paris,index,2006-Q3,71.0,bis_dpp
+XM,Paris,index,2006-Q4,71.9,bis_dpp
+XM,Paris,index,2007-Q1,73.4,bis_dpp
+XM,Paris,index,2007-Q2,74.7,bis_dpp
+XM,Paris,index,2007-Q3,77.4,bis_dpp
+XM,Paris,index,2007-Q4,79.4,bis_dpp
+XM,Paris,index,2008-Q1,80.4,bis_dpp
+XM,Paris,index,2008-Q2,81.7,bis_dpp
+XM,Paris,index,2008-Q3,83.0,bis_dpp
+XM,Paris,index,2008-Q4,81.1,bis_dpp
+XM,Paris,index,2009-Q1,78.7,bis_dpp
+XM,Paris,index,2009-Q2,75.8,bis_dpp
+XM,Paris,index,2009-Q3,77.3,bis_dpp
+XM,Paris,index,2009-Q4,78.0,bis_dpp
+XM,Paris,index,2010-Q1,80.9,bis_dpp
+XM,Paris,index,2010-Q2,83.8,bis_dpp
+XM,Paris,index,2010-Q3,88.3,bis_dpp
+XM,Paris,index,2010-Q4,92.0,bis_dpp
+XM,Paris,index,2011-Q1,97.1,bis_dpp
+XM,Paris,index,2011-Q2,102.3,bis_dpp
+XM,Paris,index,2011-Q3,105.3,bis_dpp
+XM,Paris,index,2011-Q4,105.0,bis_dpp
+XM,Paris,index,2012-Q1,103.9,bis_dpp
+XM,Paris,index,2012-Q2,105.1,bis_dpp
+XM,Paris,index,2012-Q3,106.1,bis_dpp
+XM,Paris,index,2012-Q4,103.9,bis_dpp
+XM,Paris,index,2013-Q1,104.2,bis_dpp
+XM,Paris,index,2013-Q2,103.3,bis_dpp
+XM,Paris,index,2013-Q3,104.0,bis_dpp
+XM,Paris,index,2013-Q4,102.4,bis_dpp
+XM,Paris,index,2014-Q1,102.4,bis_dpp
+XM,Paris,index,2014-Q2,102.3,bis_dpp
+XM,Paris,index,2014-Q3,101.8,bis_dpp
+XM,Paris,index,2014-Q4,100.0,bis_dpp
+XM,Paris,index,2015-Q1,99.5,bis_dpp
+XM,Paris,index,2015-Q2,99.3,bis_dpp
+XM,Paris,index,2015-Q3,100.8,bis_dpp
+XM,Paris,index,2015-Q4,100.5,bis_dpp
+XM,Paris,index,2016-Q1,100.8,bis_dpp
+XM,Paris,index,2016-Q2,102.3,bis_dpp
+XM,Paris,index,2016-Q3,104.3,bis_dpp
+XM,Paris,index,2016-Q4,104.8,bis_dpp
+XM,Paris,index,2017-Q1,106.4,bis_dpp
+XM,Paris,index,2017-Q2,109.2,bis_dpp
+XM,Paris,index,2017-Q3,112.5,bis_dpp
+XM,Paris,index,2017-Q4,113.9,bis_dpp
+XM,Paris,index,2018-Q1,114.3,bis_dpp
+XM,Paris,index,2018-Q2,117.1,bis_dpp
+XM,Paris,index,2018-Q3,119.5,bis_dpp
+XM,Paris,index,2018-Q4,120.4,bis_dpp
+XM,Paris,index,2019-Q1,121.8,bis_dpp
+XM,Paris,index,2019-Q2,124.5,bis_dpp
+XM,Paris,index,2019-Q3,126.9,bis_dpp
+XM,Paris,index,2019-Q4,128.5,bis_dpp
+XM,Paris,index,2020-Q1,131.6,bis_dpp
+XM,Paris,index,2020-Q2,134.2,bis_dpp
+XM,Paris,index,2020-Q3,135.7,bis_dpp
+XM,Paris,index,2020-Q4,135.5,bis_dpp
+XM,Paris,index,2021-Q1,133.9,bis_dpp
+XM,Paris,index,2021-Q2,134.2,bis_dpp
+XM,Paris,index,2021-Q3,135.6,bis_dpp
+XM,Paris,index,2021-Q4,133.3,bis_dpp
+XM,Paris,index,2022-Q1,132.3,bis_dpp
+XM,Paris,index,2022-Q2,133.2,bis_dpp
+XM,Paris,index,2022-Q3,133.9,bis_dpp
+XM,Paris,index,2022-Q4,131.9,bis_dpp
+XM,Paris,index,2023-Q1,129.7,bis_dpp
+XM,Paris,index,2023-Q2,127.4,bis_dpp
+XM,Paris,index,2023-Q3,126.7,bis_dpp
+XM,Paris,index,2023-Q4,122.8,bis_dpp
+XM,Paris,index,2024-Q1,119.4,bis_dpp
+XM,Paris,index,2024-Q2,119.0,bis_dpp
+XM,Paris,index,2024-Q3,119.7,bis_dpp
+XM,Paris,index,2024-Q4,119.0,bis_dpp
+XM,Paris,index,2025-Q1,119.6,bis_dpp
+XM,Paris,index,2025-Q2,119.5,bis_dpp
+XM,Paris,index,2025-Q3,122.0,bis_dpp
+XM,Paris,index,2025-Q4,120.8,bis_dpp
+XM,Paris,index,2026-Q1,120.4,bis_dpp
+XM,Paris,index,2026-Q2,120.3,bis_dpp
+XM,Rome,index,2010-Q1,129.7,bis_dpp
+XM,Rome,index,2010-Q2,130.9,bis_dpp
+XM,Rome,index,2010-Q3,129.2,bis_dpp
+XM,Rome,index,2010-Q4,133.2,bis_dpp
+XM,Rome,index,2011-Q1,134.1,bis_dpp
+XM,Rome,index,2011-Q2,138.8,bis_dpp
+XM,Rome,index,2011-Q3,138.2,bis_dpp
+XM,Rome,index,2011-Q4,136.9,bis_dpp
+XM,Rome,index,2012-Q1,136.7,bis_dpp
+XM,Rome,index,2012-Q2,135.3,bis_dpp
+XM,Rome,index,2012-Q3,131.9,bis_dpp
+XM,Rome,index,2012-Q4,129.0,bis_dpp
+XM,Rome,index,2013-Q1,122.5,bis_dpp
+XM,Rome,index,2013-Q2,119.6,bis_dpp
+XM,Rome,index,2013-Q3,119.1,bis_dpp
+XM,Rome,index,2013-Q4,116.1,bis_dpp
+XM,Rome,index,2014-Q1,110.7,bis_dpp
+XM,Rome,index,2014-Q2,107.2,bis_dpp
+XM,Rome,index,2014-Q3,105.5,bis_dpp
+XM,Rome,index,2014-Q4,104.0,bis_dpp
+XM,Rome,index,2015-Q1,99.0,bis_dpp
+XM,Rome,index,2015-Q2,99.5,bis_dpp
+XM,Rome,index,2015-Q3,100.9,bis_dpp
+XM,Rome,index,2015-Q4,100.6,bis_dpp
+XM,Rome,index,2016-Q1,101.2,bis_dpp
+XM,Rome,index,2016-Q2,100.8,bis_dpp
+XM,Rome,index,2016-Q3,101.9,bis_dpp
+XM,Rome,index,2016-Q4,100.6,bis_dpp
+XM,Rome,index,2017-Q1,98.8,bis_dpp
+XM,Rome,index,2017-Q2,100.3,bis_dpp
+XM,Rome,index,2017-Q3,98.6,bis_dpp
+XM,Rome,index,2017-Q4,97.8,bis_dpp
+XM,Rome,index,2018-Q1,97.6,bis_dpp
+XM,Rome,index,2018-Q2,98.4,bis_dpp
+XM,Rome,index,2018-Q3,96.9,bis_dpp
+XM,Rome,index,2018-Q4,95.8,bis_dpp
+XM,Rome,index,2019-Q1,92.8,bis_dpp
+XM,Rome,index,2019-Q2,95.6,bis_dpp
+XM,Rome,index,2019-Q3,93.8,bis_dpp
+XM,Rome,index,2019-Q4,94.0,bis_dpp
+XM,Rome,index,2020-Q1,94.5,bis_dpp
+XM,Rome,index,2020-Q2,96.9,bis_dpp
+XM,Rome,index,2020-Q3,94.5,bis_dpp
+XM,Rome,index,2020-Q4,93.4,bis_dpp
+XM,Rome,index,2021-Q1,96.1,bis_dpp
+XM,Rome,index,2021-Q2,96.5,bis_dpp
+XM,Rome,index,2021-Q3,98.0,bis_dpp
+XM,Rome,index,2021-Q4,98.3,bis_dpp
+XM,Rome,index,2022-Q1,99.3,bis_dpp
+XM,Rome,index,2022-Q2,101.0,bis_dpp
+XM,Rome,index,2022-Q3,101.3,bis_dpp
+XM,Rome,index,2022-Q4,101.1,bis_dpp
+XM,Rome,index,2023-Q1,101.2,bis_dpp
+XM,Rome,index,2023-Q2,101.6,bis_dpp
+XM,Rome,index,2023-Q3,100.9,bis_dpp
+XM,Rome,index,2023-Q4,102.4,bis_dpp
+XM,Vienna,index,1986-Q3,43.6,bis_dpp
+XM,Vienna,index,1986-Q4,41.2,bis_dpp
+XM,Vienna,index,1987-Q1,44.6,bis_dpp
+XM,Vienna,index,1987-Q2,48.9,bis_dpp
+XM,Vienna,index,1987-Q3,43.4,bis_dpp
+XM,Vienna,index,1987-Q4,47.3,bis_dpp
+XM,Vienna,index,1988-Q1,45.1,bis_dpp
+XM,Vienna,index,1988-Q2,48.4,bis_dpp
+XM,Vienna,index,1988-Q3,57.9,bis_dpp
+XM,Vienna,index,1988-Q4,53.9,bis_dpp
+XM,Vienna,index,1989-Q1,55.4,bis_dpp
+XM,Vienna,index,1989-Q2,57.9,bis_dpp
+XM,Vienna,index,1989-Q3,64.2,bis_dpp
+XM,Vienna,index,1989-Q4,65.1,bis_dpp
+XM,Vienna,index,1990-Q1,66.0,bis_dpp
+XM,Vienna,index,1990-Q2,74.3,bis_dpp
+XM,Vienna,index,1990-Q3,82.5,bis_dpp
+XM,Vienna,index,1990-Q4,83.3,bis_dpp
+XM,Vienna,index,1991-Q1,85.5,bis_dpp
+XM,Vienna,index,1991-Q2,90.8,bis_dpp
+XM,Vienna,index,1991-Q3,95.0,bis_dpp
+XM,Vienna,index,1991-Q4,97.7,bis_dpp
+XM,Vienna,index,1992-Q1,104.7,bis_dpp
+XM,Vienna,index,1992-Q2,109.8,bis_dpp
+XM,Vienna,index,1992-Q3,106.1,bis_dpp
+XM,Vienna,index,1992-Q4,107.4,bis_dpp
+XM,Vienna,index,1993-Q1,104.3,bis_dpp
+XM,Vienna,index,1993-Q2,108.5,bis_dpp
+XM,Vienna,index,1993-Q3,107.3,bis_dpp
+XM,Vienna,index,1993-Q4,109.5,bis_dpp
+XM,Vienna,index,1994-Q1,109.9,bis_dpp
+XM,Vienna,index,1994-Q2,107.9,bis_dpp
+XM,Vienna,index,1994-Q3,108.3,bis_dpp
+XM,Vienna,index,1994-Q4,105.2,bis_dpp
+XM,Vienna,index,1995-Q1,107.3,bis_dpp
+XM,Vienna,index,1995-Q2,105.6,bis_dpp
+XM,Vienna,index,1995-Q3,111.6,bis_dpp
+XM,Vienna,index,1995-Q4,102.8,bis_dpp
+XM,Vienna,index,1996-Q1,108.9,bis_dpp
+XM,Vienna,index,1996-Q2,110.2,bis_dpp
+XM,Vienna,index,1996-Q3,105.5,bis_dpp
+XM,Vienna,index,1996-Q4,103.5,bis_dpp
+XM,Vienna,index,1997-Q1,108.0,bis_dpp
+XM,Vienna,index,1997-Q2,105.9,bis_dpp
+XM,Vienna,index,1997-Q3,110.7,bis_dpp
+XM,Vienna,index,1997-Q4,106.6,bis_dpp
+XM,Vienna,index,1998-Q1,105.1,bis_dpp
+XM,Vienna,index,1998-Q2,101.0,bis_dpp
+XM,Vienna,index,1998-Q3,104.0,bis_dpp
+XM,Vienna,index,1998-Q4,100.1,bis_dpp
+XM,Vienna,index,1999-Q1,100.5,bis_dpp
+XM,Vienna,index,1999-Q2,100.6,bis_dpp
+XM,Vienna,index,1999-Q3,100.0,bis_dpp
+XM,Vienna,index,1999-Q4,98.9,bis_dpp
+XM,Vienna,index,2000-Q1,100.3,bis_dpp
+XM,Vienna,index,2000-Q2,100.1,bis_dpp
+XM,Vienna,index,2000-Q3,100.2,bis_dpp
+XM,Vienna,index,2000-Q4,99.4,bis_dpp
+XM,Vienna,index,2001-Q1,98.4,bis_dpp
+XM,Vienna,index,2001-Q2,98.5,bis_dpp
+XM,Vienna,index,2001-Q3,96.4,bis_dpp
+XM,Vienna,index,2001-Q4,93.0,bis_dpp
+XM,Vienna,index,2002-Q1,98.7,bis_dpp
+XM,Vienna,index,2002-Q2,98.4,bis_dpp
+XM,Vienna,index,2002-Q3,97.8,bis_dpp
+XM,Vienna,index,2002-Q4,98.6,bis_dpp
+XM,Vienna,index,2003-Q1,100.2,bis_dpp
+XM,Vienna,index,2003-Q2,99.3,bis_dpp
+XM,Vienna,index,2003-Q3,98.4,bis_dpp
+XM,Vienna,index,2003-Q4,95.6,bis_dpp
+XM,Vienna,index,2004-Q1,97.8,bis_dpp
+XM,Vienna,index,2004-Q2,99.1,bis_dpp
+XM,Vienna,index,2004-Q3,99.1,bis_dpp
+XM,Vienna,index,2004-Q4,99.4,bis_dpp
+XM,Vienna,index,2005-Q1,100.8,bis_dpp
+XM,Vienna,index,2005-Q2,104.5,bis_dpp
+XM,Vienna,index,2005-Q3,107.4,bis_dpp
+XM,Vienna,index,2005-Q4,107.3,bis_dpp
+XM,Vienna,index,2006-Q1,110.8,bis_dpp
+XM,Vienna,index,2006-Q2,111.8,bis_dpp
+XM,Vienna,index,2006-Q3,115.5,bis_dpp
+XM,Vienna,index,2006-Q4,115.5,bis_dpp
+XM,Vienna,index,2007-Q1,118.0,bis_dpp
+XM,Vienna,index,2007-Q2,120.6,bis_dpp
+XM,Vienna,index,2007-Q3,120.4,bis_dpp
+XM,Vienna,index,2007-Q4,117.8,bis_dpp
+XM,Vienna,index,2008-Q1,122.2,bis_dpp
+XM,Vienna,index,2008-Q2,123.4,bis_dpp
+XM,Vienna,index,2008-Q3,126.4,bis_dpp
+XM,Vienna,index,2008-Q4,130.0,bis_dpp
+XM,Vienna,index,2009-Q1,129.5,bis_dpp
+XM,Vienna,index,2009-Q2,135.2,bis_dpp
+XM,Vienna,index,2009-Q3,133.4,bis_dpp
+XM,Vienna,index,2009-Q4,135.8,bis_dpp
+XM,Vienna,index,2010-Q1,138.1,bis_dpp
+XM,Vienna,index,2010-Q2,142.2,bis_dpp
+XM,Vienna,index,2010-Q3,146.5,bis_dpp
+XM,Vienna,index,2010-Q4,148.7,bis_dpp
+XM,Vienna,index,2011-Q1,153.8,bis_dpp
+XM,Vienna,index,2011-Q2,150.7,bis_dpp
+XM,Vienna,index,2011-Q3,158.6,bis_dpp
+XM,Vienna,index,2011-Q4,161.4,bis_dpp
+XM,Vienna,index,2012-Q1,170.0,bis_dpp
+XM,Vienna,index,2012-Q2,181.0,bis_dpp
+XM,Vienna,index,2012-Q3,186.3,bis_dpp
+XM,Vienna,index,2012-Q4,185.4,bis_dpp
+XM,Vienna,index,2013-Q1,189.3,bis_dpp
+XM,Vienna,index,2013-Q2,196.0,bis_dpp
+XM,Vienna,index,2013-Q3,197.8,bis_dpp
+XM,Vienna,index,2013-Q4,202.3,bis_dpp
+XM,Vienna,index,2014-Q1,204.6,bis_dpp
+XM,Vienna,index,2014-Q2,207.3,bis_dpp
+XM,Vienna,index,2014-Q3,202.2,bis_dpp
+XM,Vienna,index,2014-Q4,204.4,bis_dpp
+XM,Vienna,index,2015-Q1,206.8,bis_dpp
+XM,Vienna,index,2015-Q2,208.7,bis_dpp
+XM,Vienna,index,2015-Q3,209.0,bis_dpp
+XM,Vienna,index,2015-Q4,212.3,bis_dpp
+XM,Vienna,index,2016-Q1,220.3,bis_dpp
+XM,Vienna,index,2016-Q2,215.0,bis_dpp
+XM,Vienna,index,2016-Q3,215.3,bis_dpp
+XM,Vienna,index,2016-Q4,219.4,bis_dpp
+XM,Vienna,index,2017-Q1,220.0,bis_dpp
+XM,Vienna,index,2017-Q2,220.1,bis_dpp
+XM,Vienna,index,2017-Q3,221.6,bis_dpp
+XM,Vienna,index,2017-Q4,220.1,bis_dpp
+XM,Vienna,index,2018-Q1,227.7,bis_dpp
+XM,Vienna,index,2018-Q2,229.4,bis_dpp
+XM,Vienna,index,2018-Q3,236.1,bis_dpp
+XM,Vienna,index,2018-Q4,234.8,bis_dpp
+XM,Vienna,index,2019-Q1,240.3,bis_dpp
+XM,Vienna,index,2019-Q2,245.4,bis_dpp
+XM,Vienna,index,2019-Q3,242.4,bis_dpp
+XM,Vienna,index,2019-Q4,244.9,bis_dpp
+XM,Vienna,index,2020-Q1,249.5,bis_dpp
+XM,Vienna,index,2020-Q2,255.6,bis_dpp
+XM,Vienna,index,2020-Q3,265.1,bis_dpp
+XM,Vienna,index,2020-Q4,268.0,bis_dpp
+XM,Vienna,index,2021-Q1,276.8,bis_dpp
+XM,Vienna,index,2021-Q2,283.0,bis_dpp
+XM,Vienna,index,2021-Q3,292.2,bis_dpp
+XM,Vienna,index,2021-Q4,298.4,bis_dpp
+XM,Vienna,index,2022-Q1,309.6,bis_dpp
+XM,Vienna,index,2022-Q2,319.9,bis_dpp
+XM,Vienna,index,2022-Q3,320.4,bis_dpp
+XM,Vienna,index,2022-Q4,312.6,bis_dpp
+XM,Vienna,index,2023-Q1,312.1,bis_dpp
+XM,Vienna,index,2023-Q2,310.1,bis_dpp
+XM,Vienna,index,2023-Q3,307.6,bis_dpp
+XM,Vienna,index,2023-Q4,303.2,bis_dpp
+XM,Vienna,index,2024-Q1,296.8,bis_dpp
+XM,Vienna,index,2024-Q2,300.1,bis_dpp
+XM,Vienna,index,2024-Q3,296.8,bis_dpp
+XM,Vienna,index,2024-Q4,296.9,bis_dpp
+XM,Vienna,index,2025-Q1,300.4,bis_dpp
+XM,Vienna,index,2025-Q2,299.2,bis_dpp
+XM,Vienna,index,2025-Q3,302.2,bis_dpp
+XM,Vienna,index,2025-Q4,305.6,bis_dpp
+XM,Vienna,index,2026-Q1,307.3,bis_dpp
+XM,Vienna,index,2026-Q2,307.8,bis_dpp
