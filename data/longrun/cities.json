@@ -1,0 +1,31 @@
+[
+  { "country": "AU", "city": "Perth",     "name": "珀斯",     "source": "local" },
+  { "country": "AU", "city": "Sydney",    "name": "悉尼",     "source": "local" },
+  { "country": "AU", "city": "Melbourne", "name": "墨尔本",   "source": "local" },
+  { "country": "AU", "city": "Brisbane",  "name": "布里斯班", "source": "local" },
+  { "country": "AU", "city": "Adelaide",  "name": "阿德莱德", "source": "local" },
+  { "country": "AU", "city": "Hobart",    "name": "霍巴特",   "source": "local" },
+  { "country": "AU", "city": "Darwin",    "name": "达尔文",   "source": "local" },
+  { "country": "AU", "city": "Canberra",  "name": "堪培拉",   "source": "local" },
+
+  { "country": "US", "city": "New York",      "name": "纽约",   "source": "fhfa", "id": "35614" },
+  { "country": "US", "city": "Los Angeles",   "name": "洛杉矶", "source": "fhfa", "id": "31084" },
+  { "country": "US", "city": "Chicago",       "name": "芝加哥", "source": "fhfa", "id": "16984" },
+  { "country": "US", "city": "Dallas",        "name": "达拉斯", "source": "fhfa", "id": "19124" },
+  { "country": "US", "city": "Houston",       "name": "休斯敦", "source": "fhfa", "id": "26420" },
+  { "country": "US", "city": "Washington DC", "name": "华盛顿", "source": "fhfa", "id": "47764" },
+  { "country": "US", "city": "Miami",         "name": "迈阿密", "source": "fhfa", "id": "33124" },
+  { "country": "US", "city": "San Francisco", "name": "旧金山", "source": "fhfa", "id": "41884" },
+
+  { "country": "CN", "city": "China average", "name": "全国新房均价（年度）", "source": "local" },
+  { "country": "CN", "city": "Beijing",       "name": "北京（二手住宅）", "source": "bis_dpp", "id": "M.CN.2.8.1.1.1.0" },
+
+  { "country": "XM", "city": "Paris",     "name": "巴黎",       "source": "bis_dpp", "id": "Q.FR.2.8.1.1.0.0" },
+  { "country": "XM", "city": "Berlin",    "name": "柏林",       "source": "bis_dpp", "id": "Q.DE.2.1.0.2.6.0" },
+  { "country": "XM", "city": "Madrid",    "name": "马德里",     "source": "bis_dpp", "id": "Q.ES.2.1.0.1.6.0" },
+  { "country": "XM", "city": "Rome",      "name": "罗马",       "source": "bis_dpp", "id": "Q.IT.2.1.0.1.6.0" },
+  { "country": "XM", "city": "Milan",     "name": "米兰",       "source": "bis_dpp", "id": "Q.IT.5.1.0.1.6.0" },
+  { "country": "XM", "city": "Amsterdam", "name": "阿姆斯特丹", "source": "bis_dpp", "id": "Q.NL.2.1.0.1.6.0" },
+  { "country": "XM", "city": "Vienna",    "name": "维也纳",     "source": "bis_dpp", "id": "Q.AT.2.1.0.0.1.0" },
+  { "country": "XM", "city": "Brussels",  "name": "布鲁塞尔",   "source": "bis_dpp", "id": "Q.BE.2.2.1.2.0.0" }
+]
