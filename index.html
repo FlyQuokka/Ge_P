@@ -18,6 +18,8 @@
     --border: rgba(11,11,11,0.10);
     --series-1: #2a78d6;   /* 珀斯 / 独立屋 */
     --series-2: #eb6834;   /* 对比城市 / 公寓 */
+    --series-3: #1baf7a;   /* 国际对比：第 3、4 个国家 */
+    --series-4: #eda100;
     --highlight: rgba(42,120,214,0.08);
   }
   @media (prefers-color-scheme: dark) {
@@ -25,14 +27,14 @@
       color-scheme: dark;
       --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
       --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
-      --series-1: #3987e5; --series-2: #d95926; --highlight: rgba(57,135,229,0.14);
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --highlight: rgba(57,135,229,0.14);
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
     --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
     --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
-    --series-1: #3987e5; --series-2: #d95926; --highlight: rgba(57,135,229,0.14);
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --highlight: rgba(57,135,229,0.14);
   }
 
   * { box-sizing: border-box; }
@@ -73,11 +75,22 @@
     color: var(--ink-2); cursor: pointer;
   }
   .seg button + button { border-left: 1px solid var(--border); }
+  .seg button { white-space: nowrap; }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
   select {
     font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 8px;
     border: 1px solid var(--border); background: var(--surface); color: var(--ink);
   }
+
+  .check { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); cursor: pointer; }
+  .strip-hint { margin-top: 10px; }
+
+  .picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px 14px; margin-bottom: 12px; }
+  .slot { display: flex; align-items: center; gap: 8px; }
+  .slot i { width: 16px; height: 3px; border-radius: 2px; flex: none; }
+  .slot select { flex: 1; min-width: 0; }
+  .cmp-controls { margin-bottom: 12px; }
+  .chart-box.tall { height: 360px; }
 
   .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-bottom: 8px; }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -106,6 +119,7 @@
     .tile .value { font-size: 30px; }
     .chart-box { height: 250px; }
     .card { padding: 16px; }
+    .seg button { padding: 5px 9px; }
   }
 </style>
 </head>
@@ -174,41 +188,108 @@
     </div>
   </section>
 
-  <!-- ========== 季度数据（ABS 官方统计） ========== -->
-  <div class="section-title">长期走势 · ABS 官方季度数据（<span id="quarter">—</span>）</div>
+  <!-- ========== 长期数据（1970 年至今） ========== -->
+  <div class="section-title">长期走势 · 1970 年至今</div>
 
   <section class="card">
-    <div class="card-head">
-      <div>
-        <h2>Perth 长期走势</h2>
-        <p class="hint">每季度实际成交中位价。官方统计更新较慢，但历史更长</p>
+    <div class="controls">
+      <div class="seg" id="lrPrice">
+        <button data-v="nominal" aria-pressed="true">名义价格</button>
+        <button data-v="real">扣除通胀</button>
       </div>
-      <div class="seg" id="range">
-        <button data-years="5">5 年</button>
-        <button data-years="10" aria-pressed="true">10 年</button>
-        <button data-years="0">全部</button>
+      <div class="seg" id="lrRange">
+        <button data-v="1970" aria-pressed="true">全部</button>
+        <button data-v="1990">1990 起</button>
+        <button data-v="2002">2002 起</button>
       </div>
+      <label class="check"><input type="checkbox" id="lrLog"> 对数坐标</label>
     </div>
-    <div class="legend">
-      <span><i style="background:var(--series-1)"></i>独立屋 House</span>
-      <span><i style="background:var(--series-2)"></i>公寓/联排 Unit</span>
-    </div>
-    <div class="chart-box"><canvas id="perthChart"></canvas></div>
+    <p class="hint strip-hint" id="lrHint"></p>
   </section>
 
   <section class="card">
     <div class="card-head">
       <div>
-        <h2>Perth 与其他城市长期对比</h2>
-        <p class="hint">独立屋成交中位价 · 时间范围跟随上方图表</p>
+        <h2>Perth 独立屋与公寓</h2>
+        <p class="hint">成交中位价。2001 年以前每年一个数，2002 年起每季度一个数（<span id="quarter">—</span>）</p>
       </div>
-      <label class="controls">对比城市：<select id="compareCity"></select></label>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--series-1)"></i>独立屋 House</span>
+      <span><i style="background:var(--series-2)"></i>公寓 Unit</span>
+    </div>
+    <div class="chart-box"><canvas id="lrTypeChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>Perth 与其他城市</h2>
+        <p class="hint">成交中位价，各城市数据起始年份不同</p>
+      </div>
+      <div class="controls">
+        <label>对比：<select id="lrCity"></select></label>
+        <div class="seg" id="lrType">
+          <button data-v="house" aria-pressed="true">独立屋</button>
+          <button data-v="unit">公寓</button>
+        </div>
+      </div>
     </div>
     <div class="legend">
       <span><i style="background:var(--series-1)"></i>Perth</span>
-      <span><i style="background:var(--series-2)"></i><span id="compareName">Sydney</span></span>
+      <span><i style="background:var(--series-2)"></i><span id="lrCityName"></span></span>
     </div>
-    <div class="chart-box"><canvas id="compareChart"></canvas></div>
+    <div class="chart-box"><canvas id="lrCityChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>年度涨幅 · 长期</h2>
+        <p class="hint">与一年前相比的涨跌幅，城市和类型跟随上方图表。2002 年以前每年一个数，之后每季度一个数</p>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--series-1)"></i>Perth</span>
+      <span><i style="background:var(--series-2)"></i><span id="lrGrowthName"></span></span>
+    </div>
+    <div class="chart-box"><canvas id="lrGrowthChart"></canvas></div>
+  </section>
+
+  <!-- ========== 国际对比：国家与城市 ========== -->
+  <div class="section-title">国际对比 · 国家与城市</div>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>房价走势对比</h2>
+        <p class="hint" id="cmpHint"></p>
+      </div>
+    </div>
+    <div class="picker" id="cmpPicker"></div>
+    <div class="controls cmp-controls">
+      <div class="seg" id="cmpMode">
+        <button data-v="level" aria-pressed="true">指数</button>
+        <button data-v="growth">年度涨幅</button>
+      </div>
+      <label>货币：<select id="cmpCurrency"></select></label>
+      <div class="seg" id="cmpPrice">
+        <button data-v="nominal" aria-pressed="true">名义</button>
+        <button data-v="real">扣除通胀</button>
+      </div>
+      <label class="controls">起点：
+        <div class="seg" id="cmpStart">
+          <button data-v="1970">1970</button>
+          <button data-v="1980">1980</button>
+          <button data-v="1990">1990</button>
+          <button data-v="2000">2000</button>
+          <button data-v="2005" aria-pressed="true">2005</button>
+          <button data-v="2015">2015</button>
+        </div>
+      </label>
+    </div>
+    <div class="chart-box tall"><canvas id="cmpChart"></canvas></div>
+    <p class="hint strip-hint" id="cmpNote"></p>
   </section>
 
   <footer>
@@ -216,9 +297,21 @@
     <a href="https://www.proptrack.com.au/home-price-index/" target="_blank" rel="noopener">Home Price Index</a>。
     中位价、月度变化、年度变化都是当月报告公布的数值。PropTrack 每个月会重新修订历史数据，
     所以相邻两个月中位价的差距，可能和公布的"月度变化"对不上；"较近期高点"是用各月公布的中位价直接计算的，仅供参考。</p>
-    <p><b>季度数据</b>来自澳大利亚统计局 (ABS)
+    <p><b>2002 年起的季度数据</b>来自澳大利亚统计局 (ABS)
     <a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/total-value-dwellings" target="_blank" rel="noopener">Total Value of Dwellings</a>，
-    是各首府大都市区实际成交的中位价，最近一个季度为初步数据。两个来源的统计方法不同，数字不能直接比较。</p>
+    是各首府大都市区实际成交的中位价，最近一个季度为初步数据（公寓从 2003 年第 3 季度起）。</p>
+    <p><b>1970–2001 年的年度数据</b>来自学术论文 Abelson &amp; Chung (2004)《Housing Prices in Australia: 1970 to 2003》（Macquarie University），
+    作者根据各州土地登记部门和房地产协会 (REIA) 的记录整理，不是官方统计。各城市起始年份不同（如 Brisbane 1973、Darwin 1986）。
+    它与 ABS 的统计口径不同，两段数据在 2002 年前后衔接处会有落差（Perth 独立屋约 3%，Canberra、Hobart 超过 10%，公寓的落差更大），
+    所以跨越 2002 年的比较只能看大趋势。</p>
+    <p><b>国际对比</b>的数据：各国全国指数、欧洲各城市和北京的指数、汇率、物价都来自国际清算银行 (BIS)
+    <a href="https://data.bis.org/topics/RPP" target="_blank" rel="noopener">Residential property prices</a>；
+    美国各都会区来自联邦住房金融局 (FHFA)
+    <a href="https://www.fhfa.gov/data/hpi" target="_blank" rel="noopener">House Price Index</a>（独栋住宅，1975 年起）；
+    "中国 · 全国新房均价"是国家统计局的新建商品住宅年度平均售价（1991–2015，经聚汇数据转载），它是成交总额 ÷ 成交面积，没有调整房屋质量和地段。
+    各国各城市的统计口径都不同（巴黎是二手公寓、布鲁塞尔是二手独栋、北京是二手住宅且 2011 年才开始；
+    中国全国指数是 70 城指数，2005 年才开始，不少研究认为它低估了实际涨幅），所以只适合比较走势和周期，不适合比较绝对水平。
+    换算成同一种货币时用的是当期平均汇率，曲线里会包含汇率本身的涨跌；这时的"扣除通胀"用的是该货币所在国的物价。</p>
     <p>数据由 GitHub Actions 每天自动检查更新 · 上次检查：<span id="lastChecked">—</span></p>
   </footer>
 </main>
@@ -234,29 +327,30 @@ const M_CITIES = {
   "Adelaide": "阿德莱德", "Hobart": "霍巴特", "Darwin": "达尔文", "Canberra": "堪培拉"
 };
 const M_TOTALS = { "Capital cities": "八大首府合计", "National": "全国" };
-
-// 季度数据里的城市（ABS 代码）
-const CITIES = {
-  "5GPER": { en: "Perth",     cn: "珀斯" },
-  "1GSYD": { en: "Sydney",    cn: "悉尼" },
-  "2GMEL": { en: "Melbourne", cn: "墨尔本" },
-  "3GBRI": { en: "Brisbane",  cn: "布里斯班" },
-  "4GADE": { en: "Adelaide",  cn: "阿德莱德" },
-  "6GHOB": { en: "Hobart",    cn: "霍巴特" },
-  "7GDAR": { en: "Darwin",    cn: "达尔文" },
-  "8ACTE": { en: "Canberra",  cn: "堪培拉" }
+// 长期数据里的类型和来源
+const TYPE_CN = { house: "独立屋", unit: "公寓" };
+const SOURCE_CN = {
+  abelson2004: "Abelson & Chung (2004) 论文整理",
+  abs: "ABS 季度成交中位价"
 };
-const HOUSE = "3", UNIT = "4";   // ABS 指标代码：3 = 独立屋，4 = 公寓/联排
+const SERIES_COLORS = ["--series-1", "--series-2", "--series-3", "--series-4"];
 
 // ============================================================
 //  数据
 // ============================================================
 let monthly = {};   // monthly[城市][类型] = [{ m: "2026-10", v: 949000, mo: -0.3, an: 2.4 }, ...]
 let growth = { months: [], cities: {} };   // growth.cities[城市] = [年度涨幅, ...]
-let data = {};      // 季度：data[城市代码][指标] = [{ q: "2026-Q2", v: 1010000, prelim: true }, ...]
+let countries = [];   // data/longrun/countries.json：[{ code: "AU", name: "澳大利亚" }, ...]
+let nat = {};         // 全国指数：nat[国家] = [{ p: "1970-Q1", x: 1970.125, n: 名义, r: 实际 }, ...]
+let cityData = {};    // 城市长期数据：cityData[国家][城市][类型] = { annual: [...], sub: [...] }，每项 { p, x, v, src }
 let charts = {};
-let rangeYears = 10;
 let growthMonths = 60;
+let lr = { price: "nominal", start: 1970, log: false, type: "house" };   // 长期图表当前的选项
+let fx = {};          // 汇率：fx[货币][季度] = 1 美元兑多少该货币
+let cpiIdx = {};      // 物价指数：cpiIdx[国家][季度]
+let cityNames = {};   // 城市中文名：cityNames["US|New York"] = "纽约"
+let cmp = { mode: "level", currency: "USD", price: "nominal", start: 2005,   // 国际对比当前的选项
+            slots: ["N|AU", "N|US", "N|CN", "N|XM"] };                       // 4 条线各自选了什么
 
 async function readCsv(path) {
   const res = await fetch(path, { cache: "no-store" });
@@ -281,19 +375,56 @@ async function loadGrowth() {
   head.slice(1).forEach((city, i) => growth.cities[city] = rows.map(r => Number(r[i + 1])));
 }
 
-async function loadQuarterly() {
-  const { head, rows } = await readCsv("data/prices.csv");
-  const col = name => head.indexOf(name);
-  const iM = col("MEASURE"), iR = col("REGION"), iT = col("TIME_PERIOD"),
-        iV = col("OBS_VALUE"), iS = col("OBS_STATUS");
-  for (const c of rows) {
-    const city = c[iR], measure = c[iM], value = parseFloat(c[iV]);
-    if (!CITIES[city] || isNaN(value)) continue;
-    data[city] ??= {};
-    data[city][measure] ??= [];
-    data[city][measure].push({ q: c[iT], v: value * 1000, prelim: c[iS] === "p" });
+// 把 "1975"、"2002-Q1"、"2015-03" 这样的时间变成一个数（1975.5、2002.125…），方便画在同一条时间轴上
+function periodX(p) {
+  const y = Number(p.slice(0, 4));
+  if (p.length === 4) return y + 0.5;
+  if (p[5] === "Q") return y + (Number(p[6]) - 0.5) / 4;
+  return y + (Number(p.slice(5)) - 0.5) / 12;
+}
+function periodLabel(p) {
+  if (p.length === 4) return p + " 年";
+  return p[5] === "Q" ? quarterLabel(p) : monthLabel(p);
+}
+
+async function loadLongrun() {
+  const res = await fetch("data/longrun/countries.json", { cache: "no-store" });
+  if (!res.ok) throw new Error("无法读取 data/longrun/countries.json");
+  countries = await res.json();
+
+  const national = await readCsv("data/longrun/national.csv");
+  for (const [country, p, n, r] of national.rows) {
+    nat[country] ??= [];
+    nat[country].push({ p, x: periodX(p), n: Number(n), r: Number(r) });
   }
-  for (const city in data) for (const m in data[city]) data[city][m].sort((a, b) => a.q.localeCompare(b.q));
+  for (const c in nat) nat[c].sort((a, b) => a.x - b.x);
+
+  const cities = await readCsv("data/longrun/cities.csv");
+  for (const [country, city, type, p, value, src] of cities.rows) {
+    cityData[country] ??= {};
+    cityData[country][city] ??= {};
+    cityData[country][city][type] ??= { annual: [], sub: [] };
+    cityData[country][city][type][p.length === 4 ? "annual" : "sub"].push({ p, x: periodX(p), v: Number(value), src });
+  }
+  for (const c in cityData) for (const city in cityData[c]) for (const t in cityData[c][city]) {
+    cityData[c][city][t].annual.sort((a, b) => a.x - b.x);
+    cityData[c][city][t].sub.sort((a, b) => a.x - b.x);
+  }
+}
+
+async function loadCompareData() {
+  const res = await fetch("data/longrun/cities.json", { cache: "no-store" });
+  if (!res.ok) throw new Error("无法读取 data/longrun/cities.json");
+  for (const c of await res.json()) cityNames[c.country + "|" + c.city] = c.name;
+
+  for (const [cur, p, v] of (await readCsv("data/longrun/fx.csv")).rows) {
+    fx[cur] ??= {};
+    fx[cur][p] = Number(v);
+  }
+  for (const [country, p, v] of (await readCsv("data/longrun/cpi.csv")).rows) {
+    cpiIdx[country] ??= {};
+    cpiIdx[country][p] = Number(v);
+  }
 }
 
 async function loadLastChecked() {
@@ -310,7 +441,6 @@ async function loadLastChecked() {
 //  小工具
 // ============================================================
 const mSeries = (region, type) => (monthly[region] && monthly[region][type]) || [];
-const series = (city, m) => (data[city] && data[city][m]) || [];
 const last = arr => arr[arr.length - 1];
 const quarterLabel = q => q.replace("-Q", " 年第 ") + " 季度";
 const monthLabel = m => m.slice(0, 4) + " 年 " + Number(m.slice(5)) + " 月";
@@ -499,39 +629,320 @@ function renderTable() {
 }
 
 // ============================================================
-//  季度图表（ABS）
+//  长期数据：计算
 // ============================================================
-function quarterlyChart(canvasId, sets) {
-  let labels = sets[0].points.map(p => p.q);
-  if (rangeYears) labels = labels.slice(-rangeYears * 4);
-  lineChart(canvasId, labels, sets.map(s => {
-    const map = Object.fromEntries(s.points.map(p => [p.q, p.v]));
-    return { label: s.label, color: s.color, values: labels.map(q => map[q] ?? null) };
-  }), { title: quarterLabel, value: money, axis: moneyShort, tick: (q, n) => yearTick(q, n / 4) });
+const yearOf = p => Number(p.slice(0, 4));
+const isYearStart = p => /-(Q1|01)$/.test(p);
+const cityEntry = (country, city, type) =>
+  (cityData[country] && cityData[country][city] && cityData[country][city][type]) || { annual: [], sub: [] };
+const countryName = code => (countries.find(c => c.code === code) || {}).name || code;
+
+// 从"按季度存的数据"里取某个时期的数：年份取各季度平均，月份取所在季度。
+// 比最后一个季度还晚的时期，用最后一个季度的数；比第一个季度还早的，返回 null（没有数据）
+function periodValue(byQuarter, p) {
+  if (!byQuarter) return null;
+  let keys;
+  if (p.length === 4) keys = [1, 2, 3, 4].map(q => p + "-Q" + q);
+  else if (p[5] === "Q") keys = [p];
+  else keys = [p.slice(0, 4) + "-Q" + Math.ceil(Number(p.slice(5)) / 3)];
+  const hits = keys.filter(k => byQuarter[k] != null).map(k => byQuarter[k]);
+  if (hits.length) return hits.reduce((a, b) => a + b, 0) / hits.length;
+  const all = Object.keys(byQuarter).sort();
+  return keys[0] > last(all) ? byQuarter[last(all)] : null;
+}
+const cpiAt = (country, p) => periodValue(cpiIdx[country], p);
+const lastCpiQuarter = country => last(Object.keys(cpiIdx[country] || {}).sort());
+// 把某个时期的价钱，按物价换算成最新一个季度的购买力
+function toReal(country, p, v) {
+  const then = cpiAt(country, p);
+  return then ? v * cpiIdx[country][lastCpiQuarter(country)] / then : v;
+}
+const priceOf = (country, o) => lr.price === "real" ? toReal(country, o.p, o.v) : o.v;
+
+// 价格序列：有季度数据的年份用季度数据，更早的年份用年度数据。val(o) 负责换算（扣除通胀、换货币），算不出来时返回 null
+function levelFrom(entry, val) {
+  const { annual, sub } = entry;
+  let pts = annual;
+  if (sub.length) {
+    const cutoff = isYearStart(sub[0].p) ? yearOf(sub[0].p) - 1 : yearOf(sub[0].p);
+    pts = annual.filter(o => yearOf(o.p) <= cutoff).concat(sub);
+  }
+  return pts.map(o => ({ x: o.x, p: o.p, src: o.src, y: val(o) })).filter(o => o.y != null);
 }
 
-function renderQuarterly() {
-  const house = series("5GPER", HOUSE);
-  if (!house.length) return;
-  const p = last(house);
-  document.getElementById("quarter").textContent = "最新：" + quarterLabel(p.q) + (p.prelim ? "，初步" : "");
+// 涨幅序列：只在同一个来源内部比较（年度比上一年，季度比去年同一季度），不跨来源计算
+function growthFrom(entry, val) {
+  const { annual, sub } = entry;
+  const oneYearEarlier = p => (yearOf(p) - 1) + p.slice(4);
+  const yoy = arr => {
+    const byPeriod = Object.fromEntries(arr.map(o => [o.p, o]));
+    return arr.map(o => {
+      const before = byPeriod[oneYearEarlier(o.p)];
+      const now = val(o), then = before ? val(before) : null;
+      return (now == null || then == null) ? null : { x: o.x, p: o.p, src: o.src, y: (now / then - 1) * 100 };
+    }).filter(Boolean);
+  };
+  const a = yoy(annual), s = yoy(sub);
+  if (!s.length) return a;
+  const cutoff = isYearStart(s[0].p) ? yearOf(s[0].p) - 1 : yearOf(s[0].p);
+  return a.filter(o => yearOf(o.p) <= cutoff).concat(s);
+}
 
-  quarterlyChart("perthChart", [
-    { label: "独立屋", color: "--series-1", points: house },
-    { label: "公寓/联排", color: "--series-2", points: series("5GPER", UNIT) }
-  ]);
-  const other = document.getElementById("compareCity").value;
-  document.getElementById("compareName").textContent = CITIES[other].en;
-  quarterlyChart("compareChart", [
-    { label: "Perth", color: "--series-1", points: house },
-    { label: CITIES[other].en, color: "--series-2", points: series(other, HOUSE) }
-  ]);
+const levelSeries = (country, city, type) => levelFrom(cityEntry(country, city, type), o => priceOf(country, o));
+const growthSeries = (country, city, type) => growthFrom(cityEntry(country, city, type), o => priceOf(country, o));
+
+// ============================================================
+//  长期数据：画图（横轴是连续的年份，年度和季度数据可以画在一起）
+// ============================================================
+function xyChart(canvasId, sets, opt) {
+  const xs = [...new Set(sets.flatMap(s => s.points.map(o => o.x)))]
+    .filter(x => x >= opt.start).sort((a, b) => a - b);
+  const info = {};   // info[x] = { p: 时期, src: 来源 }
+  sets.forEach(s => s.points.forEach(o => {
+    info[o.x] ??= { p: o.p, src: new Set() };
+    info[o.x].src.add(o.src);
+  }));
+  const niceLogTick = v => {
+    const lead = v / Math.pow(10, Math.floor(Math.log10(v) + 1e-9));
+    return [1, 2, 5].some(k => Math.abs(lead - k) < 1e-6);
+  };
+  const isZero = ctx => opt.zeroLine && ctx.tick && ctx.tick.value === 0;
+  const endX = xs.length ? last(xs) + 0.25 : opt.start + 1;
+  const span = endX - opt.start;
+  const yearStep = span > 40 ? 10 : span > 20 ? 5 : span > 10 ? 2 : 1;   // 横轴每隔几年写一个年份
+
+  if (charts[canvasId]) charts[canvasId].destroy();
+  charts[canvasId] = new Chart(document.getElementById(canvasId), {
+    type: "line",
+    data: {
+      datasets: sets.map(s => {
+        const byX = new Map(s.points.map(o => [o.x, o.y]));
+        return {
+          label: s.label,
+          // 对比图：每条线只放自己的点；其他图：所有线按同一组时间点对齐，缺的地方留空
+          data: opt.perDataset
+            ? s.points.filter(o => o.x >= opt.start).map(o => ({ x: o.x, y: o.y, p: o.p }))
+            : xs.map(x => ({ x, y: byX.has(x) ? byX.get(x) : null })),
+          borderColor: css(s.color),
+          backgroundColor: css(s.color),
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+          pointHoverBorderWidth: 2,
+          pointHoverBorderColor: css("--surface"),
+          tension: 0.15,
+          spanGaps: true
+        };
+      })
+    },
+    options: {
+      maintainAspectRatio: false,
+      animation: false,
+      interaction: { mode: opt.perDataset ? "perDataset" : "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: css("--surface"),
+          titleColor: css("--ink"),
+          bodyColor: css("--ink-2"),
+          footerColor: css("--muted"),
+          footerFont: { weight: "normal", size: 11 },
+          borderColor: css("--axis"),
+          borderWidth: 1,
+          padding: 10,
+          boxPadding: 4,
+          usePointStyle: true,
+          filter: item => item.parsed.y != null,
+          callbacks: {
+            title: items => {
+              if (!items.length || opt.perDataset) return "";
+              const p = info[items[0].parsed.x].p;
+              return periodLabel(p) + (p.length === 4 ? "（全年）" : "");
+            },
+            label: item => " " + item.dataset.label + (opt.perDataset ? "（" + periodLabel(item.raw.p) + "）" : "") + "：" + opt.value(item.parsed.y),
+            footer: items => {
+              if (!opt.showSource || !items.length) return "";
+              return "来源：" + [...info[items[0].parsed.x].src].map(s => SOURCE_CN[s] || s).join("；");
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: "linear",
+          min: opt.start,
+          max: endX,
+          grid: { display: false },
+          border: { color: css("--axis") },
+          ticks: {
+            color: css("--muted"), maxRotation: 0, stepSize: yearStep, includeBounds: false,
+            callback: v => Number.isInteger(v) ? String(v) : ""
+          }
+        },
+        y: {
+          type: opt.log ? "logarithmic" : "linear",
+          grid: { color: ctx => isZero(ctx) ? css("--axis") : css("--grid"),
+                  lineWidth: ctx => isZero(ctx) ? 1.5 : 1 },
+          border: { display: false },
+          ticks: {
+            color: css("--muted"),
+            maxTicksLimit: opt.log ? undefined : 6,
+            autoSkip: !opt.log,
+            callback: v => (opt.log && !niceLogTick(v)) ? "" : opt.axis(v)
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderLongrun() {
+  // 说明文字
+  const baseQuarter = cpiIdx["AU"] ? periodLabel(lastCpiQuarter("AU")) : "";
+  document.getElementById("lrHint").textContent =
+    (lr.price === "real"
+      ? "扣除通胀：把过去的价钱按物价换算成今天（" + baseQuarter + "）的购买力，更适合跨几十年比较。"
+      : "名义价格：当年实际成交的价钱，没有考虑这些年物价上涨。") +
+    (lr.log ? " 对数坐标：纵轴按倍数排列，线的坡度代表涨得快慢，能看清早年的变化。" : "");
+
+  const abs = cityEntry("AU", "Perth", "house").sub;
+  if (abs.length) document.getElementById("quarter").textContent = "最新：" + quarterLabel(last(abs).p);
+
+  const priceOpt = { start: lr.start, log: lr.log, value: money, axis: moneyShort, showSource: true };
+
+  // ① Perth 独立屋与公寓
+  xyChart("lrTypeChart", [
+    { label: "独立屋", color: "--series-1", points: levelSeries("AU", "Perth", "house") },
+    { label: "公寓", color: "--series-2", points: levelSeries("AU", "Perth", "unit") }
+  ], priceOpt);
+
+  // ② Perth 与另一个城市
+  const [country, city] = document.getElementById("lrCity").value.split("|");
+  document.getElementById("lrCityName").textContent = city;
+  document.getElementById("lrGrowthName").textContent = city;
+  xyChart("lrCityChart", [
+    { label: "Perth", color: "--series-1", points: levelSeries("AU", "Perth", lr.type) },
+    { label: city, color: "--series-2", points: levelSeries(country, city, lr.type) }
+  ], priceOpt);
+
+  // ③ 年度涨幅
+  xyChart("lrGrowthChart", [
+    { label: "Perth", color: "--series-1", points: growthSeries("AU", "Perth", lr.type) },
+    { label: city, color: "--series-2", points: growthSeries(country, city, lr.type) }
+  ], { start: lr.start, zeroLine: true, showSource: true,
+       value: v => (v > 0 ? "+" : "") + v.toFixed(1) + "%", axis: v => v + "%" });
+}
+
+// ============================================================
+//  国际对比：国家与城市
+// ============================================================
+const CUR_CN = { USD: "美元", CNY: "人民币", AUD: "澳元", EUR: "欧元" };
+const currencyOf = country => (countries.find(c => c.code === country) || {}).currency;
+const countryOfCurrency = cur => (countries.find(c => c.currency === cur) || {}).code;
+const cityLabel = (country, city) => cityNames[country + "|" + city] || city;
+
+// 1 美元兑多少某种货币（美元自己是 1）；没有数据时返回 null
+const fxPerUsd = (cur, p) => cur === "USD" ? 1 : periodValue(fx[cur], p);
+
+// 鼠标提示：每条线各找离鼠标最近的一个点（各条线的数据频率不同，不能按"第几个点"对齐）
+Chart.Interaction.modes.perDataset = function (chart, e, options, useFinalPosition) {
+  const pos = Chart.helpers.getRelativePosition(e, chart);
+  const items = [];
+  chart.getSortedVisibleDatasetMetas().forEach(meta => {
+    let best = null, bestDist = Infinity;
+    meta.data.forEach((element, index) => {
+      if (element.skip) return;
+      const dist = Math.abs(element.getProps(["x"], useFinalPosition).x - pos.x);
+      if (dist < bestDist) { bestDist = dist; best = { element, datasetIndex: meta.index, index }; }
+    });
+    if (best && bestDist < 30) items.push(best);
+  });
+  return items;
+};
+
+// 一条线的原始数据。key 形如 "N|US"（美国全国指数）或 "C|US|New York"（纽约）
+function cmpSource(key) {
+  const [kind, country, city] = key.split("|");
+  if (kind === "N") {
+    return { country, label: countryName(country),
+             entry: { annual: [], sub: (nat[country] || []).map(o => ({ p: o.p, x: o.x, v: o.n, src: "bis" })) } };
+  }
+  const types = (cityData[country] && cityData[country][city]) || {};
+  const type = ["house", "index", "avg_price", "unit"].find(t => types[t]);
+  return { country, label: cityLabel(country, city), entry: types[type] || { annual: [], sub: [] } };
+}
+
+// 把一个数换算成所选的货币，并按需要扣除通胀；缺汇率或物价数据时返回 null（这个点就不画）
+function cmpValue(country, o) {
+  let v = o.v, cpiCountry = country;
+  if (cmp.currency !== "local") {
+    const from = fxPerUsd(currencyOf(country), o.p), to = fxPerUsd(cmp.currency, o.p);
+    if (from == null || to == null) return null;
+    v = v * to / from;
+    cpiCountry = countryOfCurrency(cmp.currency);   // 换成同一种货币后，用这种货币所在国的物价来扣除通胀
+  }
+  if (cmp.price === "real") {
+    const c = cpiAt(cpiCountry, o.p);
+    if (c == null) return null;
+    v = v / c;
+  }
+  return v;
+}
+
+function renderCompare() {
+  const late = [];
+  let sets = [];
+  cmp.slots.forEach((key, i) => {
+    if (!key) return;
+    const src = cmpSource(key);
+    const val = o => cmpValue(src.country, o);
+    const pts = (cmp.mode === "growth" ? growthFrom(src.entry, val) : levelFrom(src.entry, val))
+      .filter(o => o.x >= cmp.start);
+    if (!pts.length) return;
+    if (cmp.mode === "level" && pts[0].x > cmp.start + 2) {   // 数据比所选起点晚两年以上：不画，提示换起点
+      late.push(src.label + "（" + yearOf(pts[0].p) + " 年起）");
+      return;
+    }
+    sets.push({ label: src.label, color: SERIES_COLORS[i], points: pts });
+  });
+
+  // 指数模式：所有要画的线都有数据的第一个时点算作 100
+  let chartStart = cmp.start, baseLabel = "";
+  if (cmp.mode === "level" && sets.length) {
+    const baseSet = sets.reduce((a, b) => (b.points[0].x > a.points[0].x ? b : a));
+    const baseX = baseSet.points[0].x;
+    baseLabel = periodLabel(baseSet.points[0].p);
+    chartStart = Math.floor(baseX);
+    sets.forEach(s => {
+      s.points = s.points.filter(o => o.x >= baseX);
+      const base = s.points.length ? s.points[0].y : 1;
+      s.points = s.points.map(o => ({ ...o, y: o.y / base * 100 }));
+    });
+    sets = sets.filter(s => s.points.length);
+  }
+
+  const currencyText = cmp.currency === "local" ? "各自本币" : "换算成" + (CUR_CN[cmp.currency] || cmp.currency);
+  const priceText = cmp.price !== "real" ? "名义价格"
+    : cmp.currency === "local" ? "扣除各自的通胀"
+    : "按" + countryName(countryOfCurrency(cmp.currency)) + "的物价扣除通胀";
+  document.getElementById("cmpHint").textContent = cmp.mode === "level"
+    ? "把 " + baseLabel + "的房价算作 100，看之后涨到多少（" + currencyText + "，" + priceText + "）"
+    : "与一年前相比的涨跌幅（" + currencyText + "，" + priceText + "）";
+  document.getElementById("cmpNote").textContent =
+    (late.length ? "未显示：" + late.join("、") + "。请选择更晚的起点，或改看年度涨幅。 " : "") +
+    "想比较涨跌周期，建议选「年度涨幅 + 各自本币 + 扣除通胀」，这样不受汇率波动影响；换算成同一种货币后，曲线里包含了汇率本身的涨跌。";
+
+  xyChart("cmpChart", sets, cmp.mode === "level"
+    ? { start: chartStart, perDataset: true, value: v => v.toFixed(0), axis: v => v }
+    : { start: chartStart, perDataset: true, zeroLine: true,
+        value: v => (v > 0 ? "+" : "") + v.toFixed(1) + "%", axis: v => v + "%" });
 }
 
 function renderAllCharts() {
   renderMonthlyChart();
   renderGrowthChart();
-  renderQuarterly();
+  renderLongrun();
+  renderCompare();
 }
 
 // ============================================================
@@ -548,7 +959,7 @@ function segButtons(id, onPick) {
 
 (async function () {
   try {
-    await Promise.all([loadMonthly(), loadGrowth(), loadQuarterly()]);
+    await Promise.all([loadMonthly(), loadGrowth(), loadLongrun(), loadCompareData()]);
   } catch (e) {
     document.getElementById("latest").innerHTML = `<span class="error">数据加载失败：${e.message}</span>`;
     return;
@@ -567,14 +978,51 @@ function segButtons(id, onPick) {
     .map(c => `<option value="${c}">${c} ${M_CITIES[c] || ""}</option>`).join("");
   growthCity.addEventListener("change", renderGrowthChart);
 
-  const compareCity = document.getElementById("compareCity");
-  compareCity.innerHTML = Object.keys(CITIES).filter(c => c !== "5GPER")
-    .map(c => `<option value="${c}">${CITIES[c].en} ${CITIES[c].cn}</option>`).join("");
-  compareCity.addEventListener("change", renderQuarterly);
+  // 长期图表：对比城市下拉框（澳洲各城市）
+  const lrCity = document.getElementById("lrCity");
+  lrCity.innerHTML = Object.keys(cityData["AU"]).sort().filter(city => city !== "Perth")
+    .map(city => `<option value="AU|${city}">${city} ${cityLabel("AU", city)}</option>`).join("");
+  lrCity.value = "AU|Sydney";
+  lrCity.addEventListener("change", renderLongrun);
+  segButtons("lrPrice", btn => { lr.price = btn.dataset.v; renderLongrun(); });
+  segButtons("lrRange", btn => { lr.start = Number(btn.dataset.v); renderLongrun(); });
+  segButtons("lrType", btn => { lr.type = btn.dataset.v; renderLongrun(); });
+  document.getElementById("lrLog").addEventListener("change", e => { lr.log = e.target.checked; renderLongrun(); });
+
+  // 国际对比：4 条线各一个下拉框（国家来自 countries.json，城市来自 cities.json，有数据的才列出）
+  const cityOption = (code, city) => {
+    const name = cityLabel(code, city);
+    return `<option value="C|${code}|${city}">${name === city || /average/.test(city) ? name : name + " " + city}</option>`;
+  };
+  const optionGroups =
+    `<optgroup label="全国指数">` +
+    countries.map(c => `<option value="N|${c.code}">${c.name}（全国）</option>`).join("") + `</optgroup>` +
+    countries.filter(c => cityData[c.code]).map(c =>
+      `<optgroup label="${c.name}的城市">` +
+      Object.keys(cityNames).map(k => k.split("|")).filter(([code, city]) => code === c.code && cityData[code][city])
+        .map(([code, city]) => cityOption(code, city)).join("") + `</optgroup>`).join("");
+  const picker = document.getElementById("cmpPicker");
+  picker.innerHTML = cmp.slots.map((key, i) =>
+    `<label class="slot"><i style="background:var(${SERIES_COLORS[i]})"></i>` +
+    `<select data-slot="${i}" aria-label="第 ${i + 1} 条线"><option value="">（不显示）</option>${optionGroups}</select></label>`).join("");
+  picker.querySelectorAll("select").forEach(sel => {
+    sel.value = cmp.slots[sel.dataset.slot];
+    sel.addEventListener("change", () => { cmp.slots[sel.dataset.slot] = sel.value; renderCompare(); });
+  });
+
+  // 国际对比：货币下拉框（countries.json 里出现过的货币）
+  const cmpCurrency = document.getElementById("cmpCurrency");
+  const currencies = [...new Set(countries.map(c => c.currency).filter(Boolean))].sort((a, b) => (b === "USD") - (a === "USD"));
+  cmpCurrency.innerHTML = `<option value="local">各自本币</option>` +
+    currencies.map(c => `<option value="${c}">${CUR_CN[c] || c} ${c}</option>`).join("");
+  cmpCurrency.value = cmp.currency;
+  cmpCurrency.addEventListener("change", () => { cmp.currency = cmpCurrency.value; renderCompare(); });
+  segButtons("cmpMode", btn => { cmp.mode = btn.dataset.v; renderCompare(); });
+  segButtons("cmpPrice", btn => { cmp.price = btn.dataset.v; renderCompare(); });
+  segButtons("cmpStart", btn => { cmp.start = Number(btn.dataset.v); renderCompare(); });
 
   // 时间范围按钮
   segButtons("growthRange", btn => { growthMonths = Number(btn.dataset.n); renderGrowthChart(); });
-  segButtons("range", btn => { rangeYears = Number(btn.dataset.years); renderQuarterly(); });
 
   renderTiles();
   renderTable();
