@@ -53,6 +53,12 @@ jobs:
         continue-on-error: true
         run: ruby scripts/update_longrun.rb
 
+      # ④ 黄金和石油（第二页用）：世界银行月度价格、EIA 每日原油、每日金价、欧洲央行和 BIS 汇率
+      - name: Update gold and oil data
+        id: commodities
+        continue-on-error: true
+        run: ruby scripts/update_commodities.rb
+
       - name: Save changes
         run: |
           rm -f new.csv
@@ -65,7 +71,7 @@ jobs:
 
       # 如果上面任何一个数据源失败，让这次运行显示为红色 ✗，方便发现问题
       - name: Report failures
-        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure' || steps.longrun.outcome == 'failure'
+        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure' || steps.longrun.outcome == 'failure' || steps.commodities.outcome == 'failure'
         run: |
-          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}"
+          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}，黄金石油: ${{ steps.commodities.outcome }}"
           exit 1
