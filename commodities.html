@@ -1,0 +1,782 @@
+<!doctype html>
+<!-- 第二页：黄金与石油。放置位置：仓库根目录 commodities.html -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黄金与石油</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;   /* 布伦特 */
+    --series-2: #eb6834;   /* WTI */
+    --series-3: #1baf7a;   /* 金油比 */
+    --series-4: #eda100;   /* 黄金 */
+    --up: #006300;
+    --down: #d03b3b;
+    --event-line: rgba(11,11,11,0.28); --event-badge: #fcfcfb; --event-band: rgba(208,59,59,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+      --up: #0ca30c; --down: #e66767;
+      --event-line: rgba(255,255,255,0.30); --event-badge: #1a1a19; --event-band: rgba(230,103,103,0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+    --up: #0ca30c; --down: #e66767;
+    --event-line: rgba(255,255,255,0.30); --event-badge: #1a1a19; --event-band: rgba(230,103,103,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 0 16px 48px; }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: var(--ink-2); margin: 0 0 20px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .card-head { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .hint { color: var(--muted); font-size: 13px; margin: 0; }
+  .strip-hint { margin-top: 10px; }
+  /* 去外部网站查看的链接（Trading Economics / Barchart） */
+  .ext-col { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .ext { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .ext a {
+    color: var(--ink-2); text-decoration: none; white-space: nowrap;
+    border: 1px solid var(--border); border-radius: 8px; padding: 4px 10px;
+  }
+  .ext > span { min-width: 5.5em; text-align: right; }   /* 让两行按钮对齐 */
+  .ext a:hover { color: var(--ink); border-color: var(--ink-2); }
+  @media (max-width: 600px) {   /* 手机：文字单独一行，两个按钮放在下一行 */
+    .ext-col { align-items: flex-start; gap: 10px; }
+    .ext > span { min-width: 0; text-align: left; flex-basis: 100%; }
+  }
+
+  /* 页面切换 */
+  .tabs {
+    position: sticky; top: 0; z-index: 20; display: flex; gap: 4px;
+    margin: 0 -16px 24px; padding: 10px 16px; background: var(--page); border-bottom: 1px solid var(--grid);
+  }
+  .tabs a {
+    padding: 6px 14px; border-radius: 8px; color: var(--ink-2); text-decoration: none; font-size: 14px; font-weight: 500;
+  }
+  .tabs a:hover { background: var(--surface); color: var(--ink); }
+  .tabs a[aria-current="page"] { background: var(--ink); color: var(--surface); }
+
+  /* 顶部数字 */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .tiles .card { margin-bottom: 0; }
+  .tile .label { color: var(--ink-2); font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .tile .label i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .tile .value { font-size: 30px; font-weight: 650; margin: 4px 0 2px; letter-spacing: -0.02em; }
+  .tile .unit { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+  .tile .when { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .deltas { display: flex; gap: 4px 16px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); }
+  .deltas b { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+
+  /* 按钮和下拉框 */
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; font-size: 14px; color: var(--ink-2); }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .seg button {
+    font: inherit; font-size: 13px; padding: 5px 12px; border: 0; background: transparent;
+    color: var(--ink-2); cursor: pointer; white-space: nowrap;
+  }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+  select {
+    font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  }
+  .check { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); cursor: pointer; }
+  .tabs .nav-cur { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); }
+  .tabs .nav-cur select { font-size: 13px; padding: 4px 6px; }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-bottom: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 2px; display: inline-block; border-radius: 1px; }
+  .chart-box { position: relative; height: 320px; }
+
+  /* 表格 */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); font-weight: 500; font-size: 13px; }
+  td { font-variant-numeric: tabular-nums; }
+  td.sel, th.sel { background: rgba(127,127,127,0.08); font-weight: 600; }
+  .name-sub { color: var(--muted); font-size: 12px; margin-left: 6px; }
+
+  /* 历史事件标记（与房价页相同） */
+  .ev-layer { position: absolute; inset: 0; pointer-events: none; }
+  .ev-badge {
+    position: absolute; pointer-events: auto;
+    height: 20px; padding: 0; border-radius: 10px; text-align: center;
+    border: 1px solid var(--axis); background: var(--event-badge); color: var(--ink-2);
+    font: 600 11px/18px system-ui, -apple-system, sans-serif; cursor: pointer; white-space: nowrap;
+  }
+  .ev-badge:hover, .ev-badge:focus { border-color: var(--ink); color: var(--ink); outline: none; z-index: 5; }
+  .ev-pop {
+    display: none; position: absolute; top: 24px; padding: 8px 10px;
+    background: var(--surface); border: 1px solid var(--axis); border-radius: 8px;
+    color: var(--ink-2); font-weight: 400; font-size: 12px; line-height: 1.5; text-align: left; white-space: normal;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12); max-height: 280px; overflow-y: auto;
+  }
+  .ev-pop p { margin: 0 0 6px; }
+  .ev-pop p:last-child { margin: 0; }
+  .ev-pop b { color: var(--ink); font-weight: 600; }
+  .ev-badge:hover .ev-pop, .ev-badge:focus .ev-pop { display: block; }
+
+  footer { color: var(--muted); font-size: 13px; line-height: 1.7; }
+  footer p { margin: 0 0 10px; }
+  footer a { color: var(--ink-2); }
+  .error { color: var(--down); }
+
+  @media (max-width: 520px) {
+    h1 { font-size: 24px; }
+    .tile .value { font-size: 26px; }
+    .chart-box { height: 260px; }
+    .card { padding: 16px; }
+    .seg button { padding: 5px 9px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <nav class="tabs" aria-label="切换页面">
+    <a href="index.html">房价</a>
+    <a href="commodities.html" aria-current="page">黄金与石油</a>
+    <label class="nav-cur">货币
+      <select id="currency" aria-label="货币">
+        <option value="USD">美元 USD</option>
+        <option value="AUD">澳元 AUD</option>
+        <option value="CNY">人民币 CNY</option>
+        <option value="EUR">欧元 EUR</option>
+      </select>
+    </label>
+  </nav>
+
+  <h1>黄金与石油</h1>
+  <p class="sub" id="latest">加载中…</p>
+
+  <!-- 设置：单位，对整页生效（货币在页面最上方的栏里） -->
+  <section class="card settings">
+    <div class="controls">
+      <label class="controls">黄金：
+        <div class="seg" id="goldUnit">
+          <button data-v="oz" aria-pressed="true">每盎司</button>
+          <button data-v="g">每克</button>
+        </div>
+      </label>
+      <label class="controls">石油：
+        <div class="seg" id="oilUnit">
+          <button data-v="bbl" aria-pressed="true">每桶</button>
+          <button data-v="l">每升</button>
+        </div>
+      </label>
+    </div>
+  </section>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>四种货币下的最新价格</h2>
+        <p class="hint" id="tableHint"></p>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th data-cur="USD">美元</th><th data-cur="AUD">澳元</th><th data-cur="CNY">人民币</th><th data-cur="EUR">欧元</th></tr></thead>
+        <tbody id="priceTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="controls">
+      <div class="seg" id="range">
+        <button data-v="1">1 年</button>
+        <button data-v="5" aria-pressed="true">5 年</button>
+        <button data-v="20">20 年</button>
+        <button data-v="0">全部（1960 起）</button>
+      </div>
+      <label class="check"><input type="checkbox" id="logScale"> 对数坐标</label>
+      <label class="check"><input type="checkbox" id="evShow" checked> 历史事件</label>
+    </div>
+    <p class="hint strip-hint" id="rangeHint"></p>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>黄金价格</h2>
+        <p class="hint" id="goldHint"></p>
+      </div>
+      <div class="ext-col">
+        <div class="ext"><span>实时行情</span>
+          <a href="https://tradingeconomics.com/commodity/gold" target="_blank" rel="noopener" title="在 Trading Economics 查看黄金（新窗口）">Trading Economics ↗</a>
+          <a href="https://www.barchart.com/futures/quotes/GC*0/overview" target="_blank" rel="noopener" title="在 Barchart 查看黄金期货（新窗口）">Barchart ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="chart-box"><canvas id="goldChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>原油价格</h2>
+        <p class="hint" id="oilHint"></p>
+      </div>
+      <div class="ext-col">
+        <div class="ext"><span>布伦特实时</span>
+          <a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank" rel="noopener" title="在 Trading Economics 查看布伦特原油（新窗口）">Trading Economics ↗</a>
+          <a href="https://www.barchart.com/futures/quotes/CB*0/overview" target="_blank" rel="noopener" title="在 Barchart 查看布伦特原油期货（新窗口）">Barchart ↗</a>
+        </div>
+        <div class="ext"><span>WTI 实时</span>
+          <a href="https://tradingeconomics.com/commodity/crude-oil" target="_blank" rel="noopener" title="在 Trading Economics 查看 WTI 原油（新窗口）">Trading Economics ↗</a>
+          <a href="https://www.barchart.com/futures/quotes/CL*0/overview" target="_blank" rel="noopener" title="在 Barchart 查看 WTI 原油期货（新窗口）">Barchart ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--series-1)"></i>布伦特 Brent（国际基准）</span>
+      <span><i style="background:var(--series-2)"></i>WTI（美国基准）</span>
+    </div>
+    <div class="chart-box"><canvas id="oilChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>金油比</h2>
+        <p class="hint">1 盎司黄金能换几桶布伦特原油。和货币无关，常被用来看两者谁相对更贵：数字高 = 黄金相对贵 / 石油相对便宜</p>
+      </div>
+    </div>
+    <div class="chart-box"><canvas id="ratioChart"></canvas></div>
+  </section>
+
+  <footer>
+    <p><b>月度价格（1960 年起）</b>来自世界银行
+    <a href="https://www.worldbank.org/en/research/commodity-markets" target="_blank" rel="noopener">Commodity Markets（Pink Sheet）</a>，
+    每月初更新上个月的月平均价：黄金是伦敦金价，原油是布伦特和 WTI 现货。</p>
+    <p><b>每日原油价格（1986 年起）</b>来自美国能源信息署
+    <a href="https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm" target="_blank" rel="noopener">EIA</a>，
+    现货价，通常每周三发布到上周。<b>每日金价</b>来自
+    <a href="https://gold-api.com" target="_blank" rel="noopener">gold-api.com</a> 的现货价，每天自动记一次，从 2026 年 11 月 13 日开始积累，
+    所以更早的金价只有月平均价。</p>
+    <p><b>换算成其他货币</b>：每日价格用欧洲央行 (ECB) 当天的参考汇率，月平均价用国际清算银行 (BIS) 的月平均汇率。
+    这是"国际价格折算成本地货币"，不是当地市场的实际成交价：例如中国国内金价（上海黄金交易所）常有几美元到几十美元的溢价或折价，
+    澳洲、欧洲的金店零售价还要加上加工费和税。1 盎司（金衡盎司）= 31.1035 克；1 桶 = 158.987 升（这是原油价，不是加油站的汽油价）。</p>
+    <p><b>图表旁的「实时行情」链接</b>会在新窗口打开 Trading Economics 或 Barchart 的页面，方便看盘中实时价格。
+    那里显示的多是最近月份的期货价格（Barchart 会自动跳到最近的合约），和这里的现货价可能差几美元；本网页没有使用这两个网站的数据。</p>
+    <p>数据由 GitHub Actions 每天自动检查更新 · 上次检查：<span id="lastChecked">—</span></p>
+  </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// ============================================================
+//  常量
+// ============================================================
+const GRAMS_PER_OZ = 31.1034768;      // 1 金衡盎司 = 多少克
+const LITRES_PER_BBL = 158.987294928; // 1 桶 = 多少升
+const CUR = {
+  USD: { name: "美元", sym: "US$" }, AUD: { name: "澳元", sym: "A$" },
+  CNY: { name: "人民币", sym: "¥" }, EUR: { name: "欧元", sym: "€" }
+};
+const ITEMS = {
+  gold:  { name: "黄金", color: "--series-4", kind: "gold" },
+  brent: { name: "布伦特原油", color: "--series-1", kind: "oil" },
+  wti:   { name: "WTI 原油", color: "--series-2", kind: "oil" }
+};
+
+// ============================================================
+//  数据
+// ============================================================
+// series[品种] = { monthly: [{ p: "2026-10", x, v }], daily: [{ p: "2026-11-12", x, v }] }，v 是美元价格
+const series = { gold: { monthly: [], daily: [] }, brent: { monthly: [], daily: [] }, wti: { monthly: [], daily: [] } };
+const fxDaily = { dates: [], AUD: [], CNY: [], EUR: [] };   // 按日期排好序，方便查"当天或之前最近一天"
+const fxMonthly = {};                                       // fxMonthly["2026-10"] = { AUD, CNY, EUR }
+let events = [];
+const state = { currency: "USD", goldUnit: "oz", oilUnit: "bbl", years: 5, log: false, events: true };
+const charts = {};
+
+async function readCsv(path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error("无法读取 " + path);
+  const lines = (await res.text()).trim().split(/\r?\n/);
+  return lines.slice(1).map(l => l.split(","));
+}
+
+// 把 "1975"、"2002-Q1"、"2015-03"、"2026-11-12" 这样的时间变成一个数，方便画在同一条时间轴上
+function periodX(p) {
+  const y = Number(p.slice(0, 4));
+  if (p.length === 4) return y + 0.5;
+  if (p[5] === "Q") return y + (Number(p[6]) - 0.5) / 4;
+  if (p.length === 7) return y + (Number(p.slice(5)) - 0.5) / 12;
+  const d = new Date(p + "T00:00:00Z");
+  const start = Date.UTC(y, 0, 1), end = Date.UTC(y + 1, 0, 1);
+  return y + (d - start + 43200000) / (end - start);
+}
+function periodLabel(p) {
+  if (p.length === 4) return p + " 年";
+  if (p[5] === "Q") return p.replace("-Q", " 年第 ") + " 季度";
+  if (p.length === 7) return p.slice(0, 4) + " 年 " + Number(p.slice(5)) + " 月";
+  return p.slice(0, 4) + " 年 " + Number(p.slice(5, 7)) + " 月 " + Number(p.slice(8)) + " 日";
+}
+
+async function loadData() {
+  const num = v => (v === "" || v == null ? null : Number(v));
+  for (const [m, gold, brent, wti] of await readCsv("data/commodities/monthly.csv")) {
+    const x = periodX(m);
+    if (num(gold) != null) series.gold.monthly.push({ p: m, x, v: num(gold) });
+    if (num(brent) != null) series.brent.monthly.push({ p: m, x, v: num(brent) });
+    if (num(wti) != null) series.wti.monthly.push({ p: m, x, v: num(wti) });
+  }
+  for (const [d, brent, wti] of await readCsv("data/commodities/oil_daily.csv")) {
+    const x = periodX(d);
+    if (num(brent) != null) series.brent.daily.push({ p: d, x, v: num(brent) });
+    if (num(wti) != null) series.wti.daily.push({ p: d, x, v: num(wti) });
+  }
+  for (const [d, gold] of await readCsv("data/commodities/gold_daily.csv")) {
+    if (num(gold) != null) series.gold.daily.push({ p: d, x: periodX(d), v: num(gold) });
+  }
+  for (const [d, aud, cny, eur] of await readCsv("data/commodities/fx_daily.csv")) {
+    fxDaily.dates.push(d); fxDaily.AUD.push(num(aud)); fxDaily.CNY.push(num(cny)); fxDaily.EUR.push(num(eur));
+  }
+  for (const [m, aud, cny, eur] of await readCsv("data/commodities/fx_monthly.csv")) {
+    fxMonthly[m] = { AUD: num(aud), CNY: num(cny), EUR: num(eur) };
+  }
+  try {
+    const res = await fetch("data/longrun/events.json", { cache: "no-store" });
+    if (res.ok) events = (await res.json()).map(e => ({ ...e, x: periodX(e.date) }))
+      .sort((a, b) => a.x - b.x).map((e, i) => ({ ...e, n: i + 1 }));
+  } catch (e) {}
+  try {
+    const t = await fetch("data/last_checked.txt", { cache: "no-store" });
+    const d = t.ok ? new Date((await t.text()).trim()) : null;
+    if (d && !isNaN(d)) document.getElementById("lastChecked").textContent =
+      d.toLocaleString("zh-CN", { timeZone: "Australia/Perth" }) + "（珀斯时间）";
+  } catch (e) {}
+}
+
+// ============================================================
+//  换算：货币和单位
+// ============================================================
+const last = arr => arr[arr.length - 1];
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const monthKeys = () => Object.keys(fxMonthly).sort();
+
+// 1 美元兑多少所选货币。每日价格用当天（或之前最近一天）的欧洲央行汇率，月平均价用当月 BIS 平均汇率；缺数据时返回 null
+function fxRate(cur, p) {
+  if (cur === "USD") return 1;
+  if (p.length === 10) {
+    let lo = 0, hi = fxDaily.dates.length - 1, idx = -1;
+    while (lo <= hi) { const mid = (lo + hi) >> 1; if (fxDaily.dates[mid] <= p) { idx = mid; lo = mid + 1; } else hi = mid - 1; }
+    for (let i = idx; i >= 0 && i > idx - 10; i--) if (fxDaily[cur][i] != null) return fxDaily[cur][i];
+    p = p.slice(0, 7);   // 欧洲央行没有这一天（如 2005 年以前的人民币），改用当月平均汇率
+  }
+  const m = fxMonthly[p];
+  if (m && m[cur] != null) return m[cur];
+  const keys = monthKeys();
+  if (p > last(keys)) { for (let i = keys.length - 1; i >= 0; i--) if (fxMonthly[keys[i]][cur] != null) return fxMonthly[keys[i]][cur]; }
+  return null;
+}
+const unitFactor = kind => kind === "gold"
+  ? (state.goldUnit === "g" ? 1 / GRAMS_PER_OZ : 1)
+  : (state.oilUnit === "l" ? 1 / LITRES_PER_BBL : 1);
+const unitName = kind => kind === "gold" ? (state.goldUnit === "g" ? "克" : "盎司") : (state.oilUnit === "l" ? "升" : "桶");
+// 把一个美元价格换成所选货币和单位；换不了时返回 null
+function convert(kind, o, cur = state.currency) {
+  const r = fxRate(cur, o.p);
+  return r == null ? null : o.v * r * unitFactor(kind);
+}
+function fmtMoney(v, cur = state.currency) {
+  if (v == null) return "—";
+  const digits = v >= 1000 ? 0 : v >= 10 ? 2 : 3;
+  return CUR[cur].sym + v.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+function pct(p) {
+  if (p == null || !isFinite(p)) return "—";
+  const arrow = p > 0 ? "▲" : p < 0 ? "▼" : "";
+  return (arrow + " " + (p > 0 ? "+" : "") + p.toFixed(1) + "%").trim();
+}
+
+// 某个品种的时间序列：
+// 只看最近几年（≤5 年）时，有每日数据的地方用每日数据；看更长时间时用月平均价。
+// 世界银行月度数据还没覆盖到的最近几周，接上每日数据。
+function itemSeries(item, startX) {
+  const { monthly, daily } = series[item];
+  const lastMonthX = monthly.length ? last(monthly).x + 1 / 24 : -Infinity;
+  const useDaily = state.years > 0 && state.years <= 5;
+  let pts;
+  if (useDaily && daily.length) {
+    const firstDailyX = daily[0].x;
+    pts = monthly.filter(o => o.x < firstDailyX).concat(daily);
+  } else {
+    pts = monthly.concat(daily.filter(o => o.x > lastMonthX));
+  }
+  return pts.filter(o => o.x >= startX);
+}
+
+// 最新的价格，以及大约 1 个月前、1 年前的价格（用于算涨跌幅）
+function latestInfo(item) {
+  const { monthly, daily } = series[item];
+  const all = monthly.concat(daily.filter(o => !monthly.length || o.x > last(monthly).x)).sort((a, b) => a.x - b.x);
+  const now = daily.length && (!monthly.length || last(daily).x > last(monthly).x) ? last(daily) : last(monthly);
+  const near = targetX => {   // 离目标时间最近的一个点（优先每日数据，没有就用月平均）
+    const pool = daily.length && daily[0].x <= targetX + 0.02 ? daily : all;
+    return pool.reduce((best, o) => Math.abs(o.x - targetX) < Math.abs(best.x - targetX) ? o : best, pool[0]);
+  };
+  return { now, monthAgo: near(now.x - 1 / 12), yearAgo: near(now.x - 1) };
+}
+
+// ============================================================
+//  顶部数字和表格
+// ============================================================
+function renderTiles() {
+  document.getElementById("tiles").innerHTML = Object.keys(ITEMS).map(item => {
+    const it = ITEMS[item], info = latestInfo(item);
+    const now = convert(it.kind, info.now), m = convert(it.kind, info.monthAgo), y = convert(it.kind, info.yearAgo);
+    const ch = (a, b) => (a == null || b == null) ? null : (a / b - 1) * 100;
+    return `<div class="card tile">
+      <div class="label"><i style="background:var(${it.color})"></i>${it.name}</div>
+      <div class="value">${fmtMoney(now)}<span class="unit">/ ${unitName(it.kind)}</span></div>
+      <div class="when">${periodLabel(info.now.p)}${info.now.p.length === 7 ? "（月平均）" : ""}</div>
+      <div class="deltas">
+        <span>约 1 个月 <b>${pct(ch(now, m))}</b></span>
+        <span>约 1 年 <b>${pct(ch(now, y))}</b></span>
+      </div>
+    </div>`;
+  }).join("");
+
+  const g = latestInfo("gold").now, b = latestInfo("brent").now;
+  document.getElementById("latest").textContent =
+    "最新：黄金 " + periodLabel(g.p) + "，原油 " + periodLabel(b.p) + " · 涨跌幅按所选货币计算";
+}
+
+function renderTable() {
+  const rows = [
+    ["gold", "黄金", "oz"], ["gold", "黄金", "g"],
+    ["brent", "布伦特原油", "bbl"], ["brent", "布伦特原油", "l"],
+    ["wti", "WTI 原油", "bbl"], ["wti", "WTI 原油", "l"]
+  ];
+  const unitText = { oz: "每盎司", g: "每克", bbl: "每桶", l: "每升" };
+  const saved = { goldUnit: state.goldUnit, oilUnit: state.oilUnit };
+  document.getElementById("priceTable").innerHTML = rows.map(([item, name, unit]) => {
+    const it = ITEMS[item];
+    if (it.kind === "gold") state.goldUnit = unit; else state.oilUnit = unit;
+    const o = latestInfo(item).now;
+    const cells = Object.keys(CUR).map(c =>
+      `<td class="${c === state.currency ? "sel" : ""}">${fmtMoney(convert(it.kind, o, c), c)}</td>`).join("");
+    Object.assign(state, saved);
+    return `<tr><td>${name}<span class="name-sub">${unitText[unit]}</span></td>${cells}</tr>`;
+  }).join("");
+  document.querySelectorAll("thead th[data-cur]").forEach(th => th.classList.toggle("sel", th.dataset.cur === state.currency));
+  const g = latestInfo("gold").now, b = latestInfo("brent").now;
+  document.getElementById("tableHint").textContent =
+    "黄金 " + periodLabel(g.p) + "、原油 " + periodLabel(b.p) + " 的国际价格，按当天汇率折算。灰底是当前选择的货币";
+}
+
+// ============================================================
+//  历史事件标记（和房价页一样，读同一份 data/longrun/events.json）
+// ============================================================
+const eventWhen = e => periodLabel(e.date) + (e.end === "ongoing" ? "起（持续中）" : e.end ? " – " + periodLabel(e.end) : "");
+const visibleEvents = () => state.events ? events : [];
+
+const eventPlugin = {
+  id: "historyEvents",
+  beforeDatasetsDraw(chart) {
+    const { ctx, chartArea: a, scales: { x } } = chart;
+    ctx.save();
+    ctx.fillStyle = css("--event-band");
+    visibleEvents().forEach(e => {
+      if (!e.end) return;
+      const x1 = Math.max(a.left, x.getPixelForValue(e.x));
+      const x2 = e.end === "ongoing" ? a.right : Math.min(a.right, x.getPixelForValue(periodX(e.end)));
+      if (x2 > x1) ctx.fillRect(x1, a.top, x2 - x1, a.bottom - a.top);
+    });
+    ctx.strokeStyle = css("--event-line");
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    visibleEvents().forEach(e => {
+      const px = Math.round(x.getPixelForValue(e.x)) + 0.5;
+      if (px < a.left || px > a.right) return;
+      ctx.beginPath(); ctx.moveTo(px, a.top); ctx.lineTo(px, a.bottom); ctx.stroke();
+    });
+    ctx.restore();
+  },
+  afterRender(chart) {
+    const box = chart.canvas.parentNode;
+    let layer = box.querySelector(".ev-layer");
+    if (!layer) { layer = document.createElement("div"); layer.className = "ev-layer"; box.appendChild(layer); }
+    const { ctx, chartArea: a, scales: { x } } = chart;
+    ctx.save();
+    ctx.font = "600 11px system-ui, -apple-system, sans-serif";
+    const labelOf = list => list.length === 1 ? String(list[0].n) : list[0].n + "–" + last(list).n;
+    const widthOf = list => Math.max(20, Math.ceil(ctx.measureText(labelOf(list)).width) + 12);
+    // 标记排成上下两排，从右往左摆；放不下时可往左偏一点（最多 24 像素），再放不下才合并（如"10–12"）
+    const MAX_SHIFT = 24;
+    const boxWidth = box.clientWidth;
+    const groups = [];
+    const rowLeft = [Infinity, Infinity];
+    visibleEvents().slice().reverse().forEach(e => {
+      const px = x.getPixelForValue(e.x);
+      if (px < a.left - 1 || px > a.right + 1) return;
+      const w = widthOf([e]);
+      const ideal = Math.min(px + w / 2, boxWidth - 2);
+      const options = [0, 1].map(r => ({ row: r, right: Math.min(ideal, rowLeft[r] - 2) }))
+        .filter(o => ideal - o.right <= MAX_SHIFT && o.right - w >= 2)
+        .sort((p, q) => q.right - p.right);
+      if (options.length) {
+        const { row, right } = options[0];
+        groups.unshift({ list: [e], right, row });
+        rowLeft[row] = right - w;
+      } else {
+        const g = groups[0];
+        g.list.unshift(e);
+        rowLeft[g.row] = g.right - widthOf(g.list);
+      }
+    });
+    groups.forEach(g => { g.w = widthOf(g.list); g.left = Math.max(2, g.right - g.w); });
+    ctx.restore();
+    const key = groups.map(g => labelOf(g.list) + "@" + Math.round(g.left) + "r" + g.row).join("|") + "#" + Math.round(a.top) + "w" + boxWidth;
+    if (layer.dataset.key === key) return;
+    layer.dataset.key = key;
+    const popWidth = Math.min(260, boxWidth - 8);
+    layer.innerHTML = groups.map(g => {
+      const text = labelOf(g.list), left = g.left;
+      const wanted = left + g.w / 2 > boxWidth / 2 ? left + g.w - popWidth : left;
+      const popLeft = Math.max(4, Math.min(boxWidth - popWidth - 4, wanted)) - left;
+      const pop = g.list.map(e => `<p><b>${e.n}. ${eventWhen(e)} · ${e.title}</b><br>${e.note}</p>`).join("");
+      return `<button type="button" class="ev-badge" style="left:${left.toFixed(1)}px;width:${g.w}px;top:${(a.top - 24 - g.row * 23).toFixed(1)}px"` +
+             ` aria-label="历史事件 ${text}">${text}<span class="ev-pop" style="left:${popLeft.toFixed(1)}px;width:${popWidth}px">${pop}</span></button>`;
+    }).join("");
+  }
+};
+
+// 鼠标提示：每条线各找离鼠标最近的一个点（各条线的数据频率不同）
+Chart.Interaction.modes.perDataset = function (chart, e, options, useFinalPosition) {
+  const pos = Chart.helpers.getRelativePosition(e, chart);
+  const items = [];
+  chart.getSortedVisibleDatasetMetas().forEach(meta => {
+    let best = null, bestDist = Infinity;
+    meta.data.forEach((element, index) => {
+      const dist = Math.abs(element.getProps(["x"], useFinalPosition).x - pos.x);
+      if (dist < bestDist) { bestDist = dist; best = { element, datasetIndex: meta.index, index }; }
+    });
+    if (best && bestDist < 30) items.push(best);
+  });
+  return items;
+};
+
+// ============================================================
+//  画图（横轴是连续的时间，月度和每日数据可以画在同一张图上）
+// ============================================================
+function timeChart(canvasId, sets, opt) {
+  const xs = sets.flatMap(s => s.points.map(o => o.x));
+  let endX = xs.length ? Math.max(...xs) + 0.02 : opt.start + 1;
+  const showEvents = state.events && visibleEvents().some(e => e.x >= opt.start);
+  if (showEvents) visibleEvents().forEach(e => { if (e.x <= endX + 0.5) endX = Math.max(endX, e.x + 0.05); });
+  const span = endX - opt.start;
+  const yearStep = span > 40 ? 10 : span > 20 ? 5 : span > 10 ? 2 : 1;
+  const niceLogTick = v => {
+    const lead = v / Math.pow(10, Math.floor(Math.log10(v) + 1e-9));
+    return [1, 2, 5].some(k => Math.abs(lead - k) < 1e-6);
+  };
+  // 一年以内：横轴按月份写，例如"26年3月"
+  const tickLabel = v => {
+    if (span <= 2) {
+      const y = Math.floor(v + 1e-9), m = Math.round((v - y) * 12);
+      return Math.abs(v * 12 - Math.round(v * 12)) < 1e-6 ? String(y).slice(2) + "年" + (m + 1) + "月" : "";
+    }
+    return Number.isInteger(v) ? String(v) : "";
+  };
+
+  if (charts[canvasId]) charts[canvasId].destroy();
+  charts[canvasId] = new Chart(document.getElementById(canvasId), {
+    type: "line",
+    plugins: [eventPlugin],
+    data: {
+      datasets: sets.map(s => ({
+        label: s.label,
+        data: s.points.map(o => ({ x: o.x, y: o.y, p: o.p })),
+        borderColor: css(s.color),
+        backgroundColor: css(s.color),
+        borderWidth: s.points.length > 600 ? 1.5 : 2,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBorderWidth: 2,
+        pointHoverBorderColor: css("--surface"),
+        tension: 0.1,
+        spanGaps: true
+      }))
+    },
+    options: {
+      maintainAspectRatio: false,
+      animation: false,
+      parsing: false,
+      layout: { padding: { top: showEvents ? 50 : 0 } },
+      interaction: { mode: "perDataset", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: css("--surface"),
+          titleColor: css("--ink"),
+          bodyColor: css("--ink-2"),
+          borderColor: css("--axis"),
+          borderWidth: 1,
+          padding: 10,
+          boxPadding: 4,
+          usePointStyle: true,
+          callbacks: {
+            title: () => "",
+            label: item => " " + item.dataset.label + "（" + periodLabel(item.raw.p) + (item.raw.p.length === 7 ? "，月平均" : "") + "）：" + opt.value(item.raw.y)
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: "linear", min: opt.start, max: endX,
+          grid: { display: false },
+          border: { color: css("--axis") },
+          ticks: {
+            color: css("--muted"), maxRotation: 0, includeBounds: false,
+            stepSize: span <= 2 ? 1 / 12 * Math.max(1, Math.round(span * 2)) : yearStep,
+            autoSkip: span <= 2,
+            callback: tickLabel
+          }
+        },
+        y: {
+          type: state.log ? "logarithmic" : "linear",
+          grid: { color: css("--grid") },
+          border: { display: false },
+          ticks: {
+            color: css("--muted"), maxTicksLimit: state.log ? undefined : 6, autoSkip: !state.log,
+            callback: v => (state.log && !niceLogTick(v)) ? "" : opt.axis(v)
+          }
+        }
+      }
+    }
+  });
+}
+
+function startX() {
+  if (!state.years) return 1960;
+  const latest = Math.max(last(series.brent.daily || []).x || 0, last(series.gold.daily || []).x || 0, last(series.gold.monthly).x);
+  return latest - state.years;
+}
+
+function renderCharts() {
+  const start = startX();
+  const cur = state.currency;
+  const shortAxis = v => {
+    const sym = CUR[cur].sym;
+    if (Math.abs(v) >= 10000) return sym + (v / 1000).toFixed(0) + "k";
+    if (Math.abs(v) >= 1000) return sym + (v / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+    return sym + (Math.abs(v) < 10 ? v.toFixed(2).replace(/0$/, "") : v.toFixed(0));
+  };
+  const toSet = (item, label) => ({
+    label, color: ITEMS[item].color,
+    points: itemSeries(item, start).map(o => ({ x: o.x, p: o.p, y: convert(ITEMS[item].kind, o) })).filter(o => o.y != null)
+  });
+
+  const useDaily = state.years > 0 && state.years <= 5;
+  document.getElementById("rangeHint").textContent = (useDaily
+    ? "最近几年：原油用每日价格；黄金在每日数据开始（2026 年 11 月）之前用月平均价。"
+    : "长期视图：用月平均价，最近几周接上每日价格。") +
+    (state.log ? " 对数坐标：纵轴按倍数排列，同样的坡度代表同样的涨跌幅。" : "") +
+    " 选人民币时，2005 年以前用的是 BIS 月平均汇率。";
+
+  const unitLabel = kind => CUR[cur].name + " / " + unitName(kind);
+  document.getElementById("goldHint").textContent = "单位：" + unitLabel("gold");
+  document.getElementById("oilHint").textContent = "单位：" + unitLabel("oil");
+
+  timeChart("goldChart", [toSet("gold", "黄金")], { start, value: v => fmtMoney(v), axis: shortAxis });
+  timeChart("oilChart", [toSet("brent", "布伦特"), toSet("wti", "WTI")], { start, value: v => fmtMoney(v), axis: shortAxis });
+
+  // 金油比：同一个时间点的金价 ÷ 布伦特油价（都用美元、都按"每盎司 / 每桶"）。月度数据都有，最近几周用每日数据
+  const goldPts = itemSeries("gold", start), brentPts = itemSeries("brent", start);
+  const brentByP = new Map(brentPts.map(o => [o.p, o.v]));
+  const brentDailyByP = new Map(series.brent.daily.map(o => [o.p, o.v]));
+  const brentMonthly = new Map(series.brent.monthly.map(o => [o.p, o.v]));
+  const ratio = goldPts.map(o => {
+    let oil = brentByP.get(o.p) ?? brentMonthly.get(o.p) ?? brentDailyByP.get(o.p);
+    if (oil == null && o.p.length === 10) {   // 这一天没有油价（周末、假期或 EIA 还没发布）：用之前最近一天的
+      const before = series.brent.daily.filter(d => d.p <= o.p);
+      if (before.length && o.x - last(before).x < 0.05) oil = last(before).v;
+    }
+    return oil ? { x: o.x, p: o.p, y: o.v / oil } : null;
+  }).filter(Boolean);
+  timeChart("ratioChart", [{ label: "金油比", color: "--series-3", points: ratio }],
+    { start, value: v => v.toFixed(1) + " 桶", axis: v => v.toFixed(0) });
+}
+
+function renderAll() {
+  renderTiles();
+  renderTable();
+  renderCharts();
+}
+
+// ============================================================
+//  启动
+// ============================================================
+function segButtons(id, onPick) {
+  document.querySelectorAll("#" + id + " button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#" + id + " button").forEach(b => b.setAttribute("aria-pressed", b === btn));
+      onPick(btn.dataset.v);
+    });
+  });
+}
+
+(async function () {
+  try {
+    await loadData();
+  } catch (e) {
+    document.getElementById("latest").innerHTML = `<span class="error">数据加载失败：${e.message}</span>`;
+    return;
+  }
+  // 记住上次选的货币（只存在这台设备的浏览器里）
+  try { const saved = localStorage.getItem("ge_p_currency"); if (saved && CUR[saved]) state.currency = saved; } catch (e) {}
+  const curSel = document.getElementById("currency");
+  curSel.value = state.currency;
+  curSel.addEventListener("change", () => {
+    state.currency = curSel.value;
+    try { localStorage.setItem("ge_p_currency", state.currency); } catch (e) {}
+    renderAll();
+  });
+  segButtons("goldUnit", v => { state.goldUnit = v; renderAll(); });
+  segButtons("oilUnit", v => { state.oilUnit = v; renderAll(); });
+  segButtons("range", v => { state.years = Number(v); renderCharts(); });
+  document.getElementById("logScale").addEventListener("change", e => { state.log = e.target.checked; renderCharts(); });
+  document.getElementById("evShow").addEventListener("change", e => { state.events = e.target.checked; renderCharts(); });
+  renderAll();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderCharts);
+})();
+</script>
+</body>
+</html>
