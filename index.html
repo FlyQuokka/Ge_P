@@ -42,7 +42,7 @@
     margin: 0; background: var(--page); color: var(--ink);
     font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   }
-  main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+  main { max-width: 960px; margin: 0 auto; padding: 0 16px 48px; }
   h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
   h2 { font-size: 18px; margin: 0 0 4px; }
   .sub { color: var(--ink-2); margin: 0 0 24px; }
@@ -56,6 +56,17 @@
   }
   .card-head { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
   .hint { color: var(--muted); font-size: 13px; margin: 0; }
+
+  /* 页面切换 */
+  .tabs {
+    position: sticky; top: 0; z-index: 20; display: flex; gap: 4px;
+    margin: 0 -16px 24px; padding: 10px 16px; background: var(--page); border-bottom: 1px solid var(--grid);
+  }
+  .tabs a {
+    padding: 6px 14px; border-radius: 8px; color: var(--ink-2); text-decoration: none; font-size: 14px; font-weight: 500;
+  }
+  .tabs a:hover { background: var(--surface); color: var(--ink); }
+  .tabs a[aria-current="page"] { background: var(--ink); color: var(--surface); }
 
   /* 顶部数字 */
   .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
@@ -156,6 +167,11 @@
 </head>
 <body>
 <main>
+  <nav class="tabs" aria-label="切换页面">
+    <a href="index.html" aria-current="page">房价</a>
+    <a href="commodities.html">黄金与石油</a>
+  </nav>
+
   <h1>Perth 房价监控</h1>
   <p class="sub"><span id="latest">加载中…</span></p>
 
