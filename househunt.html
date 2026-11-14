@@ -130,6 +130,24 @@
   .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
   .leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.5; }
   .leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
+  /* 地图图例、警区名字、区域对比表 */
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+  .legend:empty { display: none; }
+  .legend b { font-weight: 600; }
+  .legend i { width: 12px; height: 12px; display: inline-block; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .legend i.dot { border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.25); }
+  .dlabel span {
+    display: block; text-align: center; font: 600 12px/1.25 system-ui, -apple-system, "PingFang SC", sans-serif; color: #0b0b0b;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff;
+  }
+  .dlabel small { font-weight: 500; font-size: 11px; }
+  .tablewrap { overflow-x: auto; margin-top: 8px; }
+  table.cmp { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13px; line-height: 1.45; }
+  .cmp th, .cmp td { text-align: left; padding: 7px 14px 7px 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  .cmp th { color: var(--muted); font-weight: 500; white-space: nowrap; }
+  .cmp td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cmp tr.avg td { color: var(--muted); border-bottom: 0; }
+  .cmp i { width: 10px; height: 10px; display: inline-block; border-radius: 2px; margin-right: 5px; }
   .pop-addr { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
   .pop-checks { margin: 8px 0; display: grid; gap: 4px; }
 
@@ -173,6 +191,9 @@
   .chk b { display: block; font-weight: 600; }
   .chk .txt { color: var(--ink-2); }
   .chk small { display: block; color: var(--muted); margin-top: 3px; }
+  .chk small, .cand .notes li { white-space: pre-line; }
+  .chk a, .cand .notes a, .cmp a, .leaflet-popup-content a { color: var(--info); }
+  .chk .lnk { display: block; margin-top: 4px; font-size: 12px; }
   .chk.mini { padding: 0; border: 0; background: transparent; }
   /* 其他隐藏信息：一行一项，省地方 */
   .checks2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 18px; margin-top: 10px; font-size: 13px; line-height: 1.45; }
@@ -235,7 +256,7 @@
   </nav>
 
   <h1>Perth 找房助手</h1>
-  <p class="sub">① 设好条件，一键去 Domain / realestate.com.au 看房源 → ② 在地图上看洪水区、山火区 → ③ 把看中的地址加进候选清单，自动查 strata、洪水、山火等隐藏信息 → ④ 算贷款和买房成本。</p>
+  <p class="sub">① 设好条件，一键去 Domain / realestate.com.au 看房源 → ② 在地图上看洪水区、山火区 → ③ 把看中的地址加进候选清单，自动查 strata、洪水、山火、犯罪率、学校等隐藏信息 → ④ 算贷款和买房成本。</p>
 
   <!-- ① 找房条件 -->
   <section class="card">
@@ -336,10 +357,46 @@
           <button type="button" data-v="exclude">排除</button>
         </div>
       </div>
+      <div class="row">
+        <span class="lbl">犯罪率</span>
+        <div class="seg" id="crimeRule">
+          <button type="button" data-v="any">不限</button>
+          <button type="button" data-v="noHigh">排除明显偏高</button>
+          <button type="button" data-v="avg">不高于珀斯平均</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">公立小学</span>
+        <div class="seg" id="primaryKm">
+          <button type="button" data-v="0">不限</button>
+          <button type="button" data-v="1">1 公里内</button>
+          <button type="button" data-v="2">2 公里内</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">公立中学</span>
+        <div class="seg" id="secondaryKm">
+          <button type="button" data-v="0">不限</button>
+          <button type="button" data-v="2">2 公里内</button>
+          <button type="button" data-v="3">3 公里内</button>
+          <button type="button" data-v="5">5 公里内</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">目标学校</span>
+        <div class="ctl">
+          <div class="chips" id="schoolChips"></div>
+          <input id="schoolInput" list="schoolList" placeholder="公立学校名，例如 Rossmoyne" autocomplete="off" style="width: 230px">
+          <button class="btn small" id="schoolAdd" type="button">添加</button>
+          <datalist id="schoolList"></datalist>
+          <span class="hint">只留下「最近的公立学校就是它」的房子（按直线距离，不等于学区）</span>
+        </div>
+      </div>
     </div>
 
     <div class="actions" id="searchLinks"></div>
     <p class="hint" id="searchHint" style="margin-top: 10px"></p>
+    <div id="suburbCompare"></div>
   </section>
 
   <!-- ② 地图 -->
@@ -356,8 +413,9 @@
     </div>
     <div class="layers" id="layerToggles"></div>
     <div id="map"></div>
+    <div class="legend" id="mapLegend"></div>
     <p class="hint" id="mapHint" style="margin-top: 8px">洪水区：浅蓝 = 百年一遇或更常见的洪水范围，深蓝 = 行洪道（更少见的极端洪水没有画出）。
-      地块边界、R-Code 和遗产要放大到街区才会显示。圆圈数字是候选房源：绿 = 符合条件，红 = 不符合。</p>
+      地块边界、R-Code 和遗产要放大到街区才会显示，学校要放大一点才显示。圆圈数字是候选房源：绿 = 符合条件，红 = 不符合。</p>
   </section>
 
   <!-- ③ 候选房源 -->
@@ -452,8 +510,6 @@
     <h2>以后会加的 <span class="later-tag">预留</span></h2>
     <ul class="later-list">
       <li><b>风水</b>：位置已经留好（地图图层和每个候选房源里都有），以后按你的要求添加。</li>
-      <li><b>周边环境</b>：学校、车站、公园、商店的距离。</li>
-      <li><b>犯罪率</b>：西澳警察局按区域公布的犯罪统计，用来比较不同区。</li>
       <li><b>区域房价</b>：每个区的成交中位价和走势。</li>
     </ul>
   </section>
@@ -471,6 +527,12 @@
     <p>这些是政府规划用的参考图层，<b>不能代替产权调查</b>：买之前请看合同和 Form 1、strata 报告（管理费、储备金、特别征费、规章），
       做建筑和白蚁检查，并让 settlement agent 查产权（例如 Landgate 的 Property Interest Report）。
       洪水图只覆盖做过洪水研究的河流，不包括暴雨积水。</p>
+    <p><b>犯罪率</b>：<a href="https://www.wa.gov.au/organisation/western-australia-police-force/crime-statistics" target="_blank" rel="noopener">西澳警察局犯罪统计</a>（每季度更新）。
+      警方只公布到警区（珀斯都会区分 8 个警区），所以同一警区里的区数字相同；每千居民的比率按澳洲统计局的估计人口计算，警区边界来自 WAPOL-002。
+      「跟珀斯平均比」综合了全部罪案和入室盗窃两项。</p>
+    <p><b>学校</b>：西澳教育部每年第一学期的学校名单（SLIP，公立和私立），距离是直线距离。公立学校按学区（local intake area）招生，
+      最近的学校不一定是学区学校，请在 <a href="https://www.det.wa.edu.au/schoolsonline/home.do" target="_blank" rel="noopener">Schools Online</a> 核对；
+      学校成绩（NAPLAN 等）可以到 <a href="https://www.myschool.edu.au" target="_blank" rel="noopener">My School</a> 查看，本页不转载。</p>
     <p><b>印花税</b>按 <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener">WA Treasury</a>
       2026 年 5 月 7 日起的税率计算；<b>默认利率</b>来自<a href="https://www.rba.gov.au/statistics/tables/" target="_blank" rel="noopener">澳洲储备银行</a>统计表 F6。
       底图 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> 贡献者；航拍图 © Landgate。</p>
@@ -530,10 +592,21 @@ const OVERLAYS = [
       { layer: 15, renderer: simple(fillSym([141, 90, 43, 35], [110, 70, 30, 160], 1)) }] },
   { id: "cadastre", name: "地块边界", service: "Property_and_Planning", layers: "2", minZoom: 16 },
   { id: "rcode", name: "R-Code 密度", service: "Property_and_Planning", layers: "111", minZoom: 15 },
+  // custom：不是政府地图图片，而是网页自己用 data/househunt/ 里的数据画的
+  { id: "crime", name: "犯罪率（警区）", custom: "crime", color: "#e34948" },
+  { id: "schools", name: "学校", custom: "schools", color: "#2a78d6", minZoom: 12 },
   { id: "fengshui", name: "风水", later: true },
-  { id: "crime", name: "犯罪率", later: true },
-  { id: "amenity", name: "学校 / 车站", later: true },
 ];
+// 犯罪率跟珀斯平均比，分 5 档（1 = 跟平均一样）。蓝 = 低，灰 = 接近，红 = 高
+const CRIME_CLASSES = [
+  { max: 0.75, name: "明显低于珀斯平均", short: "明显偏低", color: "#256abf", level: "ok" },
+  { max: 0.9, name: "低于珀斯平均", short: "偏低", color: "#86b6ef", level: "ok" },
+  { max: 1.1, name: "接近珀斯平均", short: "接近平均", color: "#898781", level: "info" },
+  { max: 1.25, name: "高于珀斯平均", short: "偏高", color: "#f0a09f", level: "warn" },
+  { max: Infinity, name: "明显高于珀斯平均", short: "明显偏高", color: "#e34948", level: "warn" },
+];
+// 地图上学校圆点的颜色
+const SCHOOL_COLORS = { P: "#2a78d6", S: "#eb6834", private: "#1baf7a" };
 // 把上面的 style 变成地图服务认识的参数
 function overlayParams(o) {
   if (!o.style) return `format=png32&transparent=true&layers=show:${o.layers}`;
@@ -593,7 +666,8 @@ const STREET_TYPES = {
 const STORE_KEY = "ge_p_househunt";
 const DEFAULT_STATE = {
   criteria: { suburbs: [], nearby: false, mode: "buy", types: [], minPrice: 0, maxPrice: 0, beds: 0, baths: 0, cars: 0,
-              minLand: 0, maxLand: 0, build: "all", keywords: "", excludeOffer: false, strata: "any", flood: "any", fire: "any" },
+              minLand: 0, maxLand: 0, build: "all", keywords: "", excludeOffer: false, strata: "any", flood: "any", fire: "any",
+              crime: "any", primaryKm: 0, secondaryKm: 0, targets: [] },
   candidates: [],
   nextNo: 1,
   loan: { price: 0, depositPct: 20, rate: null, years: 30, firstHome: false, ppr: true, land: false, other: 3000 },
@@ -612,6 +686,8 @@ function loadState() {
 function saveState() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
 
 let SUBURBS = [], SUBURB_NAMES = new Set(), RATES = null;
+// 学校名单、犯罪统计、每个区属于哪个警区、警区边界（加载不到时是 null，相关功能显示"没有数据"）
+let SCHOOLS = null, CRIME = null, POLICE = null, POLICE_GEO = null;
 
 // ============================================================
 //  小工具
@@ -885,18 +961,99 @@ const CHECKS = [
         detail: "主要影响挖地基、泳池、地下排水等工程，可能需要额外处理；不影响日常居住。" };
     }
   },
+  // ---------- 犯罪率和学校：不用去政府服务器查，直接用 data/househunt/ 里的数据现算（live），所以总是最新的 ----------
+  { id: "crime", name: "犯罪率", main: true, live: c => crimeCheck(c.pt, c.suburb) },
+  { id: "school", name: "学校", main: true, live: c => schoolCheck(c.pt) },
   // ---------- 以后添加（预留位置） ----------
   { id: "fengshui", name: "风水", later: true },
-  { id: "env", name: "周边环境", later: true },
-  { id: "crime", name: "犯罪率", later: true },
 ];
 const ACTIVE_CHECKS = CHECKS.filter(c => !c.later);
 const LEVEL = { ok: ["✓", "正常"], info: ["i", "信息"], warn: ["!", "注意"], bad: ["✗", "风险"], err: ["?", "查不到"], pending: ["…", "查询中"] };
+// 某个候选房源某一项检查的结果
+const resultOf = (def, c) => def.live ? def.live(c) : (c.checks && c.checks[def.id]);
+
+// ---------- 犯罪率（按警区） ----------
+// 这个位置属于哪个警区：先看落在哪个警区边界里，查不到再按区名查
+function districtAt(pt, suburb) {
+  if (pt && POLICE_GEO) for (const f of POLICE_GEO.features) {
+    if (f.geometry.coordinates.some(poly => pointInRing(pt, poly[0]) && !poly.slice(1).some(hole => pointInRing(pt, hole)))) return f.properties.district;
+  }
+  const s = POLICE && suburb && POLICE.suburbs[String(suburb).toUpperCase()];
+  return (s && s.d) || null;
+}
+// 跟珀斯平均比的综合指数：全部罪案和入室盗窃两项各占一半（1 = 跟平均一样）
+function crimeIndex(d) {
+  const m = CRIME.metro.rate;
+  return (d.rate.total / m.total + d.rate.burglary_dwelling / m.burglary_dwelling) / 2;
+}
+const crimeClass = idx => CRIME_CLASSES.find(c => idx <= c.max);
+const vsAvg = r => Math.abs(r - 1) < 0.005 ? "持平" : (r > 1 ? "高 " : "低 ") + Math.round(Math.abs(r - 1) * 100) + "%";
+const CRIME_LINK = { t: "西澳警察局犯罪统计", u: "https://www.wa.gov.au/organisation/western-australia-police-force/crime-statistics" };
+function crimeCheck(pt, suburb) {
+  if (!CRIME) return { level: "err", text: "犯罪统计没有加载到" };
+  const name = districtAt(pt, suburb), d = name && CRIME.districts[name];
+  if (!d || !d.rate) return { level: "info", text: "这里查不到所属警区" };
+  const m = CRIME.metro, idx = crimeIndex(d), cls = crimeClass(idx);
+  const one = k => `${CRIME.categories[k]} ${d.rate[k]}（${m.rate[k]}）`;
+  const change = d.prev12.total ? d.last12.total / d.prev12.total : 1;
+  return {
+    level: cls.level, flag: idx, district: d.label,
+    text: `${d.label} 警区：${cls.name}`,
+    detail: `全部罪案比珀斯平均${vsAvg(d.rate.total / m.rate.total)}，入室盗窃${vsAvg(d.rate.burglary_dwelling / m.rate.burglary_dwelling)}。警方只公布到警区，同一警区里不同街区差别可能很大。`,
+    more: `${CRIME.period.from} 至 ${CRIME.period.to} 每 1,000 居民的罪案数（括号里是珀斯平均）：` +
+      ["total", "burglary_dwelling", "stealing_mv", "stealing_from_mv", "property_damage", "assault", "family_violence", "robbery", "drugs"].map(one).join("；") +
+      `。\n全部罪案比前 12 个月${vsAvg(change).replace("高", "多").replace("低", "少")}。人口按澳洲统计局 ${CRIME.population_year} 年估计。商场、市中心的罪案也算在所在警区里。`,
+    links: [CRIME_LINK]
+  };
+}
+
+// ---------- 学校 ----------
+// 两个经纬度之间的直线距离（公里）
+function distKm([x1, y1], [x2, y2]) {
+  const r = Math.PI / 180, dy = (y2 - y1) * r, dx = (x2 - x1) * r * Math.cos((y1 + y2) / 2 * r);
+  return 6371 * Math.sqrt(dx * dx + dy * dy);
+}
+const kmText = d => d < 0.95 ? Math.round(d * 10) * 100 + " 米" : d.toFixed(1) + " 公里";
+const yearNo = y => /^Y\d/.test(y) ? String(+y.slice(1)) : "K";
+const yearsText = s => `${yearNo(s.lo)}–${yearNo(s.hi)} 年级`;
+const shortSchool = n => n.replace(/ Senior High School$/, " SHS").replace(/ District High School$/, " DHS").replace(/ Primary School$/, " PS")
+  .replace(/ Secondary College$/, " SC").replace(/ Community College$/, " CC");
+const isPubP = s => s.g === 1 && !s.sel && (s.k === "P" || s.k === "K12");   // 普通公立小学
+const isPubS = s => s.g === 1 && !s.sel && (s.k === "S" || s.k === "K12");   // 普通公立中学（不含全部考试入学的 Perth Modern）
+const isPrivate = s => s.g === 0 && s.k !== "X";
+const nearestSchools = (pt, test, n) => SCHOOLS.schools.filter(test).map(s => ({ s, d: distKm(pt, [s.lon, s.lat]) })).sort((a, b) => a.d - b.d).slice(0, n);
+const schoolUrl = s => s.g === 1 ? "https://www.det.wa.edu.au/schoolsonline/overview.do?schoolID=" + encodeURIComponent(s.c)
+                                 : "https://www.google.com/search?q=" + encodeURIComponent(`${s.n} ${s.t} WA`);
+const schoolKind = s => (s.g === 1 ? "公立" : "私立") + ({ P: "小学", S: "中学", K12: "小学 + 中学", X: "特殊学校 / 高年级学院 / 幼儿园" }[s.k] || "") + (s.sel ? "（全部考试入学）" : "");
+function schoolCheck(pt) {
+  if (!SCHOOLS) return { level: "err", text: "学校名单没有加载到" };
+  const p = nearestSchools(pt, isPubP, 2), s = nearestSchools(pt, isPubS, 2);
+  if (!p.length || !s.length || p[0].d > 60) return { level: "info", text: "附近没有学校数据（只覆盖珀斯和皮尔地区）" };
+  const priv = nearestSchools(pt, isPrivate, 6).filter(x => x.d <= 2);
+  const item = x => `${x.s.n}（${yearsText(x.s)}，${kmText(x.d)}）`;
+  // 目标学校：按小学、中学分开看；这一级有目标时，最近的那所必须是目标之一
+  const targets = state.criteria.targets.map(t => SCHOOLS.schools.find(x => x.c === t.c)).filter(Boolean);
+  const tp = targets.filter(isPubP), ts = targets.filter(isPubS);
+  const miss = [];
+  if (tp.length && !tp.includes(p[0].s)) miss.push("小学");
+  if (ts.length && !ts.includes(s[0].s)) miss.push("中学");
+  const hasTarget = tp.length + ts.length > 0;
+  return {
+    level: !hasTarget ? "info" : miss.length ? "warn" : "ok",
+    flag: { p: p[0].d, s: s[0].d, target: hasTarget ? miss.length === 0 : null, miss },
+    text: `小学 ${shortSchool(p[0].s.n)} ${kmText(p[0].d)} · 中学 ${shortSchool(s[0].s.n)} ${kmText(s[0].d)}` +
+      (hasTarget ? (miss.length ? `（最近的公立${miss.join("、")}不是目标学校）` : "（最近的就是目标学校）") : ""),
+    detail: `公立小学：${p.map(item).join("、")}\n公立中学：${s.map(item).join("、")}\n` +
+      (priv.length ? `2 公里内的私立学校：${priv.map(item).join("、")}` : "2 公里内没有私立学校"),
+    more: "距离是直线距离。公立学校按学区（local intake area）招生，最近的学校不一定就是学区学校，买之前请在学校资料页核对。",
+    links: [{ t: shortSchool(p[0].s.n) + " 资料和学区", u: schoolUrl(p[0].s) }, { t: shortSchool(s[0].s.n) + " 资料和学区", u: schoolUrl(s[0].s) }]
+  };
+}
 
 async function runChecks(site, ids, cand) {
   const out = {};
   // 规划要用到 strata 的结果，所以先查 strata
-  const list = ACTIVE_CHECKS.filter(c => !ids || ids.includes(c.id));
+  const list = ACTIVE_CHECKS.filter(c => !c.live && (!ids || ids.includes(c.id)));
   const first = list.filter(c => c.id === "strata"), rest = list.filter(c => c.id !== "strata");
   for (const group of [first, rest]) {
     await Promise.all(group.map(async c => {
@@ -934,6 +1091,18 @@ function evaluate(c) {
   }
   if (k.flood === "exclude" && c.checks && c.checks.flood && c.checks.flood.flag) why.push("在洪水区");
   if (k.fire === "exclude" && c.checks && c.checks.fire && c.checks.fire.flag) why.push("在山火易发区");
+  if (k.crime !== "any") {
+    const cr = crimeCheck(c.pt, c.suburb);
+    if (cr.flag != null && cr.flag > (k.crime === "avg" ? 1.1 : 1.25)) why.push(`${cr.district} 警区犯罪率${k.crime === "avg" ? "高于珀斯平均" : "明显偏高"}`);
+  }
+  if (k.primaryKm || k.secondaryKm || k.targets.length) {
+    const f = schoolCheck(c.pt).flag;
+    if (f) {
+      if (k.primaryKm && f.p > k.primaryKm) why.push(`公立小学超过 ${k.primaryKm} 公里`);
+      if (k.secondaryKm && f.s > k.secondaryKm) why.push(`公立中学超过 ${k.secondaryKm} 公里`);
+      if (f.target === false) why.push(`最近的公立${f.miss.join("、")}不是目标学校`);
+    }
+  }
   return { ok: why.length === 0, why };
 }
 
@@ -963,6 +1132,57 @@ function renderCriteria() {
   $("keywords").value = k.keywords;
   $("excludeOffer").checked = k.excludeOffer;
   setSeg($("strataRule"), k.strata); setSeg($("floodRule"), k.flood); setSeg($("fireRule"), k.fire);
+  setSeg($("crimeRule"), k.crime); setSeg($("primaryKm"), k.primaryKm); setSeg($("secondaryKm"), k.secondaryKm);
+  $("schoolChips").innerHTML = k.targets.map((t, i) =>
+    `<span class="chip">${esc(t.n)}<button type="button" data-i="${i}" aria-label="删除 ${esc(t.n)}">×</button></span>`).join("");
+}
+
+// 所选区域的对比表：警区犯罪率、区内的公立学校
+function renderCompare() {
+  const box = $("suburbCompare"), subs = state.criteria.suburbs;
+  if (!subs.length || (!CRIME && !SCHOOLS)) { box.innerHTML = ""; return; }
+  const m = CRIME && CRIME.metro.rate;
+  const schoolCell = (s, test) => {
+    if (!SCHOOLS) return "—";
+    const inside = SCHOOLS.schools.filter(x => test(x) && x.t.toUpperCase() === s.n.toUpperCase());
+    const link = x => `<a href="${esc(schoolUrl(x))}" target="_blank" rel="noopener">${esc(shortSchool(x.n))}</a>`;
+    if (inside.length) return inside.map(link).join("、");
+    const info = SUBURBS.find(x => x.n === s.n && x.p === s.p);
+    const near = info && nearestSchools([(info.bbox[0] + info.bbox[2]) / 2, (info.bbox[1] + info.bbox[3]) / 2], test, 1)[0];
+    return "区内没有" + (near ? `（附近：${link(near.s)}，离区中心约 ${kmText(near.d)}）` : "");
+  };
+  const rows = subs.map(s => {
+    const name = districtAt(null, s.n), d = CRIME && name && CRIME.districts[name];
+    const cls = d && d.rate ? crimeClass(crimeIndex(d)) : null;
+    return `<tr><td><b>${esc(s.n)}</b></td>` +
+      (d && cls ? `<td>${esc(d.label)}</td><td class="num">${d.rate.total}</td><td class="num">${d.rate.burglary_dwelling}</td>` +
+                  `<td><i style="background:${cls.color}"></i>${cls.short}</td>`
+                : `<td colspan="4">查不到警区</td>`) +
+      `<td>${schoolCell(s, isPubP)}</td><td>${schoolCell(s, isPubS)}</td></tr>`;
+  }).join("");
+  box.innerHTML = `<hr class="divider"><h3>所选区域对比</h3>
+    <div class="tablewrap"><table class="cmp">
+      <thead><tr><th>区域</th><th>警区</th><th>全部罪案<br>每千人 / 年</th><th>入室盗窃<br>每千人 / 年</th><th>跟珀斯平均比</th><th>区内公立小学</th><th>区内公立中学</th></tr></thead>
+      <tbody>${rows}${m ? `<tr class="avg"><td>珀斯平均</td><td>8 个警区</td><td class="num">${m.total}</td><td class="num">${m.burglary_dwelling}</td><td></td><td></td><td></td></tr>` : ""}</tbody>
+    </table></div>
+    <p class="hint" style="margin-top: 8px">${CRIME ? `犯罪率是所在<b>警区</b>的数字（${CRIME.period.from} 至 ${CRIME.period.to}），西澳警察局不公布每个区自己的数字，所以同一警区的区数字一样。` : ""}
+      学校点开是教育部的学校资料页，可以核对学区。</p>`;
+}
+// 把输入的名字加到目标学校：先找名字完全一样的，找不到就找唯一一所以它开头的
+function addTarget(text) {
+  const inp = $("schoolInput"), t = String(text || "").trim().toUpperCase();
+  if (!t || !SCHOOLS) return false;
+  const pool = SCHOOLS.schools.filter(s => isPubP(s) || isPubS(s));
+  let hit = pool.filter(s => s.n.toUpperCase() === t);
+  if (!hit.length) hit = pool.filter(s => s.n.toUpperCase().startsWith(t));
+  if (hit.length !== 1) {
+    inp.setCustomValidity(hit.length ? "有好几所学校以这个名字开头，请从下拉提示里选一所" : "没找到这所公立学校");
+    inp.reportValidity(); return false;
+  }
+  inp.setCustomValidity("");
+  if (!state.criteria.targets.some(x => x.c === hit[0].c)) state.criteria.targets.push({ c: hit[0].c, n: hit[0].n });
+  inp.value = "";
+  return true;
 }
 
 const domainSlug = s => s.n.toLowerCase().replace(/'/g, "").replace(/\s+/g, "-") + "-wa-" + s.p;
@@ -1038,7 +1258,8 @@ function criteriaChanged(opts = {}) {
   renderCriteria();
   renderLinks();
   renderCandidates();
-  if (opts.suburbs) drawSuburbs(true);
+  drawCandidates();
+  if (opts.suburbs) { drawSuburbs(true); renderCompare(); }
   if (!state.loan.price) renderLoan();
 }
 
@@ -1082,6 +1303,21 @@ function wireCriteria() {
   onSeg($("strataRule"), v => { k().strata = v; criteriaChanged(); });
   onSeg($("floodRule"), v => { k().flood = v; criteriaChanged(); });
   onSeg($("fireRule"), v => { k().fire = v; criteriaChanged(); });
+  onSeg($("crimeRule"), v => { k().crime = v; criteriaChanged(); });
+  onSeg($("primaryKm"), v => { k().primaryKm = +v; criteriaChanged(); });
+  onSeg($("secondaryKm"), v => { k().secondaryKm = +v; criteriaChanged(); });
+  if (SCHOOLS) $("schoolList").innerHTML = SCHOOLS.schools.filter(s => isPubP(s) || isPubS(s)).map(s => `<option value="${esc(s.n)}"></option>`).join("");
+  $("schoolAdd").addEventListener("click", () => { if (addTarget($("schoolInput").value)) criteriaChanged(); });
+  $("schoolInput").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); if (addTarget($("schoolInput").value)) criteriaChanged(); } });
+  $("schoolInput").addEventListener("input", () => {   // 从下拉提示里点选后直接添加
+    const v = $("schoolInput").value;
+    $("schoolInput").setCustomValidity("");
+    if (SCHOOLS && SCHOOLS.schools.some(s => s.n === v && (isPubP(s) || isPubS(s))) && addTarget(v)) criteriaChanged();
+  });
+  $("schoolChips").addEventListener("click", e => {
+    const b = e.target.closest("button[data-i]");
+    if (b) { k().targets.splice(+b.dataset.i, 1); criteriaChanged(); }
+  });
 }
 
 // ============================================================
@@ -1116,14 +1352,24 @@ function initMap() {
     : `<label class="check"><input type="checkbox" data-o="${o.id}"${state.ui.overlays[o.id] ? " checked" : ""}>` +
       `${o.color ? `<i style="background:${o.color}; opacity:.55; border:1px solid ${o.color}"></i>` : ""}${o.name}</label>`).join("");
   for (const o of OVERLAYS.filter(x => !x.later)) {
-    overlayLayers[o.id] = new ArcExport(exportUrl(o.service, overlayParams(o)),
-      { opacity: o.style ? 1 : 0.7, maxZoom: 20, minZoom: o.minZoom || 0, zIndex: 5 });
-    if (state.ui.overlays[o.id]) overlayLayers[o.id].addTo(map);
+    overlayLayers[o.id] = o.custom === "crime" ? buildCrimeLayer() : o.custom === "schools" ? buildSchoolLayer()
+      : new ArcExport(exportUrl(o.service, overlayParams(o)), { opacity: o.style ? 1 : 0.7, maxZoom: 20, minZoom: o.minZoom || 0, zIndex: 5 });
   }
+  // 打开 / 关闭图层；自己画的图层（学校）缩得太小时先不显示
+  const syncOverlays = () => {
+    for (const o of OVERLAYS.filter(x => !x.later)) {
+      const on = !!state.ui.overlays[o.id] && (!o.custom || map.getZoom() >= (o.minZoom || 0));
+      if (on && !map.hasLayer(overlayLayers[o.id])) overlayLayers[o.id].addTo(map);
+      if (!on && map.hasLayer(overlayLayers[o.id])) map.removeLayer(overlayLayers[o.id]);
+    }
+    renderLegend();
+  };
+  syncOverlays();
+  map.on("zoomend", syncOverlays);
   $("layerToggles").addEventListener("change", e => {
     const id = e.target.dataset.o; if (!id) return;
     state.ui.overlays[id] = e.target.checked; saveState();
-    if (e.target.checked) overlayLayers[id].addTo(map); else map.removeLayer(overlayLayers[id]);
+    syncOverlays();
   });
 
   suburbLayer = L.layerGroup().addTo(map);
@@ -1133,6 +1379,45 @@ function initMap() {
   map.on("popupclose", () => { popupCandId = null; });
   map.on("focus", () => map.scrollWheelZoom.enable());
   map.on("blur", () => map.scrollWheelZoom.disable());
+}
+
+// 犯罪率图层：8 个警区按「跟珀斯平均比」上色，中间写警区名字（不挡地图点击）
+function buildCrimeLayer() {
+  const g = L.layerGroup();
+  if (!POLICE_GEO || !CRIME) return g;
+  const cls = f => { const d = CRIME.districts[f.properties.district]; return d && d.rate ? crimeClass(crimeIndex(d)) : null; };
+  L.geoJSON(POLICE_GEO, { interactive: false, style: f => {
+    const c = cls(f);
+    return { color: c ? c.color : "#898781", weight: 2, opacity: 0.9, fillColor: c ? c.color : "#898781", fillOpacity: 0.2 };
+  } }).addTo(g);
+  for (const f of POLICE_GEO.features) {
+    const c = cls(f), [x, y] = f.properties.lp;
+    L.marker([y, x], { interactive: false, keyboard: false, icon: L.divIcon({ className: "dlabel", iconSize: [130, 34], iconAnchor: [65, 17],
+      html: `<span>${esc(f.properties.label)} 警区${c ? `<br><small>${c.short}</small>` : ""}</span>` }) }).addTo(g);
+  }
+  return g;
+}
+// 学校图层：每所学校一个圆点，点开看名字、年级、人数
+function buildSchoolLayer() {
+  const g = L.layerGroup();
+  if (!SCHOOLS) return g;
+  for (const s of SCHOOLS.schools) {
+    if (s.k === "X") continue;
+    const color = s.g !== 1 ? SCHOOL_COLORS.private : s.k === "P" ? SCHOOL_COLORS.P : SCHOOL_COLORS.S;
+    L.circleMarker([s.lat, s.lon], { radius: 6, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1, bubblingMouseEvents: false })
+      .bindPopup(() => `<div class="pop-addr">${esc(s.n)}</div><div>${schoolKind(s)} · ${yearsText(s)} · ${s.e.toLocaleString()} 名学生</div>` +
+        `<a href="${esc(schoolUrl(s))}" target="_blank" rel="noopener">${s.g === 1 ? "学校资料和学区" : "搜索这所学校"} ↗</a>`, { maxWidth: 280 })
+      .addTo(g);
+  }
+  return g;
+}
+function renderLegend() {
+  const on = id => state.ui.overlays[id], parts = [];
+  if (on("crime") && CRIME) parts.push(`<span><b>犯罪率（警区）</b></span>` + CRIME_CLASSES.map(c => `<span><i style="background:${c.color}"></i>${c.short}</span>`).join(""));
+  if (on("schools") && SCHOOLS) parts.push(`<span><b>学校</b></span><span><i class="dot" style="background:${SCHOOL_COLORS.P}"></i>公立小学</span>` +
+    `<span><i class="dot" style="background:${SCHOOL_COLORS.S}"></i>公立中学（含小学到中学）</span><span><i class="dot" style="background:${SCHOOL_COLORS.private}"></i>私立学校</span>` +
+    (map.getZoom() < 12 ? `<span>（再放大一点才显示）</span>` : ""));
+  $("mapLegend").innerHTML = parts.join("");
 }
 
 const boundaryCache = {};
@@ -1181,7 +1466,7 @@ function showCandidateOnMap(id, pan) {
   candPopup = L.popup({ maxWidth: 300 }).setLatLng([c.pt[1], c.pt[0]]).setContent(
     `<div class="pop-addr">#${c.no} ${esc(c.address)}</div>` +
     `<div>${esc(factsLine(c))}</div>` +
-    `<div class="pop-checks">${["strata", "flood", "fire"].map(id => miniCheck(id, c.checks && c.checks[id])).join("")}</div>` +
+    `<div class="pop-checks">${["strata", "flood", "fire", "crime", "school"].map(id => miniCheck(id, resultOf(CHECKS.find(d => d.id === id), c))).join("")}</div>` +
     `<div>${c.checks ? (ev.ok ? "✓ " + (c.price == null ? "符合已知条件（价格还没填）" : "符合条件") : "✗ 不符合：" + esc(ev.why.join("、"))) : "查询中…"}</div>` +
     `<a href="#cand-${c.id}" data-jump="${c.id}">看详细 ↓</a>`).openOn(map);
   popupCandId = id;   // 要在 openOn 之后设：打开新弹出框时会先关掉旧的（关掉时会清空这个记录）
@@ -1203,10 +1488,13 @@ async function onMapClick(e) {
     if (site.ring) L.polygon(site.ring.map(([x, y]) => [y, x]), { color: "#e8590c", weight: 2, fillOpacity: 0.1, interactive: false }).addTo(lotLayer);
     const head = row ? `<div class="pop-addr">${esc(formatAddress(row))}</div><div>地块约 ${site.area.toLocaleString()} m²</div>`
                      : `<div class="pop-addr">这里没有门牌地址</div><div>可能是道路、公园或河流</div>`;
-    pop.setContent(head + `<div class="pop-checks">${["strata", "flood", "fire"].map(id => miniCheck(id)).join("")}</div>`);
+    // 犯罪率和学校是现算的，马上就有；strata、洪水、山火要去政府服务器查
+    const here = { pt: site.pt, suburb: row && row.locality };
+    const live = ["crime", "school"].map(id => miniCheck(id, CHECKS.find(d => d.id === id).live(here))).join("");
+    pop.setContent(head + `<div class="pop-checks">${["strata", "flood", "fire"].map(id => miniCheck(id)).join("")}${live}</div>`);
     const res = await runChecks(site, row ? ["strata", "flood", "fire"] : ["flood", "fire"]);
     const box = document.createElement("div");
-    box.innerHTML = head + `<div class="pop-checks">${(row ? ["strata", "flood", "fire"] : ["flood", "fire"]).map(id => miniCheck(id, res[id])).join("")}</div>`;
+    box.innerHTML = head + `<div class="pop-checks">${(row ? ["strata", "flood", "fire"] : ["flood", "fire"]).map(id => miniCheck(id, res[id])).join("")}${live}</div>`;
     if (row) {
       const btn = document.createElement("button");
       btn.className = "btn small primary"; btn.type = "button"; btn.textContent = "加入候选清单";
@@ -1338,8 +1626,9 @@ function factsLine(c) {
 // 主要三项（strata、洪水、山火）：大方框，带说明
 function checkRow(def, r) {
   r = r || { level: "pending", text: "查询中…" };
+  const links = (r.links || []).map(l => `<a class="lnk" href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)} ↗</a>`).join("");
   return `<div class="chk ${r.level}"><span class="ic" aria-label="${LEVEL[r.level][1]}">${LEVEL[r.level][0]}</span>` +
-    `<div><b>${def.name}</b><span class="txt">${esc(r.text)}</span>${r.detail ? `<small>${esc(r.detail)}</small>` : ""}</div></div>`;
+    `<div><b>${def.name}</b><span class="txt">${esc(r.text)}</span>${r.detail ? `<small>${esc(r.detail)}</small>` : ""}${links}</div></div>`;
 }
 // 其他项：一行一项；需要注意或有风险时才显示说明
 function checkLine(def, r) {
@@ -1354,11 +1643,11 @@ function candCard(c) {
   const verdict = !c.checks ? `<span class="verdict">… 查询中</span>`
     : ev.ok ? `<span class="verdict pass"><span class="ic">✓</span>${c.price == null ? "符合已知条件（价格还没填）" : "符合条件"}</span>`
             : `<span class="verdict fail"><span class="ic">✗</span>不符合：${esc(ev.why.join("、"))}</span>`;
-  const get = def => c.checks && c.checks[def.id];
+  const get = def => resultOf(def, c);
   const checks = `<div class="checks">${ACTIVE_CHECKS.filter(d => d.main).map(d => checkRow(d, get(d))).join("")}</div>` +
                  `<div class="checks2">${ACTIVE_CHECKS.filter(d => !d.main).map(d => checkLine(d, get(d))).join("")}</div>`;
-  const allDetails = c.checks ? ACTIVE_CHECKS.filter(d => c.checks[d.id] && c.checks[d.id].detail)
-    .map(d => `<li><b>${d.name}</b>：${esc(c.checks[d.id].detail)}</li>`).join("") : "";
+  const allDetails = c.checks ? ACTIVE_CHECKS.map(d => [d, get(d)]).filter(([, r]) => r && r.detail)
+    .map(([d, r]) => `<li><b>${d.name}</b>：${esc(r.detail + (r.more ? "\n" + r.more : ""))}</li>`).join("") : "";
   const ln = loanFor(c.price);
   const loanLine = ln ? `<div class="loanline">贷款（首付 ${state.loan.depositPct}%、利率 ${ln.rate}%、${state.loan.years} 年）：每月约 <b>${money(ln.monthly)}</b> · 印花税 <b>${money(ln.duty)}</b> · 前期现金约 <b>${money(ln.cash)}</b>
       <button class="btn small" type="button" data-act="loan">详细计算 ↓</button></div>` : "";
@@ -1578,16 +1867,20 @@ function wireLoan() {
 (async function () {
   loadState();
   try {
-    const [subs, rates] = await Promise.all([
+    // 区域名单必须有；其他几个文件加载不到时，相关功能显示"没有数据"，页面照常用
+    const optional = file => fetch("data/househunt/" + file, { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(() => null);
+    const [subs, rates, schools, crime, police, policeGeo] = await Promise.all([
       fetch("data/househunt/suburbs.json", { cache: "no-store" }).then(r => r.json()),
-      fetch("data/househunt/rates.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(() => null)
+      optional("rates.json"), optional("schools_wa.json"), optional("crime_wa.json"),
+      optional("wa_police_districts.json"), optional("wa_police_districts.geojson")
     ]);
     SUBURBS = subs; RATES = rates;
+    SCHOOLS = schools; CRIME = crime; POLICE = police; POLICE_GEO = policeGeo;
     SUBURB_NAMES = new Set(SUBURBS.map(s => s.n.toUpperCase()));
   } catch (e) {
     document.querySelector(".sub").innerHTML += `<br><span class="error">区域名单加载失败：${esc(e.message)}</span>`;
   }
-  wireCriteria(); renderCriteria(); renderLinks();
+  wireCriteria(); renderCriteria(); renderLinks(); renderCompare();
   initMap();
   wireCandidates(); renderCandidates(); drawCandidates();
   wireLoan(); renderLoan();
