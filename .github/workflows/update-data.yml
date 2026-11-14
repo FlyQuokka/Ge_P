@@ -59,6 +59,12 @@ jobs:
         continue-on-error: true
         run: ruby scripts/update_commodities.rb
 
+      # ⑤ 找房（第三页用）：珀斯区域名单（Landgate）和平均房贷利率（澳洲储备银行）
+      - name: Update house hunting data
+        id: househunt
+        continue-on-error: true
+        run: ruby scripts/update_househunt.rb
+
       - name: Save changes
         run: |
           rm -f new.csv
@@ -71,7 +77,7 @@ jobs:
 
       # 如果上面任何一个数据源失败，让这次运行显示为红色 ✗，方便发现问题
       - name: Report failures
-        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure' || steps.longrun.outcome == 'failure' || steps.commodities.outcome == 'failure'
+        if: steps.monthly.outcome == 'failure' || steps.quarterly.outcome == 'failure' || steps.longrun.outcome == 'failure' || steps.commodities.outcome == 'failure' || steps.househunt.outcome == 'failure'
         run: |
-          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}，黄金石油: ${{ steps.commodities.outcome }}"
+          echo "月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}，黄金石油: ${{ steps.commodities.outcome }}，找房: ${{ steps.househunt.outcome }}"
           exit 1
