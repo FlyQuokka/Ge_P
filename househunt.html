@@ -1,0 +1,1607 @@
+<!doctype html>
+<!-- 第三页：Perth 找房助手。放置位置：仓库根目录 househunt.html -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perth 找房助手</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    /* 体检结果的颜色：正常 / 注意 / 风险 / 信息（每个都配了符号和文字，不只靠颜色） */
+    --good: #1a7f37;
+    --warn: #b25e00;
+    --bad: #c9302c;
+    --info: #2a62c9;
+    --on-status: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+      --good: #3fb950; --warn: #d29922; --bad: #f85149; --info: #58a6ff; --on-status: #0d0d0d;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --good: #3fb950; --warn: #d29922; --bad: #f85149; --info: #58a6ff; --on-status: #0d0d0d;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 0 16px 48px; }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; margin: 0 0 4px; }
+  h3 { font-size: 15px; margin: 18px 0 8px; }
+  .sub { color: var(--ink-2); margin: 0 0 20px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .card-head { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .hint { color: var(--muted); font-size: 13px; margin: 0; }
+  .error { color: var(--bad); }
+
+  /* 页面切换 */
+  .tabs {
+    position: sticky; top: 0; z-index: 1000; display: flex; gap: 4px;
+    margin: 0 -16px 24px; padding: 10px 16px; background: var(--page); border-bottom: 1px solid var(--grid);
+  }
+  .tabs a {
+    padding: 6px 14px; border-radius: 8px; color: var(--ink-2); text-decoration: none; font-size: 14px; font-weight: 500;
+  }
+  .tabs a:hover { background: var(--surface); color: var(--ink); }
+  .tabs a[aria-current="page"] { background: var(--ink); color: var(--surface); }
+
+  /* 表单 */
+  .form { display: grid; gap: 12px; }
+  .row { display: grid; grid-template-columns: 100px 1fr; gap: 10px; align-items: start; }
+  .row > .lbl { color: var(--ink-2); font-size: 14px; padding-top: 6px; }
+  .row > .seg, .row > .toggle, .row > .check { justify-self: start; }
+  .ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+  input, select, textarea {
+    font: inherit; font-size: 14px; padding: 6px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink); min-width: 0;
+  }
+  input[type="checkbox"] { padding: 0; }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; flex-wrap: nowrap; max-width: 100%; }
+  .seg button {
+    font: inherit; font-size: 13px; padding: 5px 12px; border: 0; background: transparent;
+    color: var(--ink-2); cursor: pointer; white-space: nowrap;
+  }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+  .toggle { display: flex; flex-wrap: wrap; gap: 6px; }
+  .toggle button {
+    font: inherit; font-size: 13px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 999px;
+    background: transparent; color: var(--ink-2); cursor: pointer;
+  }
+  .toggle button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .check { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); cursor: pointer; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 12px; font-size: 14px;
+    border: 1px solid var(--border); border-radius: 999px; background: var(--page);
+  }
+  .chip button { border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 2px 6px; }
+  .chip button:hover { color: var(--ink); }
+  .btn {
+    font: inherit; font-size: 14px; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--ink); cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--ink-2); }
+  .btn.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .btn.small { font-size: 13px; padding: 4px 10px; }
+  .btn[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .divider { border: 0; border-top: 1px solid var(--grid); margin: 16px 0 4px; }
+
+  /* 地图 */
+  #map { height: 440px; border-radius: 10px; border: 1px solid var(--border); z-index: 0; }
+  .layers { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+  .layers .check i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .later-tag {
+    font-size: 11px; color: var(--muted); border: 1px dashed var(--axis); border-radius: 999px; padding: 0 8px; white-space: nowrap;
+  }
+  .layers .later { color: var(--muted); cursor: default; }
+  .pin span {
+    display: flex; width: 28px; height: 28px; border-radius: 50%; align-items: center; justify-content: center;
+    font: 700 12px system-ui, -apple-system, sans-serif; color: #fff; background: #6b6a66;
+    border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+  .pin.pass span { background: #1a7f37; }
+  .pin.fail span { background: #c9302c; }
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
+  .leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.5; }
+  .leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
+  .pop-addr { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+  .pop-checks { margin: 8px 0; display: grid; gap: 4px; }
+
+  /* 候选房源 */
+  .add-row { display: flex; gap: 8px; }
+  .add-row input { flex: 1; }
+  .results { margin-top: 10px; display: grid; gap: 6px; }
+  .result {
+    display: flex; justify-content: space-between; gap: 10px; align-items: center;
+    padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--page); font-size: 14px;
+  }
+  .list-tools { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 16px 0 4px; font-size: 13px; }
+  .list-tools .spacer { flex: 1; }
+  .cand { border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 12px; background: var(--page); }
+  .cand.focus { border-color: var(--ink-2); box-shadow: 0 0 0 2px var(--grid); }
+  .cand-head { display: flex; justify-content: space-between; gap: 8px 12px; flex-wrap: wrap; align-items: flex-start; }
+  .cand-title { display: flex; gap: 10px; align-items: center; }
+  .cand-title h3 { margin: 0; font-size: 16px; }
+  .no {
+    flex: none; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; background: var(--ink); color: var(--surface);
+  }
+  .verdict { font-size: 13px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); }
+  .verdict .ic { font-weight: 700; margin-right: 4px; }
+  .verdict.pass .ic { color: var(--good); }
+  .verdict.fail .ic { color: var(--bad); }
+  .facts { color: var(--ink-2); font-size: 14px; margin: 6px 0 10px; }
+  .checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+  .chk {
+    display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface); font-size: 13px; line-height: 1.45;
+  }
+  .chk .ic {
+    flex: none; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; color: var(--on-status); background: var(--muted); margin-top: 1px;
+  }
+  .chk.ok .ic { background: var(--good); }
+  .chk.warn .ic { background: var(--warn); }
+  .chk.bad .ic { background: var(--bad); }
+  .chk.info .ic { background: var(--info); }
+  .chk b { display: block; font-weight: 600; }
+  .chk .txt { color: var(--ink-2); }
+  .chk small { display: block; color: var(--muted); margin-top: 3px; }
+  .chk.mini { padding: 0; border: 0; background: transparent; }
+  /* 其他隐藏信息：一行一项，省地方 */
+  .checks2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 18px; margin-top: 10px; font-size: 13px; line-height: 1.45; }
+  .chk2 { display: grid; grid-template-columns: 16px auto 1fr; gap: 0 7px; align-items: baseline; }
+  .chk2 .ic {
+    width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 10px; color: var(--on-status); background: var(--muted); align-self: center;
+  }
+  .chk2.ok .ic { background: var(--good); }
+  .chk2.warn .ic { background: var(--warn); }
+  .chk2.bad .ic { background: var(--bad); }
+  .chk2.info .ic { background: var(--info); }
+  .chk2 b { font-weight: 600; white-space: nowrap; }
+  .chk2 .txt { color: var(--ink-2); }
+  .chk2 small { grid-column: 2 / -1; color: var(--muted); }
+  .later-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .cand details { margin-top: 10px; font-size: 13px; }
+  .cand summary { cursor: pointer; color: var(--ink-2); }
+  .edit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 12px; margin-top: 10px; }
+  .edit-grid label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
+  .edit-grid label.wide { grid-column: 1 / -1; }
+  .loanline { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
+  .loanline b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .cand-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
+  .empty { color: var(--muted); font-size: 14px; padding: 18px 0 6px; text-align: center; }
+
+  /* 贷款 */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 16px; }
+  .tile { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; background: var(--page); }
+  .tile .label { color: var(--ink-2); font-size: 13px; }
+  .tile .value { font-size: 24px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tile .note { color: var(--muted); font-size: 12px; }
+  .notes { margin: 14px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 13px; line-height: 1.7; }
+  .money { width: 150px; }
+  .narrow { width: 90px; }
+
+  .later-list { margin: 8px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; line-height: 1.8; }
+  footer { color: var(--muted); font-size: 13px; line-height: 1.7; }
+  footer p { margin: 0 0 10px; }
+  footer a { color: var(--ink-2); }
+
+  @media (max-width: 520px) {
+    h1 { font-size: 24px; }
+    .card { padding: 16px; }
+    .row { grid-template-columns: 1fr; gap: 6px; }
+    #map { height: 340px; }
+    /* 手机上输入框字号至少 16px，避免 iPhone 自动放大页面 */
+    input, select, textarea { font-size: 16px; }
+    .seg button { padding: 5px 9px; }
+    .add-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <nav class="tabs" aria-label="切换页面">
+    <a href="index.html">房价</a>
+    <a href="commodities.html">黄金与石油</a>
+    <a href="househunt.html" aria-current="page">找房</a>
+  </nav>
+
+  <h1>Perth 找房助手</h1>
+  <p class="sub">① 设好条件，一键去 Domain / realestate.com.au 看房源 → ② 在地图上看洪水区、山火区 → ③ 把看中的地址加进候选清单，自动查 strata、洪水、山火等隐藏信息 → ④ 算贷款和买房成本。</p>
+
+  <!-- ① 找房条件 -->
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>① 找房条件</h2>
+        <p class="hint">条件会自动记住（只存在这台设备的浏览器里）</p>
+      </div>
+    </div>
+    <div class="form">
+      <div class="row">
+        <span class="lbl">区域</span>
+        <div class="ctl">
+          <div class="chips" id="suburbChips"></div>
+          <input id="suburbInput" list="suburbList" placeholder="输入区域名，例如 Como" autocomplete="off" style="width: 210px">
+          <button class="btn small" id="suburbAdd" type="button">添加</button>
+          <datalist id="suburbList"></datalist>
+          <label class="check"><input type="checkbox" id="nearby"> 包括附近区域</label>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">在售 / 成交</span>
+        <div class="seg" id="mode">
+          <button type="button" data-v="buy">在售</button>
+          <button type="button" data-v="sold">已成交（看成交价）</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">房型</span>
+        <div class="toggle" id="types">
+          <button type="button" data-v="house">独立屋</button>
+          <button type="button" data-v="unit">公寓 / 单元</button>
+          <button type="button" data-v="townhouse">联排</button>
+          <button type="button" data-v="villa">Villa</button>
+          <button type="button" data-v="land">土地</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">价格</span>
+        <div class="ctl"><select id="minPrice"></select><span class="hint">到</span><select id="maxPrice"></select></div>
+      </div>
+      <div class="row">
+        <span class="lbl">卧室</span>
+        <div class="seg" id="beds"></div>
+      </div>
+      <div class="row">
+        <span class="lbl">浴室</span>
+        <div class="seg" id="baths"></div>
+      </div>
+      <div class="row">
+        <span class="lbl">车位</span>
+        <div class="seg" id="cars"></div>
+      </div>
+      <div class="row">
+        <span class="lbl">土地面积</span>
+        <div class="ctl"><select id="minLand"></select><span class="hint">到</span><select id="maxLand"></select></div>
+      </div>
+      <div class="row">
+        <span class="lbl">新房 / 二手</span>
+        <div class="seg" id="build">
+          <button type="button" data-v="all">全部</button>
+          <button type="button" data-v="new">新房</button>
+          <button type="button" data-v="established">二手</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">关键词</span>
+        <div class="ctl"><input id="keywords" placeholder="例如 pool, garage" style="width: 240px"></div>
+      </div>
+      <div class="row">
+        <span class="lbl"></span>
+        <label class="check"><input type="checkbox" id="excludeOffer"> 排除已有买家的房子（under offer / under contract）</label>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h3>隐藏条件 <span class="hint">（Domain 和 realestate 上没有这些筛选，只用于下面的候选清单）</span></h3>
+    <div class="form">
+      <div class="row">
+        <span class="lbl">Strata</span>
+        <div class="seg" id="strataRule">
+          <button type="button" data-v="any">都可以</button>
+          <button type="button" data-v="no">不要 strata</button>
+          <button type="button" data-v="only">只要 strata</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">洪水区</span>
+        <div class="seg" id="floodRule">
+          <button type="button" data-v="any">不限</button>
+          <button type="button" data-v="exclude">排除</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">山火易发区</span>
+        <div class="seg" id="fireRule">
+          <button type="button" data-v="any">不限</button>
+          <button type="button" data-v="exclude">排除</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions" id="searchLinks"></div>
+    <p class="hint" id="searchHint" style="margin-top: 10px"></p>
+  </section>
+
+  <!-- ② 地图 -->
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>② 地图</h2>
+        <p class="hint">点地图上任何位置：查这个位置的地址、strata、洪水、山火，并可加入候选清单</p>
+      </div>
+      <div class="seg" id="basemap">
+        <button type="button" data-v="street">街道图</button>
+        <button type="button" data-v="aerial">航拍图</button>
+      </div>
+    </div>
+    <div class="layers" id="layerToggles"></div>
+    <div id="map"></div>
+    <p class="hint" id="mapHint" style="margin-top: 8px">洪水区：浅蓝 = 百年一遇或更常见的洪水范围，深蓝 = 行洪道（更少见的极端洪水没有画出）。
+      地块边界、R-Code 和遗产要放大到街区才会显示。圆圈数字是候选房源：绿 = 符合条件，红 = 不符合。</p>
+  </section>
+
+  <!-- ③ 候选房源 -->
+  <section class="card" id="candCard">
+    <div class="card-head">
+      <div>
+        <h2>③ 候选房源 <span class="hint" id="candCount"></span></h2>
+        <p class="hint">把在 Domain / realestate 看中的房子地址贴进来（或在地图上点选），会自动查隐藏信息</p>
+      </div>
+    </div>
+    <div class="add-row">
+      <input id="addrInput" placeholder="地址，例如 12 Preston St, Como 或 5/12 Preston Street Como" autocomplete="off">
+      <button class="btn primary" id="addrFind" type="button">查找地址</button>
+    </div>
+    <div class="results" id="addrResults"></div>
+    <div class="list-tools">
+      <label class="check"><input type="checkbox" id="onlyMatch"> 只显示符合条件的</label>
+      <label class="check">排序
+        <select id="sortBy">
+          <option value="no">按添加顺序</option>
+          <option value="price">按价格（低到高）</option>
+          <option value="match">符合条件的在前</option>
+        </select>
+      </label>
+      <span class="spacer"></span>
+      <button class="btn small" id="exportBtn" type="button">导出备份</button>
+      <label class="btn small" for="importFile">导入备份</label>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+    </div>
+    <div id="candList"></div>
+    <p class="hint" style="margin-top: 12px">候选清单只保存在你这台设备的浏览器里，不会上传到网上。换手机或电脑时，用「导出备份」存成文件，再到另一台设备「导入备份」。</p>
+  </section>
+
+  <!-- ④ 贷款和买房成本 -->
+  <section class="card" id="loanCard">
+    <div class="card-head">
+      <div>
+        <h2>④ 贷款和买房成本</h2>
+        <p class="hint" id="loanHint">估算用，不是贷款或理财建议；以银行和 RevenueWA 为准</p>
+      </div>
+    </div>
+    <div class="form">
+      <div class="row">
+        <span class="lbl">房价</span>
+        <div class="ctl"><input id="loanPrice" class="money" inputmode="decimal" placeholder="例如 75万"><span class="hint" id="loanPriceHint"></span></div>
+      </div>
+      <div class="row">
+        <span class="lbl">首付</span>
+        <div class="ctl">
+          <div class="seg" id="depositSeg">
+            <button type="button" data-v="5">5%</button>
+            <button type="button" data-v="10">10%</button>
+            <button type="button" data-v="20">20%</button>
+            <button type="button" data-v="30">30%</button>
+          </div>
+          <input id="depositPct" class="narrow" type="number" min="0" max="100" step="1" aria-label="首付比例 %"><span class="hint">%</span>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">利率</span>
+        <div class="ctl"><input id="loanRate" class="narrow" type="number" min="0" max="20" step="0.05" aria-label="年利率 %"><span class="hint">% / 年</span><span class="hint" id="rateHint"></span></div>
+      </div>
+      <div class="row">
+        <span class="lbl">年限</span>
+        <div class="seg" id="yearsSeg">
+          <button type="button" data-v="25">25 年</button>
+          <button type="button" data-v="30">30 年</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">印花税</span>
+        <div class="ctl">
+          <label class="check"><input type="checkbox" id="firstHome"> 首次置业</label>
+          <label class="check"><input type="checkbox" id="ppr"> 自住</label>
+          <div class="seg" id="landSeg">
+            <button type="button" data-v="0">房屋</button>
+            <button type="button" data-v="1">空地</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <span class="lbl">其他费用</span>
+        <div class="ctl"><input id="otherCost" class="money" inputmode="decimal"><span class="hint">过户结算、验房、贷款手续等（估计）</span></div>
+      </div>
+    </div>
+    <div class="tiles" id="loanTiles"></div>
+    <ul class="notes" id="loanNotes"></ul>
+  </section>
+
+  <!-- ⑤ 以后会加的（预留位置） -->
+  <section class="card">
+    <h2>以后会加的 <span class="later-tag">预留</span></h2>
+    <ul class="later-list">
+      <li><b>风水</b>：位置已经留好（地图图层和每个候选房源里都有），以后按你的要求添加。</li>
+      <li><b>周边环境</b>：学校、车站、公园、商店的距离。</li>
+      <li><b>犯罪率</b>：西澳警察局按区域公布的犯罪统计，用来比较不同区。</li>
+      <li><b>区域房价</b>：每个区的成交中位价和走势。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><b>房源</b>：本页只按你的条件生成 <a href="https://www.domain.com.au" target="_blank" rel="noopener">Domain</a> 和
+      <a href="https://www.realestate.com.au" target="_blank" rel="noopener">realestate.com.au</a> 的搜索链接，不读取、不保存它们的房源数据。</p>
+    <p><b>隐藏信息</b>：查地址时，网页直接查询西澳政府的公开地图服务
+      <a href="https://data.wa.gov.au/slip" target="_blank" rel="noopener">SLIP</a>：
+      地址和地块（Landgate LGATE-002）、规划图（LGATE-284，"SP" 开头 = strata plan）、
+      洪水区（DWER-014 行洪道和洪泛边缘、DWER-020 洪泛区）、山火易发区（OBRM-026）、
+      规划分区和 R-Codes（DPLH-071、DPLH-070）、区域规划和保留地（DPLH-023）、遗产（DPLH-006、DPLH-089、DPLH-090）、
+      污染场地（DWER-059）、交通噪音区（SPP 5.4，DPLH-057）、机场噪音区（SPP 5.1 / 5.3，DPLH-046、DPLH-047）、
+      天鹅河和坎宁河管控区（DBCA-028）、酸性硫酸盐土（DWER-055）。</p>
+    <p>这些是政府规划用的参考图层，<b>不能代替产权调查</b>：买之前请看合同和 Form 1、strata 报告（管理费、储备金、特别征费、规章），
+      做建筑和白蚁检查，并让 settlement agent 查产权（例如 Landgate 的 Property Interest Report）。
+      洪水图只覆盖做过洪水研究的河流，不包括暴雨积水。</p>
+    <p><b>印花税</b>按 <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener">WA Treasury</a>
+      2026 年 5 月 7 日起的税率计算；<b>默认利率</b>来自<a href="https://www.rba.gov.au/statistics/tables/" target="_blank" rel="noopener">澳洲储备银行</a>统计表 F6。
+      底图 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> 贡献者；航拍图 © Landgate。</p>
+  </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+// ============================================================
+//  设置
+// ============================================================
+const SLIP = "https://public-services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services";
+// 西澳政府公开地图服务里用到的图层（服务名/MapServer/图层号）
+const LY = {
+  address:       "Places_and_Addresses/MapServer/4",   // 地址和地块 LGATE-002
+  locality:      "Boundaries/MapServer/16",            // 区域边界 LGATE-234
+  plan:          "Property_and_Planning/MapServer/135",// 规划图范围 LGATE-284（SP = strata plan）
+  bushfire:      "Bush_Fire_Prone_Areas/MapServer/23", // 山火易发区 OBRM-026
+  floodway:      "Water/MapServer/23",                 // 百年一遇行洪道和洪泛边缘 DWER-014
+  floodplain:    "Water/MapServer/21",                 // 各种频率的洪泛区 DWER-020
+  rcode:         "Property_and_Planning/MapServer/111",// R-Codes 住宅密度 DPLH-070
+  zone:          "Property_and_Planning/MapServer/112",// 规划分区 DPLH-071
+  region:        "Property_and_Planning/MapServer/48", // 区域规划（如珀斯 MRS）的分区和保留地 DPLH-023
+  heritageList:  "People_and_Society/MapServer/16",    // 本地遗产名单 DPLH-090
+  heritageArea:  "People_and_Society/MapServer/15",    // 遗产区 DPLH-089
+  stateRegister: "People_and_Society/MapServer/7",     // 州遗产名录 DPLH-006
+  contaminated:  "Environment/MapServer/5",            // 污染场地 DWER-059
+  noise:         "Property_and_Planning/MapServer/100",// 交通噪音区 SPP 5.4 DPLH-057
+  perthAirport:  "Property_and_Planning/MapServer/77", // 珀斯机场 SPP 5.1 DPLH-046
+  jandakot:      "Property_and_Planning/MapServer/78", // Jandakot 机场 SPP 5.3 DPLH-047
+  river:         "Property_and_Planning/MapServer/11", // 天鹅河和坎宁河开发管控区 DBCA-028
+  acidSoil:      "Soil_Risk_Map/MapServer/3",          // 酸性硫酸盐土风险 DWER-055
+};
+const ADDR_FIELDS = "land_id,road_number_type,road_number_1,road_number_2,lot_number,road_name,road_type,road_suffix,locality";
+
+// 地图上可以打开的图层（以后加风水、犯罪率等，在这里加一行即可）
+// style：自己定颜色（政府地图默认的洪水颜色太淡，看不清）。颜色是 [红, 绿, 蓝, 透明度 0–255]
+const fillSym = (fill, line, width = 1) => ({ type: "esriSFS", style: "esriSFSSolid", color: fill,
+  outline: { type: "esriSLS", style: "esriSLSSolid", color: line, width } });
+const simple = sym => ({ type: "simple", symbol: sym });
+const FLOOD_COMMON = "ext_type IN ('1 in 5 (20%) AEP floodplain','1 in 10 (10%) AEP floodplain','1 in 20 (5%) AEP floodplain'," +
+  "'1 in 25 (4%) AEP floodplain','1 in 50 (2%) AEP floodplain','1 in 100 (1%) AEP floodplain','Designated flood event floodplain','Maximum channel capacity')";
+const OVERLAYS = [
+  { id: "flood", name: "洪水区", service: "Water", color: "#2f6fd6", style: [
+      { layer: 23, renderer: { type: "uniqueValue", field1: "ext_type", defaultSymbol: fillSym([47, 111, 214, 110], [30, 80, 190, 220]),
+          uniqueValueInfos: [{ value: "Floodway", symbol: fillSym([25, 50, 150, 150], [20, 40, 130, 240], 1.2) }] } },
+      { layer: 21, where: FLOOD_COMMON, renderer: simple(fillSym([47, 111, 214, 70], [30, 80, 190, 160], 0.8)) }] },
+  { id: "fire", name: "山火易发区", service: "Bush_Fire_Prone_Areas", color: "#e000b0", style: [
+      { layer: 23, renderer: simple(fillSym([224, 0, 176, 70], [190, 0, 150, 200], 0.8)) }] },
+  { id: "noise", name: "交通噪音区", service: "Property_and_Planning", color: "#e08a00", style: [
+      { layer: 100, renderer: simple(fillSym([240, 140, 0, 55], [200, 110, 0, 180], 0.8)) }] },
+  { id: "contam", name: "污染场地", service: "Environment", color: "#c62828", style: [
+      { layer: 5, renderer: simple(fillSym([200, 40, 40, 110], [160, 20, 20, 230], 1)) }] },
+  { id: "heritage", name: "遗产", service: "People_and_Society", color: "#8d5a2b", minZoom: 15, style: [
+      { layer: 7, renderer: simple(fillSym([141, 90, 43, 90], [110, 70, 30, 230], 1)) },
+      { layer: 16, renderer: simple(fillSym([141, 90, 43, 70], [110, 70, 30, 200], 1)) },
+      { layer: 15, renderer: simple(fillSym([141, 90, 43, 35], [110, 70, 30, 160], 1)) }] },
+  { id: "cadastre", name: "地块边界", service: "Property_and_Planning", layers: "2", minZoom: 16 },
+  { id: "rcode", name: "R-Code 密度", service: "Property_and_Planning", layers: "111", minZoom: 15 },
+  { id: "fengshui", name: "风水", later: true },
+  { id: "crime", name: "犯罪率", later: true },
+  { id: "amenity", name: "学校 / 车站", later: true },
+];
+// 把上面的 style 变成地图服务认识的参数
+function overlayParams(o) {
+  if (!o.style) return `format=png32&transparent=true&layers=show:${o.layers}`;
+  const dyn = o.style.map(s => ({ id: s.layer, source: { type: "mapLayer", mapLayerId: s.layer },
+    ...(s.where ? { definitionExpression: s.where } : {}), drawingInfo: { renderer: s.renderer } }));
+  return "format=png32&transparent=true&dynamicLayers=" + encodeURIComponent(JSON.stringify(dyn));
+}
+
+const TYPES = { house: "独立屋", unit: "公寓 / 单元", townhouse: "联排", villa: "Villa", land: "土地" };
+const DOMAIN_TYPE = { house: "house", unit: "apartment-unit-flat", townhouse: "town-house", villa: "villa", land: "vacant-land" };
+const REA_TYPE = { house: "house", unit: "unit+apartment", townhouse: "townhouse", villa: "villa", land: "land" };
+const PRICE_STEPS = [300000, 350000, 400000, 450000, 500000, 550000, 600000, 650000, 700000, 750000, 800000, 850000,
+  900000, 950000, 1000000, 1100000, 1200000, 1300000, 1500000, 1750000, 2000000, 2500000, 3000000];
+const LAND_STEPS = [200, 300, 400, 500, 600, 700, 800, 1000, 1500, 2000, 4000];
+
+// R-Codes：每户平均占地面积（平方米），用来粗算一块地能不能再分
+const R_AVG = { "R10": 1000, "R12.5": 800, "R15": 666, "R17.5": 571, "R20": 450, "R25": 350, "R30": 300,
+  "R35": 260, "R40": 220, "R50": 180, "R60": 150 };
+const ZONE_CN = {
+  "Residential": "住宅区", "Mixed use": "混合用途区", "Centre": "中心区", "Local centre": "本地中心区",
+  "Neighbourhood centre": "社区中心区", "District centre": "区域中心区", "Commercial": "商业区",
+  "Light industry": "轻工业区", "Industrial": "工业区", "General industry": "工业区", "Rural": "乡村",
+  "Rural residential": "乡村住宅区", "Special use": "特殊用途区", "Urban development": "城市开发区",
+  "Development": "开发区", "Public open space": "公共绿地", "Private community purposes": "私人社区用途",
+  "Public purposes": "公共用途", "Local road": "道路"
+};
+const REGION_CN = {
+  "Urban": "城市区", "Urban deferred": "待开发城市区", "Rural": "乡村", "Industrial": "工业区", "Central city area": "市中心区",
+  "Regional open space": "区域公共绿地", "Parks and recreation": "公园和休闲用地", "Primary regional roads": "主要区域道路",
+  "Other regional roads": "其他区域道路", "Railways": "铁路", "Public purposes": "公共用途", "Waterways": "水道",
+  "State forests": "州立森林", "Water catchments": "集水区", "Port installations": "港口"
+};
+const CONTAM_CN = {
+  "Contaminated - remediation required": "污染，需要治理", "Contaminated - restricted use": "污染，限制用途",
+  "Remediated for restricted use": "已治理（限制用途）", "Possibly contaminated - investigation required": "可能污染，需要调查",
+  "Not contaminated - unrestricted use": "没有污染", "Decontaminated": "已清除污染"
+};
+const NOISE_CN = {
+  "Strategic freight and/or major traffic route": "主要货运 / 交通干道", "Other significant freight/traffic route": "重要货运 / 交通道路",
+  "Metropolitan passenger railway": "城市客运铁路", "Proposed metropolitan passenger railway": "规划中的客运铁路",
+  "Freight railway": "货运铁路", "Proposed strategic freight route": "规划中的货运干道"
+};
+const STREET_TYPES = {
+  STREET: "ST", ST: "ST", ROAD: "RD", RD: "RD", AVENUE: "AV", AVE: "AV", AV: "AV", WAY: "WAY", CRESCENT: "CR", CRES: "CR", CR: "CR",
+  PARADE: "PDE", PDE: "PDE", DRIVE: "DR", DR: "DR", PLACE: "PL", PL: "PL", COURT: "CT", CT: "CT", TERRACE: "TCE", TCE: "TCE",
+  HIGHWAY: "HWY", HWY: "HWY", LANE: "LANE", LN: "LANE", CLOSE: "CL", CL: "CL", BOULEVARD: "BVD", BOULEVARDE: "BVD", BLVD: "BVD", BVD: "BVD",
+  LOOP: "LOOP", GARDENS: "GDNS", GDNS: "GDNS", GROVE: "GR", GR: "GR", ESPLANADE: "ESP", ESP: "ESP", MEWS: "MEWS", RISE: "RISE",
+  VIEW: "VIEW", VISTA: "VSTA", CIRCUIT: "CCT", CCT: "CCT", CIRCLE: "CIR", RETREAT: "RTT", LINK: "LINK", SQUARE: "SQ", SQ: "SQ",
+  PROMENADE: "PROM", PARKWAY: "PWY", HEIGHTS: "HTS", HILL: "HILL", GLADE: "GLDE", GREEN: "GRN", GATE: "GTE", ENTRANCE: "ENT",
+  CHASE: "CH", CONCOURSE: "CON", COVE: "COVE", BEND: "BEND", TRAIL: "TRL", TURN: "TURN", WALK: "WALK", PATH: "PATH",
+  APPROACH: "APP", ALLEY: "ALLY", JUNCTION: "JNC", MALL: "MALL", MEANDER: "MNDR", OUTLOOK: "OTLK", RIDGE: "RDGE", CREST: "CRST", GRANGE: "GRA"
+};
+
+// ============================================================
+//  保存在这台设备上的数据（条件、候选房源、贷款设置）
+// ============================================================
+const STORE_KEY = "ge_p_househunt";
+const DEFAULT_STATE = {
+  criteria: { suburbs: [], nearby: false, mode: "buy", types: [], minPrice: 0, maxPrice: 0, beds: 0, baths: 0, cars: 0,
+              minLand: 0, maxLand: 0, build: "all", keywords: "", excludeOffer: false, strata: "any", flood: "any", fire: "any" },
+  candidates: [],
+  nextNo: 1,
+  loan: { price: 0, depositPct: 20, rate: null, years: 30, firstHome: false, ppr: true, land: false, other: 3000 },
+  ui: { overlays: { flood: true, fire: true }, basemap: "street", onlyMatch: false, sort: "no" }
+};
+let state = structuredClone(DEFAULT_STATE);
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (saved) for (const k of Object.keys(DEFAULT_STATE)) {
+      const def = structuredClone(DEFAULT_STATE[k]);
+      state[k] = (typeof def === "object" && !Array.isArray(def)) ? { ...def, ...(saved[k] || {}) } : (saved[k] ?? def);
+    }
+  } catch (e) {}
+}
+function saveState() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+let SUBURBS = [], SUBURB_NAMES = new Set(), RATES = null;
+
+// ============================================================
+//  小工具
+// ============================================================
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+const sq = s => String(s).replace(/'/g, "''");   // 查询条件里的单引号
+const titleCase = s => String(s || "").toLowerCase().replace(/(^|[\s'-])([a-z])/g, (m, a, b) => a + b.toUpperCase());
+const money = v => v == null || !isFinite(v) ? "—" : "$" + Math.round(v).toLocaleString("en-US");
+const wan = v => { const w = v / 10000; return (Number.isInteger(w) ? w : w.toFixed(1)) + " 万"; };
+const priceLabel = v => wan(v) + "（$" + (v >= 1000000 ? (v / 1000000) + "M" : (v / 1000) + "k") + "）";
+const today = () => new Date().toISOString().slice(0, 10);
+// "75万" / "750k" / "$750,000" / "0.75m" → 750000
+function parseMoney(s) {
+  if (s == null) return null;
+  const t = String(s).trim().toLowerCase().replace(/[$,\s]/g, "");
+  if (!t) return null;
+  const m = t.match(/^(\d+(?:\.\d+)?)(万|w|k|m)?$/);
+  if (!m) return null;
+  const mult = { "万": 10000, "w": 10000, "k": 1000, "m": 1000000 }[m[2]] || 1;
+  return Math.round(Number(m[1]) * mult);
+}
+const numOrNull = v => (v === "" || v == null || !isFinite(Number(v))) ? null : Number(v);
+
+// ============================================================
+//  政府地图服务查询
+// ============================================================
+async function slip(layer, params) {
+  const u = new URL(`${SLIP}/${layer}/query`);
+  const all = { f: "json", returnGeometry: false, outFields: "*", ...params };
+  for (const [k, v] of Object.entries(all)) u.searchParams.set(k, typeof v === "object" ? JSON.stringify(v) : String(v));
+  const res = await fetch(u);
+  if (!res.ok) throw new Error("政府地图服务没有响应（" + res.status + "）");
+  const j = await res.json();
+  if (j.error) throw new Error(j.error.message || "查询出错");
+  return (j.features || []).map(f => ({ ...f.attributes, _geom: f.geometry }));
+}
+const atPoint = ([x, y], extra = {}) => ({ geometry: { x, y, spatialReference: { wkid: 4326 } }, geometryType: "esriGeometryPoint",
+  inSR: 4326, spatialRel: "esriSpatialRelIntersects", ...extra });
+const onArea = ring => ({ geometry: { rings: [ring], spatialReference: { wkid: 4326 } }, geometryType: "esriGeometryPolygon",
+  inSR: 4326, spatialRel: "esriSpatialRelIntersects" });
+
+// ---------- 地块形状的计算 ----------
+function pointInRing([x, y], ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+// 地块里面的一个点（不规则地块的中心可能在地块外面，就横着找最宽的一段取中点）
+function interiorPoint(ring) {
+  let a = 0, cx = 0, cy = 0;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [x0, y0] = ring[i], [x1, y1] = ring[i + 1], f = x0 * y1 - x1 * y0;
+    a += f; cx += (x0 + x1) * f; cy += (y0 + y1) * f;
+  }
+  if (Math.abs(a) < 1e-14) return ring[0];
+  cx /= 3 * a; cy /= 3 * a;
+  if (pointInRing([cx, cy], ring)) return [cx, cy];
+  const xs = [];
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [x0, y0] = ring[i], [x1, y1] = ring[i + 1];
+    if ((y0 > cy) !== (y1 > cy)) xs.push(x0 + (cy - y0) * (x1 - x0) / (y1 - y0));
+  }
+  xs.sort((p, q) => p - q);
+  let best = ring[0], w = -1;
+  for (let i = 0; i + 1 < xs.length; i += 2) if (xs[i + 1] - xs[i] > w) { w = xs[i + 1] - xs[i]; best = [(xs[i] + xs[i + 1]) / 2, cy]; }
+  return best;
+}
+// 面积（平方米）：地块很小，用局部平面近似
+function ringArea(ring) {
+  const lat0 = ring[0][1] * Math.PI / 180, R = 6378137;
+  let s = 0;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [x0, y0] = ring[i], [x1, y1] = ring[i + 1];
+    s += (x0 * Math.cos(lat0)) * y1 - (x1 * Math.cos(lat0)) * y0;
+  }
+  return Math.abs(s / 2) * (Math.PI / 180) ** 2 * R * R;
+}
+// 稍微往里收一点（约 3%），避免只是"擦边"碰到旁边的区域也算进去
+function shrinkRing(ring, [cx, cy]) { return ring.map(([x, y]) => [cx + (x - cx) * 0.97, cy + (y - cy) * 0.97]); }
+// 点太多时抽掉一些，避免查询网址太长
+function simplifyRing(ring) {
+  if (ring.length <= 80) return ring;
+  const step = Math.ceil(ring.length / 80), out = ring.filter((_, i) => i % step === 0);
+  out.push(ring[ring.length - 1]);
+  return out;
+}
+function siteFromRow(row) {
+  const ring = simplifyRing(row._geom.rings[0]);
+  const pt = interiorPoint(ring);
+  return { pt: pt.map(v => +v.toFixed(7)), ring: ring.map(p => [+p[0].toFixed(7), +p[1].toFixed(7)]), area: Math.round(ringArea(ring)) };
+}
+const siteGeom = site => site.ring ? onArea(shrinkRing(site.ring, site.pt)) : atPoint(site.pt);
+
+function formatAddress(a, unit) {
+  const num = a.road_number_1 ? (a.road_number_2 ? `${a.road_number_1}-${a.road_number_2}` : a.road_number_1)
+            : (a.lot_number ? `Lot ${a.lot_number}` : "");
+  const street = [a.road_name, a.road_type, a.road_suffix].filter(Boolean).map(titleCase).join(" ");
+  return `${unit ? unit + "/" : ""}${num} ${street}, ${titleCase(a.locality)}`.replace(/^\s+/, "");
+}
+
+// ============================================================
+//  隐藏信息检查（以后要加新的检查，在这里加一项即可）
+//  每项返回 { level: ok 正常 / info 信息 / warn 注意 / bad 风险, text 一句话, detail 说明, flag 用于筛选 }
+// ============================================================
+const CHECKS = [
+  {
+    id: "strata", name: "Strata", main: true,
+    async run(site) {
+      if (!site.ring) return { level: "info", text: "这里没有地块，无法判断" };
+      const rows = await slip(LY.plan, atPoint(site.pt, { outFields: "plan_identifier,status" }));
+      const id = r => r.plan_identifier.replace(/^([A-Z]+)0*/, "$1 ");
+      const sp = rows.filter(r => /^SP/i.test(r.plan_identifier) && r.status !== "Retired");
+      if (sp.length) {
+        const lodged = sp.every(r => r.status === "Lodged");
+        return { level: "warn", flag: true,
+          text: lodged ? "是 strata（新的 strata plan 已提交，正在登记）" : "是 strata",
+          detail: "Strata plan " + sp.map(id).join("、") + "。买之前要看 strata 报告：每季度管理费和储备金、有没有特别征费、规章（宠物、装修、出租）、保险和维修纠纷。" +
+                  "Survey-strata（只分地、没有公共楼体）一般费用较低。" };
+      }
+      const retired = rows.some(r => /^SP/i.test(r.plan_identifier));
+      return { level: "ok", flag: false, text: "不是 strata（独立产权）",
+        detail: "地块所在的规划图：" + (rows.map(id).join("、") || "—") + "（D、DP、P 开头是普通地块）" + (retired ? "。这里以前有过 strata，已经注销。" : "。") };
+    }
+  },
+  {
+    id: "flood", name: "洪水", main: true,
+    async run(site) {
+      const g = siteGeom(site);
+      const [a, b] = await Promise.all([
+        slip(LY.floodway, { ...g, outFields: "ext_type" }),
+        slip(LY.floodplain, { ...g, outFields: "ext_type,hyd_name" })
+      ]);
+      const items = [...a, ...b].map(r => {
+        const t = r.ext_type || "";
+        const m = t.match(/1 in (\d+)/);
+        if (/floodway/i.test(t)) return { s: 3, t: "百年一遇洪水的行洪道（洪水主要流经的地方，基本不能建房）" };
+        if (/channel/i.test(t)) return { s: 3, t: "在河道范围内" };
+        if (/fringe/i.test(t)) return { s: 2, t: "百年一遇洪水的洪泛边缘（可以建房，但地板要高于洪水位）" };
+        if (/designated/i.test(t)) return { s: 2, t: "规划用的洪水范围（百年一遇，已算上海平面上升）" };
+        if (m) { const n = +m[1]; return n <= 20 ? { s: 3, t: `${n} 年一遇的洪水就会淹到` } : n <= 100 ? { s: 2, t: `${n} 年一遇洪水的范围` } : { s: 1, t: `只有 ${n} 年一遇的极端洪水才会淹到` }; }
+        if (/probable maximum/i.test(t)) return { s: 1, t: "只在「可能最大洪水」时会淹（极少见）" };
+        return { s: 1, t: t };
+      });
+      const rivers = [...new Set(b.map(r => r.hyd_name).filter(Boolean))];
+      const note = "政府洪水图只覆盖做过洪水研究的河流（如天鹅河、坎宁河），不包括暴雨积水。";
+      if (!items.length) return { level: "ok", flag: false, text: "不在已测绘的洪水区", detail: note };
+      items.sort((p, q) => q.s - p.s);
+      const worst = items[0];
+      return { level: worst.s >= 3 ? "bad" : worst.s === 2 ? "warn" : "info", flag: worst.s >= 2,
+        text: (site.ring ? "地块（全部或部分）在" : "这个位置在") + worst.t,
+        detail: (rivers.length ? "河流：" + rivers.join("、") + "。" : "") + "涉及：" + [...new Set(items.map(i => i.t))].join("；") + "。" + note };
+    }
+  },
+  {
+    id: "fire", name: "山火", main: true,
+    async run(site) {
+      const rows = await slip(LY.bushfire, { ...siteGeom(site), outFields: "planningarea" });
+      if (!rows.length) return { level: "ok", flag: false, text: "不在山火易发区",
+        detail: "官方《山火易发区地图》（Map of Bush Fire Prone Areas）。" };
+      const areas = [...new Set(rows.map(r => r.planningarea).filter(Boolean))].join("、");
+      return { level: "warn", flag: true, text: site.ring ? "在山火易发区（地块全部或部分）" : "这个位置在山火易发区",
+        detail: "官方《山火易发区地图》（" + areas + "）。建房、扩建要做 BAL（山火攻击等级）评估，可能需要更贵的建材，房屋保险也可能更贵。" };
+    }
+  },
+  {
+    id: "planning", name: "规划",
+    async run(site, cand) {
+      const [z, r, m] = await Promise.all([
+        slip(LY.zone, atPoint(site.pt, { outFields: "zone,scheme_nam" })),
+        slip(LY.rcode, atPoint(site.pt, { outFields: "rcode_no" })),
+        slip(LY.region, atPoint(site.pt, { outFields: "descriptio,rs_class,reg_scheme" }))
+      ]);
+      const zone = z[0] && z[0].zone, code = r[0] && r[0].rcode_no, reg = m[0];
+      const regName = reg ? (REGION_CN[reg.descriptio] || reg.descriptio) + (REGION_CN[reg.descriptio] ? "（" + reg.descriptio + "）" : "") : "";
+      // 区域规划里的保留地（公园、道路、铁路等）：用途受严格限制，政府将来可能征用
+      if (reg && /reserve/i.test(reg.rs_class || "")) {
+        return { level: "bad", text: "区域规划保留地：" + regName,
+          detail: `这块地在 ${reg.reg_scheme || "区域规划"} 里被划为保留地，不是普通住宅用地：开发和改建受严格限制，政府将来可能征用。买之前一定要问清楚。` +
+                  (zone || code ? "当地规划：" + [zone, code].filter(Boolean).join(" ") + "。" : "") };
+      }
+      if (!zone && !code) return { level: "info", text: reg ? "区域规划：" + regName : "没有查到规划分区" };
+      const parts = [];
+      if (zone) parts.push((ZONE_CN[zone] || zone) + (ZONE_CN[zone] ? "（" + zone + "）" : ""));
+      if (code) parts.push(code);
+      let detail = (reg ? "区域规划（" + (reg.reg_scheme || "") + "）：" + regName + "。" : "") +
+                   (z[0] && z[0].scheme_nam ? "当地规划方案：" + titleCase(z[0].scheme_nam) + "。" : "");
+      if (code) {
+        const codes = code.split("/").map(c => (c.startsWith("R") ? c : "R" + c));
+        const avg = codes.map(c => R_AVG[c]).filter(Boolean);
+        if (/AC/.test(code)) detail += "R-AC 是活动中心区的密度规定，具体要看当地规划。";
+        else if (avg.length) {
+          detail += codes.map(c => R_AVG[c] ? `${c} 每户平均约 ${R_AVG[c]} m²` : c).join("；") + "。";
+          const isStrata = cand && cand.checks && cand.checks.strata && cand.checks.strata.flag;
+          if (site.area && !isStrata) {
+            const n = Math.floor(site.area / Math.min(...avg));
+            detail += n >= 2 ? `这块地约 ${site.area} m²，按平均面积粗算理论上最多约可分 ${n} 户（实际要看最小面积、地块形状和审批）。`
+                             : `这块地约 ${site.area} m²，按这个密度不够再分。`;
+          }
+        }
+      }
+      return { level: "info", text: parts.join(" · "), detail };
+    }
+  },
+  {
+    id: "heritage", name: "遗产",
+    async run(site) {
+      const p = atPoint(site.pt, { outFields: "place_name" });
+      const [a, b, c] = await Promise.all([slip(LY.stateRegister, p), slip(LY.heritageList, p), slip(LY.heritageArea, p)]);
+      if (!a.length && !b.length && !c.length) return { level: "ok", text: "不在遗产名录" };
+      const names = [...a.map(r => r.place_name + "（州遗产名录）"), ...b.map(r => r.place_name + "（本地遗产名单）"), ...c.map(r => r.place_name + "（遗产区）")];
+      return { level: "warn", text: "在遗产名录：" + [...new Set(names)].join("、"),
+        detail: "拆除、改建、改外观通常要另外审批，翻新可能受限制。" };
+    }
+  },
+  {
+    id: "contam", name: "污染场地",
+    async run(site) {
+      const [on, near] = await Promise.all([
+        slip(LY.contaminated, atPoint(site.pt, { outFields: "classification" })),
+        slip(LY.contaminated, atPoint(site.pt, { outFields: "classification", distance: 200, units: "esriSRUnit_Meter" }))
+      ]);
+      const cn = c => CONTAM_CN[c] || c;
+      if (on.length) return { level: "bad", text: "这块地在污染场地登记中：" + cn(on[0].classification),
+        detail: "西澳环境部（DWER）污染场地数据库。买前要查清楚治理情况和用途限制。" };
+      if (near.length) return { level: "info", text: `附近 200 米内有 ${near.length} 处登记的污染场地`,
+        detail: "类别：" + [...new Set(near.map(r => cn(r.classification)))].join("、") + "。多数是已治理的旧加油站、工厂等。" };
+      return { level: "ok", text: "附近没有登记的污染场地" };
+    }
+  },
+  {
+    id: "noise", name: "交通噪音",
+    async run(site) {
+      const rows = await slip(LY.noise, { ...siteGeom(site), outFields: "feature_type" });
+      if (!rows.length) return { level: "ok", text: "不在交通噪音评估范围" };
+      const kinds = [...new Set(rows.map(r => NOISE_CN[r.feature_type] || r.feature_type))].join("、");
+      return { level: "warn", text: "靠近" + kinds,
+        detail: "在州规划政策 SPP 5.4 的噪音评估范围内：平时可能较吵，新建、扩建可能要做隔音。" };
+    }
+  },
+  {
+    id: "airport", name: "机场噪音",
+    async run(site) {
+      const p = atPoint(site.pt, { outFields: "feature_name,label" });
+      const [a, b] = await Promise.all([slip(LY.perthAirport, p), slip(LY.jandakot, p)]);
+      const z = [...a.map(r => "珀斯机场 ANEF " + (r.feature_name || r.label)), ...b.map(r => "Jandakot 机场 " + (r.feature_name || r.label))];
+      if (!z.length) return { level: "ok", text: "不在机场噪音区" };
+      return { level: "warn", text: z.join("、"), detail: "飞机噪音预测区（ANEF）。数字越大越吵；新建住宅可能要求隔音。" };
+    }
+  },
+  {
+    id: "river", name: "河流管控区",
+    async run(site) {
+      const rows = await slip(LY.river, atPoint(site.pt, { outFields: "sca_id" }));
+      if (!rows.length) return { level: "ok", text: "不在天鹅河 / 坎宁河管控区" };
+      return { level: "info", text: "在天鹅河 / 坎宁河开发管控区",
+        detail: "靠河的地块，建房和改建要经过河流管理部门（DBCA）审批。" };
+    }
+  },
+  {
+    id: "acid", name: "酸性土",
+    async run(site) {
+      const rows = await slip(LY.acidSoil, atPoint(site.pt, { outFields: "risk_category" }));
+      if (!rows.length) return { level: "ok", text: "没有酸性硫酸盐土风险记录" };
+      const cat = rows[0].risk_category || "";
+      const cn = /high/i.test(cat) ? "高到中等风险" : /moderate to low/i.test(cat) ? "中等到低风险" : cat;
+      return { level: "info", text: "酸性硫酸盐土：" + cn,
+        detail: "主要影响挖地基、泳池、地下排水等工程，可能需要额外处理；不影响日常居住。" };
+    }
+  },
+  // ---------- 以后添加（预留位置） ----------
+  { id: "fengshui", name: "风水", later: true },
+  { id: "env", name: "周边环境", later: true },
+  { id: "crime", name: "犯罪率", later: true },
+];
+const ACTIVE_CHECKS = CHECKS.filter(c => !c.later);
+const LEVEL = { ok: ["✓", "正常"], info: ["i", "信息"], warn: ["!", "注意"], bad: ["✗", "风险"], err: ["?", "查不到"], pending: ["…", "查询中"] };
+
+async function runChecks(site, ids, cand) {
+  const out = {};
+  // 规划要用到 strata 的结果，所以先查 strata
+  const list = ACTIVE_CHECKS.filter(c => !ids || ids.includes(c.id));
+  const first = list.filter(c => c.id === "strata"), rest = list.filter(c => c.id !== "strata");
+  for (const group of [first, rest]) {
+    await Promise.all(group.map(async c => {
+      try { out[c.id] = await c.run(site, cand ? { ...cand, checks: { ...(cand.checks || {}), ...out } } : { checks: out }); }
+      catch (e) { out[c.id] = { level: "err", text: "查询失败，稍后点「重新检查」", detail: String(e.message || e) }; }
+    }));
+  }
+  return out;
+}
+
+// ============================================================
+//  条件 → 是否符合
+// ============================================================
+function evaluate(c) {
+  const k = state.criteria, why = [];
+  const sub = (c.suburb || String(c.address).split(",").pop()).trim().toUpperCase();
+  if (k.suburbs.length && !k.nearby && !k.suburbs.some(s => s.n.toUpperCase() === sub)) why.push("不在所选区域");
+  if (c.price != null) {
+    if (k.maxPrice && c.price > k.maxPrice) why.push("价格高于 " + wan(k.maxPrice));
+    if (k.minPrice && c.price < k.minPrice) why.push("价格低于 " + wan(k.minPrice));
+  }
+  if (k.types.length && c.type && !k.types.includes(c.type)) why.push("房型不符");
+  if (k.beds && c.beds != null && c.beds < k.beds) why.push(`卧室少于 ${k.beds}`);
+  if (k.baths && c.baths != null && c.baths < k.baths) why.push(`浴室少于 ${k.baths}`);
+  if (k.cars && c.cars != null && c.cars < k.cars) why.push(`车位少于 ${k.cars}`);
+  const st = c.checks && c.checks.strata;
+  const land = c.land != null ? c.land : (st && st.flag === false ? c.area : null);
+  if (land != null) {
+    if (k.minLand && land < k.minLand) why.push(`土地小于 ${k.minLand} m²`);
+    if (k.maxLand && land > k.maxLand) why.push(`土地大于 ${k.maxLand} m²`);
+  }
+  if (st && st.flag != null) {
+    if (k.strata === "no" && st.flag) why.push("是 strata");
+    if (k.strata === "only" && !st.flag) why.push("不是 strata");
+  }
+  if (k.flood === "exclude" && c.checks && c.checks.flood && c.checks.flood.flag) why.push("在洪水区");
+  if (k.fire === "exclude" && c.checks && c.checks.fire && c.checks.fire.flag) why.push("在山火易发区");
+  return { ok: why.length === 0, why };
+}
+
+// ============================================================
+//  ① 条件和搜索链接
+// ============================================================
+function buildSelect(sel, steps, label, anyText) {
+  sel.innerHTML = `<option value="0">${anyText}</option>` + steps.map(v => `<option value="${v}">${label(v)}</option>`).join("");
+}
+function buildSeg(el, values) {
+  el.innerHTML = values.map(([v, t]) => `<button type="button" data-v="${v}">${t}</button>`).join("");
+}
+function setSeg(el, v) { el.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === String(v)))); }
+function onSeg(el, fn) { el.addEventListener("click", e => { const b = e.target.closest("button"); if (b && el.contains(b)) { setSeg(el, b.dataset.v); fn(b.dataset.v); } }); }
+
+function renderCriteria() {
+  const k = state.criteria;
+  $("suburbChips").innerHTML = k.suburbs.map((s, i) =>
+    `<span class="chip">${esc(s.n)} ${esc(s.p)}<button type="button" data-i="${i}" aria-label="删除 ${esc(s.n)}">×</button></span>`).join("");
+  $("nearby").checked = k.nearby;
+  setSeg($("mode"), k.mode);
+  $("types").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(k.types.includes(b.dataset.v))));
+  $("minPrice").value = k.minPrice; $("maxPrice").value = k.maxPrice;
+  setSeg($("beds"), k.beds); setSeg($("baths"), k.baths); setSeg($("cars"), k.cars);
+  $("minLand").value = k.minLand; $("maxLand").value = k.maxLand;
+  setSeg($("build"), k.build);
+  $("keywords").value = k.keywords;
+  $("excludeOffer").checked = k.excludeOffer;
+  setSeg($("strataRule"), k.strata); setSeg($("floodRule"), k.flood); setSeg($("fireRule"), k.fire);
+}
+
+const domainSlug = s => s.n.toLowerCase().replace(/'/g, "").replace(/\s+/g, "-") + "-wa-" + s.p;
+function domainUrl(k) {
+  const p = [];
+  p.push("suburb=" + k.suburbs.map(domainSlug).join(","));
+  if (k.types.length) p.push("ptype=" + k.types.map(t => DOMAIN_TYPE[t]).join(","));
+  if (k.beds) p.push(`bedrooms=${k.beds}-any`);
+  if (k.baths) p.push(`bathrooms=${k.baths}-any`);
+  if (k.cars) p.push(`carspaces=${k.cars}-any`);
+  if (k.minPrice || k.maxPrice) p.push(`price=${k.minPrice || 0}-${k.maxPrice || "any"}`);
+  if (k.minLand || k.maxLand) p.push(`landsize=${k.minLand || 0}-${k.maxLand || "any"}`);
+  if (k.build !== "all") p.push("establishedtype=" + k.build);
+  if (k.keywords.trim()) p.push("keywords=" + encodeURIComponent(k.keywords.trim()));
+  if (k.excludeOffer && k.mode === "buy") p.push("excludeunderoffer=1");
+  if (!k.nearby) p.push("ssubs=0");
+  return (k.mode === "sold" ? "https://www.domain.com.au/sold-listings/?" : "https://www.domain.com.au/sale/?") + p.join("&");
+}
+function reaUrl(k, s) {
+  const parts = [];
+  if (k.types.length) parts.push("property-" + k.types.map(t => REA_TYPE[t]).join("-"));
+  if (k.beds) parts.push(`with-${k.beds}-bedrooms`);
+  if (k.minPrice || k.maxPrice) parts.push(`between-${k.minPrice || 0}-${k.maxPrice || "any"}`);
+  parts.push("in-" + s.n.toLowerCase().replace(/\s+/g, "+") + ",+wa+" + s.p);
+  const q = ["source=refinement"];
+  if (k.baths) q.push("numBaths=" + k.baths);
+  if (k.cars) q.push("numParkingSpaces=" + k.cars);
+  if (k.excludeOffer && k.mode === "buy") q.push("misc=ex-under-contract");
+  q.push("includeSurrounding=" + (k.nearby ? "true" : "false"));
+  if (k.keywords.trim()) q.push("keywords=" + encodeURIComponent(k.keywords.trim()));
+  return `https://www.realestate.com.au/${k.mode === "sold" ? "sold" : "buy"}/${parts.join("-")}/list-1?${q.join("&")}`;
+}
+function renderLinks() {
+  const k = state.criteria, box = $("searchLinks");
+  if (!k.suburbs.length) {
+    box.innerHTML = `<span class="btn primary" aria-disabled="true">在 Domain 查看 ↗</span><span class="btn" aria-disabled="true">在 realestate.com.au 查看 ↗</span>`;
+    $("searchHint").textContent = "先在上面添加至少一个区域。";
+    return;
+  }
+  box.innerHTML =
+    `<a class="btn primary" href="${esc(domainUrl(k))}" target="_blank" rel="noopener">在 Domain 查看${k.suburbs.length > 1 ? `（${k.suburbs.length} 个区域）` : ""} ↗</a>` +
+    k.suburbs.map(s => `<a class="btn" href="${esc(reaUrl(k, s))}" target="_blank" rel="noopener">realestate.com.au · ${esc(s.n)} ↗</a>`).join("") +
+    k.suburbs.map(s => `<a class="btn small" href="https://www.domain.com.au/suburb-profile/${domainSlug(s)}" target="_blank" rel="noopener">${esc(s.n)} 区域资料 ↗</a>`).join("");
+  const bits = [k.mode === "sold" ? "已成交" : "在售", k.suburbs.map(s => s.n).join("、") + (k.nearby ? "（含附近）" : "")];
+  if (k.types.length) bits.push(k.types.map(t => TYPES[t]).join("/"));
+  if (k.minPrice && k.maxPrice) bits.push(`${wan(k.minPrice)}–${wan(k.maxPrice)}`);
+  else if (k.maxPrice) bits.push(wan(k.maxPrice) + "以内");
+  else if (k.minPrice) bits.push(wan(k.minPrice) + "以上");
+  if (k.beds) bits.push(`${k.beds} 卧以上`);
+  if (k.baths) bits.push(`${k.baths} 浴以上`);
+  if (k.cars) bits.push(`${k.cars} 车位以上`);
+  if (k.minLand || k.maxLand) bits.push(`土地 ${k.minLand || 0}–${k.maxLand || "不限"} m²`);
+  if (k.build !== "all") bits.push(k.build === "new" ? "新房" : "二手");
+  if (k.excludeOffer && k.mode === "buy") bits.push("排除已有买家");
+  $("searchHint").textContent = "条件：" + bits.join(" · ") + "。realestate.com.au 的链接每个区域一个，不含土地面积和新旧条件，需要在网站上再选。";
+}
+
+function addSuburb(text) {
+  const t = String(text || "").trim();
+  if (!t) return false;
+  const m = t.match(/^(.*?)[\s,]*\(?(\d{4})?\)?$/);
+  const name = m[1].trim().toUpperCase(), pc = m[2];
+  const s = SUBURBS.find(x => x.n.toUpperCase() === name && (!pc || x.p === pc));
+  if (!s) { $("suburbInput").setCustomValidity("没找到这个区域"); $("suburbInput").reportValidity(); return false; }
+  $("suburbInput").setCustomValidity("");
+  if (!state.criteria.suburbs.some(x => x.n === s.n && x.p === s.p)) state.criteria.suburbs.push({ n: s.n, p: s.p });
+  $("suburbInput").value = "";
+  return true;
+}
+
+function criteriaChanged(opts = {}) {
+  saveState();
+  renderCriteria();
+  renderLinks();
+  renderCandidates();
+  if (opts.suburbs) drawSuburbs(true);
+  if (!state.loan.price) renderLoan();
+}
+
+function wireCriteria() {
+  buildSelect($("minPrice"), PRICE_STEPS, priceLabel, "不限");
+  buildSelect($("maxPrice"), PRICE_STEPS, priceLabel, "不限");
+  buildSelect($("minLand"), LAND_STEPS, v => v + " m²", "不限");
+  buildSelect($("maxLand"), LAND_STEPS, v => v + " m²", "不限");
+  buildSeg($("beds"), [[0, "不限"], [1, "1+"], [2, "2+"], [3, "3+"], [4, "4+"], [5, "5+"]]);
+  buildSeg($("baths"), [[0, "不限"], [1, "1+"], [2, "2+"], [3, "3+"]]);
+  buildSeg($("cars"), [[0, "不限"], [1, "1+"], [2, "2+"], [3, "3+"]]);
+  $("suburbList").innerHTML = SUBURBS.map(s => `<option value="${esc(s.n)} ${esc(s.p)}"></option>`).join("");
+
+  const k = () => state.criteria;
+  $("suburbAdd").addEventListener("click", () => { if (addSuburb($("suburbInput").value)) criteriaChanged({ suburbs: true }); });
+  $("suburbInput").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); if (addSuburb($("suburbInput").value)) criteriaChanged({ suburbs: true }); } });
+  $("suburbInput").addEventListener("input", () => {   // 从下拉提示里点选后直接添加
+    const v = $("suburbInput").value;
+    if (SUBURBS.some(s => `${s.n} ${s.p}` === v) && addSuburb(v)) criteriaChanged({ suburbs: true });
+  });
+  $("suburbChips").addEventListener("click", e => {
+    const b = e.target.closest("button[data-i]");
+    if (b) { k().suburbs.splice(+b.dataset.i, 1); criteriaChanged({ suburbs: true }); }
+  });
+  $("nearby").addEventListener("change", e => { k().nearby = e.target.checked; criteriaChanged(); });
+  onSeg($("mode"), v => { k().mode = v; criteriaChanged(); });
+  $("types").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const t = b.dataset.v, list = k().types;
+    k().types = list.includes(t) ? list.filter(x => x !== t) : [...list, t];
+    criteriaChanged();
+  });
+  for (const id of ["minPrice", "maxPrice", "minLand", "maxLand"])
+    $(id).addEventListener("change", e => { k()[id] = Number(e.target.value); criteriaChanged(); });
+  onSeg($("beds"), v => { k().beds = +v; criteriaChanged(); });
+  onSeg($("baths"), v => { k().baths = +v; criteriaChanged(); });
+  onSeg($("cars"), v => { k().cars = +v; criteriaChanged(); });
+  onSeg($("build"), v => { k().build = v; criteriaChanged(); });
+  $("keywords").addEventListener("change", e => { k().keywords = e.target.value; criteriaChanged(); });
+  $("excludeOffer").addEventListener("change", e => { k().excludeOffer = e.target.checked; criteriaChanged(); });
+  onSeg($("strataRule"), v => { k().strata = v; criteriaChanged(); });
+  onSeg($("floodRule"), v => { k().flood = v; criteriaChanged(); });
+  onSeg($("fireRule"), v => { k().fire = v; criteriaChanged(); });
+}
+
+// ============================================================
+//  ② 地图
+// ============================================================
+let map, baseLayers = {}, overlayLayers = {}, suburbLayer, candLayer, lotLayer;
+// 把政府地图服务的图片切成地图瓦片（每块按它的经纬度范围向服务器要一张图）
+const ArcExport = L.TileLayer.extend({
+  getTileUrl(c) {
+    const ts = this.getTileSize(), crs = this._map.options.crs;
+    const nw = crs.project(this._map.unproject(c.scaleBy(ts), c.z));
+    const se = crs.project(this._map.unproject(c.add([1, 1]).scaleBy(ts), c.z));
+    return this._url + "&bbox=" + [nw.x, se.y, se.x, nw.y].map(v => v.toFixed(2)).join(",");
+  }
+});
+const exportUrl = (service, extra) => `${SLIP}/${service}/MapServer/export?f=image&bboxSR=3857&imageSR=3857&size=256,256&dpi=96&${extra}`;
+
+function initMap() {
+  map = L.map("map", { scrollWheelZoom: false, zoomSnap: 0.5 }).setView([-31.98, 115.87], 11);
+  baseLayers.street = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
+  baseLayers.aerial = new ArcExport(exportUrl("Locate", "format=jpg"), { maxZoom: 20, attribution: "航拍图 &copy; Landgate / SLIP" });
+  baseLayers[state.ui.basemap === "aerial" ? "aerial" : "street"].addTo(map);
+  setSeg($("basemap"), state.ui.basemap);
+  onSeg($("basemap"), v => {
+    state.ui.basemap = v; saveState();
+    for (const [key, layer] of Object.entries(baseLayers)) { if (key === v) layer.addTo(map); else map.removeLayer(layer); }
+  });
+
+  $("layerToggles").innerHTML = OVERLAYS.map(o => o.later
+    ? `<span class="check later">${o.name} <span class="later-tag">以后添加</span></span>`
+    : `<label class="check"><input type="checkbox" data-o="${o.id}"${state.ui.overlays[o.id] ? " checked" : ""}>` +
+      `${o.color ? `<i style="background:${o.color}; opacity:.55; border:1px solid ${o.color}"></i>` : ""}${o.name}</label>`).join("");
+  for (const o of OVERLAYS.filter(x => !x.later)) {
+    overlayLayers[o.id] = new ArcExport(exportUrl(o.service, overlayParams(o)),
+      { opacity: o.style ? 1 : 0.7, maxZoom: 20, minZoom: o.minZoom || 0, zIndex: 5 });
+    if (state.ui.overlays[o.id]) overlayLayers[o.id].addTo(map);
+  }
+  $("layerToggles").addEventListener("change", e => {
+    const id = e.target.dataset.o; if (!id) return;
+    state.ui.overlays[id] = e.target.checked; saveState();
+    if (e.target.checked) overlayLayers[id].addTo(map); else map.removeLayer(overlayLayers[id]);
+  });
+
+  suburbLayer = L.layerGroup().addTo(map);
+  lotLayer = L.layerGroup().addTo(map);
+  candLayer = L.layerGroup().addTo(map);
+  map.on("click", onMapClick);
+  map.on("popupclose", () => { popupCandId = null; });
+  map.on("focus", () => map.scrollWheelZoom.enable());
+  map.on("blur", () => map.scrollWheelZoom.disable());
+}
+
+const boundaryCache = {};
+async function drawSuburbs(fit) {
+  suburbLayer.clearLayers();
+  const ink = getComputedStyle(document.documentElement).getPropertyValue("--ink").trim() || "#333";
+  for (const s of state.criteria.suburbs) {
+    const key = s.n + s.p;
+    try {
+      if (!boundaryCache[key]) {
+        const rows = await slip(LY.locality, { where: `name='${sq(s.n.toUpperCase())}' AND postcode='${sq(s.p)}'`, outFields: "name", returnGeometry: true, outSR: 4326 });
+        boundaryCache[key] = rows.flatMap(r => r._geom.rings.map(ring => ring.map(([x, y]) => [y, x])));
+      }
+      L.polygon(boundaryCache[key], { color: ink, weight: 2, dashArray: "6 5", fill: false, interactive: false }).addTo(suburbLayer);
+    } catch (e) {}
+  }
+  if (fit) fitMap();
+}
+function fitMap() {
+  const b = L.latLngBounds([]);
+  for (const s of state.criteria.suburbs) {
+    const info = SUBURBS.find(x => x.n === s.n && x.p === s.p);
+    if (info) b.extend([[info.bbox[1], info.bbox[0]], [info.bbox[3], info.bbox[2]]]);
+  }
+  for (const c of state.candidates) b.extend([c.pt[1], c.pt[0]]);
+  if (b.isValid()) map.fitBounds(b, { padding: [20, 20], maxZoom: 16 });
+}
+function drawCandidates() {
+  candLayer.clearLayers();
+  for (const c of state.candidates) {
+    const ev = evaluate(c);
+    const cls = !c.checks ? "" : ev.ok ? "pass" : "fail";
+    L.marker([c.pt[1], c.pt[0]], {
+      icon: L.divIcon({ className: "pin " + cls, html: `<span>${c.no}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] }),
+      title: c.address, keyboard: true
+    }).on("click", () => showCandidateOnMap(c.id, false)).addTo(candLayer);
+  }
+}
+let popupCandId = null, candPopup = null;   // 地图上正在显示哪个候选房源的弹出框（查询完成后要刷新）
+function showCandidateOnMap(id, pan) {
+  const c = state.candidates.find(x => x.id === id); if (!c) return;
+  lotLayer.clearLayers();
+  if (c.ring) L.polygon(c.ring.map(([x, y]) => [y, x]), { color: "#e8590c", weight: 3, fillOpacity: 0.12, interactive: false }).addTo(lotLayer);
+  if (pan) map.setView([c.pt[1], c.pt[0]], Math.max(map.getZoom(), 17));
+  const ev = evaluate(c);
+  candPopup = L.popup({ maxWidth: 300 }).setLatLng([c.pt[1], c.pt[0]]).setContent(
+    `<div class="pop-addr">#${c.no} ${esc(c.address)}</div>` +
+    `<div>${esc(factsLine(c))}</div>` +
+    `<div class="pop-checks">${["strata", "flood", "fire"].map(id => miniCheck(id, c.checks && c.checks[id])).join("")}</div>` +
+    `<div>${c.checks ? (ev.ok ? "✓ " + (c.price == null ? "符合已知条件（价格还没填）" : "符合条件") : "✗ 不符合：" + esc(ev.why.join("、"))) : "查询中…"}</div>` +
+    `<a href="#cand-${c.id}" data-jump="${c.id}">看详细 ↓</a>`).openOn(map);
+  popupCandId = id;   // 要在 openOn 之后设：打开新弹出框时会先关掉旧的（关掉时会清空这个记录）
+}
+function miniCheck(id, r) {
+  const def = CHECKS.find(c => c.id === id);
+  r = r || { level: "pending", text: "查询中…" };
+  return `<div class="chk mini ${r.level}"><span class="ic">${LEVEL[r.level][0]}</span><div><b>${def.name}</b><span class="txt">${esc(r.text)}</span></div></div>`;
+}
+
+async function onMapClick(e) {
+  const pt = [e.latlng.lng, e.latlng.lat];
+  const pop = L.popup({ maxWidth: 300 }).setLatLng(e.latlng).setContent("正在查询这个位置…").openOn(map);
+  try {
+    const rows = await slip(LY.address, atPoint(pt, { outFields: ADDR_FIELDS, returnGeometry: true, outSR: 4326 }));
+    const row = rows.find(r => r._geom && r._geom.rings);
+    const site = row ? siteFromRow(row) : { pt, ring: null, area: null };
+    lotLayer.clearLayers();
+    if (site.ring) L.polygon(site.ring.map(([x, y]) => [y, x]), { color: "#e8590c", weight: 2, fillOpacity: 0.1, interactive: false }).addTo(lotLayer);
+    const head = row ? `<div class="pop-addr">${esc(formatAddress(row))}</div><div>地块约 ${site.area.toLocaleString()} m²</div>`
+                     : `<div class="pop-addr">这里没有门牌地址</div><div>可能是道路、公园或河流</div>`;
+    pop.setContent(head + `<div class="pop-checks">${["strata", "flood", "fire"].map(id => miniCheck(id)).join("")}</div>`);
+    const res = await runChecks(site, row ? ["strata", "flood", "fire"] : ["flood", "fire"]);
+    const box = document.createElement("div");
+    box.innerHTML = head + `<div class="pop-checks">${(row ? ["strata", "flood", "fire"] : ["flood", "fire"]).map(id => miniCheck(id, res[id])).join("")}</div>`;
+    if (row) {
+      const btn = document.createElement("button");
+      btn.className = "btn small primary"; btn.type = "button"; btn.textContent = "加入候选清单";
+      btn.addEventListener("click", () => { map.closePopup(); addCandidate(row, null); });
+      box.appendChild(btn);
+    }
+    pop.setContent(box);
+  } catch (err) {
+    pop.setContent(`<span class="error">查询失败：${esc(err.message)}</span>`);
+  }
+}
+
+// ============================================================
+//  ③ 候选房源
+// ============================================================
+function parseAddress(text) {
+  let s = String(text).toUpperCase().replace(/[.,]/g, " ").replace(/\bWESTERN AUSTRALIA\b/g, " ").replace(/\s+/g, " ").trim();
+  s = s.replace(/\s+\d{4}$/, "").replace(/\s+WA$/, "").trim();
+  let tokens = s.split(" ");
+  let suburb = null;
+  for (let n = Math.min(4, tokens.length - 1); n >= 1; n--) {
+    const cand = tokens.slice(-n).join(" ");
+    if (SUBURB_NAMES.has(cand)) { suburb = cand; tokens = tokens.slice(0, -n); break; }
+  }
+  let rest = tokens.join(" ")
+    .replace(/^(UNIT|APARTMENT|APT|VILLA|TOWNHOUSE|FLAT|SUITE|U)\s*(\d+[A-Z]?)\s*\/?\s*/, "$2/")
+    .replace(/\s*\/\s*/g, "/");
+  tokens = rest.split(" ").filter(Boolean);
+  let unit = null, num = null, lot = null;
+  if (tokens.length && /^\d/.test(tokens[0])) {
+    const m = tokens[0].match(/^(?:(\d+[A-Z]?)\/)?(\d+[A-Z]?)(?:-\d+[A-Z]?)?$/);
+    if (m) { unit = m[1] || null; num = m[2]; tokens.shift(); }
+  } else if (tokens[0] === "LOT" && /^\d+$/.test(tokens[1] || "")) { lot = tokens[1]; tokens = tokens.slice(2); }
+  let type = null;
+  if (tokens.length > 1 && STREET_TYPES[tokens[tokens.length - 1]]) type = STREET_TYPES[tokens.pop()];
+  return { unit, num, lot, street: tokens.join(" "), type, suburb };
+}
+
+async function findAddress() {
+  const box = $("addrResults"), text = $("addrInput").value.trim();
+  if (!text) return;
+  const p = parseAddress(text);
+  if (!p.suburb) { box.innerHTML = `<p class="hint error">没认出区域名。请在地址最后写上区域，例如「12 Preston St, Como」。</p>`; return; }
+  if (!p.street) { box.innerHTML = `<p class="hint error">没认出街道名。</p>`; return; }
+  box.innerHTML = `<p class="hint">查找中…</p>`;
+  try {
+    const base = `locality='${sq(p.suburb)}'`;
+    const q = where => slip(LY.address, { where, outFields: ADDR_FIELDS, returnGeometry: true, outSR: 4326, resultRecordCount: 1000 });
+    let rows = await q(`${base} AND road_name='${sq(p.street)}'`);
+    if (!rows.length) rows = await q(`${base} AND road_name LIKE '${sq(p.street.slice(0, Math.max(3, p.street.length - 2)))}%'`);
+    rows = rows.filter(r => r._geom && r._geom.rings);
+    const n = p.num ? parseInt(p.num, 10) : null;
+    const score = r => {
+      let s = 0;
+      if (p.type && r.road_type === p.type) s += 2;
+      if (r.road_name === p.street) s += 4;
+      const a = parseInt(r.road_number_1, 10), b = parseInt(r.road_number_2, 10);
+      if (p.num && String(r.road_number_1) === p.num) s += 20;
+      else if (n != null && b && n >= a && n <= b) s += 15;
+      if (p.lot && r.lot_number === p.lot) s += 20;
+      return s;
+    };
+    const dist = r => n == null ? 0 : Math.abs((parseInt(r.road_number_1, 10) || 9999) - n);
+    rows.sort((x, y) => score(y) - score(x) || dist(x) - dist(y));
+    const exact = rows.filter(r => score(r) >= 15);
+    const shown = (exact.length ? exact : rows).slice(0, 8);
+    if (!shown.length) { box.innerHTML = `<p class="hint error">在 ${esc(titleCase(p.suburb))} 没找到这条街。检查一下拼写，或者在地图上点那个位置。</p>`; return; }
+    const sameAddr = new Set(shown.map(r => formatAddress(r))).size < shown.length;
+    box.innerHTML = (exact.length ? "" : `<p class="hint">没有找到完全一样的门牌号，最接近的是：</p>`) +
+      shown.map((r, i) => `<div class="result"><span>${esc(formatAddress(r, p.unit))} <span class="hint">· 地块约 ${Math.round(ringArea(r._geom.rings[0])).toLocaleString()} m²</span></span>` +
+        `<button class="btn small primary" type="button" data-pick="${i}">加入</button></div>`).join("") +
+      (sameAddr ? `<p class="hint">同一个门牌有几块相连的地，选房子所在的那块（通常面积和房源写的接近）。</p>` : "");
+    box.onclick = e => {
+      const b = e.target.closest("button[data-pick]"); if (!b) return;
+      box.innerHTML = ""; $("addrInput").value = "";
+      addCandidate(shown[+b.dataset.pick], p.unit);
+    };
+  } catch (err) {
+    box.innerHTML = `<p class="hint error">查找失败：${esc(err.message)}</p>`;
+  }
+}
+
+async function addCandidate(row, unit) {
+  const dup = state.candidates.find(c => c.landId === row.land_id && (c.unit || null) === (unit || null));
+  if (dup) { focusCard(dup.id); return; }
+  const site = siteFromRow(row);
+  const c = { id: Date.now().toString(36), no: state.nextNo++, address: formatAddress(row, unit), suburb: titleCase(row.locality), unit: unit || null, landId: row.land_id,
+              pt: site.pt, ring: site.ring, area: site.area, addedAt: today(), price: null, type: null, beds: null, baths: null, cars: null,
+              land: null, strataFee: null, url: "", note: "", checks: null, checkedAt: null };
+  state.candidates.push(c);
+  saveState(); renderCandidates(); drawCandidates();
+  showCandidateOnMap(c.id, true);
+  focusCard(c.id);
+  await recheck(c.id);
+}
+async function recheck(id) {
+  const c = state.candidates.find(x => x.id === id); if (!c) return;
+  c.checks = null; renderCandidates(); drawCandidates();
+  const res = await runChecks({ pt: c.pt, ring: c.ring, area: c.area }, null, c);
+  const live = state.candidates.find(x => x.id === id); if (!live) return;
+  live.checks = res; live.checkedAt = today();
+  saveState(); renderCandidates(); drawCandidates();
+  if (popupCandId === id && candPopup && candPopup.isOpen()) showCandidateOnMap(id, false);
+}
+let focusedId = null;   // 最近加入或点选的候选房源，卡片加个框
+function focusCard(id) {
+  focusedId = id;
+  requestAnimationFrame(() => {
+    const el = document.getElementById("cand-" + id); if (!el) return;
+    document.querySelectorAll(".cand.focus").forEach(x => x.classList.remove("focus"));
+    el.classList.add("focus");
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+function factsLine(c) {
+  const bits = [];
+  if (c.price != null) bits.push(money(c.price) + "（" + wan(c.price) + "）");
+  if (c.type) bits.push(TYPES[c.type]);
+  const rooms = [c.beds != null ? c.beds + " 卧" : "", c.baths != null ? c.baths + " 浴" : "", c.cars != null ? c.cars + " 车位" : ""].filter(Boolean).join(" ");
+  if (rooms) bits.push(rooms);
+  if (c.land != null) bits.push("土地 " + c.land + " m²");
+  const isStrata = c.checks && c.checks.strata && c.checks.strata.flag;
+  if (c.area) bits.push((isStrata ? "整块地（多户共用）约 " : "地块约 ") + c.area.toLocaleString() + " m²");
+  if (c.strataFee != null) bits.push("Strata 费 " + money(c.strataFee) + " / 季度");
+  return bits.join(" · ") || "还没填价格、房型等信息";
+}
+
+// 主要三项（strata、洪水、山火）：大方框，带说明
+function checkRow(def, r) {
+  r = r || { level: "pending", text: "查询中…" };
+  return `<div class="chk ${r.level}"><span class="ic" aria-label="${LEVEL[r.level][1]}">${LEVEL[r.level][0]}</span>` +
+    `<div><b>${def.name}</b><span class="txt">${esc(r.text)}</span>${r.detail ? `<small>${esc(r.detail)}</small>` : ""}</div></div>`;
+}
+// 其他项：一行一项；需要注意或有风险时才显示说明
+function checkLine(def, r) {
+  r = r || { level: "pending", text: "查询中…" };
+  const showDetail = r.detail && (r.level === "warn" || r.level === "bad");
+  return `<div class="chk2 ${r.level}"><span class="ic" aria-label="${LEVEL[r.level][1]}">${LEVEL[r.level][0]}</span>` +
+    `<b>${def.name}</b><span class="txt">${esc(r.text)}</span>${showDetail ? `<small>${esc(r.detail)}</small>` : ""}</div>`;
+}
+
+function candCard(c) {
+  const ev = evaluate(c);
+  const verdict = !c.checks ? `<span class="verdict">… 查询中</span>`
+    : ev.ok ? `<span class="verdict pass"><span class="ic">✓</span>${c.price == null ? "符合已知条件（价格还没填）" : "符合条件"}</span>`
+            : `<span class="verdict fail"><span class="ic">✗</span>不符合：${esc(ev.why.join("、"))}</span>`;
+  const get = def => c.checks && c.checks[def.id];
+  const checks = `<div class="checks">${ACTIVE_CHECKS.filter(d => d.main).map(d => checkRow(d, get(d))).join("")}</div>` +
+                 `<div class="checks2">${ACTIVE_CHECKS.filter(d => !d.main).map(d => checkLine(d, get(d))).join("")}</div>`;
+  const allDetails = c.checks ? ACTIVE_CHECKS.filter(d => c.checks[d.id] && c.checks[d.id].detail)
+    .map(d => `<li><b>${d.name}</b>：${esc(c.checks[d.id].detail)}</li>`).join("") : "";
+  const ln = loanFor(c.price);
+  const loanLine = ln ? `<div class="loanline">贷款（首付 ${state.loan.depositPct}%、利率 ${ln.rate}%、${state.loan.years} 年）：每月约 <b>${money(ln.monthly)}</b> · 印花税 <b>${money(ln.duty)}</b> · 前期现金约 <b>${money(ln.cash)}</b>
+      <button class="btn small" type="button" data-act="loan">详细计算 ↓</button></div>` : "";
+  const typeOpts = `<option value="">—</option>` + Object.entries(TYPES).map(([v, t]) => `<option value="${v}"${c.type === v ? " selected" : ""}>${t}</option>`).join("");
+  const val = v => v == null ? "" : esc(v);
+  return `<div class="cand${c.id === focusedId ? " focus" : ""}" id="cand-${c.id}" data-id="${c.id}">
+    <div class="cand-head">
+      <div class="cand-title"><span class="no">${c.no}</span><h3>${esc(c.address)}</h3></div>
+      ${verdict}
+    </div>
+    <div class="facts">${esc(factsLine(c))}</div>
+    ${checks}
+    ${loanLine}
+    <details${editOpen.has(c.id) ? " open" : ""} data-edit>
+      <summary>填写 / 修改房源信息</summary>
+      <div class="edit-grid">
+        <label>价格（可写 72万）<input data-f="price" value="${c.price != null ? c.price : ""}" inputmode="decimal"></label>
+        <label>房型<select data-f="type">${typeOpts}</select></label>
+        <label>卧室<input data-f="beds" type="number" min="0" value="${val(c.beds)}"></label>
+        <label>浴室<input data-f="baths" type="number" min="0" value="${val(c.baths)}"></label>
+        <label>车位<input data-f="cars" type="number" min="0" value="${val(c.cars)}"></label>
+        <label>土地面积 m²<input data-f="land" type="number" min="0" value="${val(c.land)}"></label>
+        <label>Strata 费（每季度）<input data-f="strataFee" inputmode="decimal" value="${val(c.strataFee)}"></label>
+        <label class="wide">房源链接<input data-f="url" value="${esc(c.url)}" placeholder="https://www.domain.com.au/…"></label>
+        <label class="wide">备注<textarea data-f="note" rows="2">${esc(c.note)}</textarea></label>
+      </div>
+    </details>
+    ${allDetails ? `<details><summary>全部说明（查询日期 ${esc(c.checkedAt || "")}）</summary><ul class="notes">${allDetails}</ul></details>` : ""}
+    <div class="cand-actions">
+      <button class="btn small" type="button" data-act="map">在地图上看</button>
+      ${c.url ? `<a class="btn small" href="${esc(c.url)}" target="_blank" rel="noopener">房源链接 ↗</a>` : ""}
+      <button class="btn small" type="button" data-act="recheck">重新检查</button>
+      <button class="btn small" type="button" data-act="delete">删除</button>
+    </div>
+    <div class="later-row">以后添加：${CHECKS.filter(x => x.later).map(x => `<span class="later-tag">${x.name}</span>`).join("")}</div>
+  </div>`;
+}
+
+const editOpen = new Set();
+let renderPending = false;
+function renderCandidates() {
+  // 正在某个输入框里打字时先不重画（否则打到一半的字会丢），离开输入框后再画
+  const ae = document.activeElement;
+  if (ae && $("candList").contains(ae) && ae.matches("input, textarea, select")) { renderPending = true; return; }
+  renderPending = false;
+  const list = state.candidates.map(c => ({ c, ev: evaluate(c) }));
+  const nMatch = list.filter(x => x.c.checks && x.ev.ok).length;
+  $("candCount").textContent = state.candidates.length ? `（${state.candidates.length} 个，${nMatch} 个符合条件）` : "";
+  let shown = state.ui.onlyMatch ? list.filter(x => x.ev.ok) : list;
+  const s = state.ui.sort;
+  shown = shown.slice().sort((a, b) =>
+    s === "price" ? (a.c.price ?? Infinity) - (b.c.price ?? Infinity) :
+    s === "match" ? (b.ev.ok - a.ev.ok) || a.c.no - b.c.no : a.c.no - b.c.no);
+  $("candList").innerHTML = shown.length ? shown.map(x => candCard(x.c)).join("")
+    : `<div class="empty">${state.candidates.length ? "没有符合条件的房源。" : "还没有候选房源。在上面输入地址，或在地图上点一个房子。"}</div>`;
+}
+
+function wireCandidates() {
+  $("addrFind").addEventListener("click", findAddress);
+  $("addrInput").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); findAddress(); } });
+  $("onlyMatch").checked = state.ui.onlyMatch;
+  $("sortBy").value = state.ui.sort;
+  $("onlyMatch").addEventListener("change", e => { state.ui.onlyMatch = e.target.checked; saveState(); renderCandidates(); });
+  $("sortBy").addEventListener("change", e => { state.ui.sort = e.target.value; saveState(); renderCandidates(); });
+
+  const list = $("candList");
+  list.addEventListener("focusout", () => setTimeout(() => { if (renderPending) renderCandidates(); }, 0));
+  list.addEventListener("click", e => {
+    const b = e.target.closest("[data-act]"); if (!b) return;
+    const id = b.closest(".cand").dataset.id, act = b.dataset.act;
+    if (act === "map") { showCandidateOnMap(id, true); $("map").scrollIntoView({ behavior: "smooth", block: "center" }); }
+    if (act === "recheck") recheck(id);
+    if (act === "delete") {
+      const c = state.candidates.find(x => x.id === id);
+      if (c && confirm(`从候选清单删除「${c.address}」？`)) {
+        state.candidates = state.candidates.filter(x => x.id !== id);
+        saveState(); renderCandidates(); drawCandidates(); lotLayer.clearLayers(); map.closePopup();
+      }
+    }
+    if (act === "loan") {
+      const c = state.candidates.find(x => x.id === id);
+      if (c && c.price) { state.loan.price = c.price; state.loan.land = c.type === "land"; saveState(); renderLoan(); }
+      $("loanCard").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+  list.addEventListener("toggle", e => {
+    if (!e.target.matches("details[data-edit]")) return;
+    const id = e.target.closest(".cand").dataset.id;
+    if (e.target.open) editOpen.add(id); else editOpen.delete(id);
+  }, true);
+  list.addEventListener("change", e => {
+    const f = e.target.dataset.f; if (!f) return;
+    const c = state.candidates.find(x => x.id === e.target.closest(".cand").dataset.id); if (!c) return;
+    const v = e.target.value;
+    if (f === "price" || f === "strataFee") c[f] = parseMoney(v);
+    else if (["beds", "baths", "cars", "land"].includes(f)) c[f] = numOrNull(v);
+    else if (f === "type") c[f] = v || null;
+    else c[f] = v.trim();
+    saveState(); renderCandidates(); drawCandidates();
+  });
+
+  // 导出 / 导入备份
+  $("exportBtn").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify({ app: "ge_p_househunt", version: 1, exported: new Date().toISOString(), ...state }, null, 1)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = `找房备份-${today()}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  });
+  $("importFile").addEventListener("change", async e => {
+    const file = e.target.files[0]; if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (data.app !== "ge_p_househunt" || !Array.isArray(data.candidates)) throw new Error("这不是找房备份文件");
+      let added = 0;
+      for (const c of data.candidates) {
+        if (state.candidates.some(x => x.landId === c.landId && (x.unit || null) === (c.unit || null))) continue;
+        state.candidates.push({ ...c, no: state.nextNo++ }); added++;
+      }
+      if (!state.criteria.suburbs.length && data.criteria) state.criteria = { ...state.criteria, ...data.criteria };
+      saveState(); renderCriteria(); renderLinks(); renderCandidates(); drawCandidates(); drawSuburbs(true);
+      alert(`已导入 ${added} 个候选房源。`);
+    } catch (err) { alert("导入失败：" + err.message); }
+    e.target.value = "";
+  });
+}
+
+// ============================================================
+//  ④ 贷款和买房成本
+// ============================================================
+// WA 印花税（transfer duty），2026 年 5 月 7 日起的税率；"每 $100 或不足 $100" 按 $100 算
+function transferDuty(v, o) {
+  const per100 = (amount, rate) => Math.ceil(amount / 100) * rate;
+  const general = x => {
+    const B = [[120000, 0, 1.90, 0], [150000, 2280, 2.85, 120000], [360000, 3135, 3.80, 150000], [725000, 11115, 4.75, 360000], [Infinity, 28453, 5.15, 725000]];
+    for (const [cap, base, rate, from] of B) if (x <= cap) return base + per100(x - from, rate);
+  };
+  if (o.firstHome) {
+    if (o.land) {
+      if (v <= 450000) return { amount: 0, rule: "首次置业：空地 $45 万以下免印花税" };
+      if (v <= 550000) return { amount: per100(v - 450000, 20.14), rule: "首次置业：空地 $45–55 万有减免" };
+    } else {
+      if (v <= 600000) return { amount: 0, rule: "首次置业：$60 万以下免印花税" };
+      if (v <= 800000) return { amount: per100(v - 600000, 16.15), rule: "首次置业：$60–80 万有减免" };
+    }
+  }
+  if (o.ppr && v <= 200000) return { amount: v <= 120000 ? per100(v, 1.50) : 1800 + per100(v - 120000, 4.04), rule: "自住且 $20 万以下的优惠税率" };
+  return { amount: general(v), rule: "一般税率" };
+}
+const defaultRate = () => (RATES && RATES.mortgage_variable_new && RATES.mortgage_variable_new.value) || 6.2;
+function loanFor(price, override = {}) {
+  if (!price) return null;
+  const o = { ...state.loan, ...override };
+  const rate = o.rate != null ? o.rate : defaultRate();
+  const dep = price * o.depositPct / 100, loan = Math.max(0, price - dep), n = o.years * 12;
+  const pay = r => { const m = r / 100 / 12; return m > 0 ? loan * m / (1 - Math.pow(1 + m, -n)) : loan / n; };
+  const monthly = pay(rate);
+  const d = transferDuty(price, o);
+  return { price, rate, dep, loan, lvr: loan / price * 100, monthly, stress: pay(rate + 3), interest: monthly * n - loan,
+           duty: d.amount, dutyRule: d.rule, cash: dep + d.amount + (o.other || 0) };
+}
+function renderLoan() {
+  const o = state.loan;
+  const price = o.price || state.criteria.maxPrice || 0;
+  if (document.activeElement !== $("loanPrice")) $("loanPrice").value = o.price ? o.price.toLocaleString("en-US") : "";
+  $("loanPrice").placeholder = state.criteria.maxPrice ? "默认用最高价 " + wan(state.criteria.maxPrice) : "例如 75万";
+  $("loanPriceHint").textContent = price ? "= " + money(price) + "（" + wan(price) + "）" : "";
+  setSeg($("depositSeg"), o.depositPct); $("depositPct").value = o.depositPct;
+  $("loanRate").value = o.rate != null ? o.rate : defaultRate();
+  const r = RATES && RATES.mortgage_variable_new;
+  $("rateHint").textContent = o.rate != null ? "（你填的利率）" :
+    r ? `（默认：澳洲储备银行公布的 ${r.date.slice(0, 7)} 新贷款自住浮动利率平均值，请改成银行给你的利率）` : "";
+  setSeg($("yearsSeg"), o.years);
+  $("firstHome").checked = o.firstHome; $("ppr").checked = o.ppr;
+  setSeg($("landSeg"), o.land ? "1" : "0");
+  if (document.activeElement !== $("otherCost")) $("otherCost").value = o.other.toLocaleString("en-US");
+
+  const ln = loanFor(price);
+  if (!ln) {
+    $("loanTiles").innerHTML = `<div class="empty">填上房价，或在候选房源里点「详细计算」。</div>`;
+    $("loanNotes").innerHTML = "";
+    return;
+  }
+  const tile = (label, value, note) => `<div class="tile"><div class="label">${label}</div><div class="value">${value}</div><div class="note">${note}</div></div>`;
+  $("loanTiles").innerHTML =
+    tile("每月还款（本金 + 利息）", money(ln.monthly), `每两周约 ${money(ln.monthly * 12 / 26)}`) +
+    tile("贷款金额", money(ln.loan), `贷款比例 LVR ${ln.lvr.toFixed(0)}%`) +
+    tile("印花税", money(ln.duty), ln.dutyRule) +
+    tile("前期需要的现金", money(ln.cash), `首付 ${money(ln.dep)} + 印花税 + 其他费用`);
+  const notes = [
+    `利率高 3%（${(ln.rate + 3).toFixed(2)}%）时每月约 ${money(ln.stress)}。银行审批时一般按比实际利率高 3% 来测算你还不还得起。`,
+    `${o.years} 年一共要付利息约 ${money(ln.interest)}（假设利率一直不变）。`
+  ];
+  if (ln.lvr > 80) notes.push("首付不到 20%，银行通常会收 LMI（贷款保险，可能几千到几万元，没有算在上面）。首次置业可以了解联邦政府的 " +
+    `<a href="https://www.housingaustralia.gov.au/home-guarantee-scheme" target="_blank" rel="noopener">5% 首付担保计划</a>，可以免 LMI。`);
+  if (o.firstHome) notes.push("首次置业：买新房或自建，可能还有 $10,000 的 " +
+    `<a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/first-home-owner-grant" target="_blank" rel="noopener">首次置业补助（FHOG）</a>，房价上限 $80 万（没有算在上面）。`);
+  notes.push("印花税按 WA Treasury 2026 年 5 月 7 日起的税率估算；外国买家另有 7% 附加税。");
+  $("loanNotes").innerHTML = notes.map(n => `<li>${n}</li>`).join("");
+}
+function wireLoan() {
+  const changed = () => { saveState(); renderLoan(); renderCandidates(); };
+  $("loanPrice").addEventListener("change", e => { state.loan.price = parseMoney(e.target.value) || 0; changed(); });
+  onSeg($("depositSeg"), v => { state.loan.depositPct = +v; changed(); });
+  $("depositPct").addEventListener("change", e => { const v = numOrNull(e.target.value); if (v != null) state.loan.depositPct = Math.min(100, Math.max(0, v)); changed(); });
+  $("loanRate").addEventListener("change", e => { const v = numOrNull(e.target.value); state.loan.rate = (v == null || v === defaultRate()) ? null : v; changed(); });
+  onSeg($("yearsSeg"), v => { state.loan.years = +v; changed(); });
+  $("firstHome").addEventListener("change", e => { state.loan.firstHome = e.target.checked; changed(); });
+  $("ppr").addEventListener("change", e => { state.loan.ppr = e.target.checked; changed(); });
+  onSeg($("landSeg"), v => { state.loan.land = v === "1"; changed(); });
+  $("otherCost").addEventListener("change", e => { state.loan.other = parseMoney(e.target.value) || 0; changed(); });
+}
+
+// ============================================================
+//  启动
+// ============================================================
+(async function () {
+  loadState();
+  try {
+    const [subs, rates] = await Promise.all([
+      fetch("data/househunt/suburbs.json", { cache: "no-store" }).then(r => r.json()),
+      fetch("data/househunt/rates.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(() => null)
+    ]);
+    SUBURBS = subs; RATES = rates;
+    SUBURB_NAMES = new Set(SUBURBS.map(s => s.n.toUpperCase()));
+  } catch (e) {
+    document.querySelector(".sub").innerHTML += `<br><span class="error">区域名单加载失败：${esc(e.message)}</span>`;
+  }
+  wireCriteria(); renderCriteria(); renderLinks();
+  initMap();
+  wireCandidates(); renderCandidates(); drawCandidates();
+  wireLoan(); renderLoan();
+  if (state.criteria.suburbs.length || state.candidates.length) { fitMap(); drawSuburbs(false); }
+  // 弹出框里的"看详细"链接
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a[data-jump]"); if (!a) return;
+    e.preventDefault(); focusCard(a.dataset.jump);
+  });
+  // 以前查询失败的候选房源，自动再查一次
+  for (const c of state.candidates) {
+    if (!c.checks || Object.values(c.checks).some(r => r.level === "err")) recheck(c.id);
+  }
+})();
+</script>
+</body>
+</html>
