@@ -1,0 +1,674 @@
+{
+  "source": "WA Police Force, crime time series (wa.gov.au); population: ABS estimated resident population 2025",
+  "inputs": {
+    "crime": "Mon, 10 Aug 2026 05:12:00 GMT",
+    "districts": "2023-08-22T01:40:45.439237",
+    "population_year": 2025
+  },
+  "updated": "2026-11-14T11:34:12Z",
+  "latest_month": "2026-06",
+  "period": {
+    "from": "2025-07",
+    "to": "2026-06"
+  },
+  "prev_period": {
+    "from": "2024-07",
+    "to": "2025-06"
+  },
+  "population_year": 2025,
+  "categories": {
+    "total": "全部罪案",
+    "burglary_dwelling": "入室盗窃",
+    "stealing_mv": "偷车",
+    "stealing_from_mv": "车内财物被偷",
+    "property_damage": "财物损坏",
+    "assault": "人身攻击（非家庭）",
+    "family_violence": "家庭暴力",
+    "robbery": "抢劫",
+    "drugs": "毒品"
+  },
+  "metro": {
+    "last12": {
+      "total": 202931,
+      "burglary_dwelling": 5312,
+      "stealing_mv": 3119,
+      "stealing_from_mv": 14434,
+      "property_damage": 20798,
+      "assault": 12847,
+      "family_violence": 28490,
+      "robbery": 1236,
+      "drugs": 22905
+    },
+    "prev12": {
+      "total": 206213,
+      "burglary_dwelling": 6646,
+      "stealing_mv": 3175,
+      "stealing_from_mv": 15625,
+      "property_damage": 20098,
+      "assault": 12199,
+      "family_violence": 27047,
+      "robbery": 1385,
+      "drugs": 20085
+    },
+    "population": 2453486,
+    "rate": {
+      "total": 82.71,
+      "burglary_dwelling": 2.17,
+      "stealing_mv": 1.27,
+      "stealing_from_mv": 5.88,
+      "property_damage": 8.48,
+      "assault": 5.24,
+      "family_violence": 11.61,
+      "robbery": 0.5,
+      "drugs": 9.34
+    }
+  },
+  "state": {
+    "last12": {
+      "total": 287356,
+      "burglary_dwelling": 8412,
+      "stealing_mv": 4765,
+      "stealing_from_mv": 17307,
+      "property_damage": 30578,
+      "assault": 18510,
+      "family_violence": 48008,
+      "robbery": 1456,
+      "drugs": 34462
+    },
+    "prev12": {
+      "total": 291031,
+      "burglary_dwelling": 10297,
+      "stealing_mv": 4866,
+      "stealing_from_mv": 18516,
+      "property_damage": 30010,
+      "assault": 17782,
+      "family_violence": 46060,
+      "robbery": 1675,
+      "drugs": 30782
+    },
+    "population": 3044380,
+    "rate": {
+      "total": 94.39,
+      "burglary_dwelling": 2.76,
+      "stealing_mv": 1.57,
+      "stealing_from_mv": 5.68,
+      "property_damage": 10.04,
+      "assault": 6.08,
+      "family_violence": 15.77,
+      "robbery": 0.48,
+      "drugs": 11.32
+    }
+  },
+  "districts": {
+    "ARMADALE DISTRICT": {
+      "last12": {
+        "total": 26595,
+        "burglary_dwelling": 750,
+        "stealing_mv": 415,
+        "stealing_from_mv": 1785,
+        "property_damage": 2895,
+        "assault": 1887,
+        "family_violence": 4493,
+        "robbery": 182,
+        "drugs": 2554
+      },
+      "prev12": {
+        "total": 26267,
+        "burglary_dwelling": 891,
+        "stealing_mv": 357,
+        "stealing_from_mv": 2136,
+        "property_damage": 2728,
+        "assault": 1536,
+        "family_violence": 4230,
+        "robbery": 216,
+        "drugs": 2688
+      },
+      "population": 291958,
+      "rate": {
+        "total": 91.09,
+        "burglary_dwelling": 2.57,
+        "stealing_mv": 1.42,
+        "stealing_from_mv": 6.11,
+        "property_damage": 9.92,
+        "assault": 6.46,
+        "family_violence": 15.39,
+        "robbery": 0.62,
+        "drugs": 8.75
+      },
+      "label": "Armadale",
+      "region": "METROPOLITAN"
+    },
+    "CANNINGTON DISTRICT": {
+      "last12": {
+        "total": 28196,
+        "burglary_dwelling": 684,
+        "stealing_mv": 477,
+        "stealing_from_mv": 3093,
+        "property_damage": 2972,
+        "assault": 1546,
+        "family_violence": 3350,
+        "robbery": 164,
+        "drugs": 2909
+      },
+      "prev12": {
+        "total": 30829,
+        "burglary_dwelling": 1056,
+        "stealing_mv": 507,
+        "stealing_from_mv": 3793,
+        "property_damage": 3021,
+        "assault": 1714,
+        "family_violence": 3118,
+        "robbery": 157,
+        "drugs": 2455
+      },
+      "population": 251490,
+      "rate": {
+        "total": 112.12,
+        "burglary_dwelling": 2.72,
+        "stealing_mv": 1.9,
+        "stealing_from_mv": 12.3,
+        "property_damage": 11.82,
+        "assault": 6.15,
+        "family_violence": 13.32,
+        "robbery": 0.65,
+        "drugs": 11.57
+      },
+      "label": "Cannington",
+      "region": "METROPOLITAN"
+    },
+    "FREMANTLE DISTRICT": {
+      "last12": {
+        "total": 25877,
+        "burglary_dwelling": 774,
+        "stealing_mv": 471,
+        "stealing_from_mv": 2183,
+        "property_damage": 2730,
+        "assault": 1360,
+        "family_violence": 3523,
+        "robbery": 153,
+        "drugs": 2150
+      },
+      "prev12": {
+        "total": 26508,
+        "burglary_dwelling": 974,
+        "stealing_mv": 475,
+        "stealing_from_mv": 2267,
+        "property_damage": 2460,
+        "assault": 1347,
+        "family_violence": 2985,
+        "robbery": 185,
+        "drugs": 1994
+      },
+      "population": 323301,
+      "rate": {
+        "total": 80.04,
+        "burglary_dwelling": 2.39,
+        "stealing_mv": 1.46,
+        "stealing_from_mv": 6.75,
+        "property_damage": 8.44,
+        "assault": 4.21,
+        "family_violence": 10.9,
+        "robbery": 0.47,
+        "drugs": 6.65
+      },
+      "label": "Fremantle",
+      "region": "METROPOLITAN"
+    },
+    "GOLDFIELDS-ESPERANCE DISTRICT": {
+      "last12": {
+        "total": 12751,
+        "burglary_dwelling": 427,
+        "stealing_mv": 220,
+        "stealing_from_mv": 725,
+        "property_damage": 1526,
+        "assault": 1019,
+        "family_violence": 2832,
+        "robbery": 24,
+        "drugs": 1744
+      },
+      "prev12": {
+        "total": 11006,
+        "burglary_dwelling": 386,
+        "stealing_mv": 200,
+        "stealing_from_mv": 337,
+        "property_damage": 1288,
+        "assault": 859,
+        "family_violence": 2497,
+        "robbery": 29,
+        "drugs": 1410
+      },
+      "population": 56505,
+      "rate": {
+        "total": 225.66,
+        "burglary_dwelling": 7.56,
+        "stealing_mv": 3.89,
+        "stealing_from_mv": 12.83,
+        "property_damage": 27.01,
+        "assault": 18.03,
+        "family_violence": 50.12,
+        "robbery": 0.42,
+        "drugs": 30.86
+      },
+      "label": "Goldfields-esperance",
+      "region": "REGIONAL"
+    },
+    "GREAT SOUTHERN DISTRICT": {
+      "last12": {
+        "total": 7326,
+        "burglary_dwelling": 228,
+        "stealing_mv": 98,
+        "stealing_from_mv": 246,
+        "property_damage": 934,
+        "assault": 414,
+        "family_violence": 1092,
+        "robbery": 27,
+        "drugs": 1318
+      },
+      "prev12": {
+        "total": 7559,
+        "burglary_dwelling": 298,
+        "stealing_mv": 113,
+        "stealing_from_mv": 320,
+        "property_damage": 997,
+        "assault": 462,
+        "family_violence": 1101,
+        "robbery": 23,
+        "drugs": 1250
+      },
+      "population": 89742,
+      "rate": {
+        "total": 81.63,
+        "burglary_dwelling": 2.54,
+        "stealing_mv": 1.09,
+        "stealing_from_mv": 2.74,
+        "property_damage": 10.41,
+        "assault": 4.61,
+        "family_violence": 12.17,
+        "robbery": 0.3,
+        "drugs": 14.69
+      },
+      "label": "Great Southern",
+      "region": "REGIONAL"
+    },
+    "JOONDALUP DISTRICT": {
+      "last12": {
+        "total": 20695,
+        "burglary_dwelling": 492,
+        "stealing_mv": 301,
+        "stealing_from_mv": 1214,
+        "property_damage": 2338,
+        "assault": 1420,
+        "family_violence": 3344,
+        "robbery": 151,
+        "drugs": 2135
+      },
+      "prev12": {
+        "total": 20670,
+        "burglary_dwelling": 690,
+        "stealing_mv": 359,
+        "stealing_from_mv": 1063,
+        "property_damage": 2240,
+        "assault": 1237,
+        "family_violence": 3152,
+        "robbery": 163,
+        "drugs": 2002
+      },
+      "population": 422790,
+      "rate": {
+        "total": 48.95,
+        "burglary_dwelling": 1.16,
+        "stealing_mv": 0.71,
+        "stealing_from_mv": 2.87,
+        "property_damage": 5.53,
+        "assault": 3.36,
+        "family_violence": 7.91,
+        "robbery": 0.36,
+        "drugs": 5.05
+      },
+      "label": "Joondalup",
+      "region": "METROPOLITAN"
+    },
+    "KIMBERLEY DISTRICT": {
+      "last12": {
+        "total": 17520,
+        "burglary_dwelling": 867,
+        "stealing_mv": 449,
+        "stealing_from_mv": 348,
+        "property_damage": 1883,
+        "assault": 1313,
+        "family_violence": 6072,
+        "robbery": 30,
+        "drugs": 1611
+      },
+      "prev12": {
+        "total": 17399,
+        "burglary_dwelling": 898,
+        "stealing_mv": 490,
+        "stealing_from_mv": 366,
+        "property_damage": 1850,
+        "assault": 1286,
+        "family_violence": 5795,
+        "robbery": 49,
+        "drugs": 1274
+      },
+      "population": 40562,
+      "rate": {
+        "total": 431.93,
+        "burglary_dwelling": 21.37,
+        "stealing_mv": 11.07,
+        "stealing_from_mv": 8.58,
+        "property_damage": 46.42,
+        "assault": 32.37,
+        "family_violence": 149.7,
+        "robbery": 0.74,
+        "drugs": 39.72
+      },
+      "label": "Kimberley",
+      "region": "REGIONAL"
+    },
+    "MANDURAH DISTRICT": {
+      "last12": {
+        "total": 31038,
+        "burglary_dwelling": 1071,
+        "stealing_mv": 527,
+        "stealing_from_mv": 1647,
+        "property_damage": 3193,
+        "assault": 1904,
+        "family_violence": 4803,
+        "robbery": 179,
+        "drugs": 3480
+      },
+      "prev12": {
+        "total": 29226,
+        "burglary_dwelling": 924,
+        "stealing_mv": 484,
+        "stealing_from_mv": 1390,
+        "property_damage": 2932,
+        "assault": 1654,
+        "family_violence": 4993,
+        "robbery": 164,
+        "drugs": 2727
+      },
+      "population": 345580,
+      "rate": {
+        "total": 89.81,
+        "burglary_dwelling": 3.1,
+        "stealing_mv": 1.52,
+        "stealing_from_mv": 4.77,
+        "property_damage": 9.24,
+        "assault": 5.51,
+        "family_violence": 13.9,
+        "robbery": 0.52,
+        "drugs": 10.07
+      },
+      "label": "Mandurah",
+      "region": "METROPOLITAN"
+    },
+    "MID WEST-GASCOYNE DISTRICT": {
+      "last12": {
+        "total": 14998,
+        "burglary_dwelling": 652,
+        "stealing_mv": 261,
+        "stealing_from_mv": 602,
+        "property_damage": 1835,
+        "assault": 963,
+        "family_violence": 3643,
+        "robbery": 55,
+        "drugs": 1929
+      },
+      "prev12": {
+        "total": 16373,
+        "burglary_dwelling": 977,
+        "stealing_mv": 287,
+        "stealing_from_mv": 781,
+        "property_damage": 2185,
+        "assault": 1034,
+        "family_violence": 3640,
+        "robbery": 85,
+        "drugs": 1597
+      },
+      "population": 68978,
+      "rate": {
+        "total": 217.43,
+        "burglary_dwelling": 9.45,
+        "stealing_mv": 3.78,
+        "stealing_from_mv": 8.73,
+        "property_damage": 26.6,
+        "assault": 13.96,
+        "family_violence": 52.81,
+        "robbery": 0.8,
+        "drugs": 27.97
+      },
+      "label": "Mid West-gascoyne",
+      "region": "REGIONAL"
+    },
+    "MIDLAND DISTRICT": {
+      "last12": {
+        "total": 22084,
+        "burglary_dwelling": 627,
+        "stealing_mv": 409,
+        "stealing_from_mv": 1050,
+        "property_damage": 2439,
+        "assault": 1278,
+        "family_violence": 3863,
+        "robbery": 153,
+        "drugs": 2184
+      },
+      "prev12": {
+        "total": 22643,
+        "burglary_dwelling": 823,
+        "stealing_mv": 423,
+        "stealing_from_mv": 1252,
+        "property_damage": 2410,
+        "assault": 1292,
+        "family_violence": 3771,
+        "robbery": 157,
+        "drugs": 2050
+      },
+      "population": 313039,
+      "rate": {
+        "total": 70.55,
+        "burglary_dwelling": 2.0,
+        "stealing_mv": 1.31,
+        "stealing_from_mv": 3.35,
+        "property_damage": 7.79,
+        "assault": 4.08,
+        "family_violence": 12.34,
+        "robbery": 0.49,
+        "drugs": 6.98
+      },
+      "label": "Midland",
+      "region": "METROPOLITAN"
+    },
+    "MIRRABOOKA DISTRICT": {
+      "last12": {
+        "total": 23984,
+        "burglary_dwelling": 559,
+        "stealing_mv": 350,
+        "stealing_from_mv": 2044,
+        "property_damage": 2452,
+        "assault": 1303,
+        "family_violence": 3313,
+        "robbery": 118,
+        "drugs": 2871
+      },
+      "prev12": {
+        "total": 24304,
+        "burglary_dwelling": 816,
+        "stealing_mv": 385,
+        "stealing_from_mv": 1859,
+        "property_damage": 2434,
+        "assault": 1189,
+        "family_violence": 3318,
+        "robbery": 172,
+        "drugs": 2215
+      },
+      "population": 333097,
+      "rate": {
+        "total": 72.0,
+        "burglary_dwelling": 1.68,
+        "stealing_mv": 1.05,
+        "stealing_from_mv": 6.14,
+        "property_damage": 7.36,
+        "assault": 3.91,
+        "family_violence": 9.95,
+        "robbery": 0.35,
+        "drugs": 8.62
+      },
+      "label": "Mirrabooka",
+      "region": "METROPOLITAN"
+    },
+    "PERTH DISTRICT": {
+      "last12": {
+        "total": 24462,
+        "burglary_dwelling": 355,
+        "stealing_mv": 169,
+        "stealing_from_mv": 1418,
+        "property_damage": 1779,
+        "assault": 2149,
+        "family_violence": 1801,
+        "robbery": 136,
+        "drugs": 4622
+      },
+      "prev12": {
+        "total": 25766,
+        "burglary_dwelling": 472,
+        "stealing_mv": 185,
+        "stealing_from_mv": 1865,
+        "property_damage": 1873,
+        "assault": 2230,
+        "family_violence": 1480,
+        "robbery": 171,
+        "drugs": 3954
+      },
+      "population": 172231,
+      "rate": {
+        "total": 142.03,
+        "burglary_dwelling": 2.06,
+        "stealing_mv": 0.98,
+        "stealing_from_mv": 8.23,
+        "property_damage": 10.33,
+        "assault": 12.48,
+        "family_violence": 10.46,
+        "robbery": 0.79,
+        "drugs": 26.84
+      },
+      "label": "Perth",
+      "region": "METROPOLITAN"
+    },
+    "PILBARA DISTRICT": {
+      "last12": {
+        "total": 10792,
+        "burglary_dwelling": 394,
+        "stealing_mv": 280,
+        "stealing_from_mv": 250,
+        "property_damage": 1318,
+        "assault": 794,
+        "family_violence": 2610,
+        "robbery": 21,
+        "drugs": 1508
+      },
+      "prev12": {
+        "total": 10339,
+        "burglary_dwelling": 422,
+        "stealing_mv": 228,
+        "stealing_from_mv": 215,
+        "property_damage": 1224,
+        "assault": 782,
+        "family_violence": 2716,
+        "robbery": 33,
+        "drugs": 1569
+      },
+      "population": 65964,
+      "rate": {
+        "total": 163.6,
+        "burglary_dwelling": 5.97,
+        "stealing_mv": 4.24,
+        "stealing_from_mv": 3.79,
+        "property_damage": 19.98,
+        "assault": 12.04,
+        "family_violence": 39.57,
+        "robbery": 0.32,
+        "drugs": 22.86
+      },
+      "label": "Pilbara",
+      "region": "REGIONAL"
+    },
+    "SOUTH WEST DISTRICT": {
+      "last12": {
+        "total": 15820,
+        "burglary_dwelling": 388,
+        "stealing_mv": 256,
+        "stealing_from_mv": 630,
+        "property_damage": 1663,
+        "assault": 878,
+        "family_violence": 2427,
+        "robbery": 52,
+        "drugs": 2085
+      },
+      "prev12": {
+        "total": 17075,
+        "burglary_dwelling": 507,
+        "stealing_mv": 298,
+        "stealing_from_mv": 814,
+        "property_damage": 1791,
+        "assault": 880,
+        "family_violence": 2397,
+        "robbery": 59,
+        "drugs": 2457
+      },
+      "population": 210371,
+      "rate": {
+        "total": 75.2,
+        "burglary_dwelling": 1.84,
+        "stealing_mv": 1.22,
+        "stealing_from_mv": 2.99,
+        "property_damage": 7.91,
+        "assault": 4.17,
+        "family_violence": 11.54,
+        "robbery": 0.25,
+        "drugs": 9.91
+      },
+      "label": "South West",
+      "region": "REGIONAL"
+    },
+    "WHEATBELT DISTRICT": {
+      "last12": {
+        "total": 5059,
+        "burglary_dwelling": 142,
+        "stealing_mv": 80,
+        "stealing_from_mv": 66,
+        "property_damage": 610,
+        "assault": 271,
+        "family_violence": 824,
+        "robbery": 11,
+        "drugs": 1323
+      },
+      "prev12": {
+        "total": 5060,
+        "burglary_dwelling": 163,
+        "stealing_mv": 75,
+        "stealing_from_mv": 58,
+        "property_damage": 577,
+        "assault": 280,
+        "family_violence": 867,
+        "robbery": 12,
+        "drugs": 1140
+      },
+      "population": 58772,
+      "rate": {
+        "total": 86.08,
+        "burglary_dwelling": 2.42,
+        "stealing_mv": 1.36,
+        "stealing_from_mv": 1.12,
+        "property_damage": 10.38,
+        "assault": 4.61,
+        "family_violence": 14.02,
+        "robbery": 0.19,
+        "drugs": 22.51
+      },
+      "label": "Wheatbelt",
+      "region": "REGIONAL"
+    }
+  }
+}
