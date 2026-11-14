@@ -1,0 +1,19 @@
+{
+  "mortgage_variable_new": {
+    "value": 6.2,
+    "date": "2026-09-30",
+    "label": "新贷款 · 自住 · 浮动利率（所有银行平均）"
+  },
+  "mortgage_fixed_new": {
+    "value": 6.4,
+    "date": "2026-09-30",
+    "label": "新贷款 · 自住 · 固定 3 年以内（平均）"
+  },
+  "cash_rate": {
+    "value": 4.6,
+    "date": "2026-10-31",
+    "label": "澳洲储备银行现金利率"
+  },
+  "source": "Reserve Bank of Australia, Statistical Tables F6 and F1.1",
+  "updated": "2026-11-14T02:19:32Z"
+}
