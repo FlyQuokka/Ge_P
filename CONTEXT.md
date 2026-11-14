@@ -6,6 +6,8 @@
 
 做一个 **Perth（珀斯）房价监控网页**，同时对比澳洲八大首府城市的房价。
 第二页监控 **黄金和石油**（2026-11-13 加入），可换算成美元 / 澳元 / 人民币 / 欧元。
+第三页是 **Perth 找房助手**（2026-11-14 加入）：按条件去 Domain / realestate 找房，自动查候选房子的
+strata、洪水、山火等隐藏信息，并算贷款和印花税。
 
 - 网页部署在 **GitHub Pages**（免费、无需服务器）
 - 数据由 **GitHub Actions** 每天自动检查更新，不需要手动操作
@@ -17,6 +19,7 @@
 Ge_P/                              ← 仓库根目录
 ├── index.html                     ← 第一页：房价（页面、样式、图表都在这一个文件里）
 ├── commodities.html               ← 第二页：黄金与石油（同样是一个文件）
+├── househunt.html                 ← 第三页：Perth 找房助手（同样是一个文件）
 ├── CONTEXT.md                     ← 本文件：项目说明
 ├── data/
 │   ├── monthly.csv                ← 月度数据：各城市每月中位价、月度/年度变化（自动累积）
@@ -33,16 +36,20 @@ Ge_P/                              ← 仓库根目录
 │   │   ├── fx.csv                 ← 各货币兑美元汇率，季度平均（自动更新，BIS）
 │   │   ├── cpi.csv                ← 各国物价指数，季度（自动更新，BIS）
 │   │   └── cities.csv             ← 各城市房价 = 历史数据 + ABS + FHFA + BIS 城市指数（自动生成）
-│   └── commodities/               ← 黄金与石油（第二页用，全部自动更新）
-│       ├── monthly.csv            ← 月平均价（美元）：黄金每盎司、布伦特和 WTI 每桶，1960 年起（世界银行）
-│       ├── oil_daily.csv          ← 每日原油现货价（美元/桶），1986 年起（EIA）
-│       ├── gold_daily.csv         ← 每日金价（美元/盎司），每天记一笔，从 2026-11-13 开始积累（gold-api.com）
-│       ├── fx_daily.csv           ← 每日汇率：1 美元兑澳元 / 人民币 / 欧元，1999 年起（欧洲央行）
-│       └── fx_monthly.csv         ← 月平均汇率，1957 年起（BIS）
+│   ├── commodities/               ← 黄金与石油（第二页用，全部自动更新）
+│   │   ├── monthly.csv            ← 月平均价（美元）：黄金每盎司、布伦特和 WTI 每桶，1960 年起（世界银行）
+│   │   ├── oil_daily.csv          ← 每日原油现货价（美元/桶），1986 年起（EIA）
+│   │   ├── gold_daily.csv         ← 每日金价（美元/盎司），每天记一笔，从 2026-11-13 开始积累（gold-api.com）
+│   │   ├── fx_daily.csv           ← 每日汇率：1 美元兑澳元 / 人民币 / 欧元，1999 年起（欧洲央行）
+│   │   └── fx_monthly.csv         ← 月平均汇率，1957 年起（BIS）
+│   └── househunt/                 ← 找房（第三页用，全部自动更新）
+│       ├── suburbs.json           ← 珀斯和皮尔地区 465 个区域：名称、邮编、范围（Landgate）
+│       └── rates.json             ← 平均房贷利率和现金利率（澳洲储备银行）
 ├── scripts/
 │   ├── update_monthly.rb          ← 抓取月度数据的脚本（由 Actions 运行）
 │   ├── update_longrun.rb          ← 更新长期数据的脚本（由 Actions 运行）
-│   └── update_commodities.rb      ← 更新黄金和石油数据的脚本（由 Actions 运行）
+│   ├── update_commodities.rb      ← 更新黄金和石油数据的脚本（由 Actions 运行）
+│   └── update_househunt.rb        ← 更新找房页面数据的脚本（由 Actions 运行）
 └── .github/
     └── workflows/
         └── update-data.yml        ← 定时任务：每天运行一次
@@ -60,8 +67,9 @@ Ge_P/                              ← 仓库根目录
 4. 第 ③ 步运行 `scripts/update_longrun.rb`：按 `countries.json` 和 `cities.json` 下载各国全国指数、汇率、物价、
    外国城市指数，并把历史数据和刚更新的 ABS 数据合并成 `data/longrun/cities.csv`（所以必须排在第 ② 步之后）
 5. 第 ④ 步运行 `scripts/update_commodities.rb`：下载黄金、石油价格和汇率（见下方第 ⑦ 部分）
-6. 各步互不影响：一个失败，其他照常更新。失败的那次运行会显示红色 ✗，旧数据保留不动
-7. 自动提交（commit），GitHub Pages 随后自动重新发布
+6. 第 ⑤ 步运行 `scripts/update_househunt.rb`：更新找房页面用的区域名单和平均房贷利率（见下方第 ⑧ 部分）
+7. 各步互不影响：一个失败，其他照常更新。失败的那次运行会显示红色 ✗，旧数据保留不动
+8. 自动提交（commit），GitHub Pages 随后自动重新发布
 
 ## 数据来源
 
@@ -245,6 +253,60 @@ Ge_P/                              ← 仓库根目录
 - 每日金价历史：如果用户愿意注册 gold-api.com 拿免费密钥（存在 GitHub 的 Secrets 里），可以补上历史
 - 各国加油站汽油零售价：美国 EIA 每周、澳洲 AIP 每周、欧盟 Weekly Oil Bulletin 每周、中国发改委调价
 
+### ⑧ 第三页：Perth 找房助手（2026-11-14 加入）
+
+**用法**：① 设条件 → 一键打开 Domain / realestate.com.au 的搜索结果 → ② 地图上看洪水区、山火区等 →
+③ 把看中的房子地址贴进候选清单（或在地图上点那栋房子）→ 自动查隐藏信息 → ④ 算贷款、印花税和前期现金。
+
+**房源从哪来**：本页**不读取任何房源数据**，只生成带条件的搜索链接。
+- Domain 链接（已在浏览器里验证，Domain 能正确识别全部条件）：
+  `https://www.domain.com.au/sale/?suburb=como-wa-6152&ptype=house,town-house&bedrooms=3-any&bathrooms=2-any&carspaces=1-any&price=0-750000&landsize=300-any&establishedtype=established&keywords=pool&excludeunderoffer=1&ssubs=0`
+  （已成交用 `/sold-listings/`；多个区域用逗号分开；`ssubs=0` = 不含附近区域）
+- realestate.com.au 链接：每个区域一个，格式如 `/buy/property-house-with-3-bedrooms-between-0-750000-in-como,+wa+6152/list-1?numBaths=2&numParkingSpaces=1&misc=ex-under-contract`。
+  **这个网站在 Claude 的浏览器里打不开，所以链接格式没能实际测试**（格式参考了公开资料）；如果打开后条件不对，要再调整。
+  土地面积、新旧条件没放进 realestate 链接，需要在网站上再选。
+- 为什么不直接抓房源：realestate.com.au 和 Domain 都禁止程序抓取；Domain 的官方 API 条款不允许把房源给第三方看，
+  上线前还要 Domain 审核。本网站是公开的，所以只做跳转链接。
+
+**隐藏信息怎么查**：网页在浏览器里直接查询西澳政府的公开地图服务 SLIP
+（`https://public-services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services`，不需要账号，允许网页直接访问）。
+
+| 检查项 | 图层（数据集编号） | 怎么判断 |
+|---|---|---|
+| 找地址、画地块、算面积 | Places_and_Addresses/4（LGATE-002 地址和地块） | 按区域 + 街名查整条街，再匹配门牌号（支持 5/12、12-14 这种写法） |
+| Strata | Property_and_Planning/135（LGATE-284 规划图范围） | 地块中心落在 "SP" 开头、状态不是 Retired 的规划图里 = strata（含 survey-strata） |
+| 洪水 | Water/23（DWER-014 行洪道、洪泛边缘）、Water/21（DWER-020 各频率洪泛区） | 行洪道、河道、≤20 年一遇 = 风险；百年一遇范围 = 注意；更罕见的 = 信息 |
+| 山火 | Bush_Fire_Prone_Areas/23（OBRM-026） | 地块碰到山火易发区 = 注意 |
+| 规划 | Property_and_Planning/112、111、48（DPLH-071 分区、DPLH-070 R-Codes、DPLH-023 区域规划） | 区域规划保留地（如公园、道路保留地）= 风险；R-Code 按平均面积粗算能分几户 |
+| 遗产 | People_and_Society/7、16、15（DPLH-006、090、089） | 在州遗产名录、本地遗产名单或遗产区 = 注意 |
+| 污染场地 | Environment/5（DWER-059） | 地块本身登记 = 风险；200 米内有 = 信息 |
+| 交通噪音 | Property_and_Planning/100（SPP 5.4，DPLH-057） | 在噪音评估范围 = 注意 |
+| 机场噪音 | Property_and_Planning/77、78（SPP 5.1 珀斯机场、5.3 Jandakot） | 在 ANEF 噪音区 = 注意 |
+| 河流管控区 | Property_and_Planning/11（DBCA-028） | 在天鹅河 / 坎宁河开发管控区 = 信息 |
+| 酸性土 | Soil_Risk_Map/3（DWER-055） | 有风险记录 = 信息 |
+
+- 洪水、山火、交通噪音按"整块地"判断（地块稍微往里收一点，避免只是擦边）；其他按地块中心点判断。
+- 地图图层用同一个服务的 `export` 接口画成瓦片；洪水、山火等用 `dynamicLayers` 参数自己定颜色（政府默认颜色太淡）。
+  地图上的洪水只画百年一遇及更常见的范围。底图：OpenStreetMap；航拍图：Landgate Locate（免费公开）。
+- 这些是规划用的参考信息，不能代替产权调查、strata 报告、建筑检查（网页底部有提醒）。
+
+**贷款计算**
+- 印花税按 WA Treasury 2026 年 5 月 7 日起的税率（写在 `househunt.html` 的 `transferDuty` 里）：
+  一般税率 5 档；自住且 ≤ $20 万的优惠税率；首次置业：房屋 ≤ $60 万免、$60–80 万每 $100 交 $16.15；
+  空地 ≤ $45 万免、$45–55 万每 $100 交 $20.14。**州政府改税率时（通常在 5 月预算），要改这里。**
+- 默认利率 = 澳洲储备银行表 F6 的"新贷款 · 自住 · 浮动利率"平均值（`data/househunt/rates.json`，每天自动更新）；
+  用户自己改过的利率会记住。
+- 还显示：利率高 3% 时的月供（银行审批的压力测试）、LVR > 80% 时的 LMI 提醒、首次置业补助（FHOG）提醒。
+
+**个人数据只在本机**：找房条件、候选房源、贷款设置都存在浏览器的 localStorage（键名 `ge_p_househunt`），
+不会上传到 GitHub。换设备用页面上的「导出备份 / 导入备份」（JSON 文件）。网页代码里的默认条件是空的，不写任何个人信息。
+
+**怎么扩展（已留好位置）**
+- 新的隐藏信息检查：在 `househunt.html` 的 `CHECKS` 里加一项（写一个 `run` 函数，返回等级和说明）。
+- 新的地图图层：在 `OVERLAYS` 里加一行。
+- 已经预留、还没做的：**风水**、**周边环境**（学校、车站、公园）、**犯罪率**（WA Police 按区域统计）、区域房价走势。
+  它们在地图图层和每个候选房源里都显示为「以后添加」。
+
 ### 怎么加一个国家或城市
 
 **全国指数**：在 `data/longrun/countries.json` 里加一行即可，脚本和网页都读这个文件，不用改代码。例如：
@@ -345,3 +407,5 @@ ruby scripts/update_longrun.rb
 - 2026-11-13：加入第二页"黄金与石油"（`commodities.html`、`scripts/update_commodities.rb`、`data/commodities/`），
   两页之间加了切换栏，自动任务加了第 ④ 步；黄金图和原油图旁加了 Trading Economics / Barchart 实时行情链接。
   当天已上传 GitHub；黄金石油数据由自动任务第一次运行时生成。
+- 2026-11-14：加入第三页"找房助手"（`househunt.html`、`scripts/update_househunt.rb`、`data/househunt/`），
+  三个页面的切换栏加了「找房」，自动任务加了第 ⑤ 步。当天已上传 GitHub；`data/househunt/` 的两个文件由自动任务第一次运行时生成。
