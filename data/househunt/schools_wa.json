@@ -1,7 +1,7 @@
 {
   "year": 2026,
   "source": "WA Department of Education, Current Active Schools Semester 1 2026 - Public (DET-024) (SLIP)",
-  "updated": "2026-11-17T22:41:29Z",
+  "updated": "2026-11-18T22:40:02Z",
   "kinds": {"P":"小学","S":"中学","K12":"小学到中学","X":"特殊学校 / 高年级学院 / 幼儿园"},
   "schools": [
     {"c":"1463","n":"Al-ameen College","g":0,"k":"K12","lo":"KIN","hi":"Y12","e":1436,"lat":-32.04606,"lon":115.93716,"t":"Langford"},
