@@ -2024,7 +2024,7 @@ CN,Beijing,index,2025-Q3,104.319,bis_dpp
 CN,Beijing,index,2025-Q4,100.8138,bis_dpp
 CN,Beijing,index,2026-Q1,99.6964,bis_dpp
 CN,Beijing,index,2026-Q2,100.6954,bis_dpp
-CN,Beijing,index,2026-Q3,100.7457,bis_dpp
+CN,Beijing,index,2026-Q3,100.7625,bis_dpp
 CN,China average,avg_price,1991,756.23,nbs_avg
 CN,China average,avg_price,1992,996.40,nbs_avg
 CN,China average,avg_price,1993,1208.23,nbs_avg
@@ -3904,6 +3904,7 @@ XM,Berlin,index,2025-Q3,99.4,bis_dpp
 XM,Berlin,index,2025-Q4,100.4,bis_dpp
 XM,Berlin,index,2026-Q1,100.8,bis_dpp
 XM,Berlin,index,2026-Q2,100.9,bis_dpp
+XM,Berlin,index,2026-Q3,100.7,bis_dpp
 XM,Brussels,index,1973-Q1,11.59,bis_dpp
 XM,Brussels,index,1973-Q2,12.14,bis_dpp
 XM,Brussels,index,1973-Q3,13.64,bis_dpp
