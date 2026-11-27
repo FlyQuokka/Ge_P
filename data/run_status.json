@@ -1,0 +1,31 @@
+{
+  "checked": "2026-11-27T01:33:17Z",
+  "alert_after_days": 3,
+  "sources": {
+    "monthly": {
+      "label": "月度房价（realestate.com.au）",
+      "fail_days": 0,
+      "last_success": "2026-11-27T01:33:17Z"
+    },
+    "quarterly": {
+      "label": "季度房价（ABS）",
+      "fail_days": 0,
+      "last_success": "2026-11-27T01:33:17Z"
+    },
+    "longrun": {
+      "label": "长期数据（BIS 等）",
+      "fail_days": 0,
+      "last_success": "2026-11-27T01:33:17Z"
+    },
+    "commodities": {
+      "label": "黄金和石油",
+      "fail_days": 0,
+      "last_success": "2026-11-27T01:33:17Z"
+    },
+    "househunt": {
+      "label": "找房（区域、利率、学校、犯罪率）",
+      "fail_days": 0,
+      "last_success": "2026-11-27T01:33:17Z"
+    }
+  }
+}
