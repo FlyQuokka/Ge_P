@@ -271,7 +271,7 @@
     </div>
   </div>
   <p class="sub">① 设好条件，一键去 Domain / realestate.com.au 看房源 → ② 在地图上看洪水区、山火区 → ③ 把看中的地址加进候选清单，自动查 strata、洪水、山火、规划、犯罪率、学校等隐藏信息 → ④ 算贷款和买房成本。
-    两个州的条件和候选房源分开保存，切换不会互相影响。<span class="error" id="regionError"></span></p>
+    每个州的条件和候选房源分开保存，切换不会互相影响。<span class="error" id="regionError"></span></p>
 
   <!-- ① 找房条件 -->
   <section class="card">
@@ -822,7 +822,7 @@ const newRegionState = () => ({
   candidates: [],
   nextNo: 1
 });
-// 两个州共用：贷款设置、界面设置
+// 各州共用：贷款设置、界面设置
 const DEFAULT_STATE = {
   region: "WA",
   regions: { WA: newRegionState(), NSW: newRegionState(), VIC: newRegionState() },
@@ -2564,7 +2564,7 @@ function wireCandidates() {
         if (!dst.criteria.suburbs.length && src.criteria) dst.criteria = { ...dst.criteria, ...src.criteria };
       }
       saveState(); renderCriteria(); renderLinks(); renderCompare(); renderCandidates(); drawCandidates(); drawSuburbs(true);
-      alert(`已导入 ${added} 个候选房源（两个州合计）。`);
+      alert(`已导入 ${added} 个候选房源（所有州合计）。`);
     } catch (err) { alert("导入失败：" + err.message); }
     e.target.value = "";
   });
