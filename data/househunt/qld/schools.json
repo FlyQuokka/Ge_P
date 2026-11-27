@@ -1,6 +1,6 @@
 {
   "source": "Queensland Government (QSpatial): Schools and school catchments; non-state schools from the Non-State Schools Accreditation Board",
-  "updated": "2026-11-27T12:53:54Z",
+  "updated": "2026-11-27T22:46:02Z",
   "kinds": {"P":"小学","S":"中学","K12":"小学到中学","X":"特殊学校等"},
   "selective": {"F":"Queensland Academies（10–12 年级申请入学，没有学区）"},
   "schools": [
