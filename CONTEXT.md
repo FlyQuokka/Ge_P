@@ -49,7 +49,8 @@ Ge_P/                              ← 仓库根目录
 │   ├── update_monthly.rb          ← 抓取月度数据的脚本（由 Actions 运行）
 │   ├── update_longrun.rb          ← 更新长期数据的脚本（由 Actions 运行）
 │   ├── update_commodities.rb      ← 更新黄金和石油数据的脚本（由 Actions 运行）
-│   └── update_househunt.rb        ← 更新找房页面数据的脚本（由 Actions 运行）
+│   ├── update_househunt.rb        ← 更新找房页面数据的脚本（由 Actions 运行）
+│   └── track_failures.rb          ← 记录各数据源连续失败几天，连续 3 天才报警（写 data/run_status.json）
 └── .github/
     └── workflows/
         └── update-data.yml        ← 定时任务：每天运行一次
@@ -68,7 +69,9 @@ Ge_P/                              ← 仓库根目录
    外国城市指数，并把历史数据和刚更新的 ABS 数据合并成 `data/longrun/cities.csv`（所以必须排在第 ② 步之后）
 5. 第 ④ 步运行 `scripts/update_commodities.rb`：下载黄金、石油价格和汇率（见下方第 ⑦ 部分）
 6. 第 ⑤ 步运行 `scripts/update_househunt.rb`：更新找房页面用的区域名单和平均房贷利率（见下方第 ⑧ 部分）
-7. 各步互不影响：一个失败，其他照常更新。失败的那次运行会显示红色 ✗，旧数据保留不动
+7. 各步互不影响：一个失败，其他照常更新，失败的那一项保留旧数据不动。
+   `scripts/track_failures.rb` 把每个数据源连续失败的天数记在 `data/run_status.json`；**连续失败 3 天**才让运行显示红色 ✗（GitHub 发邮件），
+   偶尔一天的网站故障不再报警（2026-11-27 改，之前 11 月 16、19、24 日的三次失败都是外部网站临时故障）
 8. 自动提交（commit），GitHub Pages 随后自动重新发布
 
 ## 数据来源
@@ -428,5 +431,7 @@ ruby scripts/update_longrun.rb
   当天已上传 GitHub；黄金石油数据由自动任务第一次运行时生成。
 - 2026-11-14：加入第三页"找房助手"（`househunt.html`、`scripts/update_househunt.rb`、`data/househunt/`），
   三个页面的切换栏加了「找房」，自动任务加了第 ⑤ 步。当天已上传 GitHub；`data/househunt/` 的两个文件由自动任务第一次运行时生成。
+- 2026-11-27：自动任务改为某个数据源连续失败 3 天才报警（新增 `scripts/track_failures.rb`、`data/run_status.json`）；
+  找房脚本里"边界 / 人口 / 犯罪统计有没有新版本"的检查连不上时先用现有数据，不算失败；`actions/checkout` 升到 v5。
 - 2026-11-14（晚）：找房页加入犯罪率（按警区）和学校（距离、目标学校）、区域对比表、两个地图图层；
   `update_househunt.rb` 增加第 3–5 步和 4 个数据文件；另做了本地测试页 `states_test.html` 评估推广到其他州。当天已上传 GitHub（`states_test.html` 除外，只在本地）；4 个新数据文件由自动任务在 GitHub 上生成，运行成功。
