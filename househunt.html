@@ -153,7 +153,9 @@
   .title-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 4px; }
   .title-row h1 { margin: 0; }
   .region-seg button { font-size: 14px; padding: 6px 14px; }
-  body[data-region="WA"] [data-region="NSW"], body[data-region="NSW"] [data-region="WA"] { display: none !important; }
+  /* data-region 可以写几个州（例如 "WA VIC"）：不包括当前州的就隐藏 */
+  body[data-region="WA"] [data-region]:not([data-region~="WA"]), body[data-region="NSW"] [data-region]:not([data-region~="NSW"]),
+  body[data-region="VIC"] [data-region]:not([data-region~="VIC"]) { display: none !important; }
   .pop-checks { margin: 8px 0; display: grid; gap: 4px; }
 
   /* 候选房源 */
@@ -265,6 +267,7 @@
     <div class="seg region-seg" id="regionSeg" role="group" aria-label="选择州">
       <button type="button" data-v="WA">西澳 WA</button>
       <button type="button" data-v="NSW">新州 NSW</button>
+      <button type="button" data-v="VIC">维州 VIC</button>
     </div>
   </div>
   <p class="sub">① 设好条件，一键去 Domain / realestate.com.au 看房源 → ② 在地图上看洪水区、山火区 → ③ 把看中的地址加进候选清单，自动查 strata、洪水、山火、规划、犯罪率、学校等隐藏信息 → ④ 算贷款和买房成本。
@@ -500,7 +503,7 @@
         <span class="lbl">印花税</span>
         <div class="ctl">
           <label class="check"><input type="checkbox" id="firstHome"> 首次置业</label>
-          <label class="check" data-region="WA"><input type="checkbox" id="ppr"> 自住</label>
+          <label class="check" data-region="WA VIC"><input type="checkbox" id="ppr"> 自住</label>
           <div class="seg" id="landSeg">
             <button type="button" data-v="0">房屋</button>
             <button type="button" data-v="1">空地</button>
@@ -546,25 +549,42 @@
       很多地方要看合同附带的 <b>10.7 规划证书</b>（Section 10.7 planning certificate），里面会写洪水、山火、道路拓宽、污染等限制。
       污染场地没有公开的地图服务，可以查 <a href="https://www.epa.nsw.gov.au/your-environment/contaminated-land/notified-and-regulated-contaminated-land/list-of-notified-sites" target="_blank" rel="noopener">EPA 登记名单</a>。
       买 strata 要看 strata 报告（管理费、sinking fund、特别征费、规章），并做建筑和白蚁检查。</p>
+    <p data-region="VIC"><b>隐藏信息</b>：查地址时，网页直接查询维州政府的公开地图服务 Vicmap（<a href="https://discover.data.vic.gov.au/" target="_blank" rel="noopener">DataVic</a>）：
+      地址和地块（Vicmap Address、Property、Parcel；同一个 plan 有公共部分「CM」= 有 owners corporation）、
+      规划分区和规划覆盖区（Vicmap Planning：洪水 LSIO / SBO / FO、山火 BMO、遗产 HO、环境审计 EAO、潜在污染 PCLO、侵蚀 EMO、
+      公共征地 PAO、机场噪音 AEO / MAEO 等）、山火易发区（BPA）、维州遗产名录（Victorian Heritage Register）、EPA 环境审计、沿海酸性硫酸盐土。</p>
+    <p data-region="VIC">这些是政府规划用的参考图层，<b>不能代替产权调查</b>：维州卖家必须提供 <b>Section 32</b>（Vendor Statement），
+      里面有产权、规划覆盖区、owners corporation 证书（管理费、特别征费）、建筑许可等，买前请律师或 conveyancer 看。
+      洪水覆盖区只包括市政府做过洪水研究并放进规划的地方。买 unit / townhouse 要看 owners corporation 证书和会议记录，并做建筑和白蚁检查。</p>
     <p data-region="WA"><b>犯罪率</b>：<a href="https://www.wa.gov.au/organisation/western-australia-police-force/crime-statistics" target="_blank" rel="noopener">西澳警察局犯罪统计</a>（每季度更新）。
       警方只公布到警区（珀斯都会区分 8 个警区），所以同一警区里的区数字相同；每千居民的比率按澳洲统计局的估计人口计算，警区边界来自 WAPOL-002。
       「跟珀斯平均比」综合了全部罪案和入室盗窃两项。</p>
     <p data-region="NSW"><b>犯罪率</b>：<a href="https://bocsar.nsw.gov.au/statistics-dashboards/crime-and-policing.html" target="_blank" rel="noopener">新州犯罪统计局 BOCSAR</a>
       公布的每个区（suburb）每月罪案数（按案发地点），每千居民比率按 2021 年人口普查人口和澳洲统计局最新估计人口增长计算。
       「跟新州平均比」综合了全部罪案和入室盗窃两项；商业区、火车站和人口很少的区比率会偏高。</p>
+    <p data-region="VIC"><b>犯罪率</b>：<a href="https://www.crimestatistics.vic.gov.au/" target="_blank" rel="noopener">维州犯罪统计局 CSA</a>
+      每季度公布的每个区（suburb / town）一年的罪案数（recorded offences，按案发地点），每千居民比率按 2021 年人口普查人口和澳洲统计局最新估计人口增长计算。
+      「跟维州平均比」综合了全部罪案和入室盗窃两项；商业区、火车站和人口很少的区比率会偏高。</p>
     <p data-region="WA"><b>学校</b>：西澳教育部每年第一学期的学校名单（SLIP，公立和私立），距离是直线距离。公立学校按学区（local intake area）招生，
       最近的学校不一定是学区学校，请在 <a href="https://www.det.wa.edu.au/schoolsonline/home.do" target="_blank" rel="noopener">Schools Online</a> 核对；
       学校成绩（NAPLAN 等）可以到 <a href="https://www.myschool.edu.au" target="_blank" rel="noopener">My School</a> 查看，本页不转载。</p>
     <p data-region="NSW"><b>学校</b>：公立学校名单和学区（local enrolment area）边界来自新州教育部的公开数据（CC BY），私立学校位置来自 NSW Spatial Services 地名库。
       学区按教育部当年的边界判断，边界附近请用 <a href="https://schoolfinder.education.nsw.gov.au/" target="_blank" rel="noopener">School Finder</a> 核对；
       精英中学（selective）按考试录取，没有学区。学校成绩可以到 <a href="https://www.myschool.edu.au" target="_blank" rel="noopener">My School</a> 查看，本页不转载。</p>
+    <p data-region="VIC"><b>学校</b>：学校名单（公立、天主教、私立）和公立学校学区（school zone）边界来自维州教育部的公开数据（CC BY）。
+      学区按教育部公布的下一学年边界判断，边界附近请用 <a href="https://www.findmyschool.vic.gov.au/" target="_blank" rel="noopener">Find my School</a> 核对；
+      4 所<a href="https://www.vic.gov.au/selective-entry-high-schools" target="_blank" rel="noopener">精英中学</a>（selective entry）9 年级考试入学，没有学区。
+      学校成绩可以到 <a href="https://www.myschool.edu.au" target="_blank" rel="noopener">My School</a> 查看，本页不转载。</p>
     <p data-region="WA"><b>印花税</b>按 <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener">WA Treasury</a>
       2026 年 5 月 7 日起的税率计算。</p>
     <p data-region="NSW"><b>印花税</b>按 <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener">Revenue NSW</a>
       2026/27 财年税率计算（每年 7 月 1 日按通胀调整）；首次置业 $80–100 万之间的减免是估算，准确数字用
       <a href="https://www.apps09.revenue.nsw.gov.au/erevenue/calculators/fhba.php" target="_blank" rel="noopener">Revenue NSW 计算器</a>。</p>
+    <p data-region="VIC"><b>印花税</b>按 <a href="https://www.sro.vic.gov.au/rates-taxes-duties-and-levies/general-land-transfer-duty-property-current-rates" target="_blank" rel="noopener">SRO Victoria</a>
+      现行税率计算（维州税率不按年调整）：自住且 $55 万以下有优惠税率；首次置业 $60 万以下免、$60–75 万减免（空地 2026 年 5 月 7 日起 $45 万以下免、$45–55 万减免）。
+      准确数字用 <a href="https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/land-transfer-stamp-duty-calculator" target="_blank" rel="noopener">SRO 计算器</a>。</p>
     <p><b>默认利率</b>来自<a href="https://www.rba.gov.au/statistics/tables/" target="_blank" rel="noopener">澳洲储备银行</a>统计表 F6。
-      底图 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> 贡献者；航拍图 © Landgate（西澳）、© Spatial Services NSW（新州）。</p>
+      底图 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> 贡献者；航拍图 © Landgate（西澳）、© Spatial Services NSW（新州）、© Vicmap（维州）。</p>
   </footer>
 </main>
 
@@ -619,20 +639,47 @@ const LYN = {
   acid:        NSW_PLAN + "/ePlanning/Planning_Portal_Protection/MapServer/234",   // 酸性硫酸盐土
 };
 
+// 维州政府的公开地图服务（Vicmap）。按地图上的点查很快；按编号查地块很慢（十几秒），所以地块都按点查
+const VICMAP = "https://services-ap1.arcgis.com/P744lA0wf4LlBZ84/arcgis/rest/services";
+const VIC_GEO = "https://opendata.maps.vic.gov.au/geoserver";   // 同一批数据的 WMS（地图图片）和 WFS（按位置查）
+const LYV = {
+  address:  VICMAP + "/Vicmap_Address/FeatureServer/0",           // 门牌地址（点）
+  property: VICMAP + "/Vicmap_Property/FeatureServer/0",          // 产权范围（多边形）
+  propAddr: VICMAP + "/Vicmap_Property_Address/FeatureServer/0",  // 产权范围 + 地址（地图上点的位置用）
+  parcel:   VICMAP + "/Vicmap_Parcel/FeatureServer/0",            // 地块（lot 是 "CM…" 的是公共部分 = 有 owners corporation）
+  overlay:  VICMAP + "/Vicmap_Planning/FeatureServer/2",          // 规划覆盖区（洪水、遗产、山火管理等）
+  zone:     VICMAP + "/Vicmap_Planning/FeatureServer/3",          // 规划分区
+  bpa:      VICMAP + "/Vicmap_Planning/FeatureServer/9",          // 山火易发区（BPA）
+  locality: VICMAP + "/Vicmap_Admin/FeatureServer/11",            // 区（locality）边界
+};
+const VIC_ADDR_FIELDS = "property_pfi,blg_unit_prefix_1,blg_unit_id_1,blg_unit_suffix_1,house_prefix_1,house_number_1,house_suffix_1," +
+  "house_number_2,house_suffix_2,road_name,road_type,road_suffix,locality_name,postcode";
+
 // 每个州的设置。加一个州：在这里加一项，再加它的检查（CHECKS 里 region 是这个州的）和地图图层（OVERLAYS 里）
+// crimeBy：犯罪统计按警区（district）还是按区（suburb）；zones：有没有学区边界（catchments/）；finder：教育部查学区的网站
 const REGIONS = {
-  WA: { code: "WA", label: "西澳 WA", title: "珀斯找房助手", slug: "wa", avgName: "珀斯平均", revenue: "RevenueWA",
+  WA: { code: "WA", label: "西澳 WA", title: "珀斯找房助手", slug: "wa", avgName: "珀斯平均", revenue: "RevenueWA", crimeBy: "district", zones: false,
         center: [-31.98, 115.87], dir: "data/househunt/",
         files: { suburbs: "suburbs.json", schools: "schools_wa.json", crime: "crime_wa.json", police: "wa_police_districts.json", policeGeo: "wa_police_districts.geojson" },
         suburbExample: "例如 Como", addrExample: "地址，例如 12 Preston St, Como 或 5/12 Preston Street Como", schoolExample: "公立学校名，例如 Rossmoyne",
         schoolHint: "只留下「最近的公立学校就是它」的房子（按直线距离，西澳没有公开的学区地图）",
         mapHint: "洪水区：浅蓝 = 百年一遇或更常见的洪水范围，深蓝 = 行洪道（更少见的极端洪水没有画出）。地块边界、R-Code 和遗产要放大到街区才会显示，学校要放大一点才显示。圆圈数字是候选房源：绿 = 符合条件，红 = 不符合。" },
-  NSW: { code: "NSW", label: "新州 NSW", title: "新州找房助手", slug: "nsw", avgName: "新州平均", revenue: "Revenue NSW",
+  NSW: { code: "NSW", label: "新州 NSW", title: "新州找房助手", slug: "nsw", avgName: "新州平均", revenue: "Revenue NSW", crimeBy: "suburb", zones: true,
+        zoneWord: "local enrolment area", edu: "新州教育部", finder: { t: "School Finder", u: "https://schoolfinder.education.nsw.gov.au/" },
+        crimeLink: { t: "BOCSAR 犯罪统计（可以看每个区的地图和趋势）", u: "https://bocsar.nsw.gov.au/statistics-dashboards/crime-and-policing.html" },
         center: [-33.85, 151.05], dir: "data/househunt/nsw/",
         files: { suburbs: "suburbs.json", schools: "schools.json", crime: "crime.json", catchIndex: "catchments/index.json" },
         suburbExample: "例如 Epping", addrExample: "地址，例如 10 Essex St, Epping 或 5/10 Essex Street Epping", schoolExample: "公立学校名，例如 Epping Boys",
         schoolHint: "只留下在这所学校学区（local enrolment area）里的房子（按教育部公布的学区边界）",
         mapHint: "洪水区只包括把洪水规划图放进 LEP 的市政府，其他地方要看合同里的 10.7 规划证书。规划分区、地块边界和遗产要放大到街区才会显示，学校要放大一点才显示。圆圈数字是候选房源：绿 = 符合条件，红 = 不符合。" },
+  VIC: { code: "VIC", label: "维州 VIC", title: "维州找房助手", slug: "vic", avgName: "维州平均", revenue: "SRO Victoria", crimeBy: "suburb", zones: true,
+        zoneWord: "school zone", edu: "维州教育部", finder: { t: "Find my School", u: "https://www.findmyschool.vic.gov.au/" },
+        crimeLink: { t: "维州犯罪统计局 CSA（可以按区查趋势）", u: "https://www.crimestatistics.vic.gov.au/" },
+        center: [-37.84, 145.0], dir: "data/househunt/vic/",
+        files: { suburbs: "suburbs.json", schools: "schools.json", crime: "crime.json", catchIndex: "catchments/index.json" },
+        suburbExample: "例如 Box Hill", addrExample: "地址，例如 10 Station St, Box Hill 或 5/10 Station Street Box Hill", schoolExample: "公立学校名，例如 Balwyn High",
+        schoolHint: "只留下在这所学校学区（school zone）里的房子（按教育部公布的学区边界）",
+        mapHint: "洪水区是规划里的洪水覆盖区（LSIO、SBO、FO），只包括做过洪水研究的地方。规划分区、地块边界和遗产要放大到街区才会显示，学校要放大一点才显示。圆圈数字是候选房源：绿 = 符合条件，红 = 不符合。" },
 };
 
 // 地图上可以打开的图层（以后加风水、犯罪率等，在这里加一行即可）
@@ -676,7 +723,24 @@ const OVERLAYS_NSW = [
   { id: "schools", name: "学校", custom: "schools", color: "#2a78d6", minZoom: 12 },
   { id: "fengshui", name: "风水", later: true },
 ];
-const overlaysFor = code => code === "NSW" ? OVERLAYS_NSW : OVERLAYS_WA;
+// 维州：图层来自 Vicmap 的 WMS。cql = 只画哪些（例如只画洪水覆盖区），sld = 自己定颜色
+const VIC_FLOOD_CODES = ["LSIO", "SBO", "FO", "RFO"];
+const cqlCodes = codes => codes.map(c => `zone_code LIKE '${c}%'`).join(" OR ");
+const vicSld = (layer, fill, line, opacity) => `<StyledLayerDescriptor version="1.0.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc">` +
+  `<NamedLayer><Name>${layer}</Name><UserStyle><FeatureTypeStyle><Rule><PolygonSymbolizer><Fill><CssParameter name="fill">${fill}</CssParameter>` +
+  `<CssParameter name="fill-opacity">${opacity}</CssParameter></Fill><Stroke><CssParameter name="stroke">${line}</CssParameter>` +
+  `<CssParameter name="stroke-width">1</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
+const PLAN_OV = "open-data-platform:plan_overlay", VIC_BPA = "open-data-platform:bushfire_prone_area", VIC_PARCEL = "open-data-platform:v_parcel_mp";
+const OVERLAYS_VIC = [
+  { id: "flood", name: "洪水覆盖区", color: "#2f6fd6", wms: { layers: PLAN_OV, cql: cqlCodes(VIC_FLOOD_CODES), sld: vicSld(PLAN_OV, "#2f6fd6", "#1e50be", 0.4) } },
+  { id: "fire", name: "山火易发区", color: "#e000b0", wms: { layers: VIC_BPA, sld: vicSld(VIC_BPA, "#e000b0", "#be0096", 0.22) } },
+  { id: "zoning", name: "规划分区", minZoom: 15, wms: { layers: "open-data-platform:plan_zone" } },
+  { id: "heritage", name: "遗产", color: "#8d5a2b", minZoom: 15, wms: { layers: PLAN_OV, cql: cqlCodes(["HO"]), sld: vicSld(PLAN_OV, "#8d5a2b", "#6e461e", 0.3) } },
+  { id: "cadastre", name: "地块边界", minZoom: 16, wms: { layers: VIC_PARCEL, sld: vicSld(VIC_PARCEL, "#ffffff", "#f59f00", 0) } },
+  { id: "schools", name: "学校", custom: "schools", color: "#2a78d6", minZoom: 12 },
+  { id: "fengshui", name: "风水", later: true },
+];
+const overlaysFor = code => ({ WA: OVERLAYS_WA, NSW: OVERLAYS_NSW, VIC: OVERLAYS_VIC })[code];
 // 新州"洪水规划图"图层里还混有文化景观区等其他类别，只取跟洪水有关的
 const NSW_FLOOD_WHERE = "UPPER(LAY_CLASS) LIKE '%FLOOD%'";
 // 犯罪率跟平均（西澳：珀斯都会区；新州：全州）比，分 5 档（1 = 跟平均一样）。蓝 = 低，灰 = 接近，红 = 高
@@ -761,7 +825,7 @@ const newRegionState = () => ({
 // 两个州共用：贷款设置、界面设置
 const DEFAULT_STATE = {
   region: "WA",
-  regions: { WA: newRegionState(), NSW: newRegionState() },
+  regions: { WA: newRegionState(), NSW: newRegionState(), VIC: newRegionState() },
   loan: { price: 0, depositPct: 20, rate: null, years: 30, firstHome: false, ppr: true, land: false, other: 3000 },
   ui: { overlays: { flood: true, fire: true }, basemap: "street", onlyMatch: false, sort: "no" }
 };
@@ -832,7 +896,10 @@ async function arcQuery(layerUrl, params) {
   const u = new URL(`${layerUrl}/query`);
   const all = { f: "json", returnGeometry: false, outFields: "*", ...params };
   for (const [k, v] of Object.entries(all)) u.searchParams.set(k, typeof v === "object" ? JSON.stringify(v) : String(v));
-  const res = await fetch(u);
+  // 网址太长（例如带着整块地的边界）时有的服务器（维州 Vicmap）会拒绝，改成用表单发送
+  const res = u.href.length > 1800
+    ? await fetch(`${layerUrl}/query`, { method: "POST", body: u.searchParams })
+    : await fetch(u);
   if (!res.ok) throw new Error("政府地图服务没有响应（" + res.status + "）");
   const j = await res.json();
   if (j.error) throw new Error(j.error.message || "查询出错");
@@ -884,7 +951,7 @@ function ringArea(ring) {
   return Math.abs(s / 2) * (Math.PI / 180) ** 2 * R * R;
 }
 // 稍微往里收一点（约 3%），避免只是"擦边"碰到旁边的区域也算进去
-function shrinkRing(ring, [cx, cy]) { return ring.map(([x, y]) => [cx + (x - cx) * 0.97, cy + (y - cy) * 0.97]); }
+function shrinkRing(ring, [cx, cy]) { return ring.map(([x, y]) => [+(cx + (x - cx) * 0.97).toFixed(7), +(cy + (y - cy) * 0.97).toFixed(7)]); }
 // 点太多时抽掉一些，避免查询网址太长
 function simplifyRing(ring) {
   if (ring.length <= 80) return ring;
@@ -1199,6 +1266,126 @@ const CHECKS = [
         detail: "主要影响挖地基、泳池、地下排水等工程，可能需要额外处理；不影响日常居住。" };
     }
   },
+  // ---------- 维州（VIC）。很多检查都看同一份"规划覆盖区"，每个地址只查一次（vicOverlays） ----------
+  {
+    id: "strata", region: "VIC", name: "Owners Corp", main: true,
+    async run(site) {
+      if (!site.ring) return { level: "info", text: "这里没有地块，无法判断" };
+      const parcels = await arcQuery(LYV.parcel, atPoint(site.pt, { outFields: "parcel_plan_number,parcel_lot_number,parcel_status" }));
+      const live = parcels.filter(p => p.parcel_status !== "H" && p.parcel_plan_number);
+      // 有公共部分（common property，lot 写成 CM1、CP 等）的 plan = 有 owners corporation；旧的 strata plan 是 SP / RP 开头
+      const ocPlans = [...new Set(live.filter(p => /^C(M|P)/i.test(p.parcel_lot_number || "") || /^(SP|RP)\d/i.test(p.parcel_plan_number))
+                                    .map(p => p.parcel_plan_number))];
+      if (ocPlans.length) {
+        const units = live.filter(p => ocPlans.includes(p.parcel_plan_number) && !/^C(M|P)/i.test(p.parcel_lot_number || "")).length;
+        return { level: "warn", flag: true, text: `有 owners corporation（${ocPlans.join("、")}${units > 1 ? `，共 ${units} 个单位` : ""}）`,
+          detail: "买之前要看 owners corporation 证书（Section 32 里有）：每年管理费、维修基金、有没有特别征费或正在打的官司、规章（宠物、装修、出租）和保险。" +
+                  "只有 2–3 户的小 owners corporation 常常没有管理公司，要问清楚谁在管、费用怎么分。" };
+      }
+      return { level: "ok", flag: false, text: "没有 owners corporation（独立产权）",
+        detail: "地块：" + ([...new Set(live.map(p => `Lot ${p.parcel_lot_number || "?"} ${p.parcel_plan_number}`))].join("、") || "—") +
+                "（PS / LP 开头是普通分割地块）。" };
+    }
+  },
+  {
+    id: "flood", region: "VIC", name: "洪水", main: true,
+    async run(site) {
+      const ov = (await vicOverlays(site)).filter(r => VIC_FLOOD_CODES.includes(ovCode(r)));
+      const note = "洪水覆盖区由市政府和水务局（墨尔本是 Melbourne Water）根据洪水研究放进规划，只包括做过研究的地方；Section 32 里会列出这块地的覆盖区。";
+      if (!ov.length) return { level: "ok", flag: false, text: "不在洪水覆盖区（LSIO、SBO、FO）", detail: note };
+      const codes = [...new Set(ov.map(ovCode))];
+      const worst = codes.some(c => c === "FO" || c === "RFO") ? "bad" : "warn";
+      const kinds = codes.map(c => VIC_OVERLAY_CN[c] || c).join("、");
+      return { level: worst, flag: true, text: (site.ring ? "地块（全部或部分）在" : "这个位置在") + kinds,
+        detail: (worst === "bad" ? "行洪区是洪水主要流经的地方，建房和改建限制很严。" : "建房、扩建要先经水务局同意，通常要求地板高于百年一遇洪水位；保险可能更贵。") +
+                "覆盖区：" + [...new Set(ov.map(r => r.zone_code))].join("、") + "。" + note };
+    }
+  },
+  {
+    id: "fire", region: "VIC", name: "山火", main: true,
+    async run(site) {
+      const [bpa, ov] = await Promise.all([arcQuery(LYV.bpa, { ...siteGeom(site), outFields: "lga_name" }), vicOverlays(site)]);
+      const bmo = ov.filter(r => ["BMO", "WMO"].includes(ovCode(r)));
+      if (!bpa.length && !bmo.length) return { level: "ok", flag: false, text: "不在山火易发区", detail: "维州山火易发区（Bushfire Prone Area）和山火管理覆盖区（BMO）。" };
+      if (bmo.length) return { level: "bad", flag: true, text: (site.ring ? "地块（全部或部分）在" : "这个位置在") + "山火管理覆盖区（BMO）",
+        detail: "BMO 是山火风险最高的地方：建房、扩建要做山火评估和防火空地（defendable space），建材要求高，有时还要水箱；保险会更贵。" };
+      return { level: "warn", flag: true, text: site.ring ? "在山火易发区（地块全部或部分）" : "这个位置在山火易发区",
+        detail: "维州山火易发区（Bushfire Prone Area）。新建、扩建要做 BAL（山火攻击等级）评估，可能需要更贵的建材，房屋保险也可能更贵。" };
+    }
+  },
+  {
+    id: "planning", region: "VIC", name: "规划",
+    async run(site) {
+      const [z, ov] = await Promise.all([arcQuery(LYV.zone, atPoint(site.pt, { outFields: "zone_code,zone_description,lga" })), vicOverlays(site)]);
+      const pao = ov.filter(r => ovCode(r) === "PAO");
+      const others = [...new Set(ov.map(ovCode).filter(c => VIC_PLAN_NOTE[c]))];
+      if (pao.length) return { level: "bad", text: "公共征地覆盖区（" + [...new Set(pao.map(r => r.zone_code))].join("、") + "）",
+        detail: "这块地在规划里被划为政府将来可能征用的土地（Public Acquisition Overlay），例如修路、铁路、学校。开发和改建受限制，买之前一定要问清楚。" };
+      const zone = z[0];
+      if (!zone) return { level: "info", text: "没有查到规划分区" };
+      const prefix = (zone.zone_code || "").match(/^[A-Z]+\d?Z|^[A-Z]+/)?.[0] || "";
+      const key = Object.keys(VIC_ZONE_CN).filter(k => (zone.zone_code || "").startsWith(k)).sort((a, b) => b.length - a.length)[0];
+      const cn = key && VIC_ZONE_CN[key];
+      let detail = (zone.lga ? "当地规划：" + titleCase(zone.lga) + " Planning Scheme。" : "") + "分区：" + titleCase(zone.zone_description || prefix) + "。";
+      if (key && VIC_ZONE_NOTE[key]) detail += VIC_ZONE_NOTE[key];
+      if (others.length) detail += "\n其他覆盖区：" + others.map(c => VIC_PLAN_NOTE[c]).join("；") + "。";
+      return { level: "info", text: (cn ? `${cn}（${zone.zone_code}）` : zone.zone_code) + (others.length ? " · " + others.join(" ") : ""), detail };
+    }
+  },
+  {
+    id: "heritage", region: "VIC", name: "遗产",
+    async run(site) {
+      const [ov, vhr] = await Promise.all([vicOverlays(site), vicWfs("heritage_register", vicPointCql(site.pt), "site_name,vhr_num")]);
+      const ho = [...new Set(ov.filter(r => ovCode(r) === "HO").map(r => r.zone_code))];
+      if (!ho.length && !vhr.length) return { level: "ok", text: "不在遗产名录" };
+      const names = [...vhr.map(r => `${titleCase(r.site_name || "")}（维州遗产名录 ${r.vhr_num || ""}）`), ...ho.map(c => `遗产覆盖区 ${c}`)];
+      return { level: "warn", text: "在遗产名录：" + [...new Set(names)].join("、"),
+        detail: "拆除、改建、改外观、甚至换围栏通常都要另外申请规划许可，翻新可能受限制。遗产覆盖区（HO）里的普通房子也会受影响。" };
+    }
+  },
+  {
+    id: "contam", region: "VIC", name: "污染场地",
+    async run(site) {
+      const [ov, on, near] = await Promise.all([vicOverlays(site), vicWfs("enviro_audit_polygon", vicPointCql(site.pt), "address,audit_category,date_completed"),
+        vicWfs("enviro_audit_polygon", vicBoxCql(site.pt, 200), "address")]);
+      const eao = [...new Set(ov.map(ovCode).filter(c => c === "EAO" || c === "PCLO"))];
+      if (eao.length) return { level: "bad", text: eao.map(c => VIC_OVERLAY_CN[c]).join("、"),
+        detail: "这块地以前可能是工业、加油站等用地，可能有污染。改成住宅等用途前要做环境审计（或初步风险筛查），费用可能很高。买前要问清楚有没有做过审计、结论是什么。" };
+      if (on.length) {
+        const a = on[0], yr = String(a.date_completed || "").slice(0, 4);
+        return { level: "info", text: `这块地做过 EPA 环境审计${yr ? `（${yr} 年）` : ""}`,
+          detail: `${a.audit_category || ""}。审计报告可以在 EPA Victoria 网站查到，看结论里有没有用途限制。` };
+      }
+      if (near.length) return { level: "info", text: `附近约 200 米内有 ${near.length} 处做过 EPA 环境审计的地块`, detail: "多数是以前的工厂、加油站等，已做过审计。" };
+      return { level: "ok", text: "没有污染相关的覆盖区或环境审计记录" };
+    }
+  },
+  {
+    id: "landslide", region: "VIC", name: "侵蚀滑坡",
+    async run(site) {
+      const ov = (await vicOverlays(site)).filter(r => ovCode(r) === "EMO");
+      if (!ov.length) return { level: "ok", text: "不在侵蚀管理覆盖区" };
+      return { level: "warn", text: "在侵蚀管理覆盖区（EMO，可能有滑坡风险）", detail: "建房、挖方前通常要做岩土（geotechnical）评估。" };
+    }
+  },
+  {
+    id: "airport", region: "VIC", name: "机场噪音",
+    async run(site) {
+      const ov = (await vicOverlays(site)).filter(r => ["AEO", "MAEO"].includes(ovCode(r)));
+      if (!ov.length) return { level: "ok", text: "不在机场噪音覆盖区" };
+      return { level: "warn", text: [...new Set(ov.map(r => VIC_OVERLAY_CN[ovCode(r)] + "（" + r.zone_code + "）"))].join("、"),
+        detail: "在机场附近的飞机噪音区：平时可能较吵，新建住宅可能要求隔音，有的地方不能再分割加建。" };
+    }
+  },
+  {
+    id: "acid", region: "VIC", name: "酸性土",
+    async run(site) {
+      const rows = await vicWfs("coastal_acid_sulphate_soils", vicPointCql(site.pt), "prospectiv");
+      if (!rows.length) return { level: "ok", text: "没有沿海酸性硫酸盐土记录" };
+      return { level: "info", text: "沿海酸性硫酸盐土：" + (rows[0].prospectiv || "有记录"),
+        detail: "主要影响挖地基、泳池、地下排水等工程，可能需要额外处理；不影响日常居住。" };
+    }
+  },
   // ---------- 犯罪率和学校：不用去政府服务器查，直接用 data/househunt/ 里的数据现算（live），所以总是最新的 ----------
   { id: "crime", name: "犯罪率", main: true, live: c => crimeCheck(c) },
   { id: "school", name: "学校", main: true, live: c => schoolCheck(c) },
@@ -1222,12 +1409,60 @@ const NSW_ZONE_CN = {
   W1: "自然水道", W2: "休闲水道", W3: "工作水道", W4: "工作海滨", IN1: "一般工业区", IN2: "轻工业区", IN3: "重工业区", UL: "未划区土地"
 };
 
+// ---------- 维州的规划覆盖区 ----------
+// 这个地址碰到的所有覆盖区（洪水、遗产、山火等几项检查共用，每个地址只查一次）
+function vicOverlays(site) {
+  if (!site._ov) Object.defineProperty(site, "_ov", { value: arcQuery(LYV.overlay, { ...siteGeom(site), outFields: "zone_code,zone_description" }) });
+  return site._ov;
+}
+const ovCode = r => (String(r.zone_code || "").match(/^[A-Z]+/) || [""])[0];   // "HO1522" → "HO"，"LSIO1" → "LSIO"
+// 维州 WFS：按位置查（遗产名录、EPA 环境审计、酸性土）。坐标顺序是"纬度 经度"
+async function vicWfs(type, cql, props) {
+  const u = `${VIC_GEO}/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=open-data-platform:${type}&outputFormat=application/json` +
+    `&srsName=EPSG:4326&count=50&propertyName=${props}&CQL_FILTER=${encodeURIComponent(cql)}`;
+  const res = await fetch(u);
+  if (!res.ok) throw new Error("政府地图服务没有响应（" + res.status + "）");
+  return ((await res.json()).features || []).map(f => f.properties || {});
+}
+const vicPointCql = ([x, y]) => `INTERSECTS(geom,POINT(${y} ${x}))`;
+function vicBoxCql([x, y], m) {
+  const dy = m / 111320, dx = m / (111320 * Math.cos(y * Math.PI / 180));
+  const c = [[y - dy, x - dx], [y - dy, x + dx], [y + dy, x + dx], [y + dy, x - dx], [y - dy, x - dx]].map(p => p.join(" ")).join(",");
+  return `INTERSECTS(geom,POLYGON((${c})))`;
+}
+const VIC_OVERLAY_CN = {
+  LSIO: "洪水淹没覆盖区（LSIO）", SBO: "暴雨积水覆盖区（SBO）", FO: "行洪覆盖区（FO）", RFO: "乡村行洪覆盖区（RFO）",
+  EAO: "环境审计覆盖区（EAO）", PCLO: "潜在污染土地覆盖区（PCLO）", AEO: "机场周边覆盖区", MAEO: "墨尔本机场周边覆盖区"
+};
+// 规划检查里顺便列出的其他覆盖区
+const VIC_PLAN_NOTE = {
+  NCO: "NCO 社区特色覆盖区（新建、改建要符合街区特色）", DDO: "DDO 设计开发覆盖区（可能限高、退线）", DPO: "DPO 开发规划覆盖区",
+  SLO: "SLO 重要景观覆盖区", VPO: "VPO 植被保护覆盖区（砍树要许可）", ESO: "ESO 环境保护覆盖区（砍树、建房可能要许可）",
+  DCPO: "DCPO 开发费覆盖区（开发时要交基础设施费）", ICPO: "ICPO 基础设施费覆盖区", PO: "PO 停车覆盖区", SCO: "SCO 特别管控覆盖区",
+  BFO: "BFO 建筑形态覆盖区", RO: "RO 地块重组覆盖区（地块可能要合并才能建）", SMO: "SMO 盐碱管理覆盖区", BAO: "BAO 缓冲区覆盖区"
+};
+const VIC_ZONE_CN = {
+  NRZ: "社区住宅区", GRZ: "一般住宅区", RGZ: "住宅增长区", HCTZ: "住房选择和交通区", MUZ: "混合用途区", TZ: "小镇区", LDRZ: "低密度住宅区",
+  C1Z: "商业 1 区", C2Z: "商业 2 区", C3Z: "商业 3 区", IN1Z: "工业 1 区", IN2Z: "工业 2 区", IN3Z: "工业 3 区",
+  FZ: "农业区", GWZ: "绿楔区", GWAZ: "绿楔 A 区", RLZ: "乡村生活区", RCZ: "乡村保护区", RUZ: "乡村区", RAZ: "乡村活动区", ERZ: "环境乡村区",
+  UGZ: "城市增长区", ACZ: "活动中心区", CCZ: "首都城市区", CDZ: "综合开发区", DZ: "港区（Docklands）", PDZ: "优先开发区", PRZ: "片区规划区",
+  SUZ: "特殊用途区", URZ: "城市再开发区", UFZ: "城市行洪区", PZ: "港口区", PUZ: "公共用途区", PPRZ: "公园和休闲区", PCRZ: "公共保护和资源区",
+  RDZ: "道路区", TRZ: "交通区", CA: "联邦土地"
+};
+const VIC_ZONE_NOTE = {
+  NRZ: "社区住宅区限制较多：一般限高 9 米（2 层），分割和加建要看 schedule。",
+  GRZ: "一般住宅区：一般限高 11 米（3 层），常见独立屋和联排、双拼开发。",
+  RGZ: "住宅增长区：允许更高密度（一般 4 层左右），附近可能会有公寓开发。",
+  LDRZ: "低密度住宅区：地块大，分割一般有最小面积要求。",
+  UFZ: "城市行洪区：洪水主要流经的地方，基本不能建新房。"
+};
+
 // ---------- 犯罪率 ----------
 const crimeClass = idx => CRIME_CLASSES.find(c => idx <= c.max);
 const crimeName = cls => cls.rel + R().avgName;
 const vsAvg = r => Math.abs(r - 1) < 0.005 ? "持平" : (r > 1 ? "高 " : "低 ") + Math.round(Math.abs(r - 1) * 100) + "%";
 const CRIME_KEYS = ["total", "burglary_dwelling", "stealing_mv", "stealing_from_mv", "property_damage", "assault", "family_violence", "robbery", "drugs"];
-const crimeCheck = c => c.region === "NSW" ? crimeCheckNSW(c) : crimeCheckWA(c.pt, c.suburb);
+const crimeCheck = c => REGIONS[c.region || state.region].crimeBy === "suburb" ? crimeCheckSuburb(c) : crimeCheckWA(c.pt, c.suburb);
 
 // 西澳：按警区。这个位置属于哪个警区：先看落在哪个警区边界里，查不到再按区名查
 function districtAt(pt, suburb) {
@@ -1259,26 +1494,25 @@ function crimeCheckWA(pt, suburb) {
 }
 
 // 新州：按区（suburb）。同名的区用邮编区分
-function crimeRowNSW(suburb, postcode) {
+function crimeRowSuburb(suburb, postcode) {
   if (!CRIME || !suburb) return null;
   const name = String(suburb).toUpperCase();
   if (postcode && CRIME.suburbs[`${name}|${postcode}`]) return CRIME.suburbs[`${name}|${postcode}`];
   const rows = Object.keys(CRIME.suburbs).filter(k => k.startsWith(name + "|")).map(k => CRIME.suburbs[k]);
   return rows.length && rows.every(r => r.k === rows[0].k) ? rows[0] : null;
 }
-function crimeRatesNSW(r) {
+function crimeRates(r) {
   const rate = {};
   CRIME.keys.forEach((k, i) => { rate[k] = r.pop ? r.c[i] * 1000 / r.pop : null; });
   return rate;
 }
-const BOCSAR_LINK = { t: "BOCSAR 犯罪统计（可以看每个区的地图和趋势）", u: "https://bocsar.nsw.gov.au/statistics-dashboards/crime-and-policing.html" };
-function crimeCheckNSW(c) {
+function crimeCheckSuburb(c) {
   if (!CRIME) return { level: "err", text: "犯罪统计没有加载到" };
-  const r = crimeRowNSW(c.suburb, c.postcode);
+  const r = crimeRowSuburb(c.suburb, c.postcode);
   const place = titleCase(c.suburb || "");
-  if (!r) return { level: "info", text: `查不到 ${place} 的犯罪统计`, links: [BOCSAR_LINK] };
-  if (!r.pop) return { level: "info", text: `${place} 最近 12 个月有 ${r.c[0]} 起罪案（没有人口数，算不出比率）`, links: [BOCSAR_LINK] };
-  const rate = crimeRatesNSW(r), avg = CRIME.state.rate, idx = crimeIndexOf(rate, avg), cls = crimeClass(idx);
+  if (!r) return { level: "info", text: `查不到 ${place} 的犯罪统计`, links: [R().crimeLink] };
+  if (!r.pop) return { level: "info", text: `${place} 最近 12 个月有 ${r.c[0]} 起罪案（没有人口数，算不出比率）`, links: [R().crimeLink] };
+  const rate = crimeRates(r), avg = CRIME.state.rate, idx = crimeIndexOf(rate, avg), cls = crimeClass(idx);
   const small = r.pop < CRIME.small_population;
   const f2 = v => v == null ? "—" : v.toFixed(v < 10 ? 2 : 1);
   const one = k => `${CRIME.categories[k]} ${f2(rate[k])}（${f2(avg[k])}）`;
@@ -1286,11 +1520,11 @@ function crimeCheckNSW(c) {
   return {
     level: small ? "info" : cls.level, flag: small ? null : idx, district: place,
     text: `${place}：${crimeName(cls)}` + (small ? "（人口很少，仅供参考）" : ""),
-    detail: `全部罪案比新州平均${vsAvg(rate.total / avg.total)}，入室盗窃${vsAvg(rate.burglary_dwelling / avg.burglary_dwelling)}。` +
+    detail: `全部罪案比${R().avgName}${vsAvg(rate.total / avg.total)}，入室盗窃${vsAvg(rate.burglary_dwelling / avg.burglary_dwelling)}。` +
             "这是整个区的数字（按案发地点）：有商业中心、火车站、医院的区会偏高。" + (small ? `这个区只有约 ${r.pop} 人，几起案件就会让比率变化很大。` : ""),
-    more: `${CRIME.period.from} 至 ${CRIME.period.to} 每 1,000 居民的罪案数（括号里是新州平均）：` + CRIME_KEYS.map(one).join("；") +
+    more: `${CRIME.period.from} 至 ${CRIME.period.to} 每 1,000 居民的罪案数（括号里是${R().avgName}）：` + CRIME_KEYS.map(one).join("；") +
       `。\n全部罪案比前 12 个月${vsAvg(change).replace("高", "多").replace("低", "少")}。人口约 ${r.pop.toLocaleString()}（2021 年人口普查，按澳洲统计局 ${CRIME.population_year} 年估计调整）。`,
-    links: [BOCSAR_LINK]
+    links: [R().crimeLink]
   };
 }
 
@@ -1314,13 +1548,12 @@ const isPubS = s => s.g === 1 && !fullySelective(s) && (s.k === "S" || s.k === "
 const isSelectiveHigh = s => s.g === 1 && fullySelective(s) && (s.k === "S" || s.k === "K12");
 const isPrivate = s => s.g === 0 && s.k !== "X";
 const nearestSchools = (pt, test, n) => SCHOOLS.schools.filter(test).map(s => ({ s, d: distKm(pt, [s.lon, s.lat]) })).sort((a, b) => a.d - b.d).slice(0, n);
-const SCHOOL_FINDER = "https://schoolfinder.education.nsw.gov.au/";
 const schoolUrl = s => s.g === 1
-  ? (state.region === "NSW" ? (s.w || SCHOOL_FINDER) : "https://www.det.wa.edu.au/schoolsonline/overview.do?schoolID=" + encodeURIComponent(s.c))
+  ? (state.region === "WA" ? "https://www.det.wa.edu.au/schoolsonline/overview.do?schoolID=" + encodeURIComponent(s.c) : (s.w || R().finder.u))
   : "https://www.google.com/search?q=" + encodeURIComponent(`${s.n} ${s.t || ""} ${R().slug.toUpperCase()}`);
 const schoolKind = s => (s.g === 1 ? "公立" : "私立") + ({ P: "小学", S: "中学", K12: "小学 + 中学", X: "特殊学校等" }[s.k] || "") +
   (fullySelective(s) ? "（精英中学，全部考试入学）" : s.sel === "P" ? "（部分班级考试入学）" : "") + ({ B: "，男校", G: "，女校" }[s.sx] || "");
-const schoolCheck = c => c.region === "NSW" ? schoolCheckNSW(c.pt) : schoolCheckWA(c.pt);
+const schoolCheck = c => REGIONS[c.region || state.region].zones ? schoolCheckZones(c.pt) : schoolCheckWA(c.pt);
 const targetSchools = () => state.criteria.targets.map(t => SCHOOLS.schools.find(x => x.c === t.c && x.g === 1)).filter(Boolean);
 
 function schoolCheckWA(pt) {
@@ -1350,15 +1583,19 @@ function schoolCheckWA(pt) {
 
 // 新州学区：边界切成小块，按需要下载（见 scripts/update_househunt_nsw.rb）
 const CATCH_TILES = {}, CATCH_LOADING = {};
-const CATCH_TYPE_CN = { PRIMARY: "", INFANTS: "幼小 K–2", CENTRAL_PRIMARY: "中心学校", HIGH_COED: "男女合校", HIGH_BOYS: "男校", HIGH_GIRLS: "女校", CENTRAL_HIGH: "中心学校" };
+// 新州的学区类型（PRIMARY…）和维州的（P、Y7…）
+const CATCH_TYPE_CN = { PRIMARY: "", INFANTS: "幼小 K–2", CENTRAL_PRIMARY: "中心学校", HIGH_COED: "男女合校", HIGH_BOYS: "男校", HIGH_GIRLS: "女校", CENTRAL_HIGH: "中心学校",
+  P: "", Y7: "", SS: "单性别学校", JS: "初中 7–9 年级", SR: "高中部" };
+const catchKey = name => R().dir + name;   // 每个州都有 t0.json，按州分开记
 function catchTileName(pt) {
   if (!CATCH_INDEX) return null;
   const t = CATCH_INDEX.tiles.find(b => pt[0] >= b[0] && pt[0] < b[2] && pt[1] >= b[1] && pt[1] < b[3]);
-  return t ? t[4] : null;
+  return t ? catchKey(t[4]) : null;
 }
 function loadCatchTile(name) {
   if (!CATCH_LOADING[name]) {
-    CATCH_LOADING[name] = fetch(REGIONS.NSW.dir + "catchments/" + name).then(r => r.ok ? r.json() : null).catch(() => null)
+    // ?v=…：学区更新后切块会变，带上索引的更新时间，浏览器就不会用旧的缓存
+    CATCH_LOADING[name] = fetch(name.replace(/([^/]+)$/, "catchments/$1") + "?v=" + encodeURIComponent(CATCH_INDEX.updated || "")).then(r => r.ok ? r.json() : null).catch(() => null)
       .then(j => { CATCH_TILES[name] = j || { f: [] }; dataArrived(); return CATCH_TILES[name]; });
   }
   return CATCH_LOADING[name];
@@ -1373,9 +1610,9 @@ function catchmentsAt(pt) {
   const inside = rings => rings.reduce((acc, r) => pointInRing(pt, r) ? !acc : acc, false);
   return tile.f.filter(f => inside(f[3])).map(([id, t, ct]) => ({ id, t, ct }));
 }
-async function ensureCatchments(pt) { const n = state.region === "NSW" && catchTileName(pt); if (n && !CATCH_TILES[n]) await loadCatchTile(n); }
+async function ensureCatchments(pt) { const n = R().zones && catchTileName(pt); if (n && !CATCH_TILES[n]) await loadCatchTile(n); }
 
-function schoolCheckNSW(pt) {
+function schoolCheckZones(pt) {
   if (!SCHOOLS) return { level: "err", text: "学校名单没有加载到" };
   const z = catchmentsAt(pt);
   if (z === undefined) return { level: "pending", text: "正在读取学区…" };
@@ -1395,7 +1632,8 @@ function schoolCheckNSW(pt) {
   if (ts.length && !ts.some(t => zs.some(f => f.s === t))) miss.push("中学");
   const hasTarget = tp.length + ts.length > 0;
   const pDist = zp.length ? Math.min(...zp.map(f => dist(f.s))) : (near(isPubP, 1)[0] || {}).d;
-  const sDist = zs.length ? Math.min(...zs.map(f => dist(f.s))) : (near(isPubS, 1)[0] || {}).d;
+  const zs7 = zs.filter(f => f.ct !== "SR");   // 距离按 7 年级能入读的中学算（维州的高中部只收 10/11–12 年级）
+  const sDist = zs7.length ? Math.min(...zs7.map(f => dist(f.s))) : (near(isPubS, 1)[0] || {}).d;
   const zoneTxt = (list, none) => list.length ? list.map(f => shortSchool(f.s.n) + (CATCH_TYPE_CN[f.ct] ? `（${CATCH_TYPE_CN[f.ct]}）` : "")).join(" / ") : none;
   const lines = [
     "学区小学：" + (zp.length ? zp.map(f => item(f.s, CATCH_TYPE_CN[f.ct])).join("、") : "没有查到"),
@@ -1409,8 +1647,9 @@ function schoolCheckNSW(pt) {
     text: z === null ? "学区数据没有加载到" :
       `学区：小学 ${zoneTxt(zp, "—")} · 中学 ${zoneTxt(zs, "—")}` + (hasTarget ? (miss.length ? `（不在目标${miss.join("、")}的学区）` : "（在目标学校学区里）") : ""),
     detail: lines.join("\n"),
-    more: `学区按新州教育部 ${CATCH_INDEX && CATCH_INDEX.enrolment_year || ""} 学年的边界（local enrolment area），住在学区里就有权入读。边界附近的地址请用 School Finder 核对；有的学校学区外的名额很少。`,
-    links: [...zp, ...zs].slice(0, 3).map(f => ({ t: shortSchool(f.s.n) + " 学校网站", u: schoolUrl(f.s) })).concat([{ t: "School Finder（教育部查学区）", u: SCHOOL_FINDER }])
+    more: `学区按${R().edu} ${CATCH_INDEX && CATCH_INDEX.enrolment_year || ""} 学年的边界（${R().zoneWord}），住在学区里就有权入读。边界附近的地址请用 ${R().finder.t} 核对；有的学校学区外的名额很少。`,
+    links: [...zp, ...zs].slice(0, 3).map(f => ({ t: shortSchool(f.s.n) + " 学校网站", u: schoolUrl(f.s) })).filter(l => l.u !== R().finder.u)
+      .concat([{ t: R().finder.t + "（教育部查学区）", u: R().finder.u }])
   };
 }
 
@@ -1474,7 +1713,7 @@ function evaluate(c) {
   if (k.primaryKm || k.secondaryKm || k.targets.length) {
     const f = schoolCheck(c).flag;   // 学区还在下载时没有 flag，先不判断
     if (f) {
-      const label = state.region === "NSW" ? "学区" : "";
+      const label = R().zones ? "学区" : "";
       if (k.primaryKm && f.p > k.primaryKm) why.push(`${label}公立小学超过 ${k.primaryKm} 公里`);
       if (k.secondaryKm && f.s > k.secondaryKm) why.push(`${label}公立中学超过 ${k.secondaryKm} 公里`);
       if (f.target === false) why.push(f.why);
@@ -1535,7 +1774,7 @@ function renderCriteria() {
 
 // 所选区域的对比表：警区犯罪率、区内的公立学校
 function renderCompare() {
-  const box = $("suburbCompare"), subs = state.criteria.suburbs, nsw = state.region === "NSW";
+  const box = $("suburbCompare"), subs = state.criteria.suburbs, nsw = R().crimeBy === "suburb";   // nsw：按区的犯罪统计（新州、维州）
   if (!subs.length || (!CRIME && !SCHOOLS)) { box.innerHTML = ""; return; }
   const avg = CRIME && (nsw ? CRIME.state.rate : CRIME.metro.rate);
   const f2 = v => v == null ? "—" : (+v).toFixed(v < 10 ? 2 : 1);
@@ -1552,9 +1791,9 @@ function renderCompare() {
   const crimeRow = s => {
     if (!CRIME) return null;
     if (nsw) {
-      const r = crimeRowNSW(s.n, s.p);
+      const r = crimeRowSuburb(s.n, s.p);
       if (!r || !r.pop) return null;
-      const rate = crimeRatesNSW(r);
+      const rate = crimeRates(r);
       return { label: "约 " + r.pop.toLocaleString(), total: rate.total, burg: rate.burglary_dwelling, cls: crimeClass(crimeIndexOf(rate, avg)),
                note: r.pop < CRIME.small_population ? "（人口少）" : "" };
     }
@@ -1577,7 +1816,7 @@ function renderCompare() {
     <p class="hint" style="margin-top: 8px">${!CRIME ? "" : nsw
       ? `犯罪率是每个区自己的数字（${CRIME.period.from} 至 ${CRIME.period.to}，按案发地点），有商业中心、火车站的区会偏高。`
       : `犯罪率是所在<b>警区</b>的数字（${CRIME.period.from} 至 ${CRIME.period.to}），西澳警察局不公布每个区自己的数字，所以同一警区的区数字一样。`}
-      ${nsw ? "学校点开是学校网站；学区要看候选房源的具体地址。" : "学校点开是教育部的学校资料页，可以核对学区。"}</p>`;
+      ${!nsw ? "学校点开是教育部的学校资料页，可以核对学区。" : state.region === "NSW" ? "学校点开是学校网站；学区要看候选房源的具体地址。" : "学校点开是 Find my School；学区要看候选房源的具体地址。"}</p>`;
 }
 // 把输入的名字加到目标学校：先找名字完全一样的，找不到就找唯一一所以它开头的
 function addTarget(text) {
@@ -1756,6 +1995,8 @@ function initMap() {
   baseLayers.aerialWA = new ArcExport(exportUrl(`${SLIP}/Locate/MapServer`, "format=jpg"), { maxZoom: 20, attribution: "航拍图 &copy; Landgate / SLIP" });
   baseLayers.aerialNSW = L.tileLayer("https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Imagery/MapServer/tile/{z}/{y}/{x}",
     { maxZoom: 20, maxNativeZoom: 19, attribution: "航拍图 &copy; Spatial Services NSW" });
+  baseLayers.aerialVIC = L.tileLayer("https://base.maps.vic.gov.au/wmts/AERIAL_WM_256/EPSG:3857:256/{z}/{x}/{y}.png",
+    { maxZoom: 20, maxNativeZoom: 19, attribution: "航拍图 &copy; Vicmap（维州政府）" });
   setSeg($("basemap"), state.ui.basemap);
   onSeg($("basemap"), v => { state.ui.basemap = v; saveState(); showBasemap(); });
   $("layerToggles").addEventListener("change", e => {
@@ -1788,6 +2029,9 @@ function setupOverlays() {
       `${o.color ? `<i style="background:${o.color}; opacity:.55; border:1px solid ${o.color}"></i>` : ""}${o.name}</label>`).join("");
   for (const o of list.filter(x => !x.later)) {
     overlayLayers[o.id] = o.custom === "crime" ? buildCrimeLayer() : o.custom === "schools" ? buildSchoolLayer()
+      : o.wms ? L.tileLayer.wms(`${VIC_GEO}/wms`, { layers: o.wms.layers, styles: "", format: "image/png", transparent: true,
+          ...(o.wms.cql ? { CQL_FILTER: o.wms.cql } : {}), ...(o.wms.sld ? { SLD_BODY: o.wms.sld } : {}),
+          opacity: o.wms.sld ? 1 : 0.7, maxZoom: 20, minZoom: o.minZoom || 0, zIndex: 5 })
       : new ArcExport(exportUrl(overlayBase(o), overlayParams(o)), { opacity: o.style ? 1 : 0.7, maxZoom: 20, minZoom: o.minZoom || 0, zIndex: 5 });
   }
   showBasemap();
@@ -1829,7 +2073,7 @@ function buildSchoolLayer() {
     const color = s.g !== 1 ? SCHOOL_COLORS.private : s.k === "P" ? SCHOOL_COLORS.P : SCHOOL_COLORS.S;
     L.circleMarker([s.lat, s.lon], { radius: 6, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1, bubblingMouseEvents: false })
       .bindPopup(() => `<div class="pop-addr">${esc(s.n)}</div><div>${[schoolKind(s), yearsText(s), s.e ? s.e.toLocaleString() + " 名学生" : ""].filter(Boolean).join(" · ")}</div>` +
-        `<a href="${esc(schoolUrl(s))}" target="_blank" rel="noopener">${s.g !== 1 ? "搜索这所学校" : state.region === "NSW" ? "学校网站" : "学校资料和学区"} ↗</a>`, { maxWidth: 280 })
+        `<a href="${esc(schoolUrl(s))}" target="_blank" rel="noopener">${s.g !== 1 ? "搜索这所学校" : { NSW: "学校网站", VIC: "Find my School 查学区" }[state.region] || "学校资料和学区"} ↗</a>`, { maxWidth: 280 })
       .addTo(g);
   }
   return g;
@@ -1851,7 +2095,10 @@ async function drawSuburbs(fit) {
     const key = state.region + s.n + s.p;
     try {
       if (!boundaryCache[key]) {
-        const rows = state.region === "NSW"
+        const info = SUBURBS.find(x => x.n === s.n && x.p === s.p);
+        const rows = state.region === "VIC"
+          ? await arcQuery(LYV.locality, { where: `locality_name='${sq((info && info.q) || s.n.toUpperCase())}'`, outFields: "locality_name", returnGeometry: true, outSR: 4326 })
+          : state.region === "NSW"
           ? await arcQuery(LYN.suburb, { where: `suburbname='${sq(s.n.toUpperCase())}' AND postcode=${parseInt(s.p, 10) || 0}`, outFields: "suburbname", returnGeometry: true, outSR: 4326 })
           : await slip(LY.locality, { where: `name='${sq(s.n.toUpperCase())}' AND postcode='${sq(s.p)}'`, outFields: "name", returnGeometry: true, outSR: 4326 });
         boundaryCache[key] = rows.flatMap(r => r._geom.rings.map(ring => ring.map(([x, y]) => [y, x])));
@@ -1915,7 +2162,7 @@ async function onMapClick(e) {
                      : `<div class="pop-addr">这里没有门牌地址</div><div>可能是道路、公园或河流</div>`;
     // 犯罪率和学校是现算的，马上就有；strata、洪水、山火要去政府服务器查
     await ensureCatchments(site.pt);
-    const here = { pt: site.pt, suburb: row && row.locality, region: state.region, postcode: row && postcodeFor(row.locality, site.pt) };
+    const here = { pt: site.pt, suburb: row && row.locality, region: state.region, postcode: row && (row.postcode || postcodeFor(row.locality, site.pt)) };
     const live = ["crime", "school"].map(id => miniCheck(id, checkDef(id).live(here))).join("");
     pop.setContent(head + `<div class="pop-checks">${["strata", "flood", "fire"].map(id => miniCheck(id)).join("")}${live}</div>`);
     const res = await runChecks(site, row ? ["strata", "flood", "fire"] : ["flood", "fire"]);
@@ -1945,6 +2192,17 @@ function postcodeFor(locality, pt) {
 }
 // 地图上点的位置：门牌地址和地块
 async function addressAt(pt) {
+  if (state.region === "VIC") {
+    const rows = await arcQuery(LYV.propAddr, atPoint(pt, { outFields: VIC_ADDR_FIELDS.replace(/(^|,)/g, "$1add_").replace("add_property_pfi", "prop_pfi"),
+      returnGeometry: true, outSR: 4326 }));
+    const list = rows.filter(r => r._geom && r._geom.rings && r.add_house_number_1 != null)
+      .map(r => vicRow({ ...Object.fromEntries(Object.entries(r).map(([k, v]) => [k.replace(/^add_/, ""), v])), property_pfi: r.prop_pfi }, r._geom));
+    if (!list.length) return null;
+    const units = list.filter(r => r.unit);
+    const row = list.find(r => !r.unit) || { ...units[0], unit: null };   // 多单位的楼：用整栋楼
+    if (units.length > 1) row.strataLots = units.length;
+    return row;
+  }
   if (state.region === "NSW") {
     const rows = await arcQuery(LYN.property, atPoint(pt, { outFields: "address,propid,valnetlotcount", returnGeometry: true, outSR: 4326 }));
     const list = rows.filter(r => r._geom && r._geom.rings && r.address).map(nswRow);
@@ -1975,6 +2233,44 @@ function nswRow(r) {
   return { land_id: "nsw:" + r.propid, road_number_1: num1, road_number_2: num2, lot_number: lot, road_name: toks.join(" "), road_type: type,
            road_suffix: null, locality, unit, strataLots: r.valnetlotcount, _geom: r._geom };
 }
+// 维州地址库的一条 → 换成跟西澳一样的字段。locality 去掉括号（"ASCOT (BALLARAT)" → "ASCOT"），邮编直接用地址库的
+function vicRow(a, geom) {
+  const part = (p, n, x) => n == null || n === "" ? null : `${p || ""}${n}${x || ""}`;
+  return { land_id: "vic:" + a.property_pfi, road_number_1: part(a.house_prefix_1, a.house_number_1, a.house_suffix_1),
+           road_number_2: part("", a.house_number_2, a.house_suffix_2), lot_number: null, road_name: a.road_name,
+           road_type: STREET_TYPES[a.road_type] || a.road_type, road_suffix: a.road_suffix || null,
+           locality: String(a.locality_name || "").replace(/\s*\(.*\)$/, ""), postcode: a.postcode || null,
+           unit: part(a.blg_unit_prefix_1, a.blg_unit_id_1, a.blg_unit_suffix_1), _geom: geom };
+}
+// 维州找地址：先在地址库里按街道查（快），挑出最接近的几个，再按地址点查它们的地块范围
+async function findAddressVIC(p) {
+  const locs = [...new Set(SUBURBS.filter(s => s.n.toUpperCase() === p.suburb).map(s => s.q || s.n.toUpperCase()))];
+  const inLoc = `locality_name IN (${locs.map(x => `'${sq(x)}'`).join(",")})`;
+  const q = where => arcQuery(LYV.address, { where, outFields: VIC_ADDR_FIELDS, returnGeometry: true, outSR: 4326, resultRecordCount: 2000 });
+  let addrs = await q(`${inLoc} AND road_name='${sq(p.street)}'`);
+  if (!addrs.length) addrs = await q(`${inLoc} AND road_name LIKE '${sq(p.street.slice(0, Math.max(3, p.street.length - 2)))}%'`);
+  const n = p.num ? parseInt(p.num, 10) : null;
+  // 同一个门牌的单位合成一条（除非指定了单位号）
+  const groups = new Map();
+  for (const a of addrs) {
+    if (!a._geom || a.house_number_1 == null) continue;
+    const r = vicRow(a, null);
+    if (p.unit && r.unit && r.unit !== p.unit) continue;
+    const key = [r.road_number_1, r.road_number_2, r.road_name, r.road_type, r.locality, p.unit ? r.unit : ""].join("|");
+    const g = groups.get(key);
+    if (!g) groups.set(key, { row: p.unit ? r : { ...r, unit: null }, pt: [a._geom.x, a._geom.y], units: r.unit ? 1 : 0, pfi: a.property_pfi });
+    else if (r.unit) g.units++;
+  }
+  const score = g => (p.num && String(g.row.road_number_1) === p.num ? 0 : 1) * 1e6 + (n == null ? 0 : Math.abs((parseInt(g.row.road_number_1, 10) || 9999) - n));
+  const top = [...groups.values()].sort((a, b) => score(a) - score(b)).slice(0, 8);
+  const out = await Promise.all(top.map(async g => {
+    const props = await arcQuery(LYV.property, atPoint(g.pt, { outFields: "prop_pfi", returnGeometry: true, outSR: 4326 }));
+    const hit = props.find(x => x.prop_pfi === g.pfi) || props[0];
+    if (!hit || !hit._geom) return null;
+    return { ...g.row, _geom: hit._geom, strataLots: g.units > 1 ? g.units : null };
+  }));
+  return out.filter(Boolean);
+}
 // 新州找地址：先按完整地址查（很快），再按门牌开头查，最后按街道查（慢，十几秒）
 async function findAddressNSW(p) {
   const q = (where, n = 50) => arcQuery(LYN.property, { where, outFields: "address,propid,valnetlotcount", returnGeometry: true, outSR: 4326, resultRecordCount: n });
@@ -1996,8 +2292,8 @@ async function findAddressNSW(p) {
 }
 
 function parseAddress(text) {
-  let s = String(text).toUpperCase().replace(/[.,]/g, " ").replace(/\b(WESTERN AUSTRALIA|NEW SOUTH WALES)\b/g, " ").replace(/\s+/g, " ").trim();
-  s = s.replace(/\s+\d{4}$/, "").replace(/\s+(WA|NSW)$/, "").replace(/\s+\d{4}$/, "").trim();
+  let s = String(text).toUpperCase().replace(/[.,]/g, " ").replace(/\b(WESTERN AUSTRALIA|NEW SOUTH WALES|VICTORIA)\b/g, " ").replace(/\s+/g, " ").trim();
+  s = s.replace(/\s+\d{4}$/, "").replace(/\s+(WA|NSW|VIC)$/, "").replace(/\s+\d{4}$/, "").trim();
   let tokens = s.split(" ");
   let suburb = null;
   for (let n = Math.min(4, tokens.length - 1); n >= 1; n--) {
@@ -2028,6 +2324,7 @@ async function findAddress() {
   try {
     let rows;
     if (state.region === "NSW") rows = await findAddressNSW(p);
+    else if (state.region === "VIC") rows = await findAddressVIC(p);
     else {
       const base = `locality='${sq(p.suburb)}'`;
       const q = where => slip(LY.address, { where, outFields: ADDR_FIELDS, returnGeometry: true, outSR: 4326, resultRecordCount: 1000 });
@@ -2072,7 +2369,7 @@ async function addCandidate(row, unit) {
   if (dup) { focusCard(dup.id); return; }
   const site = siteFromRow(row);
   const c = { id: Date.now().toString(36), no: state.nextNo++, region: state.region, address: formatAddress(row, unit), suburb: titleCase(row.locality),
-              postcode: postcodeFor(row.locality, site.pt), unit: unit || row.unit || null, landId: row.land_id,
+              postcode: row.postcode || postcodeFor(row.locality, site.pt), unit: unit || row.unit || null, landId: row.land_id,
               pt: site.pt, ring: site.ring, area: site.area, addedAt: today(), price: null, type: null, beds: null, baths: null, cars: null,
               land: null, strataFee: null, url: "", note: "", checks: null, checkedAt: null };
   state.candidates.push(c);
@@ -2312,7 +2609,23 @@ function transferDutyNSW(v, o) {
   if (!o.land && v > 3870000) return { amount: 194137 + per100(v - 3870000, 7.00), rule: "超过 $387 万的住宅按高价房税率" };
   return { amount: general(v), rule: "一般税率（新州没有一般的自住优惠）" };
 }
-const transferDuty = (v, o) => state.region === "NSW" ? transferDutyNSW(v, o) : transferDutyWA(v, o);
+// 维州印花税（land transfer duty），SRO 现行税率（2021 年 7 月起，不按年调整）
+function transferDutyVIC(v, o) {
+  const general = x => x <= 25000 ? x * 0.014 : x <= 130000 ? 350 + (x - 25000) * 0.024 : x <= 960000 ? 2870 + (x - 130000) * 0.06
+                     : x <= 2000000 ? x * 0.055 : 110000 + (x - 2000000) * 0.065;
+  // 自住（principal place of residence）且 $55 万以下：$13–55 万这一段税率低一些
+  const ppr = x => x <= 130000 ? general(x) : x <= 440000 ? 2870 + (x - 130000) * 0.05 : 18370 + (x - 440000) * 0.06;
+  const usePpr = (o.ppr || o.firstHome) && !o.land && v <= 550000;
+  const base = usePpr ? ppr(v) : general(v);
+  if (o.firstHome) {
+    // 首次置业：$60 万以下免，$60–75 万按比例减免（空地 2026 年 5 月 7 日起是 $45 万 / $55 万）
+    const [free, upto] = o.land ? [450000, 550000] : [600000, 750000];
+    if (v <= free) return { amount: 0, rule: `首次置业：$${free / 10000} 万以下免印花税` };
+    if (v <= upto) return { amount: Math.round(base * (v - free) / (upto - free)), rule: `首次置业：$${free / 10000}–${upto / 10000} 万有减免` };
+  }
+  return { amount: Math.round(base), rule: usePpr ? "自住且 $55 万以下的优惠税率" : "一般税率" };
+}
+const transferDuty = (v, o) => state.region === "NSW" ? transferDutyNSW(v, o) : state.region === "VIC" ? transferDutyVIC(v, o) : transferDutyWA(v, o);
 const defaultRate = () => (RATES && RATES.mortgage_variable_new && RATES.mortgage_variable_new.value) || 6.2;
 function loanFor(price, override = {}) {
   if (!price) return null;
@@ -2360,13 +2673,18 @@ function renderLoan() {
   if (ln.lvr > 80) notes.push("首付不到 20%，银行通常会收 LMI（贷款保险，可能几千到几万元，没有算在上面）。首次置业可以了解联邦政府的 " +
     `<a href="https://www.housingaustralia.gov.au/home-guarantee-scheme" target="_blank" rel="noopener">5% 首付担保计划</a>，可以免 LMI。`);
   const nsw = state.region === "NSW";
-  if (o.firstHome) notes.push(nsw
+  if (o.firstHome) notes.push(state.region === "VIC"
+    ? "首次置业：买新房或自建，可能还有 $10,000 的 " +
+      `<a href="https://www.sro.vic.gov.au/first-home-owner" target="_blank" rel="noopener">首次置业补助（First Home Owner Grant）</a>，房价上限 $75 万（没有算在上面）。`
+    : nsw
     ? "首次置业：买新房或自建，可能还有 $10,000 的 " +
       `<a href="https://www.revenue.nsw.gov.au/grants-schemes/first-home-owner-new-homes-grant" target="_blank" rel="noopener">首次置业补助（First Home Owner (New Homes) Grant）</a>，新房上限 $60 万、房加地上限 $75 万（没有算在上面）。` +
       `$80–100 万之间的印花税减免是估算，准确数字用 <a href="https://www.apps09.revenue.nsw.gov.au/erevenue/calculators/fhba.php" target="_blank" rel="noopener">Revenue NSW 计算器</a>。`
     : "首次置业：买新房或自建，可能还有 $10,000 的 " +
       `<a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/first-home-owner-grant" target="_blank" rel="noopener">首次置业补助（FHOG）</a>，房价上限 $80 万（没有算在上面）。`);
-  notes.push(nsw ? "印花税按 Revenue NSW 2026/27 财年税率估算；外国买家另有 9% 附加税。"
+  notes.push(state.region === "VIC" ? "印花税按 SRO Victoria 现行税率估算；外国买家另有 8% 附加税。准确数字用 " +
+    `<a href="https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/land-transfer-stamp-duty-calculator" target="_blank" rel="noopener">SRO 计算器</a>。`
+    : nsw ? "印花税按 Revenue NSW 2026/27 财年税率估算；外国买家另有 9% 附加税。"
                  : "印花税按 WA Treasury 2026 年 5 月 7 日起的税率估算；外国买家另有 7% 附加税。");
   $("loanNotes").innerHTML = notes.map(n => `<li>${n}</li>`).join("");
 }
