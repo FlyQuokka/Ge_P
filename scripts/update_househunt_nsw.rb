@@ -18,27 +18,9 @@ CATCH_DIR = "#{NSW_DIR}/catchments"
 SPATIAL  = "https://portal.spatial.nsw.gov.au/server/rest/services"
 CKAN     = "https://data.nsw.gov.au/data/api/3/action/package_show?id="
 
-# 查询 ArcGIS 图层的全部结果（一次最多 2000 条，自动翻页）
-def arc_all(layer_url, params)
-  out = []
-  loop do
-    q = { f: "json", resultOffset: out.size, resultRecordCount: 1000 }.merge(params)
-    j = get_json("#{layer_url}/query?" + URI.encode_www_form(q))
-    feats = j["features"] || []
-    out.concat(feats)
-    break if feats.empty? || !j["exceededTransferLimit"]
-  end
-  out
-end
-
 # 数据目录（data.nsw.gov.au）里某个数据集：最后修改时间和下载链接
 def ckan_package(id)
   get_json(CKAN + id)["result"] or raise "数据目录里找不到 #{id}"
-end
-
-# 区名比较用：大写、去掉多余空格
-def key_name(s)
-  s.to_s.upcase.gsub(/\s+/, " ").strip
 end
 
 # ---------- 1. 新州所有区（suburb）：名称、邮编、范围，以及区里面的一个点（算人口、对应犯罪统计用） ----------
@@ -118,66 +100,8 @@ end
 
 # ---------- 3. 公立学校学区（local enrolment area） ----------
 # 全州的学区边界有 10 MB，网页不可能一次下载。所以把它切成大小不同的方块（悉尼这种学校密的地方切得小），
-# 每块一个文件，网页查某个地址时只下载那个地址所在的一块。
+# 每块一个文件，网页查某个地址时只下载那个地址所在的一块（切块的方法在 househunt_lib.rb 的 build_tiles）。
 CATCH_PKG = "nsw-education-school-intake-zones-catchment-areas-for-nsw-government-schools"
-TILE_MAX_BYTES = 150_000
-
-# 把一个多边形切到长方形里面（Sutherland–Hodgman 方法；只用来判断"点在不在里面"，切边多出来的线不影响）
-def clip_ring(ring, x0, y0, x1, y1)
-  pts = ring
-  [[0, x0, 1], [0, x1, -1], [1, y0, 1], [1, y1, -1]].each do |axis, v, dir|
-    inside = ->(p) { (p[axis] - v) * dir >= 0 }
-    cut = lambda do |a, b|
-      t = (v - a[axis]) / (b[axis] - a[axis])
-      q = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
-      q[axis] = v
-      q
-    end
-    out = []
-    pts.each_with_index do |cur, i|
-      prev = pts[i - 1]
-      if inside.(cur)
-        out << cut.(prev, cur) unless inside.(prev)
-        out << cur
-      elsif inside.(prev)
-        out << cut.(prev, cur)
-      end
-    end
-    pts = out
-    return nil if pts.size < 3
-  end
-  pts
-end
-
-def ring_box(r)
-  xs = r.map(&:first)
-  ys = r.map(&:last)
-  [xs.min, ys.min, xs.max, ys.max]
-end
-
-# 一块方块：里面的学区（已经切好）太大就再分成 4 块
-def build_tiles(box, feats, depth, tiles)
-  x0, y0, x1, y1 = box
-  inside = feats.map do |f|
-    rings = f[:rings].map do |r|
-      b = ring_box(r)
-      next nil if b[2] < x0 || b[0] > x1 || b[3] < y0 || b[1] > y1
-      b[0] >= x0 && b[2] <= x1 && b[1] >= y0 && b[3] <= y1 ? r : clip_ring(r, x0, y0, x1, y1)
-    end.compact
-    rings.empty? ? nil : f.merge(rings: rings)
-  end.compact
-  return if inside.empty?
-  body = inside.map { |f| [f[:id], f[:t], f[:ct], f[:rings].map { |r| r.map { |p| p.map { |v| v.round(5) } } }] }
-  size = JSON.generate(body).bytesize
-  if size > TILE_MAX_BYTES && depth < 12
-    xm, ym = (x0 + x1) / 2.0, (y0 + y1) / 2.0
-    [[x0, y0, xm, ym], [xm, y0, x1, ym], [x0, ym, xm, y1], [xm, ym, x1, y1]].each { |b| build_tiles(b, inside, depth + 1, tiles) }
-  else
-    name = "t#{tiles.size}.json"
-    File.write("#{CATCH_DIR}/#{name}", JSON.generate({ "b" => box.map { |v| v.round(6) }, "f" => body }) + "\n")
-    tiles << box.map { |v| v.round(6) } + [name]
-  end
-end
 
 step("新州学区") do
   pkg = ckan_package(CATCH_PKG)
@@ -210,7 +134,7 @@ step("新州学区") do
   root = [root[0] - 0.001, root[1] - 0.001, root[2] + 0.001, root[3] + 0.001]
   Dir["#{CATCH_DIR}/t*.json"].each { |f| File.delete(f) }
   tiles = []
-  build_tiles(root, feats, 0, tiles)
+  build_tiles(CATCH_DIR, root, feats, 0, tiles)
   index = { "source" => "NSW Department of Education, school intake zones (catchment areas) for NSW government schools",
             "source_modified" => stamp, "enrolment_year" => year, "updated" => Time.now.utc.iso8601,
             "types" => { "PRIMARY" => "小学", "INFANTS" => "幼小（K–2）", "CENTRAL_PRIMARY" => "中心学校（小学部分）",
