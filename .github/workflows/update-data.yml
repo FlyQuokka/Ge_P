@@ -77,6 +77,12 @@ jobs:
         continue-on-error: true
         run: ruby scripts/update_househunt_vic.rb
 
+      # ⑧ 找房（第三页用）：昆州的区域名单、学校、学区、各警务分区犯罪率
+      - name: Update QLD house hunting data
+        id: househunt_qld
+        continue-on-error: true
+        run: ruby scripts/update_househunt_qld.rb
+
       # 记录每个数据源连续失败了几天（写到 data/run_status.json）。
       # 网站偶尔临时出故障时会保留旧数据，不影响网页；连续 3 天都失败才算真的出问题。
       - name: Track failures
@@ -89,6 +95,7 @@ jobs:
           OUTCOME_HOUSEHUNT: ${{ steps.househunt.outcome }}
           OUTCOME_HOUSEHUNT_NSW: ${{ steps.househunt_nsw.outcome }}
           OUTCOME_HOUSEHUNT_VIC: ${{ steps.househunt_vic.outcome }}
+          OUTCOME_HOUSEHUNT_QLD: ${{ steps.househunt_qld.outcome }}
         run: ruby scripts/track_failures.rb
 
       - name: Save changes
@@ -106,5 +113,5 @@ jobs:
         if: steps.track.outputs.alert == 'true'
         run: |
           echo "有数据源连续失败，详情见上面 Track failures 这一步和 data/run_status.json"
-          echo "这次的结果：月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}，黄金石油: ${{ steps.commodities.outcome }}，找房（西澳）: ${{ steps.househunt.outcome }}，找房（新州）: ${{ steps.househunt_nsw.outcome }}，找房（维州）: ${{ steps.househunt_vic.outcome }}"
+          echo "这次的结果：月度数据: ${{ steps.monthly.outcome }}，季度数据: ${{ steps.quarterly.outcome }}，长期数据: ${{ steps.longrun.outcome }}，黄金石油: ${{ steps.commodities.outcome }}，找房（西澳）: ${{ steps.househunt.outcome }}，找房（新州）: ${{ steps.househunt_nsw.outcome }}，找房（维州）: ${{ steps.househunt_vic.outcome }}，找房（昆州）: ${{ steps.househunt_qld.outcome }}"
           exit 1
