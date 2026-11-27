@@ -13,149 +13,13 @@
 # 每一项单独下载；某一项失败时保留它原来的文件，其他照常更新，最后报告哪些失败了。
 # 不需要安装任何东西：GitHub Actions 自带 Ruby 和 unzip。
 
-require "net/http"
-require "json"
-require "uri"
-require "time"
-require "date"
-require "tmpdir"
+require_relative "househunt_lib"
 
-DIR    = "data/househunt"
 SLIP   = "https://public-services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services"
-FAILED = []
-Dir.mkdir(DIR) unless Dir.exist?(DIR)
-
-def download(url, binary: false)
-  uri = URI(url)
-  3.times do
-    begin
-      res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https", open_timeout: 30, read_timeout: 300) do |http|
-        http.get(uri.request_uri, "User-Agent" => "Mozilla/5.0")
-      end
-      if res.is_a?(Net::HTTPRedirection)
-        uri = URI.join(uri.to_s, res["location"])
-        next
-      end
-      return binary ? res.body : res.body.force_encoding("UTF-8") if res.is_a?(Net::HTTPSuccess)
-    rescue StandardError => e
-      warn "  下载出错 #{e.class}：#{url}"
-    end
-    sleep 5
-  end
-  nil
-end
-
-# 只问服务器"文件什么时候改过"，不下载文件本身
-def last_modified(url)
-  uri = URI(url)
-  res = Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 30, read_timeout: 60) do |http|
-    http.head(uri.request_uri, "User-Agent" => "Mozilla/5.0")
-  end
-  res["last-modified"]
-rescue StandardError
-  nil
-end
-
-def get_json(url)
-  text = download(url) or raise "下载失败：#{url}"
-  j = JSON.parse(text)
-  raise j["error"]["message"].to_s if j.is_a?(Hash) && j["error"]
-  j
-end
 
 # 查询西澳政府公开地图服务（SLIP）的一个图层
 def slip_query(path, params)
   get_json("#{SLIP}/#{path}/query?" + URI.encode_www_form({ f: "json" }.merge(params)))["features"]
-end
-
-# 尝试做一件事；出错就记下来，保留旧文件
-def step(name)
-  yield
-rescue StandardError => e
-  warn "#{name} 失败：#{e.message}"
-  FAILED << name
-end
-
-# "SOUTH PERTH" → "South Perth"，"O'CONNOR" → "O'Connor"，"ST COLUMBA'S" → "St Columba's"
-def title_case(name)
-  name.downcase.split(" ").map { |w| w.split("'").map(&:capitalize).join("'").sub(/'S\z/, "'s") }.join(" ")
-end
-
-def write_json(file, obj)
-  File.write("#{DIR}/#{file}", JSON.pretty_generate(obj) + "\n")
-end
-
-# ---------- 小工具：多边形 ----------
-def ring_area(r)
-  s = 0.0
-  r.each_cons(2) { |(x0, y0), (x1, y1)| s += x0 * y1 - x1 * y0 }
-  s / 2
-end
-
-def point_in_rings?((x, y), rings)
-  inside = false
-  rings.each do |ring|
-    j = ring.size - 1
-    ring.each_with_index do |(xi, yi), i|
-      xj, yj = ring[j]
-      inside = !inside if (yi > y) != (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi
-      j = i
-    end
-  end
-  inside
-end
-
-# 多边形里面的一个点：先试面积中心，不在里面就横着找最宽的一段取中点
-def interior_point(rings)
-  ring = rings.max_by { |r| ring_area(r).abs }
-  a = ring_area(ring)
-  return ring[0] if a.abs < 1e-14
-  cx = cy = 0.0
-  ring.each_cons(2) { |(x0, y0), (x1, y1)| f = x0 * y1 - x1 * y0; cx += (x0 + x1) * f; cy += (y0 + y1) * f }
-  cx /= 6 * a
-  cy /= 6 * a
-  return [cx, cy] if point_in_rings?([cx, cy], [ring])
-  xs = []
-  ring.each_cons(2) { |(x0, y0), (x1, y1)| xs << x0 + (cy - y0) * (x1 - x0) / (y1 - y0) if (y0 > cy) != (y1 > cy) }
-  xs.sort!
-  best, width = ring[0], -1
-  xs.each_slice(2) { |p, q| next unless q; (best, width = [(p + q) / 2, cy], q - p) if q - p > width }
-  best
-end
-
-# 边界线点太多时简化：去掉偏离不到 tol 度的点（0.0001 度约 10 米），形状基本不变，相邻两块之间也不会出现缝
-def simplify(points, tol)
-  return points if points.size < 4
-  keep = Array.new(points.size, false)
-  keep[0] = keep[-1] = true
-  stack = [[0, points.size - 1]]
-  until stack.empty?
-    s, e = stack.pop
-    next if e <= s + 1
-    (ax, ay), (bx, by) = points[s], points[e]
-    dx, dy = bx - ax, by - ay
-    len2 = dx * dx + dy * dy
-    far, idx = -1.0, nil
-    (s + 1...e).each do |i|
-      px, py = points[i]
-      t = len2.zero? ? 0.0 : (((px - ax) * dx + (py - ay) * dy) / len2).clamp(0.0, 1.0)
-      d = (px - ax - t * dx)**2 + (py - ay - t * dy)**2
-      far, idx = d, i if d > far
-    end
-    next unless far > tol * tol
-    keep[idx] = true
-    stack << [s, idx] << [idx, e]
-  end
-  points.each_index.select { |i| keep[i] }.map { |i| points[i] }
-end
-
-# 写 JSON：说明信息在前，长长的名单每条一行（文件小，用眼睛也容易看）
-def write_json_rows(file, meta, key, rows)
-  lines = rows.is_a?(Hash) ? rows.map { |k, v| "    #{k.to_json}: #{v.to_json}" } : rows.map { |r| "    #{r.to_json}" }
-  open_br, close_br = rows.is_a?(Hash) ? ["{", "}"] : ["[", "]"]
-  parts = meta.map { |k, v| "  #{k.to_json}: #{JSON.generate(v)}" }
-  parts << "  #{key.to_json}: #{open_br}\n#{lines.join(",\n")}\n  #{close_br}"
-  File.write("#{DIR}/#{file}", "{\n#{parts.join(",\n")}\n}\n")
 end
 
 # ---------- 1. 区域名单（珀斯和皮尔地区，用于输入区域名时的提示和地图定位） ----------
@@ -264,61 +128,6 @@ CENSUS_URL     = "https://data.api.abs.gov.au/rest/data/ABS,C21_G01_SAL,1.0.0/3.
 SA2_URL        = "https://geo.abs.gov.au/arcgis/rest/services/ASGS2021/SA2/MapServer/0/query?" +
                  URI.encode_www_form(where: "state_code_2021='5'", outFields: "sa2_code_2021", returnGeometry: true,
                                      outSR: 4326, maxAllowableOffset: 0.002, f: "json")
-
-def read_shapefile(dir)
-  shp = File.binread(Dir["#{dir}/*.shp"].first)
-  dbf = File.binread(Dir["#{dir}/*.dbf"].first)
-  # .dbf：每条记录的属性
-  n, hlen, rlen = dbf[4, 4].unpack1("V"), dbf[8, 2].unpack1("v"), dbf[10, 2].unpack1("v")
-  fields, off = [], 32
-  while dbf.getbyte(off) != 0x0D
-    fields << [dbf[off, 11].delete("\x00"), dbf.getbyte(off + 16)]
-    off += 32
-  end
-  attrs = Array.new(n) do |i|
-    rec, pos = dbf[hlen + i * rlen + 1, rlen - 1], 0
-    fields.map { |name, len| v = rec[pos, len].force_encoding("UTF-8").strip; pos += len; [name, v] }.to_h
-  end
-  # .shp：每条记录的多边形（可能有好几块，含海岛）
-  shapes, pos = [], 100
-  while pos + 8 <= shp.bytesize
-    len = shp[pos + 4, 4].unpack1("N") * 2
-    c = shp[pos + 8, len]
-    if [5, 15, 25].include?(c[0, 4].unpack1("l<"))
-      nparts, npts = c[36, 8].unpack("l<l<")
-      parts = c[44, 4 * nparts].unpack("l<*")
-      pts = c[44 + 4 * nparts, 16 * npts].unpack("E*").each_slice(2).to_a
-      shapes << parts.each_with_index.map { |s, i| pts[s...(parts[i + 1] || npts)] }
-    else
-      shapes << []
-    end
-    pos += 8 + len
-  end
-  attrs.zip(shapes)
-end
-
-# 简单的 CSV 拆分（有的格子带引号、里面有逗号）
-def csv_cells(line)
-  line.scan(/(?:\A|,)("(?:[^"]|"")*"|[^,]*)/).flatten.map { |v| v.start_with?('"') ? v[1..-2].gsub('""', '"') : v }
-end
-
-def csv_table(text)
-  rows = text.split(/\r?\n/).reject(&:empty?)
-  head = csv_cells(rows.shift)
-  [head, rows.map { |l| csv_cells(l) }]
-end
-
-def with_bbox(h, rings)
-  pts = rings.flatten(1)
-  xs = pts.map(&:first)
-  ys = pts.map(&:last)
-  h.merge("rings" => rings, "bbox" => [xs.min, ys.min, xs.max, ys.max])
-end
-
-# 在一组多边形里找包含这个点的那一个
-def locate(pt, list)
-  list.find { |x| b = x["bbox"]; pt[0].between?(b[0], b[2]) && pt[1].between?(b[1], b[3]) && point_in_rings?(pt, x["rings"]) }
-end
 
 step("西澳警区") do
   old = (JSON.parse(File.read(DISTRICTS_FILE)) rescue nil)
@@ -443,8 +252,46 @@ CRIME_CATS = {
   "drugs"             => ["毒品",               ->(l1, l2) { l2 == "Drug Offences" }]
 }
 
-def month_add(ym, n)
-  (Date.strptime(ym + "-01", "%Y-%m-%d") >> n).strftime("%Y-%m")
+# 读警方的 Excel：每个地区（全州、都会区、每个警区）一页，每行一个月，每列一种罪名。
+# 第 1 行 B 格是地区名；"Month and Year" 那一行是具体罪名（"... Total" 是小计，跳过）；
+# 它上面一行是大类（一个大类占好几列，写在第一列）。"Total Selected ..." 这类合计列也跳过，避免重复计算。
+# 每找到一个数字就调用一次 block：地区（大写）、月份（2026-09）、具体罪名、大类、数量
+def read_wapol_sheets(path)
+  read = ->(inner) { IO.popen(["unzip", "-p", path, inner], &:read).force_encoding("UTF-8") }
+  strings = read.("xl/sharedStrings.xml").scan(/<si>(.*?)<\/si>/m).map { |(x)| x.scan(/<t[^>]*>([^<]*)<\/t>/).join.gsub("&amp;", "&").strip }
+  colnum = ->(c) { c.each_char.reduce(0) { |a, ch| a * 26 + ch.ord - 64 } }
+  rels = read.("xl/_rels/workbook.xml.rels")
+  sheets = read.("xl/workbook.xml").scan(/<sheet [^>]*r:id="([^"]+)"/).flatten.map do |rid|
+    rels[/Id="#{rid}"[^>]*Target="([^"]+)"/, 1] || rels[/Target="([^"]+)"[^>]*Id="#{rid}"/, 1]
+  end.compact
+  found = 0
+  sheets.each do |target|
+    rows = read.("xl/" + target.sub(%r{\A/?xl/}, "")).scan(/<row [^>]*?r="(\d+)"[^>]*>(.*?)<\/row>/m).map do |_, row|
+      cells = {}
+      row.scan(/<c r="([A-Z]+)\d+"([^>]*?)(?:\/>|>(.*?)<\/c>)/m) do |col, attrs, inner|
+        v = inner.to_s[/<v>([^<]*)<\/v>/, 1]
+        next if v.nil?
+        cells[colnum.(col)] = attrs.include?('t="s"') ? strings[v.to_i] : v
+      end
+      cells
+    end
+    next unless rows[0] && rows[0][1].to_s.start_with?("Region")
+    region = rows[0][2].to_s.strip.upcase
+    hi = rows.index { |r| r[1].to_s.strip == "Month and Year" } or next
+    labels = rows[hi]
+    groups = rows[0...hi].reverse.find { |r| r.size > 3 && r.keys.min > 1 } || {}
+    group_of = ->(c) { k = groups.keys.select { |g| g <= c }.max; k && groups[k].to_s }
+    leaf = labels.select { |c, name| c > 1 && !name.to_s.empty? && name !~ / Total\z/ && name !~ /\ATotal / && group_of.(c) !~ /\ATotal / }
+    raise "犯罪统计：#{region} 这一页找不到罪名" if leaf.size < 30
+    rows[(hi + 1)..-1].each do |r|
+      serial = r[1].to_f
+      next unless serial > 30000
+      month = (Date.new(1899, 12, 30) + serial.to_i).strftime("%Y-%m")
+      leaf.each { |c, name| yield region, month, name.to_s, group_of.(c), r[c].to_f if r[c] }
+    end
+    found += 1
+  end
+  raise "犯罪统计的格式变了：没有找到按地区分页的数据" if found < 10
 end
 
 step("西澳犯罪统计") do
@@ -464,44 +311,7 @@ step("西澳犯罪统计") do
   Dir.mktmpdir do |tmp|
     path = "#{tmp}/crime.xlsx"
     File.binwrite(path, xlsx)
-    read = ->(inner) { IO.popen(["unzip", "-p", path, inner], &:read).force_encoding("UTF-8") }
-    rid = read.("xl/workbook.xml")[/<sheet [^>]*name="Data"[^>]*r:id="([^"]+)"/, 1] or raise "找不到 Data 这一页"
-    rels = read.("xl/_rels/workbook.xml.rels")
-    target = rels[/Id="#{rid}"[^>]*Target="([^"]+)"/, 1] || rels[/Target="([^"]+)"[^>]*Id="#{rid}"/, 1] or raise "找不到 Data 文件"
-    strings = read.("xl/sharedStrings.xml").scan(/<si>(.*?)<\/si>/m).map { |(x)| x.scan(/<t[^>]*>([^<]*)<\/t>/).join.gsub("&amp;", "&").strip }
-    cols = nil
-    process = lambda do |row|
-      cells = {}
-      row.scan(/<c r="([A-Z]+)\d+"([^>]*?)(?:\/>|>(.*?)<\/c>)/m) do |col, attrs, inner|
-        v = inner.to_s[/<v>([^<]*)<\/v>/, 1]
-        v = strings[v.to_i] if v && attrs.include?('t="s"')
-        cells[col] = v
-      end
-      if cols.nil?   # 第一行是表头：列名 → 列字母
-        cols = cells.invert
-        need = ["Website Region", "WAPOL_Hierarchy_Lvl1", "WAPOL_Hierarchy_Lvl2", "Period", "Count"]
-        raise "犯罪统计表头变了：#{cells.values.join(', ')}" unless (need - cols.keys).empty?
-        next
-      end
-      region = cells[cols["Website Region"]].to_s
-      serial = cells[cols["Period"]].to_f
-      next if region.empty? || serial <= 0
-      l1 = cells[cols["WAPOL_Hierarchy_Lvl1"]].to_s
-      l2 = cells[cols["WAPOL_Hierarchy_Lvl2"]].to_s
-      n = cells[cols["Count"]].to_f
-      m = counts[region][(Date.new(1899, 12, 30) + serial.to_i).strftime("%Y-%m")]
-      m["total"] += n
-      CRIME_CATS.each { |key, (_, test)| m[key] += n if test.(l1, l2) }
-    end
-    buf = +""
-    IO.popen(["unzip", "-p", path, "xl/" + target.sub(%r{\A/?xl/}, "")]) do |io|
-      while (chunk = io.read(4 << 20))
-        buf << chunk.force_encoding("UTF-8")
-        parts = buf.split("</row>")
-        buf = parts.pop || +""
-        parts.each { |p| r = p[/<row[^>]*>(.*)\z/m, 1]; process.(r) if r }
-      end
-    end
+    read_wapol_sheets(path) { |region, month, l1, l2, n| m = counts[region][month]; m["total"] += n; CRIME_CATS.each { |key, (_, test)| m[key] += n if test.(l1, l2) } }
   end
   raise "犯罪统计内容太少" if counts.size < 10
   latest = counts["WESTERN AUSTRALIA"].select { |_, m| m["total"] > 0 }.keys.max or raise "找不到最新月份"
