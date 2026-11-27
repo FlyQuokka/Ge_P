@@ -18,7 +18,8 @@ SOURCES = {
   "quarterly"   => "季度房价（ABS）",
   "longrun"     => "长期数据（BIS 等）",
   "commodities" => "黄金和石油",
-  "househunt"   => "找房（区域、利率、学校、犯罪率）"
+  "househunt"     => "找房 · 西澳（区域、利率、学校、犯罪率）",
+  "househunt_nsw" => "找房 · 新州（区域、学校、学区、犯罪率）"
 }
 
 old = (JSON.parse(File.read(FILE)) rescue {})
