@@ -321,15 +321,22 @@ def locate(pt, list)
 end
 
 step("西澳警区") do
-  pkg = get_json(DISTRICTS_PKG)["result"]
-  stamp = pkg["metadata_modified"]
-  # 每个 SA2 统计区每年的估计人口
-  head, rows = csv_table(download(ERP_URL) || raise("下载估计人口失败"))
-  ic, iy, iv = %w[ASGS_2021 TIME_PERIOD OBS_VALUE].map { |k| head.index(k) or raise "估计人口格式变了" }
-  erp = Hash.new { |h, k| h[k] = {} }
-  rows.each { |c| erp[c[ic]][c[iy].to_i] = c[iv].to_f if c[ic].to_s.start_with?("5") && c[iv] =~ /\d/ }
-  pop_year = erp.values.flat_map(&:keys).max or raise "估计人口是空的"
   old = (JSON.parse(File.read(DISTRICTS_FILE)) rescue nil)
+  # 先查"边界和人口有没有新版本"。这两个网站偶尔会临时连不上：已经有旧文件时，就先用旧的、明天再查（不算失败）
+  begin
+    pkg = get_json(DISTRICTS_PKG)["result"]
+    stamp = pkg["metadata_modified"]
+    # 每个 SA2 统计区每年的估计人口
+    head, rows = csv_table(download(ERP_URL) || raise("下载估计人口失败"))
+    ic, iy, iv = %w[ASGS_2021 TIME_PERIOD OBS_VALUE].map { |k| head.index(k) or raise "估计人口格式变了" }
+    erp = Hash.new { |h, k| h[k] = {} }
+    rows.each { |c| erp[c[ic]][c[iy].to_i] = c[iv].to_f if c[ic].to_s.start_with?("5") && c[iv] =~ /\d/ }
+    pop_year = erp.values.flat_map(&:keys).max or raise "估计人口是空的"
+  rescue StandardError => e
+    raise unless old && File.exist?(GEOJSON_FILE)
+    puts "西澳警区：暂时查不到有没有新版本（#{e.message}），先用现有数据，明天再查"
+    next
+  end
   if old && old["boundary_modified"] == stamp && old["population_year"] == pop_year && File.exist?(GEOJSON_FILE)
     puts "西澳警区：边界和人口都没有变（边界 #{stamp}，人口 #{pop_year} 年），不用重新计算"
     next
@@ -444,7 +451,11 @@ step("西澳犯罪统计") do
   dist = JSON.parse(File.read(DISTRICTS_FILE)) rescue raise("还没有警区文件")
   inputs = { "crime" => last_modified(CRIME_URL), "districts" => dist["boundary_modified"], "population_year" => dist["population_year"] }
   old = (JSON.parse(File.read(CRIME_FILE)) rescue nil)
-  if old && inputs["crime"] && old["inputs"] == inputs
+  if old && inputs["crime"].nil?   # 警方网站临时连不上：先用现有数据，明天再查（不算失败）
+    puts "西澳犯罪统计：暂时查不到警方有没有发布新数据，先用现有数据，明天再查"
+    next
+  end
+  if old && old["inputs"] == inputs
     puts "西澳犯罪统计：警方还没有发布新数据（#{inputs["crime"]}），不用重新计算"
     next
   end
