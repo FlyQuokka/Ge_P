@@ -1,6 +1,6 @@
 # 找房数据脚本共用的小工具（下载、读 shapefile、多边形计算、写 JSON 等）
 # 放置位置：仓库里的 scripts/househunt_lib.rb
-# 由 scripts/update_househunt.rb（西澳）和 scripts/update_househunt_nsw.rb（新州）调用，自己不单独运行。
+# 由 scripts/update_househunt.rb（西澳）、update_househunt_nsw.rb（新州）、update_househunt_vic.rb（维州）调用，自己不单独运行。
 
 require "net/http"
 require "json"
@@ -49,6 +49,24 @@ def get_json(url)
   j = JSON.parse(text)
   raise j["error"]["message"].to_s if j.is_a?(Hash) && j["error"]
   j
+end
+
+# 查询 ArcGIS 图层的全部结果（一次最多 2000 条，自动翻页）
+def arc_all(layer_url, params)
+  out = []
+  loop do
+    q = { f: "json", resultOffset: out.size, resultRecordCount: 1000 }.merge(params)
+    j = get_json("#{layer_url}/query?" + URI.encode_www_form(q))
+    feats = j["features"] || []
+    out.concat(feats)
+    break if feats.empty? || !j["exceededTransferLimit"]
+  end
+  out
+end
+
+# 区名比较用：大写、去掉多余空格
+def key_name(s)
+  s.to_s.upcase.gsub(/\s+/, " ").strip
 end
 
 # 尝试做一件事；出错就记下来，保留旧文件
@@ -198,4 +216,66 @@ end
 
 def month_add(ym, n)
   (Date.strptime(ym + "-01", "%Y-%m-%d") >> n).strftime("%Y-%m")
+end
+
+# ---------- 学区边界切块（新州、维州用） ----------
+# 一个州的学区边界有好几 MB，网页不可能一次下载。所以切成大小不同的方块（学校密的地方切得小），
+# 每块一个文件（t0.json、t1.json…），网页查某个地址时只下载那个地址所在的一块。
+TILE_MAX_BYTES = 150_000
+
+# 把一个多边形切到长方形里面（Sutherland–Hodgman 方法；只用来判断"点在不在里面"，切边多出来的线不影响）
+def clip_ring(ring, x0, y0, x1, y1)
+  pts = ring
+  [[0, x0, 1], [0, x1, -1], [1, y0, 1], [1, y1, -1]].each do |axis, v, dir|
+    inside = ->(p) { (p[axis] - v) * dir >= 0 }
+    cut = lambda do |a, b|
+      t = (v - a[axis]) / (b[axis] - a[axis])
+      q = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
+      q[axis] = v
+      q
+    end
+    out = []
+    pts.each_with_index do |cur, i|
+      prev = pts[i - 1]
+      if inside.(cur)
+        out << cut.(prev, cur) unless inside.(prev)
+        out << cur
+      elsif inside.(prev)
+        out << cut.(prev, cur)
+      end
+    end
+    pts = out
+    return nil if pts.size < 3
+  end
+  pts
+end
+
+def ring_box(r)
+  xs = r.map(&:first)
+  ys = r.map(&:last)
+  [xs.min, ys.min, xs.max, ys.max]
+end
+
+# 一块方块：里面的学区（已经切好）太大就再分成 4 块
+def build_tiles(dir, box, feats, depth, tiles)
+  x0, y0, x1, y1 = box
+  inside = feats.map do |f|
+    rings = f[:rings].map do |r|
+      b = ring_box(r)
+      next nil if b[2] < x0 || b[0] > x1 || b[3] < y0 || b[1] > y1
+      b[0] >= x0 && b[2] <= x1 && b[1] >= y0 && b[3] <= y1 ? r : clip_ring(r, x0, y0, x1, y1)
+    end.compact
+    rings.empty? ? nil : f.merge(rings: rings)
+  end.compact
+  return if inside.empty?
+  body = inside.map { |f| [f[:id], f[:t], f[:ct], f[:rings].map { |r| r.map { |p| p.map { |v| v.round(5) } } }] }
+  size = JSON.generate(body).bytesize
+  if size > TILE_MAX_BYTES && depth < 12
+    xm, ym = (x0 + x1) / 2.0, (y0 + y1) / 2.0
+    [[x0, y0, xm, ym], [xm, y0, x1, ym], [x0, ym, xm, y1], [xm, ym, x1, y1]].each { |b| build_tiles(dir, b, inside, depth + 1, tiles) }
+  else
+    name = "t#{tiles.size}.json"
+    File.write("#{dir}/#{name}", JSON.generate({ "b" => box.map { |v| v.round(6) }, "f" => body }) + "\n")
+    tiles << box.map { |v| v.round(6) } + [name]
+  end
 end
