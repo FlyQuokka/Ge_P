@@ -19,7 +19,7 @@ strata、洪水、山火等隐藏信息，并算贷款和印花税。
 Ge_P/                              ← 仓库根目录
 ├── index.html                     ← 第一页：房价（页面、样式、图表都在这一个文件里）
 ├── commodities.html               ← 第二页：黄金与石油（同样是一个文件）
-├── househunt.html                 ← 第三页：Perth 找房助手（同样是一个文件）
+├── househunt.html                 ← 第三页：找房助手（西澳 / 新州，页面上方切换；同样是一个文件）
 ├── CONTEXT.md                     ← 本文件：项目说明
 ├── data/
 │   ├── monthly.csv                ← 月度数据：各城市每月中位价、月度/年度变化（自动累积）
@@ -42,14 +42,16 @@ Ge_P/                              ← 仓库根目录
 │   │   ├── gold_daily.csv         ← 每日金价（美元/盎司），每天记一笔，从 2026-11-13 开始积累（gold-api.com）
 │   │   ├── fx_daily.csv           ← 每日汇率：1 美元兑澳元 / 人民币 / 欧元，1999 年起（欧洲央行）
 │   │   └── fx_monthly.csv         ← 月平均汇率，1957 年起（BIS）
-│   └── househunt/                 ← 找房（第三页用，全部自动更新）
+│   └── househunt/                 ← 找房（第三页用，全部自动更新；新州的在 househunt/nsw/ 里）
 │       ├── suburbs.json           ← 珀斯和皮尔地区 465 个区域：名称、邮编、范围（Landgate）
 │       └── rates.json             ← 平均房贷利率和现金利率（澳洲储备银行）
 ├── scripts/
 │   ├── update_monthly.rb          ← 抓取月度数据的脚本（由 Actions 运行）
 │   ├── update_longrun.rb          ← 更新长期数据的脚本（由 Actions 运行）
 │   ├── update_commodities.rb      ← 更新黄金和石油数据的脚本（由 Actions 运行）
-│   ├── update_househunt.rb        ← 更新找房页面数据的脚本（由 Actions 运行）
+│   ├── househunt_lib.rb           ← 两个找房脚本共用的小工具（下载、shapefile、多边形、写 JSON）
+│   ├── update_househunt.rb        ← 更新找房页面西澳数据的脚本（由 Actions 运行）
+│   ├── update_househunt_nsw.rb    ← 更新找房页面新州数据的脚本（由 Actions 运行）
 │   └── track_failures.rb          ← 记录各数据源连续失败几天，连续 3 天才报警（写 data/run_status.json）
 └── .github/
     └── workflows/
@@ -68,7 +70,7 @@ Ge_P/                              ← 仓库根目录
 4. 第 ③ 步运行 `scripts/update_longrun.rb`：按 `countries.json` 和 `cities.json` 下载各国全国指数、汇率、物价、
    外国城市指数，并把历史数据和刚更新的 ABS 数据合并成 `data/longrun/cities.csv`（所以必须排在第 ② 步之后）
 5. 第 ④ 步运行 `scripts/update_commodities.rb`：下载黄金、石油价格和汇率（见下方第 ⑦ 部分）
-6. 第 ⑤ 步运行 `scripts/update_househunt.rb`：更新找房页面用的区域名单和平均房贷利率（见下方第 ⑧ 部分）
+6. 第 ⑤ 步运行 `scripts/update_househunt.rb`（西澳），第 ⑥ 步运行 `scripts/update_househunt_nsw.rb`（新州）：更新找房页面用的区域名单和平均房贷利率（见下方第 ⑧ 部分）
 7. 各步互不影响：一个失败，其他照常更新，失败的那一项保留旧数据不动。
    `scripts/track_failures.rb` 把每个数据源连续失败的天数记在 `data/run_status.json`；**连续失败 3 天**才让运行显示红色 ✗（GitHub 发邮件），
    偶尔一天的网站故障不再报警（2026-11-27 改，之前 11 月 16、19、24 日的三次失败都是外部网站临时故障）
@@ -324,6 +326,23 @@ Ge_P/                              ← 仓库根目录
   - 网页里：这两项是"现算"的检查（`CHECKS` 里带 `live` 的两项），不存进候选房源，数据更新后自动跟着变；
     隐藏条件多了犯罪率、公立小学 / 中学距离、目标学校；条件下面有「所选区域对比」表；地图多了「犯罪率（警区）」和「学校」两个图层。
     用户说明过不需要车站（珀斯大部分人开车）。
+- **新州（NSW）版（2026-11-27 加入）**：页面上方「西澳 WA / 新州 NSW」切换；两个州的条件和候选房源分开保存
+  （localStorage 里 `regions.WA` / `regions.NSW`，贷款和界面设置共用；以前只有西澳时的保存格式会自动转成 `regions.WA`）。
+  - 每个州的设置在 `househunt.html` 的 `REGIONS` 里；检查在 `CHECKS` 里用 `region` 区分（犯罪率、学校两项共用，按州分别计算）；
+    地图图层是 `OVERLAYS_WA` / `OVERLAYS_NSW`。加一个州 = 在这三处各加一份，再写一个数据脚本。
+  - 地址：NSW Spatial Services 的 Property 图层。先按完整地址查（例如 `10 ESSEX STREET EPPING`，很快），
+    再按「门牌 + 街名」开头查，最后才按街道查地址库（AddressString，慢，十几秒）。strata 楼在 Property 里有整栋一条和每个单位一条。
+  - 检查：strata（Lot 图层 planlabel 以 SP 开头 + StrataHub 单位数）、洪水（Planning Portal 洪水规划图，**只覆盖少数市政府**，
+    所以查不到时显示「信息」而不是绿勾，并提醒看 10.7 规划证书）、山火、规划（分区、最小地块面积——乡村地区单位是公顷——、限高、规划保留地）、
+    遗产（LEP + 州遗产名录）、矿区沉降区、滑坡、酸性土。新州没有公开的污染场地地图服务，只在页脚给 EPA 名单链接。
+  - 学校：教育部公立学校名单 + **学区边界**（local enrolment area，CC BY）。学区边界全州有 10 MB，脚本把它切成 211 块
+    （`data/househunt/nsw/catchments/t*.json` + `index.json`，每块不超过 150 KB），网页只下载地址所在的那一块。
+    目标学校在新州按「在不在学区里」判断；精英中学（fully selective）没有学区，不能设为目标。私立学校来自 Spatial Services 地名库（去掉公立的）。
+  - 犯罪率：BOCSAR 每个区（suburb）每月罪案数（SuburbData.zip，约 440 MB 的 CSV，每年更新一次左右），按区算每千人比率，跟新州平均比；
+    人口 = 2021 年人口普查 × 所在 SA2 的估计人口增长。BOCSAR 同名的区写成「名字 (地方政府)」，脚本按区所在的地方政府对上。人口不到 1000 的区标「仅供参考」。
+  - 印花税：Revenue NSW 2026/27 财年税率（每年 7 月 1 日按通胀调整，**每年 7 月要更新 `transferDutyNSW`**）；
+    首次置业 $80 万以下免、$80–100 万减免（按直线估算，页面上写明是估算并链接 Revenue NSW 计算器）；外国买家附加 9%。
+  - 航拍图用 Spatial Services 的 NSW_Imagery 瓦片。
 - **推广到全澳的可行性（2026-11-14 测试）**：本地测试页 `states_test.html`（不上传）从浏览器实时查询各州政府地图服务，32 项全部通过。
   新州、维州、昆州、塔州、首都领地都有可以让网页直接查的地块 / strata / 分区 / 洪水 / 山火服务（维州是 WFS，其余是 ArcGIS）；
   南澳的服务在线但地块和分区图层还没找全；北领地没有找到。每个州的图层名、字段名、印花税、犯罪和学区数据都不一样，
@@ -431,6 +450,7 @@ ruby scripts/update_longrun.rb
   当天已上传 GitHub；黄金石油数据由自动任务第一次运行时生成。
 - 2026-11-14：加入第三页"找房助手"（`househunt.html`、`scripts/update_househunt.rb`、`data/househunt/`），
   三个页面的切换栏加了「找房」，自动任务加了第 ⑤ 步。当天已上传 GitHub；`data/househunt/` 的两个文件由自动任务第一次运行时生成。
+- 2026-11-27（晚）：找房页加入新州（NSW）：页面上方切换州；新增 `scripts/update_househunt_nsw.rb`、`scripts/househunt_lib.rb`（共用小工具）、`data/househunt/nsw/`、自动任务第 ⑥ 步。同一天西澳警察局把犯罪统计 Excel 换了格式（去掉了隐藏的 Data 页，改成每个地区一页、每行一个月），`update_househunt.rb` 的 `read_wapol_sheets` 已改成读新格式（数据到 2026 年 9 月）。
 - 2026-11-27：自动任务改为某个数据源连续失败 3 天才报警（新增 `scripts/track_failures.rb`、`data/run_status.json`）；
   找房脚本里"边界 / 人口 / 犯罪统计有没有新版本"的检查连不上时先用现有数据，不算失败；`actions/checkout` 升到 v5。
 - 2026-11-14（晚）：找房页加入犯罪率（按警区）和学校（距离、目标学校）、区域对比表、两个地图图层；
