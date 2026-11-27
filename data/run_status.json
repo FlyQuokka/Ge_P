@@ -1,36 +1,41 @@
 {
-  "checked": "2026-11-27T06:41:19Z",
+  "checked": "2026-11-27T11:20:36Z",
   "alert_after_days": 3,
   "sources": {
     "monthly": {
       "label": "月度房价（realestate.com.au）",
       "fail_days": 0,
-      "last_success": "2026-11-27T06:41:19Z"
+      "last_success": "2026-11-27T11:20:36Z"
     },
     "quarterly": {
       "label": "季度房价（ABS）",
       "fail_days": 0,
-      "last_success": "2026-11-27T06:41:19Z"
+      "last_success": "2026-11-27T11:20:36Z"
     },
     "longrun": {
       "label": "长期数据（BIS 等）",
       "fail_days": 0,
-      "last_success": "2026-11-27T06:41:19Z"
+      "last_success": "2026-11-27T11:20:36Z"
     },
     "commodities": {
       "label": "黄金和石油",
       "fail_days": 0,
-      "last_success": "2026-11-27T06:41:19Z"
+      "last_success": "2026-11-27T11:20:36Z"
     },
     "househunt": {
       "label": "找房 · 西澳（区域、利率、学校、犯罪率）",
       "fail_days": 0,
-      "last_success": "2026-11-27T06:41:19Z"
+      "last_success": "2026-11-27T11:20:36Z"
     },
     "househunt_nsw": {
       "label": "找房 · 新州（区域、学校、学区、犯罪率）",
       "fail_days": 0,
-      "last_success": "2026-11-27T06:41:19Z"
+      "last_success": "2026-11-27T11:20:36Z"
+    },
+    "househunt_vic": {
+      "label": "找房 · 维州（区域、学校、学区、犯罪率）",
+      "fail_days": 0,
+      "last_success": "2026-11-27T11:20:36Z"
     }
   }
 }

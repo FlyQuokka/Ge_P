@@ -1,6 +1,6 @@
 {
   "source": "NSW Department of Education, NSW public schools master dataset; NSW Spatial Services, Features of Interest (education facilities)",
-  "updated": "2026-11-27T06:40:47Z",
+  "updated": "2026-11-27T11:19:29Z",
   "kinds": {"P":"小学","S":"中学","K12":"小学到中学","X":"特殊学校 / 环境教育中心等"},
   "selective": {"F":"全部考试入学（精英中学）","P":"部分考试入学"},
   "schools": [
