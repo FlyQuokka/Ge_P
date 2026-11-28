@@ -2528,12 +2528,12 @@ async function addressAt(pt) {
   if (state.region === "QLD") {
     const base = (await arcQuery(LYQ.base, atPoint(pt, { outFields: "lot,plan,lotplan", returnGeometry: true, outSR: 4326 }))).filter(r => r._geom && r._geom.rings);
     if (!base.length) return null;
-    const b = base[0], geom = qldGeom(base, b.lotplan);
+    const b = base[0], land = await qldLand(b, base), geom = land.geom;
     const scheme = /^0+$/.test(b.lot || "");
     const addrs = await arcQuery(LYQ.address, { where: scheme ? `plan='${sq(b.plan)}'` : `lotplan='${sq(b.lotplan)}'`, outFields: QLD_ADDR_FIELDS, resultRecordCount: 2000 });
     if (!addrs.length) return null;
     const units = addrs.filter(a => a.unit_number);
-    const row = qldRow(addrs.find(a => !a.unit_number) || addrs[0], geom, b.lotplan);
+    const row = qldRow(addrs.find(a => !a.unit_number) || addrs[0], geom, land.key);
     row.unit = null;   // 多单位的楼：用整栋楼
     if (units.length > 1) row.strataLots = units.length;
     return row;
@@ -2588,8 +2588,16 @@ function qldRow(a, geom, landKey) {
            road_suffix: a.street_suffix || null, locality: String(a.locality || "").toUpperCase(), postcode: null,
            unit: part(a.unit_number, a.unit_suffix), _geom: geom };
 }
-// 同一个地块在地籍图上可能分成几块（community titles scheme 常常这样），合在一起
-const qldGeom = (rows, lotplan) => ({ rings: rows.filter(r => r.lotplan === lotplan && r._geom).flatMap(r => r._geom.rings) });
+// community titles scheme 的整块地在地籍图上常常分成几块，lot 写法也不一样（"0"、"00000"），都算同一块
+const qldKey = r => /^0+$/.test(r.lot || "") ? "0" + r.plan : r.lotplan;
+async function qldLand(hit, rows) {
+  if (/^0+$/.test(hit.lot || "")) {
+    const all = (await arcQuery(LYQ.base, { where: `plan='${sq(hit.plan)}'`, outFields: "lot,plan,lotplan", returnGeometry: true, outSR: 4326 })).filter(r => r._geom && r._geom.rings);
+    if (all.length) rows = all;
+  }
+  const key = qldKey(hit);
+  return { key, geom: { rings: rows.filter(r => r._geom && qldKey(r) === key).flatMap(r => r._geom.rings) } };
+}
 // 昆州找地址：先在地址库里按街道查（快），挑出最接近的几个，再按地址点查它们的地块
 async function findAddressQLD(p) {
   const q = where => arcQuery(LYQ.address, { where, outFields: QLD_ADDR_FIELDS, resultRecordCount: 2000 });
@@ -2613,10 +2621,12 @@ async function findAddressQLD(p) {
     const rows = (await arcQuery(LYQ.base, atPoint(g.pt, { outFields: "lot,plan,lotplan", returnGeometry: true, outSR: 4326 }))).filter(r => r._geom && r._geom.rings);
     const hit = rows.find(r => r.lotplan === g.lotplan) || rows.find(r => r.plan === g.plan) || rows[0];
     if (!hit) return null;
-    return { ...g.row, land_id: "qld:" + hit.lotplan, _geom: qldGeom(rows, hit.lotplan), strataLots: g.units > 1 ? g.units : null };
+    const land = await qldLand(hit, rows);
+    return { ...g.row, land_id: "qld:" + land.key, _geom: land.geom, strataLots: g.units > 1 ? g.units : null };
   }));
-  // 同一个门牌在地址库里偶尔有两条（同一块地），只留一条
-  return out.filter((r, i, a) => r && a.findIndex(x => x && x.land_id === r.land_id && formatAddress(x) === formatAddress(r)) === i);
+  // 同一个门牌在地址库里偶尔有两条（例如整栋楼一条、单位一条），同一块地、显示出来一样的只留一条
+  const shown = r => r.land_id + "|" + formatAddress(r, p.unit);
+  return out.filter((r, i, a) => r && a.findIndex(x => x && shown(x) === shown(r)) === i);
 }
 // 维州地址库的一条 → 换成跟西澳一样的字段。locality 去掉括号（"ASCOT (BALLARAT)" → "ASCOT"），邮编直接用地址库的
 function vicRow(a, geom) {
